@@ -9,7 +9,7 @@ from Type.Size2 import Size2
 
 class Resize2D(ScadSingleChildParent):
     """
-    Modifies the size of the child object to match the given x and y. See
+    Modifies the size of the child object to match the given width and depth. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#resize.
     """
 
@@ -17,19 +17,17 @@ class Resize2D(ScadSingleChildParent):
     def __init__(self,
                  *,
                  new_size: Size2 | None = None,
-                 new_size_x: float | None = None,
-                 new_size_y: float | None = None,
+                 new_width: float | None = None,
+                 new_depth: float | None = None,
                  auto: bool | Tuple[bool, bool] = False,
-                 convexity: int | None = None,
                  child: ScadObject):
         """
         Object constructor.
 
         :param new_size: The new_size along all two axes.
-        :param new_size_x: The along the x-axis (a.k.a. width).
-        :param new_size_y: The new size along the y-axis (a.k.a. depth).
+        :param new_width: The new width (the new size along the x-axis).
+        :param new_depth: The new depth (the new size along the y-axis).
         :param auto: Whether to auto-scale any 0-dimensions to match.
-        :param convexity:
         :param child: The child object to be resized.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
@@ -38,15 +36,15 @@ class Resize2D(ScadSingleChildParent):
     @property
     def new_size(self) -> Size2:
         """
-        Returns the new_size along all two axes.
+        Returns the new_size along both axes.
         """
-        return Size2(self.new_size_x, self.new_size_y)
+        return Size2(self.new_width, self.new_depth)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def new_size_x(self) -> float:
+    def new_width(self) -> float:
         """
-        Returns the new size along the x-axis (a.k.a. width).
+        Returns the new width (the new size along the x-axis).
         """
         if 'new_size' in self._args:
             return self.uc(self._args['new_size'].width)
@@ -55,9 +53,9 @@ class Resize2D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def new_size_y(self) -> float:
+    def new_depth(self) -> float:
         """
-        Returns the new size along the y-axis (a.k.a. depth).
+        Returns the new depth (the new size along the y-axis).
         """
         if 'new_size' in self._args:
             return self.uc(self._args['new_size'].depth)
