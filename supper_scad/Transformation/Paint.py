@@ -7,7 +7,7 @@ from Type.Color import Color
 
 class Paint(PrivateSingleChildScadCommand):
     """
-    Displays a child element using a specified color and opacity. See
+    Displays a child object using a specified color and opacity. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#color.
     """
 

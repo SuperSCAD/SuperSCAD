@@ -7,7 +7,7 @@ from Type.Point3 import Point3
 
 class PrivateScale(PrivateSingleChildScadCommand):
     """
-    Scales its child elements using the specified vector. See
+    Scales its child objects using the specified vector. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#scale.
     """
 

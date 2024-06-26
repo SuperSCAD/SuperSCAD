@@ -8,7 +8,7 @@ from Type.Point3 import Point3
 
 class PrivateTranslate(PrivateSingleChildScadCommand):
     """
-    Translates (moves) its child elements along the specified vector. See
+    Translates (moves) its child objects along the specified vector. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#translate.
     """
 

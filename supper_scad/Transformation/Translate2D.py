@@ -7,7 +7,7 @@ from Type.Point2 import Point2
 
 class Translate2D(ScadSingleChildParent):
     """
-    Translates (moves) its child elements along the specified vector. See
+    Translates (moves) its child object along the specified vector. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#translate.
     """
 
@@ -16,9 +16,9 @@ class Translate2D(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param x: The distance the child is translated to along the x-axis.
-        :param y: The distance the child is translated to along the y-axis.
-        :param child: The child element to translate.
+        :param x: The distance the child object is translated to along the x-axis.
+        :param y: The distance the child object is translated to along the y-axis.
+        :param child: The child object to be translated.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
@@ -26,7 +26,7 @@ class Translate2D(ScadSingleChildParent):
     @property
     def x(self) -> float:
         """
-        Returns distance the child is translated to along the x-axis.
+        Returns distance the child object is translated to along the x-axis.
         """
         return self.uc(self._args['x'])
 
@@ -34,7 +34,7 @@ class Translate2D(ScadSingleChildParent):
     @property
     def y(self) -> float:
         """
-        Returns distance the child is translated to along the y-axis.
+        Returns distance the child object is translated to along the y-axis.
         """
         return self.uc(self._args['y'])
 

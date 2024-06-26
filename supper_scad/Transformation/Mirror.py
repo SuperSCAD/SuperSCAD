@@ -5,7 +5,7 @@ from Type.Point3 import Point3
 
 class Mirror(PrivateSingleChildScadCommand):
     """
-    Transforms the child element to a mirror of the original, as if it were the mirror image seen through a plane
+    Transforms the child object to a mirror of the original, as if it were the mirror image seen through a plane
     intersecting the origin. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#mirror.
     """
 

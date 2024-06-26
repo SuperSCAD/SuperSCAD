@@ -9,7 +9,7 @@ from Type.Size3 import Size3
 
 class Resize3D(ScadSingleChildParent):
     """
-    Modifies the size of the child object to match the given x and y. See
+    Modifies the size of the child object to match the given width, depth, and height. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#resize.
     """
 
@@ -46,7 +46,7 @@ class Resize3D(ScadSingleChildParent):
     @property
     def new_width(self) -> float:
         """
-        Returns the new size along the x-axis (a.k.a. width).
+        Returns new width (the new size along the x-axis).
         """
         if 'new_size' in self._args:
             return self.uc(self._args['new_size'].width)
@@ -57,7 +57,7 @@ class Resize3D(ScadSingleChildParent):
     @property
     def new_depth(self) -> float:
         """
-        Returns the new size along the y-axis (a.k.a. depth).
+        Returns the new depth (the new size along the y-axis).
         """
         if 'new_size' in self._args:
             return self.uc(self._args['new_size'].depth)
@@ -68,7 +68,7 @@ class Resize3D(ScadSingleChildParent):
     @property
     def new_height(self) -> float:
         """
-        Returns the new size along the z-axis (a.k.a. height).
+        Returns the new height (the new size along the z-axis).
         """
         if 'new_size' in self._args:
             return self.uc(self._args['new_size'].height)
