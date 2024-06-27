@@ -31,22 +31,25 @@ jobs:
       - name: "Display Python version"
         run: "python -c 'import sys; print(sys.version)'"
 
-      - name: "Install dependencies"
+      - name: "Install dependencies1"
         run: |
           python -m venv venv
           ./venv/bin/python -m pip install --upgrade pip
           ./venv/bin/python -m pip install --upgrade poetry
 
-      - name: "Install dependencies"
+      - name: "Install dependencies2"
+        run: ./venv/bin/poetry config --list
+
+      - name: "Install dependencies3"
         run: |
           ./venv/bin/poetry env use ./venv/bin/python
           ./venv/bin/poetry install --no-root
-          ./venv/bin/poetry env info
-          ./venv/bin/poetry config --list
+
+      - name: "Install dependencies4"
+        run: ./venv/bin/poetry config --list
 
       - name: "Run tests with pytest"
         run: |
-          ./venv/bin/poetry env info
           ./venv/bin/python -m coverage run -m unittest discover -s test -p *Test.py
           ./venv/bin/python -m coverage xml
 
