@@ -36,6 +36,7 @@ jobs:
           python -m venv venv
           ./venv/bin/python -m pip install --upgrade pip
           ./venv/bin/python -m pip install --upgrade poetry
+          ./venv/bin/poetry env use ./venv/bin/python
           ./venv/bin/poetry install --no-root
 
       - name: "Run tests with pytest"
