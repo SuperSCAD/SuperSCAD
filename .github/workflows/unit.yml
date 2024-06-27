@@ -33,20 +33,24 @@ jobs:
 
       - name: "Install dependencies1"
         run: |
-          python -m venv venv
-          ./venv/bin/python -m pip install --upgrade pip
-          ./venv/bin/python -m pip install --upgrade poetry
+          python -m venv .venv
+          ./.venv/bin/python -m pip install --upgrade pip
+          ./.venv/bin/python -m pip install --upgrade poetry
 
-      - name: "Install dependencies2"
-        run: ./venv/bin/poetry config --list
+      - name: "Install dependencies2a"
+        run: ./.venv/bin/poetry config --list
+
+      - name: "Install dependencies2b"
+        run: ./.venv/bin/poetry config virtualenvs.in-project true
+
+      - name: "Install dependencies2c"
+        run: ./.venv/bin/poetry config virtualenvs.in-project true
 
       - name: "Install dependencies3"
-        run: |
-          ./venv/bin/poetry env use ./venv/bin/python
-          ./venv/bin/poetry install --no-root
+        run: ./.venv/bin/poetry install --no-root
 
       - name: "Install dependencies4"
-        run: ./venv/bin/poetry config --list
+        run: ./.venv/bin/poetry config --list
 
       - name: "Run tests with pytest"
         run: |
