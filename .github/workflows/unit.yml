@@ -42,6 +42,7 @@ jobs:
           ./venv/bin/poetry env use ./venv/bin/python
           ./venv/bin/poetry install --no-root
           ./venv/bin/poetry env info
+          ./venv/bin/poetry config --list
 
       - name: "Run tests with pytest"
         run: |
