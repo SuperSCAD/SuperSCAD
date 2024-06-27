@@ -41,19 +41,19 @@ class Scad:
         self.__project_home = project_home
 
     # ------------------------------------------------------------------------------------------------------------------
-    def run_happy_scad(self, scad_object: ScadObject, output_scad: Path) -> None:
+    def run_super_scad(self, scad_object: ScadObject, output_scad: Path) -> None:
         """
 
         :param scad_object:
         :param output_scad:
         """
-        self.__run_happy_scad(scad_object)
+        self.__run_super_scad(scad_object)
 
         with open(output_scad, 'wt') as handle:
             handle.write(self.__context.code_store.get_code())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __run_happy_scad(self, scad_object: ScadObject) -> None:
+    def __run_super_scad(self, scad_object: ScadObject) -> None:
         """
         Runs SuperSCAD on the ScadObject and recursively on it child objects, if any.
 
@@ -64,7 +64,8 @@ class Scad:
 
         self.__context.code_store.clear()
         self.__context.code_store.add_line('// Unit of length: {}'.format(self.__context.unit))
-        self.__run_happy_scad_code(builders)
+        self.__run_super_scad_code(builders)
+        self.__context.code_store.add_line('')
 
     # ------------------------------------------------------------------------------------------------------------------
     def __run_happy_scad_build(self, scad_object: ScadObject, parent: List[Dict]):
@@ -96,10 +97,10 @@ class Scad:
 
         # ------------------------------------------------------------------------------------------------------------------
 
-    def __run_happy_scad_code(self, builders) -> None:
+    def __run_super_scad_code(self, builders) -> None:
         if isinstance(builders, list):
             for builder in builders:
-                self.__run_happy_scad_code(builder)
+                self.__run_super_scad_code(builder)
         elif isinstance(builders['parent'], PrivateScadCommand):
             self.__context.code_store.add_line('{}{}'.format(builders['parent'].command,
                                                              builders['parent'].generate_args(self.__context)))
@@ -107,9 +108,9 @@ class Scad:
                 self.__context.code_store.append_to_last_line(';')
             else:
                 self.__context.code_store.add_line('{')
-                self.__run_happy_scad_code(builders['children'])
+                self.__run_super_scad_code(builders['children'])
                 self.__context.code_store.add_line('}')
         else:
-            self.__run_happy_scad_code(builders['children'])
+            self.__run_super_scad_code(builders['children'])
 
 # ----------------------------------------------------------------------------------------------------------------------

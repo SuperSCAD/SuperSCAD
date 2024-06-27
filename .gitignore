@@ -1,4 +1,6 @@
+
 /**/__pycache__/
+/.coverage
 /.idea/
 /bin/phing
 /composer.lock
@@ -7,6 +9,7 @@
 /docs/_static/
 /docs/_templates/
 /poetry.lock
+/test/**/*.actual.scad
 /test/coverage.xml
 /test/html/
 /vendor/
