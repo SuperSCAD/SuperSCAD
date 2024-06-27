@@ -1,8 +1,8 @@
 from abc import ABC
 from typing import Any, Dict, List
 
-from Context import Context
-from ScadObject import ScadObject
+from super_scad.Context import Context
+from super_scad.ScadObject import ScadObject
 
 
 class ScadMultiChildParent(ScadObject, ABC):

@@ -1,12 +1,12 @@
 from abc import ABCMeta, abstractmethod
 from typing import Any, Dict, List
 
-from Context import Context
-from Type.Point2 import Point2
-from Type.Point3 import Point3
-from Type.Size2 import Size2
-from Type.Size3 import Size3
-from Unit import Unit
+from super_scad.Context import Context
+from super_scad.type.Point2 import Point2
+from super_scad.type.Point3 import Point3
+from super_scad.type.Size2 import Size2
+from super_scad.type.Size3 import Size3
+from super_scad.Unit import Unit
 
 
 class ScadObject(metaclass=ABCMeta):

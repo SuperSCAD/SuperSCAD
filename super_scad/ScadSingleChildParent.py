@@ -1,7 +1,7 @@
 from abc import ABC
 from typing import Any, Dict
 
-from ScadObject import ScadObject
+from super_scad.ScadObject import ScadObject
 
 
 class ScadSingleChildParent(ScadObject, ABC):

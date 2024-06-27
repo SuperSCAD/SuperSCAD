@@ -2,10 +2,10 @@ import os
 from pathlib import Path
 from typing import Dict, List
 
-from Context import Context
-from Private.PrivateScadCommand import PrivateScadCommand
-from ScadObject import ScadObject
-from Unit import Unit
+from super_scad.Context import Context
+from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.ScadObject import ScadObject
+from super_scad.Unit import Unit
 
 
 class Scad:

@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from ScadCodeStore import ScadCodeStore
-from Unit import Unit
+from super_scad.ScadCodeStore import ScadCodeStore
+from super_scad.Unit import Unit
 
 
 class Context:
