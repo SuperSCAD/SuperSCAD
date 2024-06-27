@@ -5,7 +5,7 @@ from super_scad.private.PrivateScadCommand import PrivateScadCommand
 
 class Cylinder(PrivateScadCommand):
     """
-    Class for cylinder. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cylinder.
+    Class for cylinders.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

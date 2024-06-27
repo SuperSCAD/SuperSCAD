@@ -6,7 +6,7 @@ from super_scad.type.Size3 import Size3
 
 class Cuboid(ScadObject):
     """
-    Class for cubes. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cube.
+    Class for cuboids.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

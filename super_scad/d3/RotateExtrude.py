@@ -13,22 +13,22 @@ class RotateExtrude(PrivateSingleChildScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 angle: float,
+                 angle: float = 360.0,
                  convexity: int | None = None,
-                 child: ScadObject,
                  fa: float | None = None,
                  fs: float | None = None,
-                 fn: int | None = None):
+                 fn: int | None = None,
+                 child: ScadObject):
         """
         Object constructor.
 
-        :param angle: See `OpenSCAD rotate_extrude documentation`_.
-        :param convexity: See `OpenSCAD rotate_extrude documentation`_.
-        :param fa: See `OpenSCAD rotate_extrude documentation`_.
-        :param fs: See `OpenSCAD rotate_extrude documentation`_.
-        :param fn: See `OpenSCAD rotate_extrude documentation`_.
-
-        .. _OpenSCAD rotate_extrude documentation: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#rotate_extrude
+        :param angle: Specifies the number of degrees to sweep, starting at the positive X axis. The direction of the
+                      sweep follows the Right Hand Rule, hence a negative angle sweeps clockwise.
+        :param convexity: The convexity of the child object.
+        :param fa: The minimum angle (in degrees) of each fragment.
+        :param fs: The minimum circumferential length of each fragment.
+        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        :param child: The 2D child object.
         """
         PrivateSingleChildScadCommand.__init__(self, command='rotate_extrude', args=locals(), child=child)
 

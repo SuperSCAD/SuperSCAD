@@ -37,11 +37,6 @@ class PieSlice3D4n(ScadObject):
         """
         ScadObject.__init__(self, args=locals())
 
-        self.__child: ScadObject | None = None
-        """
-        The actual PieSlice.
-        """
-
     # ------------------------------------------------------------------------------------------------------------------
     @property
     def angle(self) -> float:

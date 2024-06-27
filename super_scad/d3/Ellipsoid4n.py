@@ -8,7 +8,7 @@ from super_scad.type.Size3 import Size3
 
 class Ellipsoid4n(ScadObject):
     """
-    Class for ellipsoid.
+    Class for ellipsoids.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

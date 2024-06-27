@@ -36,7 +36,7 @@ class RegularPolygon(ScadObject):
 
         self.__points: List[Point2] = []
         """
-        The points of the nodes regular polygon.
+        The points of the nodes og the regular polygon.
         """
 
     # ------------------------------------------------------------------------------------------------------------------

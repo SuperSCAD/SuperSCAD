@@ -15,11 +15,10 @@ class Polygon(PrivateScadCommand):
         """
         Object constructor.
 
-        :param points: See `OpenSCAD polygon documentation`_.
+        :param points: The list of 2D points of the polygon.
         :param paths: See `OpenSCAD polygon documentation`_
-        :param convexity: See `OpenSCAD polygon documentation`_.
-
-        .. _OpenSCAD polygon documentation: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#polygon
+        :param convexity: Integer number of "inward" curves, i.e. expected path crossings of an arbitrary line through
+                          the polygon.
         """
         PrivateScadCommand.__init__(self, command='polygon', args=locals())
 

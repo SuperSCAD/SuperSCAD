@@ -35,6 +35,9 @@ class PieSlice2D(ScadObject):
         :param radius:
         :param inner_radius:
         :param outer_radius:
+        :param fa: The minimum angle (in degrees) of each fragment.
+        :param fs: The minimum circumferential length of each fragment.
+        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
         ScadObject.__init__(self, args=locals())
 

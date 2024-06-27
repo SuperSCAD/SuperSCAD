@@ -6,7 +6,7 @@ from super_scad.ScadObject import ScadObject
 
 class Cylinder4n(ScadObject):
     """
-    Class for cylinder. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cylinder.
+    Class for cylinders.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -19,12 +19,10 @@ class Cylinder4n(ScadObject):
         """
         Object constructor.
 
-        :param height: See `OpenSCAD cylinder documentation`_.
-        :param radius: See `OpenSCAD cylinder documentation`_.
-        :param diameter: See `OpenSCAD cylinder documentation`_.
-        :param center: See `OpenSCAD cylinder documentation`_.
-
-        .. _OpenSCAD cylinder documentation: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cylinder
+        :param height: The height of the cylinder.
+        :param radius: The radius of the cylinder.
+        :param diameter: The diameter of the cylinder.
+        :param center: Whether the cylinder is centered along the z-as.
         """
         ScadObject.__init__(self, args=locals())
 

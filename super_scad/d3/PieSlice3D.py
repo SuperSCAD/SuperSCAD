@@ -36,16 +36,11 @@ class PieSlice3D(ScadObject):
         :param outer_radius:
         :param height:
         :param convexity: See `OpenSCAD rotate_extrude documentation`_.
-        :param fa: See `OpenSCAD rotate_extrude documentation`_.
-        :param fs: See `OpenSCAD rotate_extrude documentation`_.
-        :param fn: See `OpenSCAD rotate_extrude documentation`_.
+        :param fa: The minimum angle (in degrees) of each fragment.
+        :param fs: The minimum circumferential length of each fragment.
+        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
         ScadObject.__init__(self, args=locals())
-
-        self.__child: ScadObject | None = None
-        """
-        The actual PieSlice.
-        """
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
