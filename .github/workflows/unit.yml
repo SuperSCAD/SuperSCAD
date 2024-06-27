@@ -36,13 +36,12 @@ jobs:
           python -m venv venv
           ./venv/bin/python -m pip install --upgrade pip
           ./venv/bin/python -m pip install --upgrade poetry
-          ./venv/bin/poetry env use ./venv/bin/python
           ./venv/bin/poetry install --no-root
 
       - name: "Run tests with pytest"
         run: |
-          ./venv/bin/python -m coverage run -m unittest discover -s test -p *Test.py
-          ./venv/bin/python -m coverage xml
+          python -m coverage run -m unittest discover -s test -p *Test.py
+          python -m coverage xml
 
       - name: "Upload to Codecov"
         uses: "codecov/codecov-action@v4"
