@@ -27,9 +27,7 @@ class ScadMultiChildParent(ScadObject, ABC):
     # ------------------------------------------------------------------------------------------------------------------
     def children(self) -> List[ScadObject]:
         """
-        Returns the children of this multi-child command.
-
-        :rtype: List[ScadObject]|ScadObject|None
+        Returns the children of this multi-child parent.
         """
         return self.__children
 
