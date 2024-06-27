@@ -49,7 +49,7 @@ class Scad:
         """
         self.__run_happy_scad(scad_object)
 
-        with open('test.scad', 'wt') as handle:
+        with open(output_scad, 'wt') as handle:
             handle.write(self.__context.code_store.get_code())
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -62,6 +62,7 @@ class Scad:
         builders = []
         self.__run_happy_scad_build(scad_object, builders)
 
+        self.__context.code_store.clear()
         self.__context.code_store.add_line('// Unit of length: {}'.format(self.__context.unit))
         self.__run_happy_scad_code(builders)
 

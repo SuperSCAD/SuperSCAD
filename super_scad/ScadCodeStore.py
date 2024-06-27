@@ -9,12 +9,12 @@ class ScadCodeStore:
         """
         Object contructor.
         """
-        self.lines: list[str] = list()
+        self.__lines: list[str] = list()
         """
         The stored code.
         """
 
-        self.indent_level: int = 0
+        self.__indent_level: int = 0
         """
         The current indentation level.
         """
@@ -27,13 +27,13 @@ class ScadCodeStore:
         :param line: The line.
         """
         if line == '{':
-            self.lines.append(' ' * (ScadCodeStore.C_INDENTATION * self.indent_level) + line)
-            self.indent_level += 1
+            self.__lines.append(' ' * (ScadCodeStore.C_INDENTATION * self.__indent_level) + line)
+            self.__indent_level += 1
         elif line == '}':
-            self.indent_level = max(0, self.indent_level - 1)
-            self.lines.append(' ' * (ScadCodeStore.C_INDENTATION * self.indent_level) + line)
+            self.__indent_level = max(0, self.__indent_level - 1)
+            self.__lines.append(' ' * (ScadCodeStore.C_INDENTATION * self.__indent_level) + line)
         else:
-            self.lines.append(' ' * (ScadCodeStore.C_INDENTATION * self.indent_level) + line)
+            self.__lines.append(' ' * (ScadCodeStore.C_INDENTATION * self.__indent_level) + line)
 
         return self
 
@@ -44,13 +44,21 @@ class ScadCodeStore:
 
         :param part: The part of code.
         """
-        self.lines[-1] += part
+        self.__lines[-1] += part
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def clear(self) -> None:
+        """
+        Clears the code.
+        """
+        self.__lines = []
+        self.__indent_level = 0
 
     # ------------------------------------------------------------------------------------------------------------------
     def get_code(self) -> str:
         """
         Returns the code as a string.
         """
-        return '\n'.join(self.lines)
+        return '\n'.join(self.__lines)
 
 # ----------------------------------------------------------------------------------------------------------------------
