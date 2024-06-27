@@ -12,10 +12,10 @@ class Cuboid(ScadObject):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 size: Size3 | None,
-                 width: float | None,
-                 depth: float | None,
-                 height: float | None,
+                 size: Size3 | None = None,
+                 width: float | None = None,
+                 depth: float | None = None,
+                 height: float | None = None,
                  center: bool = False):
         """
         Object constructor.
