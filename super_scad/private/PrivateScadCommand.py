@@ -115,6 +115,9 @@ class PrivateScadCommand(ScadObject):
         elif isinstance(argument, str):
             argument = '"{}"'.format(re.sub(r'([\\\"])', r'\\\1', argument))
 
+        elif isinstance(argument, int):
+            argument = str(argument)
+
         elif isinstance(argument, List):
             parts = []
             for element in argument:

@@ -1,12 +1,13 @@
 from super_scad.Context import Context
-from super_scad.d2.Square import Square
+from super_scad.d2.Polygon import Polygon
 from super_scad.ScadObject import ScadObject
+from super_scad.type.Point2 import Point2
 from super_scad.Unit import Unit
 
 
-class ImperialUnitSquare(ScadObject):
+class ImperialUnitPolygon(ScadObject):
     """
-    Class for an imperial unit square.
+    Class for an imperial unit polygon.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -25,6 +26,14 @@ class ImperialUnitSquare(ScadObject):
         """
         context.unit = Unit.INCH
 
-        return Square(size=1.0)
+        return Polygon(primary=[Point2(0.0, 0.0),
+                                Point2(2.0, 0.0),
+                                Point2(2.0, 2.0),
+                                Point2(0.0, 2.0)],
+                       secondary=[Point2(0.5, 0.5),
+                                  Point2(1.5, 0.5),
+                                  Point2(1.5, 1.5),
+                                  Point2(0.5, 1.5)],
+                       convexity=4)
 
 # ----------------------------------------------------------------------------------------------------------------------

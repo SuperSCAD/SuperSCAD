@@ -65,8 +65,8 @@ class ScadObject(metaclass=ABCMeta):
         raise NotImplementedError()
 
     # ------------------------------------------------------------------------------------------------------------------
-    def uc(self, length: int | float | Point2 | Point3 | Size2 | Size3 | None) -> \
-            float | Point2 | Point3 | Size2 | Size3 | None:
+    def uc(self, length: int | float | Point2 | Point3 | Size2 | Size3 | List[Point2] | None) -> \
+            float | Point2 | Point3 | Size2 | Size3 | List[Point2] | None:
         """
         Returns the length in the unit of the current context.
 
@@ -116,6 +116,13 @@ class ScadObject(metaclass=ABCMeta):
 
         if isinstance(length, Size3):
             return Size3(self.uc(length.width), self.uc(length.depth), self.uc(length.height))
+
+        if isinstance(length, List):
+            points = []
+            for point in length:
+                points.append(self.uc(point))
+
+            return points
 
         raise ValueError('Can not convert length of type {}.'.format(type(length)))
 
