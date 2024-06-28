@@ -1,6 +1,9 @@
+from typing import List
+
 from super_scad.Context import Context
 from super_scad.d2.RegularPolygon import RegularPolygon
 from super_scad.ScadObject import ScadObject
+from super_scad.type.Point2 import Point2
 from super_scad.Unit import Unit
 
 
@@ -43,6 +46,14 @@ class ImperialUnitPentagon(ScadObject):
         return self.scad_object.size
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def points(self) -> List[Point2]:
+        """
+        Returns the coordinates of the nodes of the regular polygon.
+        """
+        return self.scad_object.points
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
         """
         Builds a SuperSCAD object.
@@ -52,6 +63,7 @@ class ImperialUnitPentagon(ScadObject):
         context.unit = Unit.INCH
 
         self.scad_object = RegularPolygon(size=1.0, sides=5)
+        self.scad_object.points
 
         return self.scad_object
 

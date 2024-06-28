@@ -5,6 +5,7 @@ from super_scad.Context import Context
 from super_scad.d2.Polygon import Polygon
 from super_scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
+from super_scad.Unit import Unit
 
 
 class RegularPolygon(ScadObject):
@@ -39,6 +40,11 @@ class RegularPolygon(ScadObject):
         The points of the nodes og the regular polygon.
         """
 
+        self.__unit: Unit | None = None
+        """
+        The unit in which self.__points are calculated.
+        """
+
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         pass
@@ -48,6 +54,13 @@ class RegularPolygon(ScadObject):
         """
         Computes the points ond the angles of the nodes of the regular polygon.
         """
+        if self.__angles and self.__unit == Context.current_target_unit:
+            return
+
+        self.__unit = Context.current_target_unit
+        self.__points.clear()
+        self.__angles.clear()
+
         step = 2.0 * math.pi / self.sides
         radius = self.outer_radius
         if self.sides % 2 == 0:
@@ -143,8 +156,7 @@ class RegularPolygon(ScadObject):
         """
         Returns the angles in degrees of the position of the nodes of the regular polygon in polar coordinates.
         """
-        if len(self.__angles) == 0:
-            self.__points_and_angles()
+        self.__points_and_angles()
 
         return self.__angles
 
@@ -154,8 +166,7 @@ class RegularPolygon(ScadObject):
         """
         Returns the coordinates of the nodes of the regular polygon.
         """
-        if len(self.__points) == 0:
-            self.__points_and_angles()
+        self.__points_and_angles()
 
         return self.__points
 

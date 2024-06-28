@@ -208,6 +208,7 @@ class RegularPolygonTestCase(unittest.TestCase):
         self.assertAlmostEqual(25.4 / (2 * math.tan(math.pi / 5)), polygon.inner_radius)
         self.assertAlmostEqual(25.4 / (2 * math.sin(math.pi / 5)), polygon.outer_radius)
         self.assertAlmostEqual(25.4, polygon.size)
+        self.assertAlmostEqual(polygon.points[0].y, polygon.outer_radius)
 
         actual = Path(path_actual).read_text()
         expected = Path(path_expected).read_text()
