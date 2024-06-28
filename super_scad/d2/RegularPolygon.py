@@ -68,7 +68,7 @@ class RegularPolygon(ScadObject):
         """
         Returns the number of sides of the polygon.
         """
-        return self._args.get('sides', 1)
+        return self._args['sides']
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -77,13 +77,13 @@ class RegularPolygon(ScadObject):
         Returns the outer radius of the regular polygon.
         """
         if 'outer_radius' in self._args:
-            return self._args['outer_radius']
+            return self.uc(self._args['outer_radius'])
 
         if 'inner_radius' in self._args:
-            return self._args['inner_radius'] / math.cos(math.pi / self.sides)
+            return self.uc(self._args['inner_radius'] / math.cos(math.pi / self.sides))
 
         if 'size' in self._args:
-            return self._args['size'] / (2.0 * math.sin(math.pi / self.sides))
+            return self.uc(self._args['size'] / (2.0 * math.sin(math.pi / self.sides)))
 
         return 0.0
 
@@ -94,13 +94,30 @@ class RegularPolygon(ScadObject):
         Returns the inner radius of the regular polygon.
         """
         if 'inner_radius' in self._args:
-            return self._args['inner_radius']
+            return self.uc(self._args['inner_radius'])
 
         if 'outer_radius' in self._args:
-            return self._args['outer_radius'] * math.cos(math.pi / self.sides)
+            return self.uc(self._args['outer_radius'] * math.cos(math.pi / self.sides))
 
         if 'size' in self._args:
-            return self._args['size'] * (2.0 * math.tan(math.pi / self.sides))
+            return self.uc(self._args['size'] / (2.0 * math.tan(math.pi / self.sides)))
+
+        return 0.0
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def size(self) -> float:
+        """
+        Returns the inner radius of the regular polygon.
+        """
+        if 'inner_radius' in self._args:
+            return self.uc(2.0 * self._args['inner_radius'] * math.tan(math.pi / self.sides))
+
+        if 'outer_radius' in self._args:
+            return self.uc(2.0 * self._args['outer_radius'] * math.sin(math.pi / self.sides))
+
+        if 'size' in self._args:
+            return self.uc(self._args['size'])
 
         return 0.0
 
