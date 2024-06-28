@@ -14,8 +14,8 @@ class RightTriangle(ScadObject):
         """
         Object constructor.
 
-        :param width: The width of a triangle.
-        :param depth: The depth of a triangle.
+        :param width: The width of the right triangle.
+        :param depth: The depth of the right triangle.
         """
         ScadObject.__init__(self, args=locals())
 
