@@ -15,7 +15,7 @@ class ScadObject(metaclass=ABCMeta):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, args: Dict[str, Any]):
+    def __init__(self, *, args: Dict[str, Any] | None = None):
         """
         Object constructor.
         """
@@ -29,9 +29,10 @@ class ScadObject(metaclass=ABCMeta):
         The target unit of length of the BuildContext of this SuperSCAD object.
         """
 
-        for key, value in args.items():
-            if value is not None and value != self and key not in ('child', 'children'):
-                self._args[key] = value
+        if args is not None:
+            for key, value in args.items():
+                if value is not None and value != self and key not in ('child', 'children'):
+                    self._args[key] = value
 
         self._validate_arguments()
 
