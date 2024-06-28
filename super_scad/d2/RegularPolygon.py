@@ -35,9 +35,9 @@ class RegularPolygon(ScadObject):
         The angles of the nodes regular polygon.
         """
 
-        self.__points: List[Point2] = []
+        self.__nodes: List[Point2] = []
         """
-        The points of the nodes og the regular polygon.
+        The nodes of the regular polygon.
         """
 
         self.__unit: Unit | None = None
@@ -50,15 +50,15 @@ class RegularPolygon(ScadObject):
         pass
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __points_and_angles(self) -> None:
+    def __nodes_and_angles(self) -> None:
         """
-        Computes the points ond the angles of the nodes of the regular polygon.
+        Computes the nodes ond the angles of the nodes of the regular polygon.
         """
-        if self.__angles and self.__unit == Context.current_target_unit:
+        if len(self.__angles) > 0 and self.__unit == Context.current_target_unit:
             return
 
         self.__unit = Context.current_target_unit
-        self.__points.clear()
+        self.__nodes.clear()
         self.__angles.clear()
 
         step = 2.0 * math.pi / self.sides
@@ -71,7 +71,7 @@ class RegularPolygon(ScadObject):
             angle = math.pi / 2.0
 
         for i in range(self.sides):
-            self.__points.append(Point2(x=radius * math.cos(angle), y=radius * math.sin(angle)))
+            self.__nodes.append(Point2(x=radius * math.cos(angle), y=radius * math.sin(angle)))
             self.__angles.append(math.degrees(angle))
             angle += step
 
@@ -156,19 +156,19 @@ class RegularPolygon(ScadObject):
         """
         Returns the angles in degrees of the position of the nodes of the regular polygon in polar coordinates.
         """
-        self.__points_and_angles()
+        self.__nodes_and_angles()
 
         return self.__angles
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def points(self) -> List[Point2]:
+    def nodes(self) -> List[Point2]:
         """
         Returns the coordinates of the nodes of the regular polygon.
         """
-        self.__points_and_angles()
+        self.__nodes_and_angles()
 
-        return self.__points
+        return self.__nodes
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
@@ -177,6 +177,6 @@ class RegularPolygon(ScadObject):
 
         :param context: The build context.
         """
-        return Polygon(points=self.points)
+        return Polygon(points=self.nodes)
 
 # ----------------------------------------------------------------------------------------------------------------------

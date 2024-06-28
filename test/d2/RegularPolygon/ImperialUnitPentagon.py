@@ -47,11 +47,11 @@ class ImperialUnitPentagon(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def points(self) -> List[Point2]:
+    def nodes(self) -> List[Point2]:
         """
         Returns the coordinates of the nodes of the regular polygon.
         """
-        return self.scad_object.points
+        return self.scad_object.nodes
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
@@ -63,7 +63,7 @@ class ImperialUnitPentagon(ScadObject):
         context.unit = Unit.INCH
 
         self.scad_object = RegularPolygon(size=1.0, sides=5)
-        self.scad_object.points
+        self.scad_object.nodes  # Force calculation of the nodes in inches.
 
         return self.scad_object
 
