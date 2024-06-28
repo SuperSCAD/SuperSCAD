@@ -36,6 +36,7 @@ class Polygon(ScadObject):
         pass
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
     def primary(self) -> List[Point2]:
         """
         Returns the points of the polygon.
@@ -43,6 +44,7 @@ class Polygon(ScadObject):
         return self.uc(self._args.get('primary', self._args.get('points')))
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
     def secondaries(self) -> List[List[Point2]] | None:
         """
         Returns the points of the polygon.
@@ -60,6 +62,7 @@ class Polygon(ScadObject):
         return None
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
     def convexity(self) -> int | None:
         """
         Returns the convexity of the polygon.
@@ -73,11 +76,11 @@ class Polygon(ScadObject):
 
         :param context: The build context.
         """
-        secondaries = self.secondaries()
+        secondaries = self.secondaries
         if secondaries is None:
-            return PrivatePolygon(points=self.primary(), convexity=self.convexity())
+            return PrivatePolygon(points=self.primary, convexity=self.convexity)
 
-        points = self.primary()
+        points = self.primary
         n = 0
         m = n + len(points)
         paths = [list(range(n, m))]
@@ -89,6 +92,6 @@ class Polygon(ScadObject):
             paths.append(list(range(n, m)))
             n = m
 
-        return PrivatePolygon(points=points, paths=paths, convexity=self.convexity())
+        return PrivatePolygon(points=points, paths=paths, convexity=self.convexity)
 
 # ----------------------------------------------------------------------------------------------------------------------
