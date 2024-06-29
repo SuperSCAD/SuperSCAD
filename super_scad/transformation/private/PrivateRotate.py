@@ -16,8 +16,8 @@ class PrivateRotate(PrivateSingleChildScadCommand):
         """
         Object constructor.
 
-        :param angle:
-        :param vector:
+        :param angle: The angle of the rotation.
+        :param vector: The vector of the rotation.
         """
         PrivateSingleChildScadCommand.__init__(self, command='rotate', args=locals(), child=child)
 
