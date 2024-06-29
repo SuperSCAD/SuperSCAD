@@ -97,8 +97,28 @@
 
     <!-- Runs all unit tests-->
     <target name="unit">
-        <exec command="./venv/bin/python -m coverage run -m unittest discover -s test -p \*Test.py" passthru="true" checkreturn="true"/>
-        <exec command="./venv/bin/python -m coverage html" passthru="true" checkreturn="true"/>
+        <exec executable="./venv/bin/python" checkreturn="true" passthru="true">
+            <arg value="-m"/>
+            <arg value="coverage"/>
+            <arg value="run"/>
+            <arg value="-m"/>
+            <arg value="unittest"/>
+            <arg value="discover"/>
+            <arg value="-s"/>
+            <arg value="test"/>
+            <arg value="-p"/>
+            <arg value="\*Test.py"/>
+        </exec>
+        <exec executable="./venv/bin/python" checkreturn="true" passthru="true">
+            <arg value="-m"/>
+            <arg value="coverage"/>
+            <arg value="html"/>
+        </exec>
+        <delete>
+            <fileset dir="test">
+                <include name="**/*.actual.scad"/>
+            </fileset>
+        </delete>
     </target>
 
     <!-- Default target -->

@@ -1,14 +1,12 @@
-import unittest
-from pathlib import Path
-
 from d2.Polygon.ImperialUnitPolygon import ImperialUnitPolygon
+from ScadTestCase import ScadTestCase
 from super_scad.d2.Polygon import Polygon
 from super_scad.Scad import Scad
 from super_scad.type.Point2 import Point2
 from super_scad.Unit import Unit
 
 
-class PolygonTestCase(unittest.TestCase):
+class PolygonTestCase(ScadTestCase):
     """
     Testcases for polygons.
     """
@@ -18,18 +16,17 @@ class PolygonTestCase(unittest.TestCase):
         """
         Plain test for a plain polygon.
         """
-        path_actual = 'test/d2/Polygon/testPlainPolygon.actual.scad'
-        path_expected = 'test/d2/Polygon/testPlainPolygon.expected.scad'
+        path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
         scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
                                              Point2(100.0, 0.0),
                                              Point2(130.0, 50.0),
                                              Point2(30.0, 50.0)]),
-                            Path(path_actual))
+                            path_actual)
 
-        actual = Path(path_actual).read_text()
-        expected = Path(path_expected).read_text()
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -37,8 +34,7 @@ class PolygonTestCase(unittest.TestCase):
         """
         Plain test for a polygon with one hole.
         """
-        path_actual = 'test/d2/Polygon/testOneHolePolygon.actual.scad'
-        path_expected = 'test/d2/Polygon/testOneHolePolygon.expected.scad'
+        path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
         scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
@@ -48,10 +44,10 @@ class PolygonTestCase(unittest.TestCase):
                                                Point2(80.0, 10.0),
                                                Point2(10.0, 80.0)],
                                     convexity=10),
-                            Path(path_actual))
+                            path_actual)
 
-        actual = Path(path_actual).read_text()
-        expected = Path(path_expected).read_text()
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -59,8 +55,7 @@ class PolygonTestCase(unittest.TestCase):
         """
         Plain test for a polygon with multiple holes.
         """
-        path_actual = 'test/d2/Polygon/testMultiHolePolygon.actual.scad'
-        path_expected = 'test/d2/Polygon/testMultiHolePolygon.expected.scad'
+        path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
         scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
@@ -81,10 +76,10 @@ class PolygonTestCase(unittest.TestCase):
                                                   Point2(115.0, 40.0),
                                                   Point2(85.0, 40.0),
                                                   Point2(85.0, 10.0)]]),
-                            Path(path_actual))
+                            path_actual)
 
-        actual = Path(path_actual).read_text()
-        expected = Path(path_expected).read_text()
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -92,14 +87,13 @@ class PolygonTestCase(unittest.TestCase):
         """
         Test for an imperial unit polygon in metric units.
         """
-        path_actual = 'test/d2/Polygon/testImperialMetricPolygon.actual.scad'
-        path_expected = 'test/d2/Polygon/testImperialMetricPolygon.expected.scad'
+        path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        scad.run_super_scad(ImperialUnitPolygon(), Path(path_actual))
+        scad.run_super_scad(ImperialUnitPolygon(), path_actual)
 
-        actual = Path(path_actual).read_text()
-        expected = Path(path_expected).read_text()
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -107,14 +101,13 @@ class PolygonTestCase(unittest.TestCase):
         """
         Test for an imperial unit polygon in imperial units.
         """
-        path_actual = 'test/d2/Polygon/testImperialImperialPolygon.actual.scad'
-        path_expected = 'test/d2/Polygon/testImperialImperialPolygon.expected.scad'
+        path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.INCH)
-        scad.run_super_scad(ImperialUnitPolygon(), Path(path_actual))
+        scad.run_super_scad(ImperialUnitPolygon(), path_actual)
 
-        actual = Path(path_actual).read_text()
-        expected = Path(path_expected).read_text()
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
 # ----------------------------------------------------------------------------------------------------------------------
