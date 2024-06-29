@@ -53,7 +53,7 @@ class PrivateScadCommand(ScadObject):
         return self._command
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
+    def argument_map(self) -> Dict[str, str | None]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
@@ -87,7 +87,10 @@ class PrivateScadCommand(ScadObject):
 
             real_value = self.__format_argument(context, real_value)
 
-            args_as_str += '{} = {}'.format(real_name, real_value)
+            if real_name is None:
+                args_as_str += '{}'.format(real_value)
+            else:
+                args_as_str += '{} = {}'.format(real_name, real_value)
         args_as_str += ')'
 
         return args_as_str
