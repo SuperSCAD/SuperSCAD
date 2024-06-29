@@ -32,20 +32,19 @@ class Rotate3DTest(ScadTestCase):
         b = math.degrees(math.acos(end_point.z / length))
         c = math.degrees(math.atan2(end_point.y, end_point.x))
 
-        rotate = Rotate3D(angles=Point3(0.0, b, c), child=Cylinder(height=length, radius=0.5))
+        rotate = Rotate3D(angle=Point3(0.0, b, c), child=Cylinder(height=length, radius=0.5))
         cube = Paint(color=Color(color='gray', alpha=0.5), child=Cube(size=end_point.x))
 
         self.assertAlmostEqual(rotate.angle_x, 0.0)
         self.assertAlmostEqual(rotate.angle_y, b)
         self.assertAlmostEqual(rotate.angle_z, c)
-        self.assertAlmostEqual(rotate.angles.x, 0.0)
-        self.assertAlmostEqual(rotate.angles.y, b)
-        self.assertAlmostEqual(rotate.angles.z, c)
+        self.assertAlmostEqual(rotate.angle.x, 0.0)
+        self.assertAlmostEqual(rotate.angle.y, b)
+        self.assertAlmostEqual(rotate.angle.z, c)
+        self.assertIsNone(rotate.vector)
 
         union = Union(children=[rotate, cube])
 
-        self.assertIsNone(rotate.angle)
-        self.assertIsNone(rotate.vector)
         scad.run_super_scad(union, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -68,14 +67,13 @@ class Rotate3DTest(ScadTestCase):
         rotate = Rotate3D(angle_y=b, angle_z=c, child=Cylinder(height=length, radius=0.5))
         cube = Paint(color=Color(color='gray', alpha=0.5), child=Cube(size=end_point.x))
 
-        self.assertIsNone(rotate.angle)
         self.assertIsNone(rotate.vector)
         self.assertAlmostEqual(rotate.angle_x, 0.0)
         self.assertAlmostEqual(rotate.angle_y, b)
         self.assertAlmostEqual(rotate.angle_z, c)
-        self.assertAlmostEqual(rotate.angles.x, 0.0)
-        self.assertAlmostEqual(rotate.angles.y, b)
-        self.assertAlmostEqual(rotate.angles.z, c)
+        self.assertAlmostEqual(rotate.angle.x, 0.0)
+        self.assertAlmostEqual(rotate.angle.y, b)
+        self.assertAlmostEqual(rotate.angle.z, c)
 
         union = Union(children=[rotate, cube])
 

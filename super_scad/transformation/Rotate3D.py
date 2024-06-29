@@ -14,8 +14,7 @@ class Rotate3D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 angle: float | None = None,
-                 angles: Point3 | None = None,
+                 angle: float | Point3 | None = None,
                  angle_x: float | None = None,
                  angle_y: float | None = None,
                  angle_z: float | None = None,
@@ -24,8 +23,7 @@ class Rotate3D(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param angle: The angle of rotation around a vector.
-        :param angles: The angle of rotation around all three axes.
+        :param angle: The angle of rotation around all axis or a vector.
         :param angle_x: The angle of rotation around the x-axis.
         :param angle_y: The angle of rotation around the y-axis.
         :param angle_z: The angle of rotation around the z-axis.
@@ -39,11 +37,14 @@ class Rotate3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def angle(self) -> float | None:
+    def angle(self) -> float | Point3 | None:
         """
         Returns the angle around of rotation around a vector.
         """
-        return self._args.get('angle')
+        if 'vector' in self._args:
+            return self._args.get('angle')
+
+        return Point3(self.angle_x, self.angle_y, self.angle_z)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -54,19 +55,17 @@ class Rotate3D(ScadSingleChildParent):
         if 'vector' in self._args:
             return None
 
-        return Point3(self.angle_x, self.angle_y, self.angle_z)
-
     # ------------------------------------------------------------------------------------------------------------------
     @property
     def angle_x(self) -> float | None:
         """
         Returns the angle of rotation around the x-axis.
         """
-        if 'angles' in self._args:
-            return self._args['angles'].x
-
         if 'vector' in self._args:
             return None
+
+        if 'angle' in self._args:
+            return self._args['angle'].x
 
         return self._args.get('angle_x', 0.0)
 
@@ -76,11 +75,11 @@ class Rotate3D(ScadSingleChildParent):
         """
         Returns the angle of rotation around the y-axis.
         """
-        if 'angles' in self._args:
-            return self._args['angles'].y
-
         if 'vector' in self._args:
             return None
+
+        if 'angle' in self._args:
+            return self._args['angle'].y
 
         return self._args.get('angle_y', 0.0)
 
@@ -90,11 +89,11 @@ class Rotate3D(ScadSingleChildParent):
         """
         Returns the angle of rotation around the z-axis.
         """
-        if 'angles' in self._args:
-            return self._args['angles'].z
-
         if 'vector' in self._args:
             return None
+
+        if 'angle' in self._args:
+            return self._args['angle'].z
 
         return self._args.get('angle_z', 0.0)
 
@@ -116,9 +115,6 @@ class Rotate3D(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        if 'vector' in self._args:
-            return PrivateRotate(angle=self.angle, vector=self.vector, child=self.child)
-
-        return PrivateRotate(angle=self.angles, child=self.child)
+        return PrivateRotate(angle=self.angle, vector=self.vector, child=self.child)
 
 # ----------------------------------------------------------------------------------------------------------------------
