@@ -16,6 +16,11 @@ class ImperialUnitSquare(ScadObject):
         """
         ScadObject.__init__(self, args={})
 
+        self.imperial_square: Square | None = None
+        """
+        The imperial unit square.
+        """
+
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
         """
@@ -25,6 +30,8 @@ class ImperialUnitSquare(ScadObject):
         """
         context.unit = Unit.INCH
 
-        return Square(size=1.0)
+        self.imperial_square = Square(size=1.0)
+
+        return self.imperial_square
 
 # ----------------------------------------------------------------------------------------------------------------------

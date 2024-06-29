@@ -197,10 +197,10 @@ class RegularPolygonTestCase(ScadTestCase):
 
         scad.run_super_scad(polygon, path_actual)
 
-        self.assertAlmostEqual(25.4 / (2 * math.tan(math.pi / 5)), polygon.inner_radius)
-        self.assertAlmostEqual(25.4 / (2 * math.sin(math.pi / 5)), polygon.outer_radius)
-        self.assertAlmostEqual(25.4, polygon.size)
-        self.assertAlmostEqual(polygon.nodes[0].y, polygon.outer_radius)
+        self.assertAlmostEqual(25.4 / (2 * math.tan(math.pi / 5)), polygon.imperial_pentagon.inner_radius)
+        self.assertAlmostEqual(25.4 / (2 * math.sin(math.pi / 5)), polygon.imperial_pentagon.outer_radius)
+        self.assertAlmostEqual(25.4, polygon.imperial_pentagon.size)
+        self.assertAlmostEqual(polygon.imperial_pentagon.nodes[0].y, polygon.imperial_pentagon.outer_radius)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -218,9 +218,9 @@ class RegularPolygonTestCase(ScadTestCase):
 
         scad.run_super_scad(polygon, path_actual)
 
-        self.assertAlmostEqual(1.0 / (2 * math.tan(math.pi / 5)), polygon.inner_radius)
-        self.assertAlmostEqual(1.0 / (2 * math.sin(math.pi / 5)), polygon.outer_radius)
-        self.assertAlmostEqual(1.0, polygon.size)
+        self.assertAlmostEqual(1.0 / (2 * math.tan(math.pi / 5)), polygon.imperial_pentagon.inner_radius)
+        self.assertAlmostEqual(1.0 / (2 * math.sin(math.pi / 5)), polygon.imperial_pentagon.outer_radius)
+        self.assertAlmostEqual(1.0, polygon.imperial_pentagon.size)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()

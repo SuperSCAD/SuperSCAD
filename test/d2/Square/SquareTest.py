@@ -18,8 +18,12 @@ class SquareTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        scad.run_super_scad(Square(size=10), path_actual)
+        square = Square(size=10)
 
+        self.assertAlmostEqual(10.0, square.size)
+        self.assertFalse(square.center)
+
+        scad.run_super_scad(square, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
@@ -32,8 +36,12 @@ class SquareTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        scad.run_super_scad(Square(size=10, center=True), path_actual)
+        square = Square(size=10, center=True)
 
+        self.assertAlmostEqual(10.0, square.size)
+        self.assertTrue(square.center)
+
+        scad.run_super_scad(square, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
@@ -46,7 +54,11 @@ class SquareTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        scad.run_super_scad(ImperialUnitSquare(), path_actual)
+        square = ImperialUnitSquare()
+        scad.run_super_scad(square, path_actual)
+
+        self.assertAlmostEqual(25.4, square.imperial_square.size)
+        self.assertFalse(square.imperial_square.center)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -60,7 +72,11 @@ class SquareTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.INCH)
-        scad.run_super_scad(ImperialUnitSquare(), path_actual)
+        square = ImperialUnitSquare()
+        scad.run_super_scad(square, path_actual)
+
+        self.assertAlmostEqual(1.0, square.imperial_square.size)
+        self.assertFalse(square.imperial_square.center)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()
