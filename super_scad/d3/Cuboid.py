@@ -54,7 +54,7 @@ class Cuboid(ScadObject):
         """
         Returns the width of the cuboid.
         """
-        if isinstance(self._args.get('size'), Size3):
+        if 'size' in self._args:
             return self.uc(self._args['size'].width)
 
         return self.uc(self._args['width'])
@@ -65,7 +65,7 @@ class Cuboid(ScadObject):
         """
         Returns the depth of the cuboid.
         """
-        if isinstance(self._args.get('size'), Size3):
+        if 'size' in self._args:
             return self.uc(self._args['size'].depth)
 
         return self.uc(self._args['depth'])
@@ -76,7 +76,7 @@ class Cuboid(ScadObject):
         """
         Returns the height of the cuboid.
         """
-        if isinstance(self._args.get('size'), Size3):
+        if 'size' in self._args:
             return self.uc(self._args['size'].height)
 
         return self.uc(self._args['height'])
