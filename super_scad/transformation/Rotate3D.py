@@ -39,21 +39,12 @@ class Rotate3D(ScadSingleChildParent):
     @property
     def angle(self) -> float | Point3 | None:
         """
-        Returns the angle around of rotation around a vector.
+        Returns angle of rotation around all axis or a vector.
         """
         if 'vector' in self._args:
             return self._args.get('angle')
 
         return Point3(self.angle_x, self.angle_y, self.angle_z)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def angles(self) -> Point3 | None:
-        """
-        Returns the angle around all three axes.
-        """
-        if 'vector' in self._args:
-            return None
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

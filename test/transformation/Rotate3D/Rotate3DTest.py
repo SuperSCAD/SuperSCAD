@@ -96,7 +96,6 @@ class Rotate3DTest(ScadTestCase):
         self.assertIsNone(rotate.angle_x)
         self.assertIsNone(rotate.angle_y)
         self.assertIsNone(rotate.angle_z)
-        self.assertIsNone(rotate.angles)
         self.assertAlmostEqual(rotate.angle, 45.0)
         self.assertAlmostEqual(rotate.vector.x, 1.0)
         self.assertAlmostEqual(rotate.vector.y, 1.0)
