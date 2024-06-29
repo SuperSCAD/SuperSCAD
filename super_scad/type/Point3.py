@@ -41,6 +41,10 @@ class Point3:
         return Point3(self.x / other, self.y / other, self.z / other)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def __mul__(self, other: float):
+        return Point3(self.x * other, self.y * other, self.z * other)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def length(self) -> float:
         """
         Returns the length of this vector.
