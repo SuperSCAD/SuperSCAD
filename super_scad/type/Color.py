@@ -1,4 +1,3 @@
-import random
 import re
 from typing import List, Tuple
 
@@ -192,14 +191,16 @@ class Color:
         - #rrggbb
         - #rrggbbaa
         - color name
+        - Color(color=...)
         For example, the following values result in the same color:
         - (119, 136, 153)
         - [119, 136, 153]
         - (119, 136, 153 , 1.0)
-        - (0.4667, 0.5333, 0.6)
-        - [0.4667, 0.5333, 0.6]
-        - (0.4667, 0.5333, 0.6, 1.0)
-        - [0.4667, 0.5333, 0.6, 1.0]
+        - [119, 136, 153 , 1.0]
+        - (0.467, 0.533, 0.6)
+        - [0.467, 0.533, 0.6]
+        - (0.467, 0.533, 0.6, 1.0)
+        - [0.467, 0.533, 0.6, 1.0]
         - '#789'
         - '#789F'
         - '#789f'
@@ -212,6 +213,7 @@ class Color:
         - 'LightSlateGrey'
         - 'LIGHTSLATEGRAY'
         - 'LIGHTSLATEGREY'
+        - Color(color='#778899FF')
         :param alpha: The transparency of the color between 0.0 fully (transparent) and 1.0 (opaque). If the alpha
         value is given in both the color parameter and in the alpha parameter, the alpha parameter takes
         precedence.
@@ -274,16 +276,21 @@ class Color:
                 self.__red = int(color[1:3], 16) / 255.0
                 self.__green = int(color[3:5], 16) / 255.0
                 self.__blue = int(color[5:7], 16) / 255.0
-                self.__alpha = int(color[7:8], 16) / 255.0
+                self.__alpha = int(color[7:9], 16) / 255.0
             else:
                 self.__alpha = None
 
+        elif isinstance(color, Color):
+            self.__red = color.red
+            self.__green = color.green
+            self.__blue = color.blue
+            self.__alpha = color.alpha
+
+        else:
+            self.__alpha = None
+
         if self.__alpha is None:
-            # XXX logging error.
-            self.__red = random.random()
-            self.__green = random.random()
-            self.__blue = random.random()
-            self.__alpha = random.random()
+            raise ValueError('Not a valid color: {}'.format(str(color)))
 
         if isinstance(alpha, float) or isinstance(alpha, int):
             self.__alpha = Color.__normalize(alpha)
@@ -322,7 +329,7 @@ class Color:
 
     # ------------------------------------------------------------------------------------------------------------------
     def __mul__(self, factor: float):
-        return Color(color=(self.__red * factor, self.__green * factor, self.__green * factor, self.__alpha))
+        return Color(color=(self.__red * factor, self.__green * factor, self.__blue * factor, self.__alpha))
 
     # ------------------------------------------------------------------------------------------------------------------
     def __repr__(self):
@@ -333,7 +340,7 @@ class Color:
 
     # ------------------------------------------------------------------------------------------------------------------
     def __truediv__(self, fraction: float):
-        return Color(color=(self.__red / fraction, self.__green / fraction, self.__green / fraction, self.__alpha))
+        return Color(color=(self.__red / fraction, self.__green / fraction, self.__blue / fraction, self.__alpha))
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
