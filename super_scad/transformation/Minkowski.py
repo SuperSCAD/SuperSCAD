@@ -11,7 +11,7 @@ class Minkowski(PrivateMultiChildScadCommand):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, convexity: int, children: List[ScadObject]):
+    def __init__(self, *, convexity: int | None = None, children: List[ScadObject]):
         """
         Object constructor.
 
