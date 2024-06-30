@@ -1,12 +1,14 @@
+import math
+
 from super_scad.boolean.Difference import Difference
 from super_scad.boolean.Intersection import Intersection
 from super_scad.boolean.Union import Union
 from super_scad.Context import Context
 from super_scad.d2.Circle import Circle
-from super_scad.d2.Square import Square
+from super_scad.d2.Polygon import Polygon
 from super_scad.ScadObject import ScadObject
-from super_scad.transformation.Rotate2D import Rotate2D
-from super_scad.transformation.Translate2D import Translate2D
+from super_scad.type.Angle import Angle
+from super_scad.type.Point2 import Point2
 
 
 class PieSlice2D(ScadObject):
@@ -51,7 +53,7 @@ class PieSlice2D(ScadObject):
         """
         Returns the angle of the pie slice.
         """
-        return self.end_angle - self.start_angle
+        return Angle.normalize(self.end_angle - self.start_angle)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -59,7 +61,10 @@ class PieSlice2D(ScadObject):
         """
         Returns the start angle of the pie slice.
         """
-        return self._args.get('start_angle', 0.0)
+        if 'angle' in self._args:
+            return Angle.normalize(self._args['angle']) if self._args['angle'] < 0.0 else 0.0
+
+        return Angle.normalize(self._args['start_angle'])
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -67,7 +72,10 @@ class PieSlice2D(ScadObject):
         """
         Returns the end angle of the pie slice.
         """
-        return self._args.get('end_angle', self._args.get('angle', 0.0))
+        if 'angle' in self._args:
+            return Angle.normalize(self._args['angle']) if self._args['angle'] > 0.0 else 0.0
+
+        return Angle.normalize(self._args['end_angle'])
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -118,36 +126,91 @@ class PieSlice2D(ScadObject):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def __angular_to_vector(length: float, angle: float, ):
+        return Point2(length * math.cos(math.radians(angle)), length * math.sin(math.radians(angle)))
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
         """
         Builds a SuperSCAD object.
 
         :param context: The build context.
         """
-        size = self.outer_radius + 2 * context.eps
-        trans = self.outer_radius + context.eps
         angle = self.angle
+        start_angle = self.start_angle
+        end_angle = self.end_angle
 
-        if angle <= 90.0:
-            return Intersection(children=[
-                Difference(children=[Circle(radius=self.outer_radius, fa=self.fa, fs=self.fs, fn=self.fn),
-                                     Circle(radius=self.inner_radius, fa=self.fa, fs=self.fs, fn=self.fn)]),
-                Rotate2D(angle=self.end_angle - 90, child=Square(size=size)),
-                Rotate2D(angle=self.start_angle, child=Square(size=size))])
+        if self.outer_radius <= 0.0 or angle == 0.0:  # xxx Use rounding in target units.
+            return Union(children=[])
 
-        children = []
-        if self.start_angle < 0.0 and self.end_angle > 90.0:
-            children.append(Square(size=size))
-        if self.start_angle < 90.0 and self.end_angle > 180.0:
-            children.append(Translate2D(x=-trans, child=Square(size=size)))
-        if self.start_angle < 180.0 and self.end_angle > 270.0:
-            children.append(Translate2D(x=-trans, y=-trans, child=Square(size=size)))
-        children.append(Rotate2D(angle=self.end_angle - 90, child=Square(size=size)))
-        children.append(Rotate2D(angle=self.start_angle, child=Square(size=size)))
+        if self.inner_radius == 0.0:  # xxx Use rounding in target units.
+            circles = Circle(radius=self.outer_radius, fa=self.fa, fs=self.fs, fn=self.fn)
+        else:
+            circles = Difference(children=[Circle(radius=self.outer_radius, fa=self.fa, fs=self.fs, fn=self.fn),
+                                           Circle(radius=self.inner_radius, fa=self.fa, fs=self.fs, fn=self.fn)])
 
-        return Intersection(children=[
-            Difference(children=[Circle(radius=self.outer_radius, fa=self.fa, fs=self.fs, fn=self.fn),
-                                 Circle(radius=self.inner_radius, fa=self.fa, fs=self.fs, fn=self.fn)]),
-            Union(children=children)])
+        if round(angle - 360.0, 4) == 0.0:  # xxx Use rounding in target units.
+            return circles
+
+        if round(angle - 90.0, 4) < 0.0:  # xxx Use rounding in target units.
+            size2 = self.outer_radius / math.cos(math.radians(Angle.normalize(angle, 90.0) / 2.0)) + context.eps
+            points = [Point2(0.0, 0.0),
+                      self.__angular_to_vector(size2, start_angle),
+                      self.__angular_to_vector(size2, end_angle)]
+
+        elif round(angle - 90.0, 4) == 0.0:  # xxx Use rounding in target units.
+            size1 = math.sqrt(2.0) * self.outer_radius + context.eps
+            size2 = self.outer_radius + context.eps
+            points = [Point2(0.0, 0.0),
+                      self.__angular_to_vector(size2, start_angle),
+                      self.__angular_to_vector(size1, start_angle + 45.0),
+                      self.__angular_to_vector(size2, end_angle)]
+
+        elif round(angle - 180.0, 4) == 0.0:  # xxx Use rounding in target units.
+            size1 = math.sqrt(2.0) * self.outer_radius + context.eps
+            size2 = self.outer_radius + context.eps
+            points = [self.__angular_to_vector(size2, start_angle),
+                      self.__angular_to_vector(size1, start_angle + 45.0),
+                      self.__angular_to_vector(size1, start_angle + 135.0),
+                      self.__angular_to_vector(size2, end_angle)]
+
+        elif round(angle - 270.0, 4) == 0.0:  # xxx Use rounding in target units.
+            size1 = math.sqrt(2.0) * self.outer_radius + context.eps
+            size2 = self.outer_radius + context.eps
+            points = [Point2(0.0, 0.0),
+                      self.__angular_to_vector(size2, start_angle),
+                      self.__angular_to_vector(size1, start_angle + 45.0),
+                      self.__angular_to_vector(size1, start_angle + 135.0),
+                      self.__angular_to_vector(size1, start_angle + 225.0),
+                      self.__angular_to_vector(size2, end_angle)]
+
+        elif round(angle - 180.0, 4) < 0.0:  # xxx Use rounding in target units.
+            phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
+            size1 = math.sqrt(2.0) * self.outer_radius + context.eps
+            size2 = math.sqrt(2.0) * self.outer_radius / (
+                    math.cos(math.radians(phi)) + math.sin(math.radians(phi))) + context.eps
+            points = [Point2(0.0, 0.0),
+                      self.__angular_to_vector(size2, start_angle),
+                      self.__angular_to_vector(size1, start_angle - phi + 90.0),
+                      self.__angular_to_vector(size1, start_angle - phi + 180.0),
+                      self.__angular_to_vector(size2, end_angle)]
+
+        elif round(angle - 360.0, 4) < 0.0:  # xxx Use rounding in target units.
+            phi = Angle.normalize((start_angle - end_angle) / 2.0, 90.0)
+            size1 = math.sqrt(2.0) * self.outer_radius + context.eps
+            size2 = math.sqrt(2.0) * self.outer_radius / (
+                    math.cos(math.radians(phi)) + math.sin(math.radians(phi))) + context.eps
+            points = [Point2(0.0, 0.0),
+                      self.__angular_to_vector(size2, start_angle),
+                      self.__angular_to_vector(size1, start_angle - phi + 90.0),
+                      self.__angular_to_vector(size1, start_angle - phi + 180.0),
+                      self.__angular_to_vector(size1, start_angle - phi + 270.0),
+                      self.__angular_to_vector(size2, end_angle)]
+
+        else:
+            raise ValueError('Math is broken!')
+
+        return Intersection(children=[circles, Polygon(points=points, convexity=2)])
 
 # ----------------------------------------------------------------------------------------------------------------------
