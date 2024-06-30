@@ -2,8 +2,8 @@ import abc
 import math
 
 from super_scad.boolean.Difference import Difference
+from super_scad.boolean.Empty import Empty
 from super_scad.boolean.Intersection import Intersection
-from super_scad.boolean.Union import Union
 from super_scad.Context import Context
 from super_scad.d2.Polygon import Polygon
 from super_scad.ScadObject import ScadObject
@@ -101,7 +101,7 @@ class PrivatePieSlice2D(ScadObject):
         end_angle = self.end_angle
 
         if self.outer_radius <= 0.0 or angle == 0.0:  # xxx Use rounding in target units.
-            return Union(children=[])
+            return Empty()
 
         if self.inner_radius == 0.0:  # xxx Use rounding in target units.
             circles = self._create_circle(self.outer_radius)
