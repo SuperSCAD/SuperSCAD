@@ -2,6 +2,7 @@ from super_scad.Context import Context
 from super_scad.ScadObject import ScadObject
 from super_scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.transformation.private.PrivateRotate import PrivateRotate
+from super_scad.type.Angle import Angle
 
 
 class Rotate2D(ScadSingleChildParent):
@@ -29,7 +30,7 @@ class Rotate2D(ScadSingleChildParent):
         """
         Returns the angle of rotation (around the z-axis).
         """
-        return self.uc(self._args.get('angle', 0.0))
+        return Angle.normalize(self._args.get('angle', 0.0))
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
