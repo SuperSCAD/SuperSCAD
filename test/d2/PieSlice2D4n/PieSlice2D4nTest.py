@@ -1,12 +1,12 @@
 from ScadTestCase import ScadTestCase
-from super_scad.d2.PieSlice2D import PieSlice2D
+from super_scad.d2.PieSlice2D4n import PieSlice2D4n
 from super_scad.Scad import Scad
 from super_scad.Unit import Unit
 
 
-class PieSlice2DTest(ScadTestCase):
+class PieSlice2D4n4nTest(ScadTestCase):
     """
-    Test cases for PieSlice2D.
+    Test cases for PieSlice2D4n.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -17,7 +17,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=10.0, end_angle=80.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=10.0, end_angle=80.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -39,7 +39,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=100.0, end_angle=170.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=100.0, end_angle=170.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -61,7 +61,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=190.0, end_angle=260.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=190.0, end_angle=260.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -83,7 +83,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=280.0, end_angle=350.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=280.0, end_angle=350.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -105,7 +105,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=0.0, end_angle=90.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=0.0, end_angle=90.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -127,7 +127,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=90.0, end_angle=180.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=90.0, end_angle=180.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -149,7 +149,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=180.0, end_angle=270.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=180.0, end_angle=270.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -171,7 +171,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=270.0, end_angle=360.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=270.0, end_angle=360.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -193,7 +193,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=0.0, end_angle=180.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=0.0, end_angle=180.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -215,7 +215,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=90.0, end_angle=270.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=90.0, end_angle=270.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -237,7 +237,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=180.0, end_angle=360.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=180.0, end_angle=360.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -259,7 +259,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=270.0, end_angle=90.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=270.0, end_angle=90.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -281,7 +281,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=0.0, end_angle=270.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=0.0, end_angle=270.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -303,7 +303,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=90.0, end_angle=360.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=90.0, end_angle=360.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -325,7 +325,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=180.0, end_angle=90.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=180.0, end_angle=90.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -347,7 +347,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=270.0, end_angle=180.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=270.0, end_angle=180.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -369,7 +369,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=0.0, end_angle=360.0 - 1e-8, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=0.0, end_angle=360.0 - 1e-8, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
@@ -391,7 +391,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=80.0, end_angle=100.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=80.0, end_angle=100.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -413,7 +413,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=170.0, end_angle=190.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=170.0, end_angle=190.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -435,7 +435,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=260.0, end_angle=280.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=260.0, end_angle=280.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -457,7 +457,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=180.01, end_angle=89.99, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=180.01, end_angle=89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -479,7 +479,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=269.99, end_angle=0.01, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=269.99, end_angle=0.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -501,7 +501,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=350.0, end_angle=370.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=350.0, end_angle=370.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -523,7 +523,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=270.01, end_angle=89.99, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=270.01, end_angle=89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -545,7 +545,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=15.0, end_angle=265.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=15.0, end_angle=265.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -567,7 +567,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=0.01, end_angle=269.99, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=0.01, end_angle=269.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -589,7 +589,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=89.99, end_angle=180.01, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=89.99, end_angle=180.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -611,7 +611,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=105, end_angle=355.0, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=105, end_angle=355.0, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -633,7 +633,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=90.01, end_angle=-0.01, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=90.01, end_angle=-0.01, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -655,7 +655,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=179.99, end_angle=-89.99, inner_radius=10.0, outer_radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=179.99, end_angle=-89.99, inner_radius=10.0, outer_radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(10.0, pie_slice.inner_radius)
@@ -677,7 +677,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(angle=-20, radius=30.0)
+        pie_slice = PieSlice2D4n(angle=-20, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(00.0, pie_slice.inner_radius)
@@ -699,7 +699,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(angle=20, radius=30.0)
+        pie_slice = PieSlice2D4n(angle=20, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(00.0, pie_slice.inner_radius)
@@ -721,7 +721,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=25, end_angle=15, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=25, end_angle=15, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(00.0, pie_slice.inner_radius)
@@ -743,7 +743,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=25, end_angle=0.0, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=25, end_angle=0.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(00.0, pie_slice.inner_radius)
@@ -765,7 +765,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=110, end_angle=95, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=110, end_angle=95, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(00.0, pie_slice.inner_radius)
@@ -787,7 +787,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=269, end_angle=181, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=269, end_angle=181, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(00.0, pie_slice.inner_radius)
@@ -809,7 +809,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=-30, end_angle=-40, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=-30, end_angle=-40, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(00.0, pie_slice.inner_radius)
@@ -831,7 +831,7 @@ class PieSlice2DTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        pie_slice = PieSlice2D(start_angle=0.0, end_angle=-40, radius=30.0)
+        pie_slice = PieSlice2D4n(start_angle=0.0, end_angle=-40, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
         self.assertAlmostEqual(00.0, pie_slice.inner_radius)
