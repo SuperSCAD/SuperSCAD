@@ -19,7 +19,7 @@ class Resize2D(ScadSingleChildParent):
                  new_size: Size2 | None = None,
                  new_width: float | None = None,
                  new_depth: float | None = None,
-                 auto: bool | Tuple[bool, bool]| None = None,
+                 auto: bool | Tuple[bool, bool] | None = None,
                  auto_width: bool | None = None,
                  auto_depth: bool | None = None,
                  convexity: int | None = None,
