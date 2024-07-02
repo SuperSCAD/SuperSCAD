@@ -2,6 +2,7 @@ from typing import Dict
 
 from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
 from super_scad.ScadObject import ScadObject
+from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
 
 
@@ -12,7 +13,7 @@ class PrivateScale(PrivateSingleChildScadCommand):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, factor: Point3, child: ScadObject) -> None:
+    def __init__(self, *, factor: Point2 | Point3, child: ScadObject) -> None:
         """
         Object constructor.
 
