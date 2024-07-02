@@ -1,17 +1,6 @@
 // Unit of length: Unit.MM
 intersection()
 {
-   difference()
-   {
-      circle(r = 30.0);
-      circle(r = 0.0);
-   }
-   rotate(a = 290.0)
-   {
-      square(size = 30.02, center = false);
-   }
-   rotate(a = 0.0)
-   {
-      square(size = 30.02, center = false);
-   }
+   circle(r = 30.0);
+   polygon(points = [[0.0, 0.0], [30.473, 0.0], [28.6352, 10.4224]], convexity = 2);
 }

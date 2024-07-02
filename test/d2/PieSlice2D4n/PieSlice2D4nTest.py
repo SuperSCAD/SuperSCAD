@@ -670,7 +670,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def xtestPieSliceNegative(self):
+    def testPieSliceNegative(self):
         """
         Test a pie slice with a negative angle.
         """
@@ -692,7 +692,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def xtestPieSlicePositive(self):
+    def testPieSlicePositive(self):
         """
         Test a pie slice with a positive angle.
         """
