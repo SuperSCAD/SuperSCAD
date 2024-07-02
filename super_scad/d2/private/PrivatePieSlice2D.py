@@ -113,7 +113,7 @@ class PrivatePieSlice2D(ScadObject):
             return circles
 
         if round(angle - 90.0, 4) < 0.0:  # xxx Use rounding in target units.
-            size2 = self.outer_radius / math.cos(math.radians(Angle.normalize(angle, 90.0) / 2.0)) + context.eps
+            size2 = (self.outer_radius + context.eps) / math.cos(math.radians(Angle.normalize(angle, 90.0) / 2.0))
             points = [Point2(0.0, 0.0),
                       self.__angular_to_vector(size2, start_angle),
                       self.__angular_to_vector(size2, end_angle)]
