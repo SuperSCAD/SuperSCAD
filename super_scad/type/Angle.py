@@ -1,3 +1,6 @@
+import math
+
+
 class Angle:
     """
     Utility class for angles.
@@ -10,8 +13,9 @@ class Angle:
         Returns the normalized angle of an angle. A normalized and is between 0.0 and 360.0 degrees.
 
         :param angle: The angle to be normalized.
+        :param norm: The normalized value,must be a positive value.
         """
-        angle = angle % norm
+        angle = math.fmod(angle, norm)
         if angle < 0.0:
             angle += norm
 
