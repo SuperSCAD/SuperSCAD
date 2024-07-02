@@ -15,8 +15,8 @@ class PrivateResize(PrivateSingleChildScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 new_size: Size2 | Size3,
-                 auto: bool | Tuple[bool, bool] = False,
+                 new_size: Size2 | Size3 | None = None,
+                 auto: bool | Tuple[bool, bool] | Tuple[bool, bool, bool] = None,
                  convexity: int | None = None,
                  child: ScadObject) -> None:
         """

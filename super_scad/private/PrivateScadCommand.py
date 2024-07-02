@@ -1,5 +1,5 @@
 import re
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Set, Tuple
 
 from super_scad.Context import Context
 from super_scad.ScadObject import ScadObject
@@ -122,6 +122,13 @@ class PrivateScadCommand(ScadObject):
             argument = str(argument)
 
         elif isinstance(argument, List):
+            parts = []
+            for element in argument:
+                parts.append(self.__format_argument(context, element))
+
+            argument = '[{}]'.format(', '.join(parts))
+
+        elif isinstance(argument, Tuple):
             parts = []
             for element in argument:
                 parts.append(self.__format_argument(context, element))

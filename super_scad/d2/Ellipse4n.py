@@ -1,7 +1,7 @@
 from super_scad.Context import Context
 from super_scad.d2.Circle4n import Circle4n
 from super_scad.ScadObject import ScadObject
-from super_scad.transformation.private.PrivateResize import PrivateResize
+from super_scad.transformation.Resize2D import Resize2D
 from super_scad.type.Size2 import Size2
 
 
@@ -67,6 +67,6 @@ class Ellipse4n(ScadObject):
         """
         diameter: float = max(self.diameter_x, self.diameter_y)
 
-        return PrivateResize(new_size=Size2(self.diameter_x, self.diameter_y), child=Circle4n(diameter=diameter))
+        return Resize2D(new_size=Size2(self.diameter_x, self.diameter_y), child=Circle4n(diameter=diameter))
 
 # ----------------------------------------------------------------------------------------------------------------------
