@@ -6,7 +6,7 @@ from super_scad.ScadObject import ScadObject
 
 class ScadSingleChildParent(ScadObject, ABC):
     """
-    Class for OpenSCAD objects that have a single-child.
+    Abstract parent class for SuperSCAD objects that have a single-child.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -28,8 +28,6 @@ class ScadSingleChildParent(ScadObject, ABC):
     def child(self) -> ScadObject:
         """
         Returns the child of this single-child parent.
-
-        :rtype: List[ScadObject]|ScadObject|None
         """
         return self.__child
 
@@ -37,8 +35,6 @@ class ScadSingleChildParent(ScadObject, ABC):
     def children(self) -> ScadObject:
         """
         Returns the child of this single-child parent.
-
-        :rtype: List[ScadObject]|ScadObject|None
         """
         return self.__child
 

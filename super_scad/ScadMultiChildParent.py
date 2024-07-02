@@ -1,13 +1,12 @@
 from abc import ABC
 from typing import Any, Dict, List
 
-from super_scad.Context import Context
 from super_scad.ScadObject import ScadObject
 
 
 class ScadMultiChildParent(ScadObject, ABC):
     """
-    Class for SuperSCAD objects that have multiple children.
+    Abstract parent class for SuperSCAD objects that have multiple children.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -30,14 +29,5 @@ class ScadMultiChildParent(ScadObject, ABC):
         Returns the children of this multi-child parent.
         """
         return self.__children
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
-        """
-        Builds a SuperSCAD object.
-
-        :param context: The build context.
-        """
-        return self
 
 # ----------------------------------------------------------------------------------------------------------------------

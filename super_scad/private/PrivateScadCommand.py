@@ -10,6 +10,9 @@ from super_scad.type.Size3 import Size3
 
 
 class PrivateScadCommand(ScadObject):
+    """
+    Parent class for OpenSCAD commands.
+    """
 
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self, command: str, args: Dict[str, Any]):

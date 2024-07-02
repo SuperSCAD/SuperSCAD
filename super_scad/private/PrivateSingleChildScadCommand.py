@@ -6,6 +6,10 @@ from super_scad.ScadSingleChildParent import ScadSingleChildParent
 
 
 class PrivateSingleChildScadCommand(PrivateScadCommand, ScadSingleChildParent):
+    """
+    Parent class for OpenSCAD commands with a single child.
+    """
+
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self, command: str, args: Dict[str, Any], child: ScadObject):
         """

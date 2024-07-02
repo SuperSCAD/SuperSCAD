@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractmethod
+from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
 from super_scad.Context import Context
@@ -9,9 +9,9 @@ from super_scad.type.Size3 import Size3
 from super_scad.Unit import Unit
 
 
-class ScadObject(metaclass=ABCMeta):
+class ScadObject(ABC):
     """
-    Abstract class for OpenSCAD commands.
+    Abstract parent class for OpenSCAD objects.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

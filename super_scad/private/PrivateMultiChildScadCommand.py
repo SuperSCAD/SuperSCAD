@@ -6,6 +6,10 @@ from super_scad.ScadObject import ScadObject
 
 
 class PrivateMultiChildScadCommand(PrivateScadCommand, ScadMultiChildParent):
+    """
+    Parent class for OpenSCAD commands with a multiple children.
+    """
+
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self, command: str, args: Dict[str, Any], children: List[ScadObject]):
         """
