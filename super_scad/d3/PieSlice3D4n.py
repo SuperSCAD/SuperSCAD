@@ -33,7 +33,8 @@ class PieSlice3D4n(ScadObject):
         :param inner_radius:
         :param outer_radius:
         :param height:
-        :param convexity: See `OpenSCAD rotate_extrude documentation`_.
+        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+                          the child object.
         """
         ScadObject.__init__(self, args=locals())
 

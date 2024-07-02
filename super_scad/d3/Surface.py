@@ -15,7 +15,8 @@ class Surface(PrivateScadCommand):
         :param file: See `OpenSCAD surface documentation`_.
         :param center: See `OpenSCAD surface documentation`_.
         :param invert: See `OpenSCAD surface documentation`_.
-        :param convexity: See `OpenSCAD surface documentation`_.
+        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+                          the child object.
 
         .. _OpenSCAD surface documentation: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#surface
         """

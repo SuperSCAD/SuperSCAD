@@ -29,7 +29,8 @@ class LinearExtrude(PrivateSingleChildScadCommand):
 
         :param height: See `OpenSCAD linear_extrude documentation`_.
         :param center: See `OpenSCAD linear_extrude documentation`_.
-        :param convexity: See `OpenSCAD linear_extrude documentation`_.
+        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+                          the child object.
         :param twist: See `OpenSCAD linear_extrude documentation`_.
         :param scale: See `OpenSCAD linear_extrude documentation`_.
         :param slices: See `OpenSCAD linear_extrude documentation`_.

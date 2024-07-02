@@ -17,7 +17,8 @@ class Polyhedron(PrivateScadCommand):
 
         :param points: See `OpenSCAD polyhedron documentation`_.
         :param faces: See `OpenSCAD polyhedron documentation`_.
-        :param convexity: See `OpenSCAD polyhedron documentation`_.
+        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+                          the child object.
 
         .. _OpenSCAD polyhedron documentation:
         https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#polyhedron

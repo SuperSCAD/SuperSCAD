@@ -26,8 +26,8 @@ class Polygon(ScadObject):
         :param points: Alias for primary.
         :param secondary: The secondary path that will be subtracted form the polygon.
         :param secondaries: The secondary paths that will be subtracted form the polygon.
-        :param convexity: Integer number of "inward" curves, i.e. expected path crossings of an arbitrary line through
-                          the polygon.
+        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+                          the child object.
         """
         ScadObject.__init__(self, args=locals())
 

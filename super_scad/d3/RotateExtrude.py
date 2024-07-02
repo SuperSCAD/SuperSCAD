@@ -24,7 +24,8 @@ class RotateExtrude(PrivateSingleChildScadCommand):
 
         :param angle: Specifies the number of degrees to sweep, starting at the positive X axis. The direction of the
                       sweep follows the Right Hand Rule, hence a negative angle sweeps clockwise.
-        :param convexity: The convexity of the child object.
+        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+                          the child object.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.

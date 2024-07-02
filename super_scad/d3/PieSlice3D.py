@@ -35,7 +35,8 @@ class PieSlice3D(ScadObject):
         :param inner_radius:
         :param outer_radius:
         :param height:
-        :param convexity: See `OpenSCAD rotate_extrude documentation`_.
+        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+                          the child object.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.

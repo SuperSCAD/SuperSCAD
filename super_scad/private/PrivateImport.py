@@ -24,7 +24,8 @@ class PrivateImport(PrivateScadCommand, ABC):
         Object constructor.
 
         :param file: See `OpenSCAD import documentation`_.
-        :param convexity: See `OpenSCAD import documentation`_.
+        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+                          the child object.
         :param layer: See `OpenSCAD import documentation`_.
         :param fa: See `OpenSCAD import documentation`_.
         :param fs: See `OpenSCAD import documentation`_.
