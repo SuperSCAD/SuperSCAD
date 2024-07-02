@@ -10,10 +10,11 @@ class Angle:
     @staticmethod
     def normalize(angle: float, norm: float = 360.0) -> float:
         """
-        Returns the normalized angle of an angle. A normalized and is between 0.0 and 360.0 degrees.
+        Returns the normalized angle of an angle. A normalized angle is between 0.0 and the norm (360.0 degrees by
+        default).
 
         :param angle: The angle to be normalized.
-        :param norm: The normalized value,must be a positive value.
+        :param norm: The norm value.
         """
         angle = math.fmod(angle, norm)
         if angle < 0.0:
