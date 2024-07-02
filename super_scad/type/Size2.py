@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-from super_scad.Context import Context
-
 
 @dataclass
 class Size2:
@@ -21,9 +19,5 @@ class Size2:
     # ------------------------------------------------------------------------------------------------------------------
     def __repr__(self):
         return f"[{self.width}, {self.depth}]"
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> str:
-        return f"[{context.round_length(self.width)}, {context.round_length(self.depth)}]"
 
 # ----------------------------------------------------------------------------------------------------------------------

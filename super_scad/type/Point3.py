@@ -1,8 +1,6 @@
 import math
 from dataclasses import dataclass
 
-from super_scad.Context import Context
-
 
 @dataclass
 class Point3:
@@ -50,9 +48,5 @@ class Point3:
         Returns the length of this vector.
         """
         return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> str:
-        return f"[{context.round_length(self.x)}, {context.round_length(self.y)}, {context.round_length(self.z)}]"
 
 # ----------------------------------------------------------------------------------------------------------------------

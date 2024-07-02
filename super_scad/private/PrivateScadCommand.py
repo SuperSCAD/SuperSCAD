@@ -104,13 +104,28 @@ class PrivateScadCommand(ScadObject):
         :param argument: The argument of OpenSCAD command.
         """
         if isinstance(argument, float):
+            # xxx Distinguish between length, scale, and angle.
             argument = context.round_length(argument)
+            if argument == '-0.0':
+                argument = '0.0'
 
-        elif isinstance(argument, Point2) or isinstance(argument, Point3):
-            argument = argument.build(context)
+        elif isinstance(argument, Point2):
+            argument = "[{}, {}]".format(self.__format_argument(context, float(argument.x)),
+                                         self.__format_argument(context, float(argument.y)))
 
-        elif isinstance(argument, Size2) or isinstance(argument, Size3):
-            argument = argument.build(context)
+        elif isinstance(argument, Point3):
+            argument = "[{}, {}, {}]".format(self.__format_argument(context, float(argument.x)),
+                                             self.__format_argument(context, float(argument.y)),
+                                             self.__format_argument(context, float(argument.z)))
+
+        elif isinstance(argument, Size2):
+            argument = "[{}, {}]".format(self.__format_argument(context, float(argument.width)),
+                                         self.__format_argument(context, float(argument.depth)))
+
+        elif isinstance(argument, Size3):
+            argument = "[{}, {}, {}]".format(self.__format_argument(context, float(argument.width)),
+                                             self.__format_argument(context, float(argument.depth)),
+                                             self.__format_argument(context, float(argument.height)))
 
         elif isinstance(argument, bool):
             argument = str(argument).lower()
