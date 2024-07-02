@@ -119,7 +119,7 @@ class PrivatePieSlice2D(ScadObject):
                       self.__angular_to_vector(size2, end_angle)]
 
         elif round(angle - 90.0, 4) == 0.0:  # xxx Use rounding in target units.
-            size1 = math.sqrt(2.0) * self.outer_radius + context.eps
+            size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
             size2 = self.outer_radius + context.eps
             points = [Point2(0.0, 0.0),
                       self.__angular_to_vector(size2, start_angle),
@@ -127,7 +127,7 @@ class PrivatePieSlice2D(ScadObject):
                       self.__angular_to_vector(size2, end_angle)]
 
         elif round(angle - 180.0, 4) == 0.0:  # xxx Use rounding in target units.
-            size1 = math.sqrt(2.0) * self.outer_radius + context.eps
+            size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
             size2 = self.outer_radius + context.eps
             points = [self.__angular_to_vector(size2, start_angle),
                       self.__angular_to_vector(size1, start_angle + 45.0),
@@ -135,7 +135,7 @@ class PrivatePieSlice2D(ScadObject):
                       self.__angular_to_vector(size2, end_angle)]
 
         elif round(angle - 270.0, 4) == 0.0:  # xxx Use rounding in target units.
-            size1 = math.sqrt(2.0) * self.outer_radius + context.eps
+            size1 = math.sqrt(2.0) * (self.outer_radius + context.eps)
             size2 = self.outer_radius + context.eps
             points = [Point2(0.0, 0.0),
                       self.__angular_to_vector(size2, start_angle),
