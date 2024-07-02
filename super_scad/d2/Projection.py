@@ -1,7 +1,7 @@
 from super_scad.Context import Context
+from super_scad.d2.private.PrivateProjection import PrivateProjection
 from super_scad.ScadObject import ScadObject
 from super_scad.ScadSingleChildParent import ScadSingleChildParent
-from super_scad.transformation.private.PrivateProjection import PrivateProjection
 from super_scad.transformation.Translate3D import Translate3D
 
 
@@ -17,7 +17,7 @@ class Projection(ScadSingleChildParent):
         Object constructor.
 
         :param cut: Whether to cut the 3D model.
-        :param z: The height where the 3D model will be cut.
+        :param z: The height where the 3D model will be cut. Defaults to 0.0.
         :param child: The 3D model.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
@@ -52,10 +52,10 @@ class Projection(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        if self.z != 0.0:
-            child = Translate3D(z=-self.z, child=self.child)
-        else:
+        if self.z is None:
             child = self.child
+        else:
+            child = Translate3D(z=-self.z, child=self.child)
 
         return PrivateProjection(cut=self.cut, child=child)
 
