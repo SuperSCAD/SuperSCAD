@@ -13,10 +13,10 @@ class Cone4n(ScadObject):
     def __init__(self,
                  *,
                  height: float,
-                 top_radius: float | None = None,
-                 top_diameter: float | None = None,
                  bottom_radius: float | None = None,
                  bottom_diameter: float | None = None,
+                 top_radius: float | None = None,
+                 top_diameter: float | None = None,
                  center: bool = False):
         """
         Object constructor.
@@ -92,6 +92,7 @@ class Cone4n(ScadObject):
         return Cone(height=self.height,
                     bottom_diameter=self.bottom_diameter,
                     top_diameter=self.top_diameter,
+                    center=self.center,
                     fn=Circle4n.r2sides4n(max(self.bottom_radius, self.top_radius), context))
 
 # ----------------------------------------------------------------------------------------------------------------------

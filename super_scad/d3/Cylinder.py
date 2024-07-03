@@ -1,9 +1,12 @@
 from typing import Dict, Set
 
+from super_scad.Context import Context
+from super_scad.d3.private.PrivateCylinder import PrivateCylinder
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.ScadObject import ScadObject
 
 
-class Cylinder(PrivateScadCommand):
+class Cylinder(ScadObject):
     """
     Class for cylinders.
     """
@@ -29,7 +32,7 @@ class Cylinder(PrivateScadCommand):
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
-        PrivateScadCommand.__init__(self, command='cylinder', args=locals())
+        ScadObject.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
@@ -42,20 +45,6 @@ class Cylinder(PrivateScadCommand):
         Returns whether the cylinder is centered along the z-as.
         """
         return self._args['center']
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def argument_lengths(self) -> Set[str]:
-        """
-        Returns the set with arguments that are lengths.
-        """
-        return {'h', 'r', 'd', '$fs'}
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
-        """
-        Returns the map from SuperSCAD arguments to OpenSCAD arguments.
-        """
-        return {'height': 'h', 'radius': 'r', 'diameter': 'd', 'fa': '$fa', 'fs': '$fs', 'fn': '$fn'}
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -104,5 +93,19 @@ class Cylinder(PrivateScadCommand):
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
         return self._args.get('fn')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def build(self, context: Context) -> ScadObject:
+        """
+        Builds a SuperSCAD object.
+
+        :param context: The build context.
+        """
+        return PrivateCylinder(height=self.height,
+                               diameter=self.diameter,
+                               center=self.center,
+                               fa=self.fa,
+                               fs=self.fs,
+                               fn=self.fn)
 
 # ----------------------------------------------------------------------------------------------------------------------

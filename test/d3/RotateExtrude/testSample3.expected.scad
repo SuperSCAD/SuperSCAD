@@ -22,7 +22,7 @@ union()
    {
       rotate(a = [90.0, 0.0, 0.0])
       {
-         cylinder(h = 80.01, r = 10.0, center = false);
+         cylinder(h = 80.01, d = 20.0, center = false);
       }
    }
 }

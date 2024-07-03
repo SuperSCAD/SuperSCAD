@@ -69,8 +69,8 @@ class Cylinder4n(ScadObject):
 
         :param context: The build context.
         """
-        return Cylinder(diameter=self.diameter,
-                        height=self.height,
+        return Cylinder(height=self.height,
+                        diameter=self.diameter,
                         center=self.center,
                         fn=Circle4n.r2sides4n(self.radius, context))
 

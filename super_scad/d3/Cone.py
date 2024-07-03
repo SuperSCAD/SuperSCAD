@@ -1,9 +1,9 @@
-from typing import Dict, Set
+from super_scad.Context import Context
+from super_scad.d3.private.PrivateCylinder import PrivateCylinder
+from super_scad.ScadObject import ScadObject
 
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
 
-
-class Cone(PrivateScadCommand):
+class Cone(ScadObject):
     """
     Class for cones. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cylinder.
     """
@@ -12,10 +12,10 @@ class Cone(PrivateScadCommand):
     def __init__(self,
                  *,
                  height: float,
-                 top_radius: float | None = None,
-                 top_diameter: float | None = None,
                  bottom_radius: float | None = None,
                  bottom_diameter: float | None = None,
+                 top_radius: float | None = None,
+                 top_diameter: float | None = None,
                  center: bool = False,
                  fa: float | None = None,
                  fs: float | None = None,
@@ -24,41 +24,20 @@ class Cone(PrivateScadCommand):
         Object constructor.
 
         :param height: The height of the cone.
-        :param top_radius: The radius at the top of the cone.
-        :param top_diameter: The diameter at the top of the cone.
         :param bottom_radius: The radius at the bottom of the cone.
         :param bottom_diameter: The diameter at the bottom of the cone.
+        :param top_radius: The radius at the top of the cone.
+        :param top_diameter: The diameter at the top of the cone.
         :param center: Whether the cone is centered in the z-direction.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
-        PrivateScadCommand.__init__(self, command='cylinder', args=locals())
+        ScadObject.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         pass
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
-        """
-        Returns the map from SuperSCAD arguments to OpenSCAD arguments.
-        """
-        return {'height':          'h',
-                'bottom_radius':   'r1',
-                'bottom_diameter': 'd1',
-                'top_radius':      'r2',
-                'top_diameter':    'd2',
-                'fa':              '$fa',
-                'fs':              '$fs',
-                'fn':              '$fn'}
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def argument_lengths(self) -> Set[str]:
-        """
-        Returns the set with arguments that are lengths.
-        """
-        return {'h', 'r1', 'r2', 'd1', 'd2', '$fs'}
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -131,5 +110,20 @@ class Cone(PrivateScadCommand):
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
         return self._args.get('fn')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def build(self, context: Context) -> ScadObject:
+        """
+        Builds a SuperSCAD object.
+
+        :param context: The build context.
+        """
+        return PrivateCylinder(height=self.height,
+                               bottom_diameter=self.bottom_diameter,
+                               top_diameter=self.top_diameter,
+                               center=self.center,
+                               fa=self.fa,
+                               fs=self.fs,
+                               fn=self.fn)
 
 # ----------------------------------------------------------------------------------------------------------------------

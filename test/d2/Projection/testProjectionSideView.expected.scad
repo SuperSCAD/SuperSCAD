@@ -26,7 +26,7 @@ projection(cut = false)
             }
             translate(v = [0.0, 0.0, 5.0])
             {
-               cylinder(h = 50.0, r2 = 5.0, r1 = 20.0, center = true);
+               cylinder(h = 50.0, d1 = 40.0, d2 = 10.0, center = true);
             }
          }
       }
