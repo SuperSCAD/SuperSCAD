@@ -62,7 +62,7 @@ class LinearExtrude(PrivateSingleChildScadCommand):
         """
         Returns the set with arguments that are lengths.
         """
-        return {'height', 'fs'}
+        return {'height', '$fs'}
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

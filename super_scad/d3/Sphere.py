@@ -43,7 +43,7 @@ class Sphere(PrivateScadCommand):
         """
         Returns the set with arguments that are lengths.
         """
-        return {'r', 'd', 'fs'}
+        return {'r', 'd', '$fs'}
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
