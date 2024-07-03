@@ -29,6 +29,7 @@ class PieSlice3D4nTest(ScadTestCase):
         self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(10.0, pie_slice.height)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
 
@@ -55,6 +56,7 @@ class PieSlice3D4nTest(ScadTestCase):
         self.assertAlmostEqual(0.0, pie_slice.imperial_pie_slice.inner_radius)
         self.assertAlmostEqual(30.0 * 25.4, pie_slice.imperial_pie_slice.outer_radius)
         self.assertAlmostEqual(10.0 * 25.4, pie_slice.imperial_pie_slice.height)
+        self.assertEqual(2, pie_slice.imperial_pie_slice.convexity)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -79,6 +81,7 @@ class PieSlice3D4nTest(ScadTestCase):
         self.assertAlmostEqual(0.0, pie_slice.imperial_pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.imperial_pie_slice.outer_radius)
         self.assertAlmostEqual(10.0, pie_slice.imperial_pie_slice.height)
+        self.assertEqual(2, pie_slice.imperial_pie_slice.convexity)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()

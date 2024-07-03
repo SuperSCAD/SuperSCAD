@@ -26,6 +26,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(70.0, pie_slice.angle)
         self.assertAlmostEqual(10.0, pie_slice.start_angle)
         self.assertAlmostEqual(80.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -48,6 +49,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(70.0, pie_slice.angle)
         self.assertAlmostEqual(100.0, pie_slice.start_angle)
         self.assertAlmostEqual(170.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -70,6 +72,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(70.0, pie_slice.angle)
         self.assertAlmostEqual(190.0, pie_slice.start_angle)
         self.assertAlmostEqual(260.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -92,6 +95,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(70.0, pie_slice.angle)
         self.assertAlmostEqual(280.0, pie_slice.start_angle)
         self.assertAlmostEqual(350.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -114,6 +118,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(90.0, pie_slice.angle)
         self.assertAlmostEqual(0.0, pie_slice.start_angle)
         self.assertAlmostEqual(90.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -136,6 +141,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(90.0, pie_slice.angle)
         self.assertAlmostEqual(90.0, pie_slice.start_angle)
         self.assertAlmostEqual(180.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -158,6 +164,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(90.0, pie_slice.angle)
         self.assertAlmostEqual(180.0, pie_slice.start_angle)
         self.assertAlmostEqual(270.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -180,6 +187,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(90.0, pie_slice.angle)
         self.assertAlmostEqual(270.0, pie_slice.start_angle)
         self.assertAlmostEqual(0.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -202,6 +210,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(180.0, pie_slice.angle)
         self.assertAlmostEqual(0.0, pie_slice.start_angle)
         self.assertAlmostEqual(180.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -224,6 +233,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(180.0, pie_slice.angle)
         self.assertAlmostEqual(90.0, pie_slice.start_angle)
         self.assertAlmostEqual(270.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -246,6 +256,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(180.0, pie_slice.angle)
         self.assertAlmostEqual(180.0, pie_slice.start_angle)
         self.assertAlmostEqual(0.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -268,6 +279,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(180.0, pie_slice.angle)
         self.assertAlmostEqual(270.0, pie_slice.start_angle)
         self.assertAlmostEqual(90.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -290,6 +302,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(270.0, pie_slice.angle)
         self.assertAlmostEqual(0.0, pie_slice.start_angle)
         self.assertAlmostEqual(270.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -312,6 +325,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(270.0, pie_slice.angle)
         self.assertAlmostEqual(90.0, pie_slice.start_angle)
         self.assertAlmostEqual(0.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -334,6 +348,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(270.0, pie_slice.angle)
         self.assertAlmostEqual(180.0, pie_slice.start_angle)
         self.assertAlmostEqual(90.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -356,6 +371,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(270.0, pie_slice.angle)
         self.assertAlmostEqual(270.0, pie_slice.start_angle)
         self.assertAlmostEqual(180.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -378,6 +394,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(360.0, pie_slice.angle)
         self.assertAlmostEqual(0.0, pie_slice.start_angle)
         self.assertAlmostEqual(360.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -400,6 +417,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(20.0, pie_slice.angle)
         self.assertAlmostEqual(80.0, pie_slice.start_angle)
         self.assertAlmostEqual(100.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -422,6 +440,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(20.0, pie_slice.angle)
         self.assertAlmostEqual(170.0, pie_slice.start_angle)
         self.assertAlmostEqual(190.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -444,6 +463,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(20.0, pie_slice.angle)
         self.assertAlmostEqual(260.0, pie_slice.start_angle)
         self.assertAlmostEqual(280.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -466,6 +486,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(269.98, pie_slice.angle)
         self.assertAlmostEqual(180.01, pie_slice.start_angle)
         self.assertAlmostEqual(89.99, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -488,6 +509,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(90.02, pie_slice.angle)
         self.assertAlmostEqual(269.99, pie_slice.start_angle)
         self.assertAlmostEqual(0.01, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -510,6 +532,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(20.0, pie_slice.angle)
         self.assertAlmostEqual(350.0, pie_slice.start_angle)
         self.assertAlmostEqual(10.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -532,6 +555,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(179.98, pie_slice.angle)
         self.assertAlmostEqual(270.01, pie_slice.start_angle)
         self.assertAlmostEqual(89.99, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -554,6 +578,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(250.0, pie_slice.angle)
         self.assertAlmostEqual(15.0, pie_slice.start_angle)
         self.assertAlmostEqual(265.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -576,6 +601,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(269.98, pie_slice.angle)
         self.assertAlmostEqual(0.01, pie_slice.start_angle)
         self.assertAlmostEqual(269.99, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -598,6 +624,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(90.02, pie_slice.angle)
         self.assertAlmostEqual(89.99, pie_slice.start_angle)
         self.assertAlmostEqual(180.01, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -620,6 +647,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(250.0, pie_slice.angle)
         self.assertAlmostEqual(105.0, pie_slice.start_angle)
         self.assertAlmostEqual(355.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -642,6 +670,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(269.98, pie_slice.angle)
         self.assertAlmostEqual(90.01, pie_slice.start_angle)
         self.assertAlmostEqual(359.99, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -664,6 +693,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(90.02, pie_slice.angle)
         self.assertAlmostEqual(179.99, pie_slice.start_angle)
         self.assertAlmostEqual(270.01, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -686,6 +716,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(20.0, pie_slice.angle)
         self.assertAlmostEqual(340.0, pie_slice.start_angle)
         self.assertAlmostEqual(0.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -708,6 +739,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(20.0, pie_slice.angle)
         self.assertAlmostEqual(0.0, pie_slice.start_angle)
         self.assertAlmostEqual(20.0, pie_slice.end_angle)
+        self.assertEqual(1, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -730,6 +762,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(350.0, pie_slice.angle)
         self.assertAlmostEqual(25.0, pie_slice.start_angle)
         self.assertAlmostEqual(15.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -752,6 +785,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(335.0, pie_slice.angle)
         self.assertAlmostEqual(25.0, pie_slice.start_angle)
         self.assertAlmostEqual(0.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -774,6 +808,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(345.0, pie_slice.angle)
         self.assertAlmostEqual(110.0, pie_slice.start_angle)
         self.assertAlmostEqual(95.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -796,6 +831,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(272.0, pie_slice.angle)
         self.assertAlmostEqual(269.0, pie_slice.start_angle)
         self.assertAlmostEqual(181.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -818,6 +854,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(350.0, pie_slice.angle)
         self.assertAlmostEqual(330.0, pie_slice.start_angle)
         self.assertAlmostEqual(320.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -840,6 +877,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(320.0, pie_slice.angle)
         self.assertAlmostEqual(0.0, pie_slice.start_angle)
         self.assertAlmostEqual(320.0, pie_slice.end_angle)
+        self.assertEqual(2, pie_slice.convexity)
 
         scad.run_super_scad(pie_slice, path_actual)
         actual = path_actual.read_text()
@@ -863,6 +901,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(30.0 * 25.4, pie_slice.imperial_pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.imperial_pie_slice.inner_radius)
         self.assertAlmostEqual(30.0 * 25.4, pie_slice.imperial_pie_slice.outer_radius)
+        self.assertEqual(2, pie_slice.imperial_pie_slice.convexity)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -885,6 +924,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         self.assertAlmostEqual(30.0, pie_slice.imperial_pie_slice.radius)
         self.assertAlmostEqual(0.0, pie_slice.imperial_pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.imperial_pie_slice.outer_radius)
+        self.assertEqual(2, pie_slice.imperial_pie_slice.convexity)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()

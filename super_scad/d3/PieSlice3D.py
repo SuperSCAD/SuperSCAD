@@ -4,7 +4,7 @@ from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.ScadObject import ScadObject
 
 
-class PieSlice3D(PieSlice2D):
+class PieSlice3D(ScadObject):
     """
     Class for 3D pie slices.
     """
@@ -109,6 +109,14 @@ class PieSlice3D(PieSlice2D):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
+    def convexity(self) -> int:
+        """
+        Returns the convexity of the pie slice.
+        """
+        return 1 if self.angle < 180.0 else 2
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
     def fa(self) -> float | None:
         """
         Returns the minimum angle (in degrees) of each fragment.
@@ -138,6 +146,6 @@ class PieSlice3D(PieSlice2D):
 
         :param context: The build context.
         """
-        return LinearExtrude(height=self.height, convexity=2, child=self.__pie_slice2d)
+        return LinearExtrude(height=self.height, convexity=self.__pie_slice2d.convexity, child=self.__pie_slice2d)
 
 # ----------------------------------------------------------------------------------------------------------------------

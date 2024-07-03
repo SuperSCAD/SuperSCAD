@@ -75,6 +75,14 @@ class PrivatePieSlice2D(ScadObject):
         return self.uc(self._args.get('outer_radius', self._args.get('radius', 0.0)))
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def convexity(self) -> int:
+        """
+        Returns the convexity of the pie slice.
+        """
+        return 1 if self.angle < 180.0 else 2
+
+    # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
     def __angular_to_vector(length: float, angle: float, ):
         return Point2(length * math.cos(math.radians(angle)), length * math.sin(math.radians(angle)))
@@ -168,6 +176,6 @@ class PrivatePieSlice2D(ScadObject):
         else:
             raise ValueError('Math is broken!')
 
-        return Intersection(children=[circles, Polygon(points=points, convexity=2)])
+        return Intersection(children=[circles, Polygon(points=points, convexity=self.convexity)])
 
 # ----------------------------------------------------------------------------------------------------------------------

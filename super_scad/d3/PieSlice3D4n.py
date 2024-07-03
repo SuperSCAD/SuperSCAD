@@ -1,11 +1,10 @@
 from super_scad.Context import Context
-from super_scad.d2.PieSlice2D import PieSlice2D
 from super_scad.d2.PieSlice2D4n import PieSlice2D4n
 from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.ScadObject import ScadObject
 
 
-class PieSlice3D4n(PieSlice2D):
+class PieSlice3D4n(ScadObject):
     """
     Class for 3D pie slices.
     """
@@ -100,12 +99,20 @@ class PieSlice3D4n(PieSlice2D):
         return self.uc(self._args['height'])
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def convexity(self) -> int:
+        """
+        Returns the convexity of the pie slice.
+        """
+        return 1 if self.angle < 180.0 else 2
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
         """
         Builds a SuperSCAD object.
 
         :param context: The build context.
         """
-        return LinearExtrude(height=self.height, convexity=2, child=self.__pie_slice2d)
+        return LinearExtrude(height=self.height, convexity=self.__pie_slice2d.convexity, child=self.__pie_slice2d)
 
 # ----------------------------------------------------------------------------------------------------------------------
