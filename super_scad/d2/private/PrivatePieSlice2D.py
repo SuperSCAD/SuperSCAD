@@ -56,7 +56,7 @@ class PrivatePieSlice2D(ScadObject):
         """
         Returns the outer radius of the pie slice.
         """
-        return self.uc(self.outer_radius)
+        return self.outer_radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
