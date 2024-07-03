@@ -20,12 +20,12 @@ class PieSlice2D4n(PrivatePieSlice2D):
         """
         Object constructor.
 
-        :param angle:
-        :param start_angle:
-        :param end_angle:
-        :param radius:
-        :param inner_radius:
-        :param outer_radius:
+        :param angle: The angle of the pie slice (implies starting angle is 0.0).
+        :param start_angle: The start angle of the pie slice.
+        :param end_angle: The end angle of the pie slice.
+        :param radius: The radius of the pie slice (implies inner radius is 0.0).
+        :param inner_radius: The inner radius of the pie slice.
+        :param outer_radius: The outer radius of the pie slice.
         """
         PrivatePieSlice2D.__init__(self, args=locals())
 

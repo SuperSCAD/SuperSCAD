@@ -35,9 +35,9 @@ class LinearExtrude(PrivateSingleChildScadCommand):
         :param scale: See `OpenSCAD linear_extrude documentation`_.
         :param slices: See `OpenSCAD linear_extrude documentation`_.
         :param segments: See `OpenSCAD linear_extrude documentation`_.
-        :param fa: See `OpenSCAD linear_extrude documentation`_.
-        :param fs: See `OpenSCAD linear_extrude documentation`_.
-        :param fn: See `OpenSCAD linear_extrude documentation`_.
+        :param fa: The minimum angle (in degrees) of each fragment.
+        :param fs: The minimum circumferential length of each fragment.
+        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
 
         .. _OpenSCAD linear_extrude documentation: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#linear_extrude
         """

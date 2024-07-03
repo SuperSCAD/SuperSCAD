@@ -25,13 +25,13 @@ class PieSlice3D(ScadObject):
         """
         Object constructor.
 
-        :param angle:
-        :param start_angle:
-        :param end_angle:
-        :param radius:
-        :param inner_radius:
-        :param outer_radius:
-        :param height:
+        :param angle: The angle of the pie slice (implies starting angle is 0.0).
+        :param start_angle: The start angle of the pie slice.
+        :param end_angle: The end angle of the pie slice.
+        :param radius: The radius of the pie slice (implies inner radius is 0.0).
+        :param inner_radius: The inner radius of the pie slice.
+        :param outer_radius: The outer radius of the pie slice.
+        :param height: The height of the pie slice.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.

@@ -27,9 +27,9 @@ class PrivateImport(PrivateScadCommand, ABC):
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child object.
         :param layer: See `OpenSCAD import documentation`_.
-        :param fa: See `OpenSCAD import documentation`_.
-        :param fs: See `OpenSCAD import documentation`_.
-        :param fn: See `OpenSCAD import documentation`_.
+        :param fa: The minimum angle (in degrees) of each fragment.
+        :param fs: The minimum circumferential length of each fragment.
+        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         :param id: See `OpenSCAD import documentation`_.
 
         .. _OpenSCAD import documentation: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Importing_Geometry#import
