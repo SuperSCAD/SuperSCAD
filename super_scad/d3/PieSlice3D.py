@@ -1,12 +1,10 @@
 from super_scad.Context import Context
-from super_scad.d2.Rectangle import Rectangle
-from super_scad.d3.RotateExtrude import RotateExtrude
+from super_scad.d2.PieSlice2D import PieSlice2D
+from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.ScadObject import ScadObject
-from super_scad.transformation.Rotate3D import Rotate3D
-from super_scad.transformation.Translate3D import Translate3D
 
 
-class PieSlice3D(ScadObject):
+class PieSlice3D(PieSlice2D):
     """
     Class for 3D pie slices.
     """
@@ -21,7 +19,6 @@ class PieSlice3D(ScadObject):
                  inner_radius: float | None = None,
                  outer_radius: float | None = None,
                  height: float,
-                 convexity: int | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None):
@@ -35,13 +32,24 @@ class PieSlice3D(ScadObject):
         :param inner_radius:
         :param outer_radius:
         :param height:
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
         ScadObject.__init__(self, args=locals())
+
+        self.__pie_slice2d: PieSlice2D = PieSlice2D(angle=angle,
+                                                    start_angle=start_angle,
+                                                    end_angle=end_angle,
+                                                    radius=radius,
+                                                    inner_radius=inner_radius,
+                                                    outer_radius=outer_radius,
+                                                    fa=fa,
+                                                    fs=fs,
+                                                    fn=fn)
+        """
+        The 2D pie slice to be extruded to a 3D pie slice.
+        """
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -49,10 +57,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the angle of the pie slice.
         """
-        if 'start_angle' in self._args and 'end_angle' in self._args:
-            return self._args['end_angle'] - self._args['start_angle']
-
-        return self.end_angle
+        return self.__pie_slice2d.angle
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -60,7 +65,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the start angle of the pie slice.
         """
-        return self._args.get('start_angle', 0.0)
+        return self.__pie_slice2d.start_angle
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -68,7 +73,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the end angle of the pie slice.
         """
-        return self._args.get('end_angle', self._args.get('angle', 0.0))
+        return self.__pie_slice2d.end_angle
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -76,7 +81,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the outer radius of the pie slice.
         """
-        return self.uc(self.outer_radius)
+        return self.__pie_slice2d.radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -84,7 +89,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the inner radius of the pie slice.
         """
-        return self.uc(self._args.get('inner_radius', 0.0))
+        return self.__pie_slice2d.inner_radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -92,7 +97,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the outer radius of the pie slice.
         """
-        return self.uc(self._args.get('outer_radius', self._args.get('radius', 0.0)))
+        return self.__pie_slice2d.outer_radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -100,7 +105,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the height of the pie slice.
         """
-        return self.uc(self._args.get('height', 0.0))
+        return self.uc(self._args['height'])
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -108,7 +113,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the minimum angle (in degrees) of each fragment.
         """
-        return self._args.get('fa')
+        return self.__pie_slice2d.fa
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -116,7 +121,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self.__pie_slice2d.fs
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -124,7 +129,7 @@ class PieSlice3D(ScadObject):
         """
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
-        return self._args.get('fn')
+        return self.__pie_slice2d.fn
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
@@ -133,14 +138,6 @@ class PieSlice3D(ScadObject):
 
         :param context: The build context.
         """
-        rectangle = Rectangle(width=self.outer_radius - self.inner_radius, depth=self.height)
-        translate = Translate3D(x=self.inner_radius, child=rectangle)
-        extrude = RotateExtrude(angle=self.end_angle - self.start_angle,
-                                child=translate,
-                                fa=self.fa,
-                                fs=self.fs,
-                                fn=self.fn)
-
-        return Rotate3D(angle_z=self.start_angle, child=extrude)
+        return LinearExtrude(height=self.height, convexity=2, child=self.__pie_slice2d)
 
 # ----------------------------------------------------------------------------------------------------------------------
