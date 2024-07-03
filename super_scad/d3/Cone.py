@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Set
 
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
 
@@ -54,6 +54,13 @@ class Cone(PrivateScadCommand):
                 'fn':              '$fn'}
 
     # ------------------------------------------------------------------------------------------------------------------
+    def argument_lengths(self) -> Set[str]:
+        """
+        Returns the set with arguments that are lengths.
+        """
+        return {'h', 'r1', 'r2', 'd1', 'd2', '$fs'}
+
+    # ------------------------------------------------------------------------------------------------------------------
     @property
     def center(self) -> bool:
         """
@@ -83,7 +90,7 @@ class Cone(PrivateScadCommand):
         """
         Returns the top radius of the cone.
         """
-        return self.uc(self._args.get('top_radius', 0.5 * self._args.get('bottom_diameter', 0.0)))
+        return self.uc(self._args.get('top_radius', 0.5 * self._args.get('top_diameter', 0.0)))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
