@@ -49,7 +49,7 @@ class RotateExtrude(PrivateSingleChildScadCommand):
         """
         Returns the set with arguments that are lengths.
         """
-        return {'fs'}
+        return {'$fs'}
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -62,11 +62,11 @@ class RotateExtrude(PrivateSingleChildScadCommand):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def convexity(self) -> int:
+    def convexity(self) -> int | None:
         """
         Returns the convexity.
         """
-        return self._args.get('convexity', 2)
+        return self._args.get('convexity')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
