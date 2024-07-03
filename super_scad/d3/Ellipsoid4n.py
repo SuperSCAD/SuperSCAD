@@ -2,7 +2,7 @@ from super_scad.Context import Context
 from super_scad.d2.Circle4n import Circle4n
 from super_scad.d3.Sphere import Sphere
 from super_scad.ScadObject import ScadObject
-from super_scad.transformation.private.PrivateResize import PrivateResize
+from super_scad.transformation.Resize3D import Resize3D
 from super_scad.type.Size3 import Size3
 
 
@@ -93,7 +93,7 @@ class Ellipsoid4n(ScadObject):
         """
         diameter: float = max(self.diameter_x, self.diameter_y, self.diameter_z)
 
-        return PrivateResize(new_size=Size3(self.diameter_x, self.diameter_y, self.diameter_z),
-                             child=Sphere(diameter=diameter, fn=Circle4n.r2sides4n(0.5 * diameter, context)))
+        return Resize3D(new_size=Size3(self.diameter_x, self.diameter_y, self.diameter_z),
+                        child=Sphere(diameter=diameter, fn=Circle4n.r2sides4n(0.5 * diameter, context)))
 
 # ----------------------------------------------------------------------------------------------------------------------
