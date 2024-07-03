@@ -12,16 +12,31 @@ class Translate3D(ScadSingleChildParent):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, x: float = 0.0, y: float = 0.0, z: float = 0.0, child: ScadObject):
+    def __init__(self,
+                 *,
+                 vector: Point3 | None = None,
+                 x: float | None = None,
+                 y: float | None = None,
+                 z: float | None = None,
+                 child: ScadObject):
         """
         Object constructor.
 
-        :param x: The distance the child object is translated to along the x-axis.
-        :param y: The distance the child object is translated to along the y-axis.
-        :param z: The distance the child object is translated to along the z-axis.
+        :param vector: The vector over which the child object is translated.
+        :param x: The distance the child object is translated along the x-axis.
+        :param y: The distance the child object is translated along the y-axis.
+        :param z: The distance the child object is translated along the z-axis.
         :param child: The child object to be translated.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def vector(self) -> Point3:
+        """
+        Returns the scaling factor along all three the axes.
+        """
+        return Point3(self.x, self.y, self.z)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -29,7 +44,10 @@ class Translate3D(ScadSingleChildParent):
         """
         Returns distance the child object is translated to along the x-axis.
         """
-        return self.uc(self._args['x'])
+        if 'vector' in self._args:
+            return self.uc(self._args['vector'].x)
+
+        return self.uc(self._args.get('x', 0.0))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -37,7 +55,10 @@ class Translate3D(ScadSingleChildParent):
         """
         Returns distance the child object is translated to along the y-axis.
         """
-        return self.uc(self._args['y'])
+        if 'vector' in self._args:
+            return self.uc(self._args['vector'].y)
+
+        return self.uc(self._args.get('y', 0.0))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -45,7 +66,10 @@ class Translate3D(ScadSingleChildParent):
         """
         Returns distance the child object is translated to along the z-axis.
         """
-        return self.uc(self._args['z'])
+        if 'vector' in self._args:
+            return self.uc(self._args['vector'].z)
+
+        return self.uc(self._args.get('z', 0.0))
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
