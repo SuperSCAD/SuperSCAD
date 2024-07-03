@@ -1,11 +1,10 @@
 from super_scad.Context import Context
 from super_scad.ScadObject import ScadObject
 from super_scad.ScadSingleChildParent import ScadSingleChildParent
-from super_scad.transformation.private.PrivateRotate import PrivateRotate
-from super_scad.type.Point3 import Point3
+from super_scad.transformation.Rotate3D import Rotate3D
 
 
-class Flip(ScadSingleChildParent):
+class Flip3D(ScadSingleChildParent):
     """
     Flips its child about the x, y, or z-axis.
     """
@@ -26,7 +25,7 @@ class Flip(ScadSingleChildParent):
     @property
     def flip_x(self) -> bool:
         """
-        Returns to flip the child object around the x-asis (i.e. vertical flip).
+        Returns whether to flip the child object around the x-asis (i.e. vertical flip).
         """
         return self._args['flip_x']
 
@@ -34,7 +33,7 @@ class Flip(ScadSingleChildParent):
     @property
     def flip_y(self) -> bool:
         """
-        Returns to flip the child object around the y-asis (i.e. horizontal flip).
+        Returns whether to flip the child object around the y-asis (i.e. horizontal flip).
         """
         return self._args['flip_y']
 
@@ -42,7 +41,7 @@ class Flip(ScadSingleChildParent):
     @property
     def flip_z(self) -> bool:
         """
-        Returns to flip the child object around the z-asis (i.e. horizontal and vertical flip).
+        Returns whether to flip the child object around the z-asis (i.e. horizontal and vertical flip).
         """
         return self._args['flip_z']
 
@@ -53,9 +52,9 @@ class Flip(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        angle = Point3(x=180.0 if self.flip_x else 0.0,
-                       y=180.0 if self.flip_y else 0.0,
-                       z=180.0 if self.flip_z else 0.0)
-        return PrivateRotate(angle=angle, child=self.child)
+        return Rotate3D(angle_x=180.0 if self.flip_x else 0.0,
+                        angle_y=180.0 if self.flip_y else 0.0,
+                        angle_z=180.0 if self.flip_z else 0.0,
+                        child=self.child)
 
 # ----------------------------------------------------------------------------------------------------------------------
