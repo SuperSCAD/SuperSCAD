@@ -32,6 +32,12 @@ class Offset(PrivateSingleChildScadCommand):
                         offsets.
         :param child: The child object.
         """
+        if delta is not None:
+            if chamfer is None:
+                chamfer = False
+        else:
+            chamfer = None
+
         PrivateSingleChildScadCommand.__init__(self, command='offset', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -47,5 +53,53 @@ class Offset(PrivateSingleChildScadCommand):
         Returns the set with arguments that are lengths.
         """
         return {'r', 'delta', '$fs'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def radius(self) -> float | None:
+        """
+        Returns the radius.
+        """
+        return self.uc(self._args.get('radius'))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def delta(self) -> float | None:
+        """
+        Returns the delta.
+        """
+        return self.uc(self._args.get('delta'))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def chamfer(self) -> bool | None:
+        """
+        Returns the delta.
+        """
+        return self._args.get('chamfer')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def fa(self) -> float | None:
+        """
+        Returns the minimum angle (in degrees) of each fragment.
+        """
+        return self._args.get('fa')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def fs(self) -> float | None:
+        """
+        Returns the minimum circumferential length of each fragment.
+        """
+        return self.uc(self._args.get('fs'))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def fn(self) -> int | None:
+        """
+        Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
+        """
+        return self._args.get('fn')
 
 # ----------------------------------------------------------------------------------------------------------------------
