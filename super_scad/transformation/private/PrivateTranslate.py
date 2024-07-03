@@ -17,7 +17,7 @@ class PrivateTranslate(PrivateSingleChildScadCommand):
         """
         Object constructor.
 
-        :param vector:
+        :param vector: The vector over which the child object is translated.
         """
         PrivateSingleChildScadCommand.__init__(self, command='translate', args=locals(), child=child)
 
