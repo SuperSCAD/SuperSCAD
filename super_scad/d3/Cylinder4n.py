@@ -60,7 +60,7 @@ class Cylinder4n(ScadObject):
         """
         Returns the height of the cylinder.
         """
-        return self.uc(self._args.get('height', 0.0))
+        return self.uc(self._args['height'])
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
