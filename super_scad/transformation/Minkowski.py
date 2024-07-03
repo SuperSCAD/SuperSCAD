@@ -17,7 +17,7 @@ class Minkowski(PrivateMultiChildScadCommand):
 
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child objects.
-        : param children: List of child objects.
+        :param children: The child objects.
         """
         PrivateMultiChildScadCommand.__init__(self, command='minkowski', args=locals(), children=children)
 
