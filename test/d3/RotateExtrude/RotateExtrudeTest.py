@@ -28,6 +28,7 @@ class RotateExtrudeTest(ScadTestCase):
                                 child=Translate2D(x=2.0, child=Circle(radius=1.0)))
 
         self.assertAlmostEqual(360.0, extrude.angle)
+        self.assertEqual(10, extrude.convexity)
         self.assertIsNone(extrude.fa)
         self.assertIsNone(extrude.fs)
         self.assertIsNone(extrude.fn)
@@ -51,6 +52,7 @@ class RotateExtrudeTest(ScadTestCase):
                                 child=Translate2D(x=2.0, child=Circle(radius=1.0, fn=100)))
 
         self.assertAlmostEqual(360.0, extrude.angle)
+        self.assertEqual(10, extrude.convexity)
         self.assertIsNone(extrude.fa)
         self.assertIsNone(extrude.fs)
         self.assertEqual(100, extrude.fn)
