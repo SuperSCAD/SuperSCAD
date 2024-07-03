@@ -1,5 +1,5 @@
 // Unit of length: Unit.MM
-linear_extrude(height = 10.0, center = false, convexity = 2, twist = 0.0, scale = 1.0)
+linear_extrude(height = 254.0, center = false, convexity = 2, twist = 0.0, scale = 1.0)
 {
    intersection()
    {
