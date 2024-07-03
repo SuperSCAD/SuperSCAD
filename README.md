@@ -13,14 +13,14 @@ An advanced Python application and library for generating 2D and 3D models in [O
 <tbody>
 <tr>
 <td>
-<a href="https://pypi.org/project/Super-SCAD/"><img alt="PyPI - License" src="https://img.shields.io/pypi/l/Super-SCAD">
+<a href="https://pypi.org/project/Super-SCAD/" target="_blank"><img alt="PyPI - License" src="https://img.shields.io/pypi/l/Super-SCAD">
 </a>
 </td>
 <td>
-<a href="https://badge.fury.io/py/Super-SCAD"><img src="https://badge.fury.io/py/Super-SCAD.svg" alt="Latest Stable Version"/></a><br/>
+<a href="https://badge.fury.io/py/Super-SCAD" target="_blank"><img src="https://badge.fury.io/py/Super-SCAD.svg" alt="Latest Stable Version"/></a><br/>
 </td>
 <td>
-<a href="https://codecov.io/gh/SuperSCAD/SuperSCAD"><img src="https://codecov.io/gh/SuperSCAD/SuperSCAD/graph/badge.svg?token=7D8V8RRY11" alt="Code Coverage"/></a>
+<a href="https://codecov.io/gh/SuperSCAD/SuperSCAD" target="_blank"><img src="https://codecov.io/gh/SuperSCAD/SuperSCAD/graph/badge.svg?token=7D8V8RRY11" alt="Code Coverage"/></a>
 <a href="https://github.com/SuperSCAD/SuperSCAD/actions/workflows/unit.yml"><img src="https://github.com/SuperSCAD/SuperSCAD/actions/workflows/unit.yml/badge.svg" alt="unit Tests"/></a>
 </td>
 </tr>
