@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Set
 
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
 
@@ -44,6 +44,13 @@ class Cylinder(PrivateScadCommand):
         return self._args['center']
 
     # ------------------------------------------------------------------------------------------------------------------
+    def argument_lengths(self) -> Set[str]:
+        """
+        Returns the set with arguments that are lengths.
+        """
+        return {'h', 'r', 'd', '$fs'}
+
+    # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
@@ -72,7 +79,7 @@ class Cylinder(PrivateScadCommand):
         """
         Returns the height of the cylinder.
         """
-        return self.uc(self._args.get('height', 0.0))
+        return self.uc(self._args['height'])
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
