@@ -1,4 +1,4 @@
-from d3.LinearExtrude.ImperialLinearExtrude import ImperialLinearExtrude
+from d3.LinearExtrude.ImperialUnitCube import ImperialUnitCube
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Circle import Circle
 from super_scad.d2.Polygon import Polygon
@@ -302,20 +302,20 @@ class LinearExtrudeTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.MM)
-        extrude = ImperialLinearExtrude()
+        extrude = ImperialUnitCube()
 
         scad.run_super_scad(extrude, path_actual)
 
-        self.assertAlmostEqual(25.4, extrude.imperial_linear_extrude.height)
-        self.assertFalse(extrude.imperial_linear_extrude.center)
-        self.assertIsNone(extrude.imperial_linear_extrude.convexity)
-        self.assertAlmostEqual(0.0, extrude.imperial_linear_extrude.twist)
-        self.assertAlmostEqual(1.0, extrude.imperial_linear_extrude.scale)
-        self.assertIsNone(extrude.imperial_linear_extrude.slices)
-        self.assertIsNone(extrude.imperial_linear_extrude.segments)
-        self.assertIsNone(extrude.imperial_linear_extrude.fa)
-        self.assertAlmostEqual(0.254, extrude.imperial_linear_extrude.fs)
-        self.assertIsNone(extrude.imperial_linear_extrude.fn)
+        self.assertAlmostEqual(25.4, extrude.imperial_unit_cube.height)
+        self.assertFalse(extrude.imperial_unit_cube.center)
+        self.assertIsNone(extrude.imperial_unit_cube.convexity)
+        self.assertAlmostEqual(0.0, extrude.imperial_unit_cube.twist)
+        self.assertAlmostEqual(1.0, extrude.imperial_unit_cube.scale)
+        self.assertIsNone(extrude.imperial_unit_cube.slices)
+        self.assertIsNone(extrude.imperial_unit_cube.segments)
+        self.assertIsNone(extrude.imperial_unit_cube.fa)
+        self.assertAlmostEqual(0.254, extrude.imperial_unit_cube.fs)
+        self.assertIsNone(extrude.imperial_unit_cube.fn)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -329,20 +329,20 @@ class LinearExtrudeTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit=Unit.INCH)
-        extrude = ImperialLinearExtrude()
+        extrude = ImperialUnitCube()
 
         scad.run_super_scad(extrude, path_actual)
 
-        self.assertAlmostEqual(1.0, extrude.imperial_linear_extrude.height)
-        self.assertFalse(extrude.imperial_linear_extrude.center)
-        self.assertIsNone(extrude.imperial_linear_extrude.convexity)
-        self.assertAlmostEqual(0.0, extrude.imperial_linear_extrude.twist)
-        self.assertAlmostEqual(1.0, extrude.imperial_linear_extrude.scale)
-        self.assertIsNone(extrude.imperial_linear_extrude.slices)
-        self.assertIsNone(extrude.imperial_linear_extrude.segments)
-        self.assertIsNone(extrude.imperial_linear_extrude.fa)
-        self.assertAlmostEqual(0.01, extrude.imperial_linear_extrude.fs)
-        self.assertIsNone(extrude.imperial_linear_extrude.fn)
+        self.assertAlmostEqual(1.0, extrude.imperial_unit_cube.height)
+        self.assertFalse(extrude.imperial_unit_cube.center)
+        self.assertIsNone(extrude.imperial_unit_cube.convexity)
+        self.assertAlmostEqual(0.0, extrude.imperial_unit_cube.twist)
+        self.assertAlmostEqual(1.0, extrude.imperial_unit_cube.scale)
+        self.assertIsNone(extrude.imperial_unit_cube.slices)
+        self.assertIsNone(extrude.imperial_unit_cube.segments)
+        self.assertIsNone(extrude.imperial_unit_cube.fa)
+        self.assertAlmostEqual(0.01, extrude.imperial_unit_cube.fs)
+        self.assertIsNone(extrude.imperial_unit_cube.fn)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()

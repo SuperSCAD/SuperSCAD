@@ -5,9 +5,9 @@ from super_scad.ScadObject import ScadObject
 from super_scad.Unit import Unit
 
 
-class ImperialLinearExtrude(ScadObject):
+class ImperialUnitCube(ScadObject):
     """
-    Extrudes an imperial cube.
+    Extrudes an imperial unit cube.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -17,9 +17,9 @@ class ImperialLinearExtrude(ScadObject):
         """
         ScadObject.__init__(self, args=locals())
 
-        self.imperial_linear_extrude: LinearExtrude | None = None
+        self.imperial_unit_cube: LinearExtrude | None = None
         """
-        The imperial sphere.
+        The imperial unit cube.
         """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -31,11 +31,8 @@ class ImperialLinearExtrude(ScadObject):
         """
         context.unit = Unit.INCH
 
-        self.imperial_linear_extrude = LinearExtrude(height=1.0,
-                                                     fs=0.01,
-                                                     child=Square(size=1.0)
-                                                     )
+        self.imperial_unit_cube = LinearExtrude(height=1.0, fs=0.01, child=Square(size=1.0))
 
-        return self.imperial_linear_extrude
+        return self.imperial_unit_cube
 
 # ----------------------------------------------------------------------------------------------------------------------
