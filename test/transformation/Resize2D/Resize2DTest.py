@@ -28,36 +28,36 @@ class Resize2DTest(ScadTestCase):
         resize = Resize2D(new_size=Size2(30.0, 0.0), child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
-        self.assertAlmostEqual(resize.new_depth, 00.0)
+        self.assertAlmostEqual(resize.new_depth, 0.0)
         self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 00.0)
+        self.assertAlmostEqual(resize.new_size.depth, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 
         resize = Resize2D(new_size=Size2(30.0, 0.0), auto=True, child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
-        self.assertAlmostEqual(resize.new_depth, 00.0)
+        self.assertAlmostEqual(resize.new_depth, 0.0)
         self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 00.0)
+        self.assertAlmostEqual(resize.new_size.depth, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertTrue(resize.auto_depth)
 
         resize = Resize2D(new_size=Size2(30.0, 0.0), auto_depth=True, child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
-        self.assertAlmostEqual(resize.new_depth, 00.0)
+        self.assertAlmostEqual(resize.new_depth, 0.0)
         self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 00.0)
+        self.assertAlmostEqual(resize.new_size.depth, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertTrue(resize.auto_depth)
 
         resize = Resize2D(new_size=Size2(30.0, 0.0), auto=(True, True), child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
-        self.assertAlmostEqual(resize.new_depth, 00.0)
+        self.assertAlmostEqual(resize.new_depth, 0.0)
         self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 00.0)
+        self.assertAlmostEqual(resize.new_size.depth, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertTrue(resize.auto_depth)
 

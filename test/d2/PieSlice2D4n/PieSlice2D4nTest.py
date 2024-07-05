@@ -711,7 +711,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         pie_slice = PieSlice2D4n(angle=-20, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
-        self.assertAlmostEqual(00.0, pie_slice.inner_radius)
+        self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(20.0, pie_slice.angle)
         self.assertAlmostEqual(340.0, pie_slice.start_angle)
@@ -734,7 +734,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         pie_slice = PieSlice2D4n(angle=20, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
-        self.assertAlmostEqual(00.0, pie_slice.inner_radius)
+        self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(20.0, pie_slice.angle)
         self.assertAlmostEqual(0.0, pie_slice.start_angle)
@@ -757,7 +757,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         pie_slice = PieSlice2D4n(start_angle=25, end_angle=15, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
-        self.assertAlmostEqual(00.0, pie_slice.inner_radius)
+        self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(350.0, pie_slice.angle)
         self.assertAlmostEqual(25.0, pie_slice.start_angle)
@@ -780,7 +780,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         pie_slice = PieSlice2D4n(start_angle=25, end_angle=0.0, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
-        self.assertAlmostEqual(00.0, pie_slice.inner_radius)
+        self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(335.0, pie_slice.angle)
         self.assertAlmostEqual(25.0, pie_slice.start_angle)
@@ -803,7 +803,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         pie_slice = PieSlice2D4n(start_angle=110, end_angle=95, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
-        self.assertAlmostEqual(00.0, pie_slice.inner_radius)
+        self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(345.0, pie_slice.angle)
         self.assertAlmostEqual(110.0, pie_slice.start_angle)
@@ -826,7 +826,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         pie_slice = PieSlice2D4n(start_angle=269, end_angle=181, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
-        self.assertAlmostEqual(00.0, pie_slice.inner_radius)
+        self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(272.0, pie_slice.angle)
         self.assertAlmostEqual(269.0, pie_slice.start_angle)
@@ -849,7 +849,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         pie_slice = PieSlice2D4n(start_angle=-30, end_angle=-40, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
-        self.assertAlmostEqual(00.0, pie_slice.inner_radius)
+        self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(350.0, pie_slice.angle)
         self.assertAlmostEqual(330.0, pie_slice.start_angle)
@@ -872,7 +872,7 @@ class PieSlice2D4n4nTest(ScadTestCase):
         pie_slice = PieSlice2D4n(start_angle=0.0, end_angle=-40, radius=30.0)
 
         self.assertAlmostEqual(30.0, pie_slice.radius)
-        self.assertAlmostEqual(00.0, pie_slice.inner_radius)
+        self.assertAlmostEqual(0.0, pie_slice.inner_radius)
         self.assertAlmostEqual(30.0, pie_slice.outer_radius)
         self.assertAlmostEqual(320.0, pie_slice.angle)
         self.assertAlmostEqual(0.0, pie_slice.start_angle)

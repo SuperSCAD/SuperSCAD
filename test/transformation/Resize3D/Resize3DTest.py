@@ -31,11 +31,11 @@ class Resize3DTest(ScadTestCase):
         resize = Resize3D(new_size=Size3(30.0, 0.0, 0.0), child=Sphere(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
-        self.assertAlmostEqual(resize.new_depth, 00.0)
-        self.assertAlmostEqual(resize.new_height, 00.0)
+        self.assertAlmostEqual(resize.new_depth, 0.0)
+        self.assertAlmostEqual(resize.new_height, 0.0)
         self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 00.0)
-        self.assertAlmostEqual(resize.new_size.height, 00.0)
+        self.assertAlmostEqual(resize.new_size.depth, 0.0)
+        self.assertAlmostEqual(resize.new_size.height, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertFalse(resize.auto_depth)
         self.assertFalse(resize.auto_height)
@@ -43,7 +43,7 @@ class Resize3DTest(ScadTestCase):
         resize = Resize3D(new_size=Size3(0.0, 0.0, 30.0), auto=True, child=Sphere(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 0.0)
-        self.assertAlmostEqual(resize.new_depth, 00.0)
+        self.assertAlmostEqual(resize.new_depth, 0.0)
         self.assertAlmostEqual(resize.new_height, 30.0)
         self.assertAlmostEqual(resize.new_size.width, 0.0)
         self.assertAlmostEqual(resize.new_size.depth, 0.0)
@@ -55,7 +55,7 @@ class Resize3DTest(ScadTestCase):
         resize = Resize3D(new_size=Size3(0.0, 0.0, 30.0), auto=(True, True, False), child=Sphere(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 0.0)
-        self.assertAlmostEqual(resize.new_depth, 00.0)
+        self.assertAlmostEqual(resize.new_depth, 0.0)
         self.assertAlmostEqual(resize.new_height, 30.0)
         self.assertAlmostEqual(resize.new_size.width, 0.0)
         self.assertAlmostEqual(resize.new_size.depth, 0.0)
@@ -67,7 +67,7 @@ class Resize3DTest(ScadTestCase):
         resize = Resize3D(new_size=Size3(0.0, 0.0, 30.0), auto_depth=True, child=Sphere(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 0.0)
-        self.assertAlmostEqual(resize.new_depth, 00.0)
+        self.assertAlmostEqual(resize.new_depth, 0.0)
         self.assertAlmostEqual(resize.new_height, 30.0)
         self.assertAlmostEqual(resize.new_size.width, 0.0)
         self.assertAlmostEqual(resize.new_size.depth, 0.0)
