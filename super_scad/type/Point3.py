@@ -2,7 +2,7 @@ import math
 from dataclasses import dataclass
 
 
-@dataclass
+@dataclass(frozen=True)
 class Point3:
     """
     A point in 3D space.

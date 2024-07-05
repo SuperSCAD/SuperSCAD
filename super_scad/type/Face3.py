@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import List
 
 
-@dataclass
+@dataclass(frozen=True)
 class Face3:
     """
     A face in 3D space.
@@ -11,9 +11,5 @@ class Face3:
     """
     The points of the face.
     """
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def __repr__(self):
-        raise NotImplementedError()
 
 # ----------------------------------------------------------------------------------------------------------------------
