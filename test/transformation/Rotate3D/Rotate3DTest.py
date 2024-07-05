@@ -28,7 +28,7 @@ class Rotate3DTest(ScadTestCase):
         scad = Scad(unit=Unit.MM)
 
         end_point = Point3(x=10.0, y=10.0, z=10.0)
-        length = end_point.length()
+        length = end_point.length
         b = math.degrees(math.acos(end_point.z / length))
         c = math.degrees(math.atan2(end_point.y, end_point.x))
 
@@ -60,7 +60,7 @@ class Rotate3DTest(ScadTestCase):
         scad = Scad(unit=Unit.MM)
 
         end_point = Point3(x=10.0, y=10.0, z=10.0)
-        length = end_point.length()
+        length = end_point.length
         b = math.degrees(math.acos(end_point.z / length))
         c = math.degrees(math.atan2(end_point.y, end_point.x))
 

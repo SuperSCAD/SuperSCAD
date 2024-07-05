@@ -43,10 +43,23 @@ class Point3:
         return Point3(self.x * other, self.y * other, self.z * other)
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
     def length(self) -> float:
         """
         Returns the length of this vector.
         """
         return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def normal(self):
+        """
+        Returns the unit vector of this vector.
+
+        :rtype: super_scad.type.Point3.Point3
+        """
+        length = self.length
+
+        return Point3(self.x / length, self.y / length, self.z / length)
 
 # ----------------------------------------------------------------------------------------------------------------------

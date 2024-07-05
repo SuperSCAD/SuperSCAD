@@ -87,13 +87,29 @@ class Point3Test(unittest.TestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def testLength(self):
         """
-        Test length of a point.
+        Test length of a vector.
         """
         point = Point3(2.0, 3.0, 4.0)
-        length = point.length()
         self.assertAlmostEqual(2.0, point.x)
         self.assertAlmostEqual(3.0, point.y)
         self.assertAlmostEqual(4.0, point.z)
-        self.assertAlmostEqual(5.385164807134504, length)
+        self.assertAlmostEqual(5.385164807134504, point.length)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testNormal(self):
+        """
+        Test normalized vector of a vector.
+        """
+        point = Point3(2.0, 3.0, 4.0).normal
+        self.assertAlmostEqual(0.3713906763541037, point.x)
+        self.assertAlmostEqual(0.5570860145311556, point.y)
+        self.assertAlmostEqual(0.7427813527082074, point.z)
+        self.assertAlmostEqual(1.0, point.length)
+
+        point = Point3(2.0, -3.0, 4.0).normal
+        self.assertAlmostEqual(0.3713906763541037, point.x)
+        self.assertAlmostEqual(-0.5570860145311556, point.y)
+        self.assertAlmostEqual(0.7427813527082074, point.z)
+        self.assertAlmostEqual(1.0, point.length)
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -38,10 +38,23 @@ class Point2:
         return Point2(self.x * other, self.y * other)
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
     def length(self) -> float:
         """
         Returns the length of this vector.
         """
         return math.sqrt(self.x ** 2 + self.y ** 2)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def normal(self):
+        """
+        Returns the unit vector of this vector.
+
+        :rtype: super_scad.type.Point2.Point2
+        """
+        length = self.length
+
+        return Point2(self.x / length, self.y / length)
 
 # ----------------------------------------------------------------------------------------------------------------------
