@@ -113,7 +113,7 @@ union()
    }
    translate(v = [20.0, 0.0, 0.0])
    {
-      rotate(a = [0.0, 0.0, 180.0])
+      rotate(a = [180.0, 180.0, 0.0])
       {
          difference()
          {

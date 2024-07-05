@@ -25,8 +25,9 @@ class Flip3DTest(ScadTestCase):
         union = Union(children=[Translate3D(x=-20, child=dice), Translate3D(x=20, child=flip_dice)])
 
         self.assertTrue(flip_dice.flip_x)
+        self.assertTrue(flip_dice.vertical)
         self.assertFalse(flip_dice.flip_y)
-        self.assertFalse(flip_dice.flip_z)
+        self.assertFalse(flip_dice.horizontal)
 
         scad.run_super_scad(union, path_actual)
         actual = path_actual.read_text()
@@ -46,8 +47,9 @@ class Flip3DTest(ScadTestCase):
         union = Union(children=[Translate3D(x=-20, child=dice), Translate3D(x=20, child=flip_dice)])
 
         self.assertFalse(flip_dice.flip_x)
+        self.assertFalse(flip_dice.vertical)
         self.assertTrue(flip_dice.flip_y)
-        self.assertFalse(flip_dice.flip_z)
+        self.assertTrue(flip_dice.horizontal)
 
         scad.run_super_scad(union, path_actual)
         actual = path_actual.read_text()
@@ -66,9 +68,10 @@ class Flip3DTest(ScadTestCase):
         flip_dice = Flip3D(flip_z=True, child=Dice(size=30.0))
         union = Union(children=[Translate3D(x=-20, child=dice), Translate3D(x=20, child=flip_dice)])
 
-        self.assertFalse(flip_dice.flip_x)
-        self.assertFalse(flip_dice.flip_y)
-        self.assertTrue(flip_dice.flip_z)
+        self.assertTrue(flip_dice.flip_x)
+        self.assertTrue(flip_dice.vertical)
+        self.assertTrue(flip_dice.flip_y)
+        self.assertTrue(flip_dice.horizontal)
 
         scad.run_super_scad(union, path_actual)
         actual = path_actual.read_text()
@@ -88,14 +91,13 @@ class Flip3DTest(ScadTestCase):
         union = Union(children=[Translate3D(x=-20, child=dice), Translate3D(x=20, child=flip_dice)])
 
         self.assertTrue(flip_dice.flip_x)
+        self.assertTrue(flip_dice.vertical)
         self.assertTrue(flip_dice.flip_y)
-        self.assertFalse(flip_dice.flip_z)
+        self.assertTrue(flip_dice.horizontal)
 
         scad.run_super_scad(union, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
-
-    # ------------------------------------------------------------------------------------------------------------------
 
 # ----------------------------------------------------------------------------------------------------------------------
