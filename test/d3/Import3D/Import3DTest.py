@@ -1,5 +1,6 @@
 from d3.Import3D.Slot3D import Slot3D
 from ScadTestCase import ScadTestCase
+from super_scad.d3.Import3D import Import3D
 from super_scad.Scad import Scad
 from super_scad.Unit import Unit
 
@@ -19,6 +20,9 @@ class Import3DTest(ScadTestCase):
         scad = Scad(unit=Unit.MM)
         example = Slot3D()
         scad.run_super_scad(example, path_actual)
+
+        self.assertEqual('../../slot.stl', str(example.import3d.path))
+        self.assertEqual(10, example.import3d.convexity)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()

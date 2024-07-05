@@ -21,7 +21,7 @@ class PrivateImport(PrivateScadCommand, ABC):
         """
         Object constructor.
 
-        :param path: The absolute path or the relative path from the project home to the file that will be imported.
+        :param path: The absolute path or the relative path from the target script to the file that will be imported.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child object.
         :param layer: For DXF import only, specify a specific layer to import.
@@ -61,5 +61,13 @@ class PrivateImport(PrivateScadCommand, ABC):
         For DXF import only, return the specific layer to import.
         """
         return self._args.get('layer')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def path(self) -> Path:
+        """
+        Returns The absolute path or the relative path from the target script to the file that will be imported.
+        """
+        return Path(self._args['path'])
 
 # ----------------------------------------------------------------------------------------------------------------------

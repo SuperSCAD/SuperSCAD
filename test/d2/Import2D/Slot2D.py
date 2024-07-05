@@ -10,16 +10,25 @@ class Slot2D(ScadObject):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
+    def __init__(self):
+        """
+        Object constructor.
+        """
+        ScadObject.__init__(self)
+
+        self.import2d: Import2D | None = None
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadObject:
         """
         Builds a SuperSCAD object.
 
         :param context: The build context.
         """
-        return LinearExtrude(height=5.0,
-                             center=True,
-                             convexity=10,
-                             child=Import2D(path=context.resolve_path('../../slot.dxf'),
-                                            layer='Sketch'))
+        self.import2d = Import2D(path=context.resolve_path('../../slot.dxf'),
+                                 convexity=10,
+                                 layer='Sketch')
+
+        return LinearExtrude(height=5.0, center=True, convexity=10, child=self.import2d)
 
 # ----------------------------------------------------------------------------------------------------------------------
