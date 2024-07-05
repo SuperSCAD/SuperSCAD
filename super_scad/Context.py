@@ -109,8 +109,11 @@ class Context:
         caller = Path(inspect.stack()[1].filename)
         absolute_path = Path(caller.parent.joinpath(path).resolve())
 
-        # works with python >=2.12 return absolute_path.relative_to(self.target_path.parent, walk_up=True)
-        return Path(os.path.relpath(absolute_path, self.target_path.parent))
+        if os.path.commonprefix([absolute_path, self.__project_home]) == str(self.__project_home):
+            # works with python >=2.12 return absolute_path.relative_to(self.target_path.parent, walk_up=True)
+            return Path(os.path.relpath(absolute_path, self.target_path.parent))
+
+        return absolute_path
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
