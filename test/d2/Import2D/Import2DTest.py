@@ -29,4 +29,16 @@ class Import2DTest(ScadTestCase):
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    def testFileNotExists(self):
+        """
+        Test for non-existent file.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit=Unit.MM)
+        example = Import2D(path='nonexistent.dxf')
+
+        self.assertRaises(FileNotFoundError, lambda: scad.run_super_scad(example, path_actual))
+
 # ----------------------------------------------------------------------------------------------------------------------

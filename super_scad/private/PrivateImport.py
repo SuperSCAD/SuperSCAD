@@ -3,7 +3,9 @@ from abc import ABC
 from pathlib import Path
 from typing import Dict
 
+from super_scad.Context import Context
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.ScadObject import ScadObject
 
 
 class PrivateImport(PrivateScadCommand, ABC):
@@ -28,9 +30,6 @@ class PrivateImport(PrivateScadCommand, ABC):
         """
         if path is not None:
             path = str(path)
-
-        if not os.path.isfile(path):
-            ValueError('Path "{}" is not a file'.format(path))
 
         PrivateScadCommand.__init__(self, command='import', args=locals())
 
@@ -69,5 +68,21 @@ class PrivateImport(PrivateScadCommand, ABC):
         Returns The absolute path or the relative path from the target script to the file that will be imported.
         """
         return Path(self._args['path'])
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def build(self, context: Context) -> ScadObject:
+        """
+        Builds a SuperSCAD object.
+
+        :param context: The build context.
+        """
+        path = self.path
+        if not path.is_absolute():
+            path = context.target_path.parent.joinpath(path)
+
+        if not path.is_file():
+            raise FileNotFoundError(f'File {path} does not exist.')
+
+        return self
 
 # ----------------------------------------------------------------------------------------------------------------------
