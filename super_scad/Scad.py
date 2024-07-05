@@ -14,7 +14,7 @@ class Scad:
         """
         Object constructor.
         """
-        self.__project_home: Path = Path(os.getcwd())
+        self.__project_home: Path = Path(os.getcwd()).resolve()
         """
         The current project's home directory.
         """

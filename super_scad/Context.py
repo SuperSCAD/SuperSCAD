@@ -107,9 +107,10 @@ class Context:
         :param Path path: The path to resolve.
         """
         caller = Path(inspect.stack()[1].filename)
-        absolute_path = Path(os.path.realpath(caller.parent.joinpath(path)))
+        absolute_path = Path(caller.parent.joinpath(path).resolve())
 
-        return absolute_path.relative_to(self.target_path.parent, walk_up=True)
+        # works with python >=2.12 return absolute_path.relative_to(self.target_path.parent, walk_up=True)
+        return Path(os.path.relpath(absolute_path, self.target_path.parent))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
