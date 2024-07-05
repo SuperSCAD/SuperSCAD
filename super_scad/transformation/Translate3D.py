@@ -34,7 +34,7 @@ class Translate3D(ScadSingleChildParent):
     @property
     def vector(self) -> Point3:
         """
-        Returns the scaling factor along all three the axes.
+        Returns the vector over which the child object is translated.
         """
         return Point3(self.x, self.y, self.z)
 
