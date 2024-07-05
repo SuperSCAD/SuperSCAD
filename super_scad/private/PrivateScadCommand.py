@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Set, Tuple
 
 from super_scad.Context import Context
 from super_scad.ScadObject import ScadObject
+from super_scad.type.Face3 import Face3
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
 from super_scad.type.Size2 import Size2
@@ -129,6 +130,9 @@ class PrivateScadCommand(ScadObject):
             argument = "[{}, {}, {}]".format(self.__format_argument(context, float(argument.width)),
                                              self.__format_argument(context, float(argument.depth)),
                                              self.__format_argument(context, float(argument.height)))
+
+        elif isinstance(argument, Face3):
+            argument = "[{}]".format(', '.join(str(point) for point in argument.points))
 
         elif isinstance(argument, bool):
             argument = str(argument).lower()
