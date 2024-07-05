@@ -41,12 +41,13 @@ class Scad:
         self.__project_home = project_home
 
     # ------------------------------------------------------------------------------------------------------------------
-    def run_super_scad(self, scad_object: ScadObject, output_scad: Path) -> None:
+    def run_super_scad(self, scad_object: ScadObject, output_scad: Path | str) -> None:
         """
 
         :param scad_object:
         :param output_scad:
         """
+        self.__context.target_path = Path(output_scad)
         self.__run_super_scad(scad_object)
 
         with open(output_scad, 'wt') as handle:

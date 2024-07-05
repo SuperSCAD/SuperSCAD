@@ -1,3 +1,5 @@
+import inspect
+import os
 from pathlib import Path
 
 from super_scad.ScadCodeStore import ScadCodeStore
@@ -25,6 +27,11 @@ class Context:
         self.__project_home: Path = project_home
         """
         The home folder of the current project. 
+        """
+
+        self.__target_path: Path | None = None
+        """
+        The path to the OpenSCAD script that currently been generated.
         """
 
         self.__code_store: ScadCodeStore = ScadCodeStore()
@@ -74,6 +81,35 @@ class Context:
         Returns the current project's home directory.
         """
         return self.__project_home
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def target_path(self) -> Path | None:
+        """
+        Returns the path to the OpenSCAD script that currently been generated.
+        """
+        return self.__target_path
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @target_path.setter
+    def target_path(self, target_path: str) -> None:
+        """
+        Set the
+        path to the OpenSCAD script that currently been generated.
+        """
+        self.__target_path = Path(os.path.realpath(target_path))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def resolve_path(self, path: Path | str) -> Path:
+        """
+        Resolve a path relative from the caller script to a path relative to the project home.
+
+        :param Path path: The path to resolve.
+        """
+        caller = Path(inspect.stack()[1].filename)
+        absolute_path = Path(os.path.realpath(caller.parent.joinpath(path)))
+
+        return absolute_path.relative_to(self.target_path.parent, walk_up=True)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

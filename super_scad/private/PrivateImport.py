@@ -1,4 +1,6 @@
+import os.path
 from abc import ABC
+from pathlib import Path
 from typing import Dict
 
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
@@ -13,27 +15,23 @@ class PrivateImport(PrivateScadCommand, ABC):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 file: str,
+                 path: Path | str | None = None,
                  convexity: int | None = None,
-                 layer: str | None = None,
-                 fa: float | None = None,
-                 fs: float | None = None,
-                 fn: int | None = None,
-                 id: str | None = None):
+                 layer: str | None = None):
         """
         Object constructor.
 
-        :param file: See `OpenSCAD import documentation`_.
+        :param path: The absolute path or the relative path from the project home to the file that will be imported.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child object.
-        :param layer: See `OpenSCAD import documentation`_.
-        :param fa: The minimum angle (in degrees) of each fragment.
-        :param fs: The minimum circumferential length of each fragment.
-        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
-        :param id: See `OpenSCAD import documentation`_.
-
-        .. _OpenSCAD import documentation: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Importing_Geometry#import
+        :param layer: For DXF import only, specify a specific layer to import.
         """
+        if path is not None:
+            path = str(path)
+
+        if not os.path.isfile(path):
+            ValueError('Path "{}" is not a file'.format(path))
+
         PrivateScadCommand.__init__(self, command='import', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -41,34 +39,27 @@ class PrivateImport(PrivateScadCommand, ABC):
         pass
 
     # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def fa(self) -> float | None:
-        """
-        Returns the minimum angle (in degrees) of each fragment.
-        """
-        return self._args.get('fa')
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def fs(self) -> float | None:
-        """
-        Returns the minimum circumferential length of each fragment.
-        """
-        return self.uc(self._args.get('fs'))
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def fn(self) -> int | None:
-        """
-        Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
-        """
-        return self._args.get('fn')
-
-    # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
-        return {'fa': '$fa', 'fs': '$fs', 'fn': '$fn'}
+        return {'path': 'file'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def convexity(self) -> int | None:
+        """
+        Returns the number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through the
+        child object.
+        """
+        return self._args.get('convexity')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def layer(self) -> str | None:
+        """
+        For DXF import only, return the specific layer to import.
+        """
+        return self._args.get('layer')
 
 # ----------------------------------------------------------------------------------------------------------------------
