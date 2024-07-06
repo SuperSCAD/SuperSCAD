@@ -49,6 +49,7 @@ class Ellipse4nTest(ScadTestCase):
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
+
     # ------------------------------------------------------------------------------------------------------------------
     def testImperialMetricEllipse4n(self):
         """

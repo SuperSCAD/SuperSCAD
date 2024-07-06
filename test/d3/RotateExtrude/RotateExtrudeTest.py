@@ -85,7 +85,7 @@ class RotateExtrudeTest(ScadTestCase):
                                 Translate2D(x=20.0,
                                             y=eps,
                                             child=Rotate3D(angle_x=90.0,
-                                                           child=Cylinder(height=80+eps,
+                                                           child=Cylinder(height=80 + eps,
                                                                           radius=10.0)))])
 
         scad.run_super_scad(union, path_actual)

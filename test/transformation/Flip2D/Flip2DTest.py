@@ -1,10 +1,7 @@
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
-from super_scad.d2.Rectangle import Rectangle
-from super_scad.d2.RightTriangle import RightTriangle
 from super_scad.Scad import Scad
 from super_scad.transformation.Flip2D import Flip2D
-from super_scad.transformation.Translate2D import Translate2D
 from super_scad.Unit import Unit
 from transformation.Flip2D.Indicator import Indicator
 

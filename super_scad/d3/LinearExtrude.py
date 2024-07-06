@@ -91,7 +91,7 @@ class LinearExtrude(PrivateSingleChildScadCommand):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def twist(self) -> float :
+    def twist(self) -> float:
         """
         Returns the number of degrees of through which the shape is extruded. Setting the parameter twist = 360
         extrudes through one revolution. The twist direction follows the left hand rule.

@@ -1,7 +1,6 @@
 from super_scad.Context import Context
 from super_scad.d3.Polyhedron import Polyhedron
 from super_scad.ScadObject import ScadObject
-from super_scad.transformation.Translate2D import Translate2D
 from super_scad.transformation.Translate3D import Translate3D
 from super_scad.type.Face3 import Face3
 from super_scad.type.Point3 import Point3

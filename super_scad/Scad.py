@@ -6,7 +6,6 @@ from super_scad.private.PrivateMultiChildScadCommand import PrivateMultiChildSca
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
 from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
 from super_scad.ScadObject import ScadObject
-from super_scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.Unit import Unit
 
 

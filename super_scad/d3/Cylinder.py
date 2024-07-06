@@ -1,8 +1,5 @@
-from typing import Dict, Set
-
 from super_scad.Context import Context
 from super_scad.d3.private.PrivateCylinder import PrivateCylinder
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
 from super_scad.ScadObject import ScadObject
 
 

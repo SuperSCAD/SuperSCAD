@@ -10,6 +10,7 @@ class ContextTest(unittest.TestCase):
     """
     Text cases for Context.
     """
+
     # ------------------------------------------------------------------------------------------------------------------
     def test_resolve_path(self):
         """
