@@ -1,8 +1,8 @@
 from d3.Sphere4n.ImperialSphere4n import ImperialSphere4n
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Sphere4n import Sphere4n
-from super_scad.Scad import Scad
-from super_scad.Unit import Unit
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 
 
 class Sphere4nTestCase(ScadTestCase):

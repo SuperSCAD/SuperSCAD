@@ -1,6 +1,6 @@
 from super_scad.d2.Circle4n import Circle4n
 from super_scad.d2.private.PrivatePieSlice2D import PrivatePieSlice2D
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.ScadObject import ScadObject
 
 
 class PieSlice2D4n(PrivatePieSlice2D):

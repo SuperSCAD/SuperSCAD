@@ -1,8 +1,8 @@
 from d2.Ellipse.ImperialUnitEllipse import ImperialUnitEllipse
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Ellipse import Ellipse
-from super_scad.Scad import Scad
-from super_scad.Unit import Unit
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 
 
 class EllipseTest(ScadTestCase):

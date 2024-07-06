@@ -1,8 +1,8 @@
 from d3.Import3D.Slot3D import Slot3D
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Import3D import Import3D
-from super_scad.Scad import Scad
-from super_scad.Unit import Unit
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 
 
 class Import3DTest(ScadTestCase):

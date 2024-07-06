@@ -1,9 +1,9 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Sphere import Sphere
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 from super_scad.transformation.Resize3D import Resize3D
 from super_scad.type.Size3 import Size3
-from super_scad.Unit import Unit
 
 
 class Resize3DTest(ScadTestCase):

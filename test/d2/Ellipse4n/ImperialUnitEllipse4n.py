@@ -1,7 +1,7 @@
-from super_scad.Context import Context
 from super_scad.d2.Ellipse4n import Ellipse4n
-from super_scad.ScadObject import ScadObject
-from super_scad.Unit import Unit
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.Unit import Unit
 
 
 class ImperialUnitEllipse4n(ScadObject):

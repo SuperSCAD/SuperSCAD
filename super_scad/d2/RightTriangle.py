@@ -1,6 +1,6 @@
-from super_scad.Context import Context
 from super_scad.d2.Polygon import Polygon
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
 
 

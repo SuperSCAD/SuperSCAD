@@ -1,6 +1,6 @@
-from super_scad.Context import Context
 from super_scad.d2.Circle import Circle
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.transformation.Resize2D import Resize2D
 from super_scad.type.Size2 import Size2
 

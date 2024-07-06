@@ -1,7 +1,7 @@
-from super_scad.Context import Context
 from super_scad.d2.PieSlice2D4n import PieSlice2D4n
-from super_scad.ScadObject import ScadObject
-from super_scad.Unit import Unit
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.Unit import Unit
 
 
 class ImperialPieSlice2D4n(ScadObject):

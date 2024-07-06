@@ -1,9 +1,9 @@
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
 from super_scad.transformation.Flip3D import Flip3D
 from super_scad.transformation.Translate3D import Translate3D
-from super_scad.Unit import Unit
+from super_scad.scad.Unit import Unit
 from transformation.Flip3D.Dice import Dice
 
 

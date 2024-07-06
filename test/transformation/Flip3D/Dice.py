@@ -1,10 +1,10 @@
 from super_scad.boolean.Difference import Difference
 from super_scad.boolean.Intersection import Intersection
 from super_scad.boolean.Union import Union
-from super_scad.Context import Context
+from super_scad.scad.Context import Context
 from super_scad.d3.Cube import Cube
 from super_scad.d3.Sphere import Sphere
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.transformation.Translate3D import Translate3D
 from super_scad.type.Point3 import Point3
 

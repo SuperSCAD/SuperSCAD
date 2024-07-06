@@ -1,8 +1,8 @@
 import math
 
-from super_scad.Context import Context
 from super_scad.d2.Circle import Circle
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 
 
 class Circle4n(ScadObject):

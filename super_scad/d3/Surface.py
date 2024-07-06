@@ -1,9 +1,9 @@
 from pathlib import Path
 from typing import Dict
 
-from super_scad.Context import Context
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 
 
 class Surface(PrivateScadCommand):

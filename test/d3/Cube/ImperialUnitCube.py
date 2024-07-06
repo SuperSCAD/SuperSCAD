@@ -1,7 +1,7 @@
-from super_scad.Context import Context
 from super_scad.d3.Cube import Cube
-from super_scad.ScadObject import ScadObject
-from super_scad.Unit import Unit
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.Unit import Unit
 
 
 class ImperialUnitCube(ScadObject):

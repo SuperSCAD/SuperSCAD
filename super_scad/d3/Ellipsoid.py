@@ -1,6 +1,6 @@
-from super_scad.Context import Context
 from super_scad.d3.Sphere import Sphere
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.transformation.Resize3D import Resize3D
 from super_scad.type.Size3 import Size3
 

@@ -1,6 +1,6 @@
-from super_scad.Context import Context
 from super_scad.d3.private.PrivateCylinder import PrivateCylinder
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 
 
 class Cone(ScadObject):

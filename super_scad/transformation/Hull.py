@@ -1,7 +1,7 @@
 from typing import List
 
 from super_scad.private.PrivateMultiChildScadCommand import PrivateMultiChildScadCommand
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.ScadObject import ScadObject
 
 
 class Hull(PrivateMultiChildScadCommand):

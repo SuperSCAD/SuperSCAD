@@ -1,7 +1,7 @@
-from super_scad.Context import Context
 from super_scad.d2.PieSlice2D import PieSlice2D
 from super_scad.d3.LinearExtrude import LinearExtrude
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 
 
 class PieSlice3D(ScadObject):

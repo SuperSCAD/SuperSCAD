@@ -2,10 +2,10 @@ from d3.LinearExtrude.ImperialUnitCube import ImperialUnitCube
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Circle import Circle
 from super_scad.d3.LinearExtrude import LinearExtrude
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate2D import Translate2D
 from super_scad.type.Point2 import Point2
-from super_scad.Unit import Unit
 
 
 class LinearExtrudeTest(ScadTestCase):

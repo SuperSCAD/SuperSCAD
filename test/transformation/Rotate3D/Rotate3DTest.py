@@ -5,12 +5,12 @@ from super_scad.boolean.Union import Union
 from super_scad.d3.Cube import Cube
 from super_scad.d3.Cuboid import Cuboid
 from super_scad.d3.Cylinder import Cylinder
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 from super_scad.transformation.Paint import Paint
 from super_scad.transformation.Rotate3D import Rotate3D
 from super_scad.type.Color import Color
 from super_scad.type.Point3 import Point3
-from super_scad.Unit import Unit
 
 
 class Rotate3DTest(ScadTestCase):

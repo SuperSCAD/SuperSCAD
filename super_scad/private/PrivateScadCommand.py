@@ -1,8 +1,8 @@
 import re
 from typing import Any, Dict, List, Set, Tuple
 
-from super_scad.Context import Context
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Face3 import Face3
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3

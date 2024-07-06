@@ -1,8 +1,8 @@
 from d3.Cylinder4n.ImperialCylinder4n import ImperialCylinder4n
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Cylinder4n import Cylinder4n
-from super_scad.Scad import Scad
-from super_scad.Unit import Unit
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 
 
 class Cylinder4nTestCase(ScadTestCase):

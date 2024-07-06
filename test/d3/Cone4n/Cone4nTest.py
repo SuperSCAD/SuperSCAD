@@ -1,8 +1,8 @@
 from d3.Cone4n.ImperialCone4n import ImperialCone4n
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Cone4n import Cone4n
-from super_scad.Scad import Scad
-from super_scad.Unit import Unit
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 
 
 class ConeTestCase(ScadTestCase):

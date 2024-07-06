@@ -1,7 +1,7 @@
-from super_scad.Context import Context
 from super_scad.d3.Ellipsoid import Ellipsoid
-from super_scad.ScadObject import ScadObject
-from super_scad.Unit import Unit
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.Unit import Unit
 
 
 class ImperialEllipsoid(ScadObject):

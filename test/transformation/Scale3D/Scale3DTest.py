@@ -1,11 +1,11 @@
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
 from super_scad.d3.Cube import Cube
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 from super_scad.transformation.Scale3D import Scale3D
 from super_scad.transformation.Translate3D import Translate3D
 from super_scad.type.Point3 import Point3
-from super_scad.Unit import Unit
 
 
 class Scale3DTest(ScadTestCase):

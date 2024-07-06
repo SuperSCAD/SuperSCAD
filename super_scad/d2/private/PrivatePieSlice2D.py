@@ -4,9 +4,9 @@ import math
 from super_scad.boolean.Difference import Difference
 from super_scad.boolean.Empty import Empty
 from super_scad.boolean.Intersection import Intersection
-from super_scad.Context import Context
 from super_scad.d2.Polygon import Polygon
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Angle import Angle
 from super_scad.type.Point2 import Point2
 

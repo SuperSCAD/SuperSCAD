@@ -1,8 +1,8 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Rectangle import Rectangle
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 from super_scad.type.Size2 import Size2
-from super_scad.Unit import Unit
 from test.d2.Rectangle.ImperialUnitRectangle import ImperialUnitRectangle
 
 

@@ -1,8 +1,8 @@
 from typing import Any, Dict, List
 
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
-from super_scad.ScadMultiChildParent import ScadMultiChildParent
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.ScadMultiChildParent import ScadMultiChildParent
+from super_scad.scad.ScadObject import ScadObject
 
 
 class PrivateMultiChildScadCommand(PrivateScadCommand, ScadMultiChildParent):

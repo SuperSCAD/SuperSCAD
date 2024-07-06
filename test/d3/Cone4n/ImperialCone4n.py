@@ -1,8 +1,8 @@
-from super_scad.Context import Context
 from super_scad.d3.Cone import Cone
 from super_scad.d3.Cone4n import Cone4n
-from super_scad.ScadObject import ScadObject
-from super_scad.Unit import Unit
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.Unit import Unit
 
 
 class ImperialCone4n(ScadObject):

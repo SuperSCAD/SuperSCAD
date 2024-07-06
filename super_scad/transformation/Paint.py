@@ -1,7 +1,7 @@
 from typing import Dict
 
 from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Color import Color
 
 

@@ -1,9 +1,9 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Circle import Circle
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 from super_scad.transformation.Resize2D import Resize2D
 from super_scad.type.Size2 import Size2
-from super_scad.Unit import Unit
 
 
 class Resize2DTest(ScadTestCase):

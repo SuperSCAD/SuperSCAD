@@ -2,8 +2,8 @@ import os
 import unittest
 from pathlib import Path
 
-from super_scad.Context import Context
-from super_scad.Unit import Unit
+from super_scad.scad.Context import Context
+from super_scad.scad.Unit import Unit
 
 
 class ContextTest(unittest.TestCase):

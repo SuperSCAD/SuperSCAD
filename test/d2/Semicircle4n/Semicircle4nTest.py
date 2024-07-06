@@ -1,8 +1,8 @@
 from d2.Semicircle4n.ImperialSemicircle4n import ImperialSemicircle4n
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Semicircle4n import Semicircle4n
-from super_scad.Scad import Scad
-from super_scad.Unit import Unit
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 
 
 class Semicircle4nTestCase(ScadTestCase):

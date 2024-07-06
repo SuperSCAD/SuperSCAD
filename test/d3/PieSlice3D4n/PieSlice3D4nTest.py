@@ -1,8 +1,8 @@
 from d3.PieSlice3D4n.ImperialPieSlice3D4n import ImperialPieSlice3D4n
 from ScadTestCase import ScadTestCase
 from super_scad.d3.PieSlice3D4n import PieSlice3D4n
-from super_scad.Scad import Scad
-from super_scad.Unit import Unit
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 
 
 class PieSlice3D4nTest(ScadTestCase):

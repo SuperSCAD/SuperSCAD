@@ -1,8 +1,8 @@
-from super_scad.Context import Context
 from super_scad.d2.Circle4n import Circle4n
 from super_scad.d2.Semicircle4n import Semicircle4n
 from super_scad.d3.RotateExtrude import RotateExtrude
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.transformation.Rotate2D import Rotate2D
 
 

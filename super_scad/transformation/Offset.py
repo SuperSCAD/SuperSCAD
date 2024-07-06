@@ -1,7 +1,7 @@
 from typing import Dict, Set
 
 from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.ScadObject import ScadObject
 
 
 class Offset(PrivateSingleChildScadCommand):

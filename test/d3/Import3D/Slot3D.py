@@ -1,6 +1,6 @@
-from super_scad.Context import Context
 from super_scad.d3.Import3D import Import3D
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.transformation.Paint import Paint
 from super_scad.type.Color import Color
 

@@ -1,7 +1,7 @@
 from typing import Dict, Set, Tuple
 
 from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Size2 import Size2
 from super_scad.type.Size3 import Size3
 

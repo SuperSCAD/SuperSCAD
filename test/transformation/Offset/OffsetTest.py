@@ -1,9 +1,9 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Polygon import Polygon
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
 from super_scad.transformation.Offset import Offset
 from super_scad.type.Point2 import Point2
-from super_scad.Unit import Unit
+from super_scad.scad.Unit import Unit
 
 
 class OffsetTest(ScadTestCase):

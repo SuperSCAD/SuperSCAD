@@ -1,6 +1,6 @@
-from super_scad.Context import Context
-from super_scad.ScadObject import ScadObject
-from super_scad.ScadSingleChildParent import ScadSingleChildParent
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.transformation.private.PrivateMirror import PrivateMirror
 from super_scad.type.Point2 import Point2
 

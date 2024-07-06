@@ -1,8 +1,8 @@
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
-from super_scad.Scad import Scad
+from super_scad.scad.Scad import Scad
 from super_scad.transformation.Flip2D import Flip2D
-from super_scad.Unit import Unit
+from super_scad.scad.Unit import Unit
 from transformation.Flip2D.Indicator import Indicator
 
 

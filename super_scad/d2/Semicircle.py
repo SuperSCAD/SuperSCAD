@@ -1,8 +1,8 @@
 from super_scad.boolean.Intersection import Intersection
-from super_scad.Context import Context
 from super_scad.d2.Circle import Circle
 from super_scad.d2.Rectangle import Rectangle
-from super_scad.ScadObject import ScadObject
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadObject import ScadObject
 from super_scad.transformation.Translate2D import Translate2D
 
 

@@ -1,8 +1,8 @@
 from d3.Ellipsoid.ImperialEllipsoid import ImperialEllipsoid
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Ellipsoid import Ellipsoid
-from super_scad.Scad import Scad
-from super_scad.Unit import Unit
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 
 
 class EllipsoidTestCase(ScadTestCase):
