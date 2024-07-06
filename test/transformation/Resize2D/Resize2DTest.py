@@ -77,7 +77,7 @@ class Resize2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize2D(new_size=Size2(30.0, 60.0), child=Circle(radius=10.0))
 
@@ -100,7 +100,7 @@ class Resize2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize2D(new_width=30.0, new_depth=60.0, child=Circle(radius=10.0))
 
@@ -123,7 +123,7 @@ class Resize2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize2D(new_depth=60.0, auto=(True, True), child=Circle(radius=10.0))
 
@@ -146,7 +146,7 @@ class Resize2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize2D(new_depth=60.0, auto_width=True, auto_depth=True, child=Circle(radius=10.0))
 
@@ -169,7 +169,7 @@ class Resize2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize2D(new_depth=60.0, auto=True, child=Circle(radius=10.0))
 

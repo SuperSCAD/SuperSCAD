@@ -31,7 +31,7 @@ class ImperialCylinder4n(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_cylinder = Cylinder4n(height=self._args.get('height'),
                                             radius=self._args.get('radius'),

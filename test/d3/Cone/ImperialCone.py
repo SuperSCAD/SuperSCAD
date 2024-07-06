@@ -36,7 +36,7 @@ class ImperialCone(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_cone = Cone(height=self._args.get('height'),
                                   top_radius=self._args.get('top_radius'),

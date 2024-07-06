@@ -29,7 +29,7 @@ class ImperialUnitCube(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_unit_cube = LinearExtrude(height=1.0, fs=0.01, child=Square(size=1.0))
 

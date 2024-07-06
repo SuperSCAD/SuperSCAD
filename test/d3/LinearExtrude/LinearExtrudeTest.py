@@ -20,7 +20,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = LinearExtrude(height=10.0,
                                 center=True,
                                 convexity=10,
@@ -50,7 +50,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = LinearExtrude(height=10.0,
                                 center=True,
                                 convexity=10,
@@ -81,7 +81,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = LinearExtrude(height=10.0,
                                 center=True,
                                 convexity=10,
@@ -112,7 +112,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = LinearExtrude(height=10.0,
                                 center=True,
                                 convexity=10,
@@ -143,7 +143,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = LinearExtrude(height=10.0,
                                 convexity=10,
                                 twist=-500.0,
@@ -173,7 +173,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = LinearExtrude(height=10.0,
                                 convexity=10,
                                 twist=360.0,
@@ -204,7 +204,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = LinearExtrude(height=10.0,
                                 convexity=10,
                                 twist=-360.0,
@@ -235,7 +235,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = LinearExtrude(height=10.0,
                                 convexity=10,
                                 scale=3.0,
@@ -265,7 +265,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         polygon = [Point2(0.0, 0.0), Point2(20.0, 10.0), Point2(20.0, -10.0)]
         extrude = LinearExtrude(height=10.0,
                                 center=True,
@@ -300,7 +300,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = ImperialUnitCube()
 
         scad.run_super_scad(extrude, path_actual)
@@ -327,7 +327,7 @@ class LinearExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         extrude = ImperialUnitCube()
 
         scad.run_super_scad(extrude, path_actual)

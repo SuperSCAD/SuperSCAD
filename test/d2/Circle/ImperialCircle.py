@@ -33,7 +33,7 @@ class ImperialCircle(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_circle = Circle(radius=self._args.get('radius'),
                                       diameter=self._args.get('diameter'),

@@ -1,9 +1,9 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Sphere import Sphere
 from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 from super_scad.transformation.Paint import Paint
 from super_scad.type.Color import Color
-from super_scad.scad.Unit import Unit
 
 
 class PaintTest(ScadTestCase):
@@ -18,7 +18,7 @@ class PaintTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         paint = Paint(color=Color(color='fuchsia'), child=Sphere(radius=10.0))
 
         scad.run_super_scad(paint, path_actual)

@@ -19,7 +19,7 @@ class PieSlice3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         pie_slice = PieSlice3D(start_angle=-15.0, end_angle=15.0, radius=30.0, height=10.0)
 
         self.assertAlmostEqual(30.0, pie_slice.angle)
@@ -47,7 +47,7 @@ class PieSlice3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         pie_slice = PieSlice3D(start_angle=15.0, end_angle=-15.0, radius=30.0, height=10.0, fa=12.0, fs=2.0, fn=0)
 
         self.assertAlmostEqual(330.0, pie_slice.angle)
@@ -72,7 +72,7 @@ class PieSlice3DTest(ScadTestCase):
     def testImperialMetricPieSlice(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         pie_slice = ImperialPieSlice3D(start_angle=15.0,
                                        end_angle=-15.0,
                                        radius=30.0,
@@ -103,7 +103,7 @@ class PieSlice3DTest(ScadTestCase):
     def testImperialImperialPieSlice(self):
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         pie_slice = ImperialPieSlice3D(start_angle=15.0,
                                        end_angle=-15.0,
                                        radius=30.0,

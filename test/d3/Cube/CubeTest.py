@@ -17,7 +17,7 @@ class CubeTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cube = Cube(size=10)
 
         self.assertAlmostEqual(10.0, cube.size)
@@ -35,7 +35,7 @@ class CubeTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cube = Cube(size=10, center=True)
 
         self.assertAlmostEqual(10.0, cube.size)
@@ -53,7 +53,7 @@ class CubeTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cube = ImperialUnitCube()
         scad.run_super_scad(cube, path_actual)
 
@@ -71,7 +71,7 @@ class CubeTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         cube = ImperialUnitCube()
         scad.run_super_scad(cube, path_actual)
 

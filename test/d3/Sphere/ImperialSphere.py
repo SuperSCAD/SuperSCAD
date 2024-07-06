@@ -33,7 +33,7 @@ class ImperialSphere(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_sphere = Sphere(radius=self._args.get('radius'),
                                       diameter=self._args.get('diameter'),

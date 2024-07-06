@@ -23,7 +23,7 @@ class RotateExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = RotateExtrude(convexity=10,
                                 child=Translate2D(x=2.0, child=Circle(radius=1.0)))
 
@@ -46,7 +46,7 @@ class RotateExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = RotateExtrude(convexity=10,
                                 fn=100,
                                 child=Translate2D(x=2.0, child=Circle(radius=1.0, fn=100)))
@@ -70,7 +70,7 @@ class RotateExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         eps = 0.01
         union = Union(children=[Translate3D(x=eps,
                                             y=60.0,
@@ -101,7 +101,7 @@ class RotateExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         extrude = ImperialUnitDonut()
 
         scad.run_super_scad(extrude, path_actual)
@@ -118,7 +118,7 @@ class RotateExtrudeTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         extrude = ImperialUnitDonut()
 
         scad.run_super_scad(extrude, path_actual)

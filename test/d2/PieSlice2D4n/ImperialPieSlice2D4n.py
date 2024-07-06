@@ -35,7 +35,7 @@ class ImperialPieSlice2D4n(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_pie_slice = PieSlice2D4n(angle=self._args.get('angle'),
                                                start_angle=self._args.get('start_angle'),

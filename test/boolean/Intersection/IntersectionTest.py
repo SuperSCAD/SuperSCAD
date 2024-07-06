@@ -2,8 +2,8 @@ from ScadTestCase import ScadTestCase
 from super_scad.boolean.Intersection import Intersection
 from super_scad.d3.Cylinder import Cylinder
 from super_scad.scad.Scad import Scad
-from super_scad.transformation.Rotate3D import Rotate3D
 from super_scad.scad.Unit import Unit
+from super_scad.transformation.Rotate3D import Rotate3D
 
 
 class IntersectionTest(ScadTestCase):
@@ -18,7 +18,7 @@ class IntersectionTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         intersection = Intersection(children=[Cylinder(height=4, radius=1, center=True, fn=100),
                                               Rotate3D(angle_x=90,
                                                        child=Cylinder(height=4, radius=0.9, center=True, fn=100))])

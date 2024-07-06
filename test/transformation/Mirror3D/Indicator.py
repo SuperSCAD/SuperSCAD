@@ -26,7 +26,7 @@ class Indicator(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = self._args['unit']
+        Context.set_unit_length_current(self._args['unit'])
 
         return Translate3D(x=10.0,
                            y=10.0,

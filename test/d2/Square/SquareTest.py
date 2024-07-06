@@ -17,7 +17,7 @@ class SquareTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         square = Square(size=10)
 
         self.assertAlmostEqual(10.0, square.size)
@@ -35,7 +35,7 @@ class SquareTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         square = Square(size=10, center=True)
 
         self.assertAlmostEqual(10.0, square.size)
@@ -53,7 +53,7 @@ class SquareTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         square = ImperialUnitSquare()
         scad.run_super_scad(square, path_actual)
 
@@ -71,7 +71,7 @@ class SquareTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         square = ImperialUnitSquare()
         scad.run_super_scad(square, path_actual)
 

@@ -1,9 +1,9 @@
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
 from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
 from super_scad.transformation.Flip3D import Flip3D
 from super_scad.transformation.Translate3D import Translate3D
-from super_scad.scad.Unit import Unit
 from transformation.Flip3D.Dice import Dice
 
 
@@ -19,7 +19,7 @@ class Flip3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         dice = Dice(size=30.0)
         flip_dice = Flip3D(flip_x=True, child=Dice(size=30.0))
         union = Union(children=[Translate3D(x=-20, child=dice), Translate3D(x=20, child=flip_dice)])
@@ -41,7 +41,7 @@ class Flip3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         dice = Dice(size=30.0)
         flip_dice = Flip3D(flip_y=True, child=Dice(size=30.0))
         union = Union(children=[Translate3D(x=-20, child=dice), Translate3D(x=20, child=flip_dice)])
@@ -63,7 +63,7 @@ class Flip3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         dice = Dice(size=30.0)
         flip_dice = Flip3D(flip_z=True, child=Dice(size=30.0))
         union = Union(children=[Translate3D(x=-20, child=dice), Translate3D(x=20, child=flip_dice)])
@@ -85,7 +85,7 @@ class Flip3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         dice = Dice(size=30.0)
         flip_dice = Flip3D(flip_x=True, flip_y=True, child=Dice(size=30.0))
         union = Union(children=[Translate3D(x=-20, child=dice), Translate3D(x=20, child=flip_dice)])

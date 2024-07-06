@@ -1,8 +1,8 @@
-from super_scad.scad.Context import Context
 from super_scad.d2.RightTriangle import RightTriangle
+from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
-from super_scad.transformation.Translate2D import Translate2D
 from super_scad.scad.Unit import Unit
+from super_scad.transformation.Translate2D import Translate2D
 
 
 class Indicator(ScadObject):
@@ -24,7 +24,7 @@ class Indicator(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = self._args['unit']
+        Context.set_unit_length_current(self._args['unit'])
 
         return Translate2D(x=5.0, y=5.0, child=RightTriangle(width=10.0, depth=5.0))
 

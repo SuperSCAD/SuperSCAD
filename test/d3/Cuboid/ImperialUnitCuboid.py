@@ -28,7 +28,7 @@ class ImperialUnitCuboid(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_cuboid = Cuboid(width=3.0, depth=2.0, height=1.0)
 

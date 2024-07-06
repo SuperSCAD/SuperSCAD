@@ -19,7 +19,7 @@ class Translate2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         translate = Translate2D(vector=Point2(10.0, 20.0), child=Circle(radius=10.0))
 
@@ -40,7 +40,7 @@ class Translate2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         translate = Translate2D(x=10.0, child=Circle(radius=10.0))
         self.assertAlmostEqual(10.0, translate.vector.x)
@@ -72,7 +72,7 @@ class Translate2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         # Test given a vector.
         translate = ImperialTranslate2D(vector=Point2(10.0, 20.0), child=Circle(radius=10.0))
@@ -102,7 +102,7 @@ class Translate2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
 
         # Test given a vector.
         translate = ImperialTranslate2D(vector=Point2(10.0, 20.0), child=Circle(radius=10.0))

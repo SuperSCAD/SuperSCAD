@@ -17,7 +17,7 @@ class ConeTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cone = Cone4n(height=10.0, bottom_radius=3.0, top_radius=2.0)
 
         self.assertAlmostEqual(10.0, cone.height)
@@ -39,7 +39,7 @@ class ConeTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cone = Cone4n(height=10.0, bottom_diameter=3.0, top_diameter=2.0, center=True)
 
         self.assertAlmostEqual(10.0, cone.height)
@@ -61,7 +61,7 @@ class ConeTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cone = ImperialCone4n(height=100.0, bottom_radius=25.0, top_radius=20.0)
         scad.run_super_scad(cone, path_actual)
 
@@ -83,7 +83,7 @@ class ConeTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         cone = ImperialCone4n(height=100.0, bottom_radius=25.0, top_radius=20.0)
         scad.run_super_scad(cone, path_actual)
 

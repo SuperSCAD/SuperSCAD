@@ -24,9 +24,9 @@ class ScadObject(ABC):
         The arguments of this SuperSCAD object.
         """
 
-        self.__unit: Unit = Context.current_target_unit
+        self.__unit: Unit = Context.get_unit_length_current()
         """
-        The target unit of length of the BuildContext of this SuperSCAD object.
+        The unit of length of the Context of this SuperSCAD object.
         """
 
         if args is not None:
@@ -67,7 +67,8 @@ class ScadObject(ABC):
             return None
 
         if isinstance(length, float) or isinstance(length, int):
-            match Context.current_target_unit:
+            unit_length_current = Context.get_unit_length_current()
+            match unit_length_current:
                 case Unit.MM:
                     match self.__unit:
                         case Unit.MM:
@@ -78,7 +79,7 @@ class ScadObject(ABC):
 
                         case _:
                             raise ValueError('Can not convert unit {} to {}.'.format(self.__unit.name,
-                                                                                     Context.current_target_unit.name))
+                                                                                     unit_length_current.name))
 
                 case Unit.INCH:
                     match self.__unit:
@@ -90,11 +91,11 @@ class ScadObject(ABC):
 
                         case _:
                             raise ValueError('Can not convert unit {} to {}.'.format(self.__unit.name,
-                                                                                     Context.current_target_unit.name))
+                                                                                     unit_length_current.name))
 
                 case _:
                     raise ValueError('Can not convert unit {} to {}.'.format(self.__unit.name,
-                                                                             Context.current_target_unit.name))
+                                                                             unit_length_current.name))
 
         if isinstance(length, Point2):
             return Point2(self.uc(length.x), self.uc(length.y))

@@ -23,7 +23,7 @@ class RegularPolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         polygon = RegularPolygon(sides=4, inner_radius=1.0)
 
         self.assertAlmostEqual(1.0, polygon.inner_radius)
@@ -50,7 +50,7 @@ class RegularPolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         polygon = RegularPolygon(sides=4, outer_radius=1.0)
 
         self.assertAlmostEqual(0.5 * math.sqrt(2.0), polygon.inner_radius)
@@ -77,7 +77,7 @@ class RegularPolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         polygon = RegularPolygon(sides=4, size=1.0)
 
         self.assertAlmostEqual(0.5, polygon.inner_radius)
@@ -104,7 +104,7 @@ class RegularPolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         polygon = RegularPolygon(sides=5, inner_radius=1.0)
 
         self.assertAlmostEqual(1.0, polygon.inner_radius)
@@ -136,7 +136,7 @@ class RegularPolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         polygon = RegularPolygon(sides=5, outer_radius=1.0)
 
         self.assertAlmostEqual(1.0 * math.cos(math.pi / 5), polygon.inner_radius)
@@ -164,7 +164,7 @@ class RegularPolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         polygon = RegularPolygon(sides=5, size=1.0)
 
         self.assertAlmostEqual(1.0 / (2 * math.tan(math.pi / 5)), polygon.inner_radius)
@@ -192,9 +192,8 @@ class RegularPolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         polygon = ImperialUnitPentagon()
-
         scad.run_super_scad(polygon, path_actual)
 
         self.assertAlmostEqual(25.4 / (2 * math.tan(math.pi / 5)), polygon.imperial_pentagon.inner_radius)
@@ -213,7 +212,7 @@ class RegularPolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         polygon = ImperialUnitPentagon()
 
         scad.run_super_scad(polygon, path_actual)

@@ -17,7 +17,7 @@ class Cylinder4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cylinder = Cylinder4n(height=10.0, radius=2.0)
 
         self.assertAlmostEqual(10.0, cylinder.height)
@@ -38,7 +38,7 @@ class Cylinder4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cylinder = Cylinder4n(height=10.0, diameter=2.0, center=True)
 
         self.assertAlmostEqual(10.0, cylinder.height)
@@ -59,7 +59,7 @@ class Cylinder4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cylinder = ImperialCylinder4n(height=100.0, radius=20.0)
         scad.run_super_scad(cylinder, path_actual)
 
@@ -79,7 +79,7 @@ class Cylinder4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         cylinder = ImperialCylinder4n(height=100.0, radius=20.0)
         scad.run_super_scad(cylinder, path_actual)
 

@@ -28,7 +28,7 @@ class ImperialUnitCube(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_cube = Cube(size=1.0)
 

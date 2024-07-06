@@ -19,7 +19,7 @@ class Translate3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         translate = Translate3D(vector=Point3(10.0, 20.0, 30.0), child=Sphere(radius=10.0))
 
@@ -42,7 +42,7 @@ class Translate3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         translate = Translate3D(x=10.0, child=Sphere(radius=10.0))
         self.assertAlmostEqual(10.0, translate.vector.x)
@@ -88,7 +88,7 @@ class Translate3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         # Test given a vector.
         translate = ImperialTranslate3D(vector=Point3(10.0, 20.0, 30.0), child=Sphere(radius=10.0))
@@ -122,7 +122,7 @@ class Translate3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
 
         # Test given a vector.
         translate = ImperialTranslate3D(vector=Point3(10.0, 20.0, 30.0), child=Sphere(radius=10.0))

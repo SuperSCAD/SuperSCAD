@@ -28,7 +28,7 @@ class ImperialUnitEllipse(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_ellipse = Ellipse(radius_x=2.0, radius_y=1.0)
 

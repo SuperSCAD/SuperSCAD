@@ -43,7 +43,7 @@ class ProjectionTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         projection = Projection(cut=True, child=self.example002())
 
         self.assertTrue(20.0, projection.cut)
@@ -62,7 +62,7 @@ class ProjectionTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         projection = Projection(cut=True, z=-20, child=self.example002())
 
         self.assertTrue(20.0, projection.cut)
@@ -81,7 +81,7 @@ class ProjectionTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         projection = Projection(cut=False, child=self.example002())
 
         self.assertTrue(20.0, projection.cut)
@@ -100,7 +100,7 @@ class ProjectionTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         projection = Projection(child=Translate3D(z=25, child=Rotate3D(angle_x=90, child=self.example002())))
 
         self.assertTrue(20.0, projection.cut)

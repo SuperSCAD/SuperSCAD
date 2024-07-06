@@ -24,7 +24,7 @@ class ImperialUnitPolygon(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         return Polygon(primary=[Point2(0.0, 0.0),
                                 Point2(2.0, 0.0),

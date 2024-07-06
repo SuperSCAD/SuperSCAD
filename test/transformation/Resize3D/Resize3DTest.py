@@ -83,7 +83,7 @@ class Resize3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize3D(new_size=Size3(30.0, 60.0, 10.0), child=Sphere(radius=10.0))
 
@@ -109,7 +109,7 @@ class Resize3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize3D(new_width=30.0, new_depth=60.0, new_height=10.0, child=Sphere(radius=10.0))
 
@@ -135,7 +135,7 @@ class Resize3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize3D(new_depth=60.0, auto=(True, True, True), child=Sphere(radius=10.0))
 
@@ -161,7 +161,7 @@ class Resize3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize3D(new_depth=60.0, auto_width=True, auto_depth=True, auto_height=True, child=Sphere(radius=10.0))
 
@@ -187,7 +187,7 @@ class Resize3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
 
         resize = Resize3D(new_depth=60.0, auto=True, child=Sphere(radius=10.0))
 

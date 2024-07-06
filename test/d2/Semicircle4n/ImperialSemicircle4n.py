@@ -30,7 +30,7 @@ class ImperialSemicircle4n(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_semicircle4n = Semicircle4n(radius=self._args.get('radius'),
                                                   diameter=self._args.get('diameter'))

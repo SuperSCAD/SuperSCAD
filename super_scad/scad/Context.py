@@ -11,17 +11,24 @@ class Context:
     The context for generating OpenSCAD from SuperSCAD.
     """
 
-    current_target_unit: Unit = Unit.MM
+    # ------------------------------------------------------------------------------------------------------------------
+    __unit_length_current: Unit = Unit.FREE
     """
-    The current target unit of length (READONLY).
+    The current unit of length.
+    """
+
+    __unit_length_final: Unit = Unit.FREE
+    """
+    The unit of length used in the generated OpenSCAD code.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, project_home: Path, unit: Unit):
+    def __init__(self, project_home: Path, unit_length_final: Unit):
         """
         Object constructor.
 
         :param Path project_home: The home folder of the current project.
+        :param unit_length_final: The unit of length used in the generated OpenSCAD code.
         """
 
         self.__project_home: Path = project_home
@@ -62,7 +69,7 @@ class Context:
         Known in OpenSCAD as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.
         """
 
-        self.__unit: Unit = unit
+        self.__unit_length_final: Unit = unit_length_final
         """
         The unit of length.
         """
@@ -72,7 +79,8 @@ class Context:
         The number of decimal places in a length.
         """
 
-        Context.current_target_unit = unit
+        Context.set_unit_length_current(unit_length_final)
+        Context.__set_unit_length_final(unit_length_final)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -167,25 +175,45 @@ class Context:
         return self.__fn
 
     # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def unit(self) -> Unit:
+    @staticmethod
+    def __set_unit_length_final(__unit_length_final: Unit) -> None:
         """
-        Returns the unit of length.
+        Sets the unit of length used in the generated OpenSCAD code.
         """
-        return self.__unit
+        Context.__unit_length_final = __unit_length_final
 
     # ------------------------------------------------------------------------------------------------------------------
-    @unit.setter
-    def unit(self, unit: Unit) -> None:
+    @staticmethod
+    def get_unit_length_final() -> Unit:
         """
-        Sets the unit of length.
+        Returns the unit of length used in the generated OpenSCAD code.
         """
-        Context.current_target_unit = unit
+        return Context.__unit_length_final
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def set_unit_length_current(unit_length_current: Unit) -> None:
+        """
+        Sets the current unit of length.
+
+        :param unit_length_current: The new current unit of length.
+        """
+        Context.__unit_length_current = unit_length_current
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def get_unit_length_current() -> Unit:
+        """
+        Returns the current unit of length.
+        """
+        return Context.__unit_length_current
 
     # ------------------------------------------------------------------------------------------------------------------
     def round_length(self, length: float) -> str:
         """
-        Returns the unit of length.
+        Returns a length rounded to the desired number of digits.
+
+        :param length: The length.
         """
         return str(round(float(length), self.__round_length))
 

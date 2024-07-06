@@ -28,7 +28,7 @@ class ImperialUnitSquare(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_square = Square(size=1.0)
 

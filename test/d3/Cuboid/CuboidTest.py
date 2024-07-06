@@ -18,7 +18,7 @@ class CuboidTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cuboid = Cuboid(size=Size3(30, 20, 10))
 
         self.assertAlmostEqual(30.0, cuboid.width)
@@ -41,7 +41,7 @@ class CuboidTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cuboid = Cuboid(size=Size3(30, 20, 10), center=True)
 
         self.assertAlmostEqual(30.0, cuboid.width)
@@ -64,7 +64,7 @@ class CuboidTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         cuboid = ImperialUnitCuboid()
         scad.run_super_scad(cuboid, path_actual)
 
@@ -87,7 +87,7 @@ class CuboidTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         cuboid = ImperialUnitCuboid()
         scad.run_super_scad(cuboid, path_actual)
 

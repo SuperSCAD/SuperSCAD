@@ -17,7 +17,7 @@ class RightTriangleTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         triangle = RightTriangle(width=20.0, depth=10.0)
 
         self.assertAlmostEqual(20.0, triangle.width)
@@ -35,7 +35,7 @@ class RightTriangleTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         right_triangle = ImperialUnitRightTriangle()
         scad.run_super_scad(right_triangle, path_actual)
 
@@ -53,7 +53,7 @@ class RightTriangleTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         right_triangle = ImperialUnitRightTriangle()
         scad.run_super_scad(right_triangle, path_actual)
 

@@ -19,7 +19,7 @@ class MinkowskiTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         minkowski = Minkowski(children=[Cuboid(size=Size3(10, 10, 1)),
                                         Cylinder(radius=2.0, height=1.0)])
 
@@ -35,7 +35,7 @@ class MinkowskiTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         minkowski = Minkowski(convexity=10,
                               children=[Cuboid(size=Size3(10, 10, 1)),
                                         Cylinder(radius=2.0, height=1.0)])

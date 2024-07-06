@@ -37,7 +37,7 @@ class ImperialEllipsoid(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_ellipsoid = Ellipsoid(radius_x=self._args.get('radius_x'),
                                             radius_y=self._args.get('radius_y'),

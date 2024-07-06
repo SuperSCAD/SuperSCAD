@@ -11,16 +11,19 @@ from super_scad.scad.Unit import Unit
 
 class Scad:
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, unit: Unit):
+    def __init__(self, unit_length_final: Unit):
         """
         Object constructor.
+
+        :param unit_length_final: The unit of length used in the generated OpenSCAD code.
         """
+
         self.__project_home: Path = Path(os.getcwd()).resolve()
         """
         The current project's home directory.
         """
 
-        self.__context = Context(project_home=self.__project_home, unit=unit)
+        self.__context = Context(project_home=self.__project_home, unit_length_final=unit_length_final)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -62,7 +65,7 @@ class Scad:
         :param scad_object: The SuperSCAD object to run.
         """
         self.__context.code_store.clear()
-        self.__context.code_store.add_line('// Unit of length: {}'.format(self.__context.unit))
+        self.__context.code_store.add_line('// Unit of length: {}'.format(Context.get_unit_length_final()))
         self.__run_supe_scad_build_tree(scad_object)
         self.__context.code_store.add_line('')
 
@@ -72,9 +75,9 @@ class Scad:
         Helper method for __run_super_scad. Runs recursively on the ScadObject and its children until it finds a
         OpenSCAD command. This OpenSCAD command is used to generate the OpenSCAD code.
         """
-        old_unit = self.__context.unit
+        old_unit = Context.get_unit_length_current()
         scad_object = scad_object.build(self.__context)
-        self.__context.unit = old_unit
+        Context.set_unit_length_current(old_unit)
 
         if isinstance(scad_object, PrivateScadCommand):
             self.__context.code_store.add_line('{}{}'.format(scad_object.command,

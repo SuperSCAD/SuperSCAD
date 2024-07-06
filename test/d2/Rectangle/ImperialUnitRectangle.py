@@ -28,7 +28,7 @@ class ImperialUnitRectangle(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_rectangle = Rectangle(width=2.0, depth=1.0)
 

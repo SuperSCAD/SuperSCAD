@@ -54,10 +54,10 @@ class RegularPolygon(ScadObject):
         """
         Computes the nodes ond the angles of the nodes of the regular polygon.
         """
-        if len(self.__angles) > 0 and self.__unit == Context.current_target_unit:
+        if len(self.__angles) > 0 and self.__unit == Context.get_unit_length_current():
             return
 
-        self.__unit = Context.current_target_unit
+        self.__unit = Context.get_unit_length_current()
         self.__nodes.clear()
         self.__angles.clear()
 

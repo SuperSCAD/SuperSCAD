@@ -17,7 +17,7 @@ class Import2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         example = Slot2D()
         scad.run_super_scad(example, path_actual)
 
@@ -36,7 +36,7 @@ class Import2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         example = Import2D(path='nonexistent.dxf')
 
         self.assertRaises(FileNotFoundError, lambda: scad.run_super_scad(example, path_actual))

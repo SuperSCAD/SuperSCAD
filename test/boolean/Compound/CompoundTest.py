@@ -19,7 +19,7 @@ class CompoundTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         compound = Compound(children=[Cube(size=2, center=True),
                                       Translate3D(x=5, child=Sphere(radius=1))])
 

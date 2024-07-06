@@ -21,7 +21,7 @@ class Mirror3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         original = Indicator()
         mirrored = Mirror3D(x=1.0, child=original)
 
@@ -42,7 +42,7 @@ class Mirror3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         original = Indicator()
         mirrored = Mirror3D(y=1.0, child=original)
 
@@ -63,7 +63,7 @@ class Mirror3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         original = Indicator()
         mirrored = Mirror3D(z=1.0, child=original)
 
@@ -85,7 +85,7 @@ class Mirror3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         original = Indicator()
         mirrored = Mirror3D(vector=Point3(1.0, 1.0, 1.0), child=original)
 

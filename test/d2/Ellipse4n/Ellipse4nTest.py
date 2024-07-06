@@ -17,7 +17,7 @@ class Ellipse4nTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         ellipse4n = Ellipse4n(radius_x=20.0, radius_y=10.0)
 
         self.assertAlmostEqual(20.0, ellipse4n.radius_x)
@@ -37,7 +37,7 @@ class Ellipse4nTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         ellipse4n = Ellipse4n(diameter_x=40.0, diameter_y=20.0)
 
         self.assertAlmostEqual(20.0, ellipse4n.radius_x)
@@ -57,7 +57,7 @@ class Ellipse4nTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         ellipse4n = ImperialUnitEllipse4n()
         scad.run_super_scad(ellipse4n, path_actual)
 
@@ -77,7 +77,7 @@ class Ellipse4nTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         ellipse4n = ImperialUnitEllipse4n()
         scad.run_super_scad(ellipse4n, path_actual)
 

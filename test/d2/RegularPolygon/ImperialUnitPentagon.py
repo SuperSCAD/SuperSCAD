@@ -28,10 +28,10 @@ class ImperialUnitPentagon(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_pentagon = RegularPolygon(size=1.0, sides=5)
-        self.imperial_pentagon.nodes  # Force calculation of the nodes in inches.
+        len(self.imperial_pentagon.nodes)  # Force calculation of the nodes in inches.
 
         return self.imperial_pentagon
 

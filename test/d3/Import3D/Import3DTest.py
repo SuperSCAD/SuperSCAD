@@ -17,7 +17,7 @@ class Import3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         example = Slot3D()
         scad.run_super_scad(example, path_actual)
 
@@ -35,7 +35,7 @@ class Import3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         example = Import3D(path='nonexistent.stl')
 
         self.assertRaises(FileNotFoundError, lambda: scad.run_super_scad(example, path_actual))

@@ -18,7 +18,7 @@ class Ellipsoid4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         ellipsoid = Ellipsoid4n(radius_x=30.0, radius_y=20.0, radius_z=10.0)
 
         self.assertAlmostEqual(30.0, ellipsoid.radius_x)
@@ -41,7 +41,7 @@ class Ellipsoid4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         ellipsoid = Ellipsoid4n(diameter_x=30.0, diameter_y=20.0, diameter_z=10.0)
 
         self.assertAlmostEqual(15.0, ellipsoid.radius_x)
@@ -64,7 +64,7 @@ class Ellipsoid4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         ellipsoid = ImperialEllipsoid4n(radius_x=30.0, radius_y=20.0, radius_z=10.0)
         scad.run_super_scad(ellipsoid, path_actual)
 
@@ -86,7 +86,7 @@ class Ellipsoid4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         ellipsoid = ImperialEllipsoid4n(radius_x=30.0, radius_y=20.0, radius_z=10.0)
         scad.run_super_scad(ellipsoid, path_actual)
 

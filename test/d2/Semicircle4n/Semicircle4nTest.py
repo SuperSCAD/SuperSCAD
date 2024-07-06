@@ -17,7 +17,7 @@ class Semicircle4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         semi_circle = Semicircle4n(radius=2.0)
 
         self.assertAlmostEqual(2.0, semi_circle.radius)
@@ -36,7 +36,7 @@ class Semicircle4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         semi_circle = Semicircle4n(diameter=20.0)
 
         self.assertAlmostEqual(10.0, semi_circle.radius)
@@ -55,7 +55,7 @@ class Semicircle4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         semi_circle = ImperialSemicircle4n(radius=20.0)
         scad.run_super_scad(semi_circle, path_actual)
 
@@ -73,7 +73,7 @@ class Semicircle4nTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         semi_circle = ImperialSemicircle4n(radius=20.0)
         scad.run_super_scad(semi_circle, path_actual)
 

@@ -28,7 +28,7 @@ class ImperialUnitRightTriangle(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_right_triangle = RightTriangle(width=2.0, depth=1.0)
 

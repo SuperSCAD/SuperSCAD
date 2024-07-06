@@ -18,7 +18,7 @@ class UnionTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         union = Union(children=[Cylinder(height=4, radius=1, center=True, fn=100),
                                 Rotate3D(angle_x=90, child=Cylinder(height=4, radius=0.9, center=True, fn=100))])
 

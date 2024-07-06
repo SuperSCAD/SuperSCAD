@@ -17,7 +17,7 @@ class CircleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         circle = Circle(radius=2.0)
 
         self.assertAlmostEqual(2.0, circle.radius)
@@ -36,7 +36,7 @@ class CircleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         circle = Circle(diameter=2.0)
 
         self.assertAlmostEqual(1.0, circle.radius)
@@ -58,7 +58,7 @@ class CircleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         circle = Circle(diameter=10.0, fa=12.0, fs=2.0, fn=0)
 
         self.assertAlmostEqual(5.0, circle.radius)
@@ -80,7 +80,7 @@ class CircleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.MM)
+        scad = Scad(unit_length_final=Unit.MM)
         circle = ImperialCircle(radius=20.0, fa=12.0, fs=2.0, fn=0)
         scad.run_super_scad(circle, path_actual)
 
@@ -101,7 +101,7 @@ class CircleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit=Unit.INCH)
+        scad = Scad(unit_length_final=Unit.INCH)
         circle = ImperialCircle(radius=20.0, fa=12.0, fs=2.0, fn=0)
         scad.run_super_scad(circle, path_actual)
 

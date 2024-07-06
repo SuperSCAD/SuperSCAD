@@ -40,7 +40,7 @@ class ImperialTranslate3D(ScadObject):
 
         :param context: The build context.
         """
-        context.unit = Unit.INCH
+        Context.set_unit_length_current(Unit.INCH)
 
         self.imperial_translate = Translate3D(vector=self._args.get('vector'),
                                               x=self._args.get('x'),
