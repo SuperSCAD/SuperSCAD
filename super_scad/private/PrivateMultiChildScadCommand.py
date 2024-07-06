@@ -22,13 +22,4 @@ class PrivateMultiChildScadCommand(PrivateScadCommand, ScadMultiChildParent):
         PrivateScadCommand.__init__(self, command=command, args=args)
         ScadMultiChildParent.__init__(self, args=args, children=children)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    def children(self):
-        """
-        Returns the children of this multi-child command.
-
-        :rtype: List[ScadObject]|ScadObject|None
-        """
-        return ScadMultiChildParent.children(self)
-
 # ----------------------------------------------------------------------------------------------------------------------

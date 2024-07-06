@@ -180,7 +180,6 @@ class Context:
         """
         Sets the unit of length.
         """
-        self.__unit = unit
         Context.current_target_unit = unit
 
     # ------------------------------------------------------------------------------------------------------------------

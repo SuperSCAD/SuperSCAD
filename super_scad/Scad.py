@@ -1,10 +1,12 @@
 import os
 from pathlib import Path
-from typing import Dict, List
 
 from super_scad.Context import Context
+from super_scad.private.PrivateMultiChildScadCommand import PrivateMultiChildScadCommand
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
 from super_scad.ScadObject import ScadObject
+from super_scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.Unit import Unit
 
 
@@ -21,8 +23,7 @@ class Scad:
 
         self.__context = Context(project_home=self.__project_home, unit=unit)
 
-        # ------------------------------------------------------------------------------------------------------------------
-
+    # ------------------------------------------------------------------------------------------------------------------
     @property
     def project_home(self) -> Path:
         """
@@ -41,77 +42,60 @@ class Scad:
         self.__project_home = project_home
 
     # ------------------------------------------------------------------------------------------------------------------
-    def run_super_scad(self, scad_object: ScadObject, output_scad: Path | str) -> None:
+    def run_super_scad(self, scad_object: ScadObject, openscad_path: Path | str) -> None:
         """
+        Runs SuperSCAD on a SuperSCAD object and stores the generated OpenSCAD code.
 
-        :param scad_object:
-        :param output_scad:
+        :param scad_object: The SuperSCAD object to run.
+        :param openscad_path: The path to the file were to store the generated OpenSCAD code.
         """
-        self.__context.target_path = Path(output_scad)
+        self.__context.target_path = Path(openscad_path)
         self.__run_super_scad(scad_object)
 
-        with open(output_scad, 'wt') as handle:
+        with open(openscad_path, 'wt') as handle:
             handle.write(self.__context.code_store.get_code())
 
     # ------------------------------------------------------------------------------------------------------------------
     def __run_super_scad(self, scad_object: ScadObject) -> None:
         """
-        Runs SuperSCAD on the ScadObject and recursively on it child objects, if any.
+        Runs SuperSCAD on the ScadObject.
 
-        :param scad_object:
+        :param scad_object: The SuperSCAD object to run.
         """
-        builders = []
-        self.__run_happy_scad_build(scad_object, builders)
-
         self.__context.code_store.clear()
         self.__context.code_store.add_line('// Unit of length: {}'.format(self.__context.unit))
-        self.__run_super_scad_code(builders)
+        self.__run_supe_scad_build_tree(scad_object)
         self.__context.code_store.add_line('')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __run_happy_scad_build(self, scad_object: ScadObject, parent: List[Dict]):
+    def __run_supe_scad_build_tree(self, scad_object: ScadObject) -> None:
+        """
+        Helper method for __run_super_scad. Runs recursively on the ScadObject and its children until it finds a
+        OpenSCAD command. This OpenSCAD command is used to generate the OpenSCAD code.
+        """
         old_unit = self.__context.unit
-        tmp = {}
-
-        builder = scad_object.build(self.__context)
-        if builder != scad_object:
-            tmp['parent'] = scad_object
-            tmp['children'] = []
-            self.__run_happy_scad_build(builder, tmp['children'])
-        else:
-            tmp['parent'] = builder
-            children = builder.children()
-            if children is None:
-                tmp['children'] = None
-            elif isinstance(children, ScadObject):
-                tmp['children'] = []
-                self.__run_happy_scad_build(children, tmp['children'])
-            elif isinstance(children, list):
-                tmp['children'] = []
-                for child in children:
-                    self.__run_happy_scad_build(child, tmp['children'])
-            else:
-                raise ValueError('Expecting None, ScadObject or List[ScadObject], got {}'.format(type(children)))
-
-        parent.append(tmp)
+        scad_object = scad_object.build(self.__context)
         self.__context.unit = old_unit
 
-        # ------------------------------------------------------------------------------------------------------------------
+        if isinstance(scad_object, PrivateScadCommand):
+            self.__context.code_store.add_line('{}{}'.format(scad_object.command,
+                                                             scad_object.generate_args(self.__context)))
 
-    def __run_super_scad_code(self, builders) -> None:
-        if isinstance(builders, list):
-            for builder in builders:
-                self.__run_super_scad_code(builder)
-        elif isinstance(builders['parent'], PrivateScadCommand):
-            self.__context.code_store.add_line('{}{}'.format(builders['parent'].command,
-                                                             builders['parent'].generate_args(self.__context)))
-            if builders['children'] is None:
-                self.__context.code_store.append_to_last_line(';')
-            else:
+            if isinstance(scad_object, PrivateSingleChildScadCommand):
                 self.__context.code_store.add_line('{')
-                self.__run_super_scad_code(builders['children'])
+                self.__run_supe_scad_build_tree(scad_object.child)
                 self.__context.code_store.add_line('}')
+
+            elif isinstance(scad_object, PrivateMultiChildScadCommand):
+                self.__context.code_store.add_line('{')
+                for child in scad_object.children:
+                    self.__run_supe_scad_build_tree(child)
+                self.__context.code_store.add_line('}')
+
+            else:
+                self.__context.code_store.append_to_last_line(';')
+
         else:
-            self.__run_super_scad_code(builders['children'])
+            self.__run_supe_scad_build_tree(scad_object)
 
 # ----------------------------------------------------------------------------------------------------------------------

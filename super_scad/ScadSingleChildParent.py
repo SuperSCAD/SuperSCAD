@@ -31,11 +31,4 @@ class ScadSingleChildParent(ScadObject, ABC):
         """
         return self.__child
 
-    # ------------------------------------------------------------------------------------------------------------------
-    def children(self) -> ScadObject:
-        """
-        Returns the child of this single-child parent.
-        """
-        return self.__child
-
 # ----------------------------------------------------------------------------------------------------------------------

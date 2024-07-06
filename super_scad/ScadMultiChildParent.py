@@ -24,6 +24,7 @@ class ScadMultiChildParent(ScadObject, ABC):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
     def children(self) -> List[ScadObject]:
         """
         Returns the children of this multi-child parent.

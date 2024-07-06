@@ -22,13 +22,4 @@ class PrivateSingleChildScadCommand(PrivateScadCommand, ScadSingleChildParent):
         PrivateScadCommand.__init__(self, command=command, args=args)
         ScadSingleChildParent.__init__(self, args=args, child=child)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    def children(self):
-        """
-        Returns the child of this single-child command.
-
-        :rtype: List[ScadObject]|ScadObject|None
-        """
-        return ScadSingleChildParent.children(self)
-
 # ----------------------------------------------------------------------------------------------------------------------

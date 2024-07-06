@@ -40,15 +40,6 @@ class PrivateScadCommand(ScadObject):
         return self
 
     # ------------------------------------------------------------------------------------------------------------------
-    def children(self):
-        """
-        Returns the children of this OpenSCAD command.
-
-        :rtype: List[ScadObject]|ScadObject|None
-        """
-        return None
-
-    # ------------------------------------------------------------------------------------------------------------------
     @property
     def command(self) -> str:
         """
