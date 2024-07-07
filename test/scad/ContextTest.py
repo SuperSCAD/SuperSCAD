@@ -17,9 +17,14 @@ class ContextTest(unittest.TestCase):
         Test method resolve_path.
         """
         context = Context(project_home=Path(os.getcwd()).resolve(), unit_length_final=Unit.MM)
+
+        context.target_path = 'test/test.scad'
+        self.assertEqual(Path('/etc/password'), context.resolve_path('/etc/password'))
+        self.assertEqual(Path('other/__init__.py'), context.resolve_path('../other/__init__.py'))
         context.target_path = 'test/test.scad'
 
+        context.target_path = 'super_scad/test.scad'
         self.assertEqual(Path('/etc/password'), context.resolve_path('/etc/password'))
-        self.assertEqual(Path('../other/surface.dat'), context.resolve_path('../other/surface.dat'))
+        self.assertEqual(Path('../test/other/__init__.py'), context.resolve_path('../other/__init__.py'))
 
 # ----------------------------------------------------------------------------------------------------------------------
