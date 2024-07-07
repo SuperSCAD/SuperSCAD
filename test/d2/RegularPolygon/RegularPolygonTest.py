@@ -108,7 +108,43 @@ class RegularPolygonTestCase(ScadTestCase):
         polygon = RegularPolygon(sides=5, inner_radius=1.0)
 
         self.assertAlmostEqual(1.0, polygon.inner_radius)
+        self.assertAlmostEqual(2.0, polygon.inner_diameter)
         self.assertAlmostEqual(1.0 / math.cos(math.pi / 5), polygon.outer_radius)
+        self.assertAlmostEqual(2.0 / math.cos(math.pi / 5), polygon.outer_diameter)
+        self.assertAlmostEqual(2 * math.tan(math.pi / 5), polygon.size)
+        self.assertAlmostEqual(108.0, polygon.inner_angle)
+        self.assertAlmostEqual(72.0, polygon.exterior_angle)
+
+        angles = polygon.angles
+        self.assertAlmostEqual(90.0, angles[0])
+        self.assertAlmostEqual(162.0, angles[1])
+        self.assertAlmostEqual(234.0, angles[2])
+        self.assertAlmostEqual(306.0, angles[3])
+        self.assertAlmostEqual(378.0, angles[4])
+
+        union = Union(children=[Paint(color=Color(color='blue'), child=Circle4n(radius=polygon.outer_radius)),
+                                Paint(color=Color(color='red'), child=polygon),
+                                Paint(color=Color(color='green'), child=Circle4n(radius=polygon.inner_radius))])
+
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testPentagonInnerDiameter(self):
+        """
+        Test for a regular polygon defined by its inner diameter.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        polygon = RegularPolygon(sides=5, inner_diameter=2.0)
+
+        self.assertAlmostEqual(1.0, polygon.inner_radius)
+        self.assertAlmostEqual(2.0, polygon.inner_diameter)
+        self.assertAlmostEqual(1.0 / math.cos(math.pi / 5), polygon.outer_radius)
+        self.assertAlmostEqual(2.0 / math.cos(math.pi / 5), polygon.outer_diameter)
         self.assertAlmostEqual(2 * math.tan(math.pi / 5), polygon.size)
         self.assertAlmostEqual(108.0, polygon.inner_angle)
         self.assertAlmostEqual(72.0, polygon.exterior_angle)
@@ -140,7 +176,39 @@ class RegularPolygonTestCase(ScadTestCase):
         polygon = RegularPolygon(sides=5, outer_radius=1.0)
 
         self.assertAlmostEqual(1.0 * math.cos(math.pi / 5), polygon.inner_radius)
+        self.assertAlmostEqual(2.0 * math.cos(math.pi / 5), polygon.inner_diameter)
         self.assertAlmostEqual(1.0, polygon.outer_radius)
+        self.assertAlmostEqual(2.0, polygon.outer_diameter)
+        self.assertAlmostEqual(2 * math.sin(math.pi / 5), polygon.size)
+        self.assertAlmostEqual(108.0, polygon.inner_angle)
+        self.assertAlmostEqual(72.0, polygon.exterior_angle)
+
+        angles = polygon.angles
+        self.assertAlmostEqual(90.0, angles[0])
+        self.assertAlmostEqual(162.0, angles[1])
+        self.assertAlmostEqual(234.0, angles[2])
+        self.assertAlmostEqual(306.0, angles[3])
+        self.assertAlmostEqual(378.0, angles[4])
+
+        scad.run_super_scad(polygon, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testPentagonOuterDiameter(self):
+        """
+        Test for a regular polygon defined by its outer diameter.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        polygon = RegularPolygon(sides=5, outer_diameter=2.0)
+
+        self.assertAlmostEqual(1.0 * math.cos(math.pi / 5), polygon.inner_radius)
+        self.assertAlmostEqual(2.0 * math.cos(math.pi / 5), polygon.inner_diameter)
+        self.assertAlmostEqual(1.0, polygon.outer_radius)
+        self.assertAlmostEqual(2.0, polygon.outer_diameter)
         self.assertAlmostEqual(2 * math.sin(math.pi / 5), polygon.size)
         self.assertAlmostEqual(108.0, polygon.inner_angle)
         self.assertAlmostEqual(72.0, polygon.exterior_angle)
@@ -168,7 +236,9 @@ class RegularPolygonTestCase(ScadTestCase):
         polygon = RegularPolygon(sides=5, size=1.0)
 
         self.assertAlmostEqual(1.0 / (2 * math.tan(math.pi / 5)), polygon.inner_radius)
+        self.assertAlmostEqual(2.0 / (2 * math.tan(math.pi / 5)), polygon.inner_diameter)
         self.assertAlmostEqual(1.0 / (2 * math.sin(math.pi / 5)), polygon.outer_radius)
+        self.assertAlmostEqual(2.0 / (2 * math.sin(math.pi / 5)), polygon.outer_diameter)
         self.assertAlmostEqual(1.0, polygon.size)
         self.assertAlmostEqual(108.0, polygon.inner_angle)
         self.assertAlmostEqual(72.0, polygon.exterior_angle)
@@ -197,7 +267,9 @@ class RegularPolygonTestCase(ScadTestCase):
         scad.run_super_scad(polygon, path_actual)
 
         self.assertAlmostEqual(25.4 / (2 * math.tan(math.pi / 5)), polygon.imperial_pentagon.inner_radius)
+        self.assertAlmostEqual(25.4 / (math.tan(math.pi / 5)), polygon.imperial_pentagon.inner_diameter)
         self.assertAlmostEqual(25.4 / (2 * math.sin(math.pi / 5)), polygon.imperial_pentagon.outer_radius)
+        self.assertAlmostEqual(25.4 / (math.sin(math.pi / 5)), polygon.imperial_pentagon.outer_diameter)
         self.assertAlmostEqual(25.4, polygon.imperial_pentagon.size)
         self.assertAlmostEqual(polygon.imperial_pentagon.nodes[0].y, polygon.imperial_pentagon.outer_radius)
 
@@ -218,7 +290,9 @@ class RegularPolygonTestCase(ScadTestCase):
         scad.run_super_scad(polygon, path_actual)
 
         self.assertAlmostEqual(1.0 / (2 * math.tan(math.pi / 5)), polygon.imperial_pentagon.inner_radius)
+        self.assertAlmostEqual(2.0 / (2 * math.tan(math.pi / 5)), polygon.imperial_pentagon.inner_diameter)
         self.assertAlmostEqual(1.0 / (2 * math.sin(math.pi / 5)), polygon.imperial_pentagon.outer_radius)
+        self.assertAlmostEqual(2.0 / (2 * math.sin(math.pi / 5)), polygon.imperial_pentagon.outer_diameter)
         self.assertAlmostEqual(1.0, polygon.imperial_pentagon.size)
 
         actual = path_actual.read_text()

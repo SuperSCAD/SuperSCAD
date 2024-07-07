@@ -18,7 +18,9 @@ class RegularPolygon(ScadObject):
                  *,
                  sides: int,
                  outer_radius: float | None = None,
+                 outer_diameter: float | None = None,
                  inner_radius: float | None = None,
+                 inner_diameter: float | None = None,
                  size: float | None = None):
         """
         Object constructor.
@@ -92,13 +94,42 @@ class RegularPolygon(ScadObject):
         if 'outer_radius' in self._args:
             return self.uc(self._args['outer_radius'])
 
+        if 'outer_diameter' in self._args:
+            return self.uc(0.5 * self._args['outer_diameter'])
+
         if 'inner_radius' in self._args:
             return self.uc(self._args['inner_radius'] / math.cos(math.pi / self.sides))
+
+        if 'inner_diameter' in self._args:
+            return self.uc(0.5 * self._args['inner_diameter'] / math.cos(math.pi / self.sides))
 
         if 'size' in self._args:
             return self.uc(self._args['size'] / (2.0 * math.sin(math.pi / self.sides)))
 
-        return 0.0
+        raise AssertionError('Should not be reached')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def outer_diameter(self) -> float:
+        """
+        Returns the outer diameter of the regular polygon.
+        """
+        if 'outer_radius' in self._args:
+            return self.uc(2.0 * self._args['outer_radius'])
+
+        if 'outer_diameter' in self._args:
+            return self.uc(self._args['outer_diameter'])
+
+        if 'inner_radius' in self._args:
+            return self.uc(2.0 * self._args['inner_radius'] / math.cos(math.pi / self.sides))
+
+        if 'inner_diameter' in self._args:
+            return self.uc(self._args['inner_diameter'] / math.cos(math.pi / self.sides))
+
+        if 'size' in self._args:
+            return self.uc(self._args['size'] / (math.sin(math.pi / self.sides)))
+
+        raise AssertionError('Should not be reached')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -109,13 +140,42 @@ class RegularPolygon(ScadObject):
         if 'inner_radius' in self._args:
             return self.uc(self._args['inner_radius'])
 
+        if 'inner_diameter' in self._args:
+            return self.uc(self._args['inner_diameter'] / 2.0)
+
         if 'outer_radius' in self._args:
             return self.uc(self._args['outer_radius'] * math.cos(math.pi / self.sides))
+
+        if 'outer_diameter' in self._args:
+            return self.uc(0.5 * self._args['outer_diameter'] * math.cos(math.pi / self.sides))
 
         if 'size' in self._args:
             return self.uc(self._args['size'] / (2.0 * math.tan(math.pi / self.sides)))
 
-        return 0.0
+        raise AssertionError('Should not be reached')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def inner_diameter(self) -> float:
+        """
+        Returns the inner diameter of the regular polygon.
+        """
+        if 'inner_radius' in self._args:
+            return self.uc(2.0 * self._args['inner_radius'])
+
+        if 'inner_diameter' in self._args:
+            return self.uc(self._args['inner_diameter'])
+
+        if 'outer_radius' in self._args:
+            return self.uc(2.0 * self._args['outer_radius'] * math.cos(math.pi / self.sides))
+
+        if 'outer_diameter' in self._args:
+            return self.uc(self._args['outer_diameter'] * math.cos(math.pi / self.sides))
+
+        if 'size' in self._args:
+            return self.uc(self._args['size'] / (math.tan(math.pi / self.sides)))
+
+        raise AssertionError('Should not be reached')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -126,13 +186,19 @@ class RegularPolygon(ScadObject):
         if 'inner_radius' in self._args:
             return self.uc(2.0 * self._args['inner_radius'] * math.tan(math.pi / self.sides))
 
+        if 'inner_diameter' in self._args:
+            return self.uc(self._args['inner_diameter'] * math.tan(math.pi / self.sides))
+
         if 'outer_radius' in self._args:
             return self.uc(2.0 * self._args['outer_radius'] * math.sin(math.pi / self.sides))
+
+        if 'outer_diameter' in self._args:
+            return self.uc(self._args['outer_diameter'] * math.sin(math.pi / self.sides))
 
         if 'size' in self._args:
             return self.uc(self._args['size'])
 
-        return 0.0
+        raise AssertionError('Should not be reached')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
