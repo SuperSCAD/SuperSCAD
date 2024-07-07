@@ -11,7 +11,10 @@ class Rotate2D(ScadSingleChildParent):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, angle: float | None = None, child: ScadObject) -> None:
+    def __init__(self,
+                 *,
+                 angle: float | None = None,
+                 child: ScadObject) -> None:
         """
         Object constructor.
 
@@ -19,10 +22,6 @@ class Rotate2D(ScadSingleChildParent):
         :param child: The child object to be rotated (around the z-axis).
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
-        pass
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

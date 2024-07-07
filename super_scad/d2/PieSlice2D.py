@@ -36,10 +36,6 @@ class PieSlice2D(PrivatePieSlice2D):
         PrivatePieSlice2D.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
-        pass
-
-    # ------------------------------------------------------------------------------------------------------------------
     @property
     def fa(self) -> float | None:
         """

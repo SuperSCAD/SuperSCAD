@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Dict
 
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 
@@ -37,7 +38,14 @@ class Surface(PrivateScadCommand):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_required({'path'}, {'center'})
+
+        # We like to validate here whether the path goes to an exiting readable file, but we need the build context for
+        # that. So, we test the existence of the file in the build method.
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

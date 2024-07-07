@@ -1,6 +1,7 @@
 import math
 
 from super_scad.d2.Circle import Circle
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 
@@ -11,7 +12,10 @@ class Circle4n(ScadObject):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, radius: float | None = None, diameter: float | None = None):
+    def __init__(self,
+                 *,
+                 radius: float | None = None,
+                 diameter: float | None = None):
         """
         Object constructor.
 
@@ -22,7 +26,12 @@ class Circle4n(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'radius'}, {'diameter'})
+        admission.validate_required({'radius', 'diameter'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

@@ -1,4 +1,5 @@
 from super_scad.d3.private.PrivateCube import PrivateCube
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Size3 import Size3
@@ -30,7 +31,15 @@ class Cuboid(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'size'}, {'width', 'depth', 'height'})
+        admission.validate_required({'size', 'width'},
+                                    {'size', 'depth'},
+                                    {'size', 'height'},
+                                    {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

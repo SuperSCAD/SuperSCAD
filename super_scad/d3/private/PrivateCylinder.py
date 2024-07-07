@@ -1,6 +1,7 @@
 from typing import Dict, Set
 
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 
 
 class PrivateCylinder(PrivateScadCommand):
@@ -41,7 +42,17 @@ class PrivateCylinder(PrivateScadCommand):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'radius'}, {'diameter'})
+        admission.validate_exclusive({'top_radius'}, {'top_diameter'}, {'radius'}, {'diameter'})
+        admission.validate_exclusive({'bottom_radius'}, {'bottom_diameter'}, {'radius'}, {'diameter'})
+        admission.validate_required({'height'},
+                                    {'radius', 'diameter', 'bottom_radius', 'bottom_diameter'},
+                                    {'radius', 'diameter', 'top_radius', 'top_diameter'},
+                                    {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

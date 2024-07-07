@@ -1,5 +1,6 @@
 from typing import Tuple
 
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
@@ -39,8 +40,14 @@ class Resize2D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        # Handle scaling beyond resolution.
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'new_size'}, {'new_width', 'new_depth'})
+        admission.validate_exclusive({'auto'}, {'auto_width', 'auto_depth'})
+
+        # Handle resizing beyond resolution.
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

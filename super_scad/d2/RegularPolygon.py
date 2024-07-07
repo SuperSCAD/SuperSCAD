@@ -2,6 +2,7 @@ import math
 from typing import List
 
 from super_scad.d2.Polygon import Polygon
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.scad.Unit import Unit
@@ -49,7 +50,17 @@ class RegularPolygon(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'size'},
+                                     {'outer_radius'},
+                                     {'outer_diameter'},
+                                     {'inner_radius'},
+                                     {'inner_diameter'})
+        admission.validate_required({'sides'},
+                                    {'size', 'outer_radius', 'outer_diameter', 'inner_radius', 'inner_diameter'})
 
     # ------------------------------------------------------------------------------------------------------------------
     def __nodes_and_angles(self) -> None:

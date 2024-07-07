@@ -1,5 +1,6 @@
 from super_scad.d2.Circle4n import Circle4n
 from super_scad.d3.Cylinder import Cylinder
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 
@@ -28,7 +29,14 @@ class Cylinder4n(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'radius'}, {'diameter'})
+        admission.validate_required({'height'},
+                                    {'radius', 'diameter'},
+                                    {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

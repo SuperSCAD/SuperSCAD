@@ -39,7 +39,7 @@ class ScadObject(ABC):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
         """
         pass
 

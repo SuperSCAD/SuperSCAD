@@ -1,5 +1,6 @@
 from super_scad.d2.PieSlice2D import PieSlice2D
 from super_scad.d3.LinearExtrude import LinearExtrude
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 
@@ -12,26 +13,26 @@ class PieSlice3D(ScadObject):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
+                 height: float,
                  angle: float | None = None,
                  start_angle: float | None = None,
                  end_angle: float | None = None,
                  radius: float | None = None,
                  inner_radius: float | None = None,
                  outer_radius: float | None = None,
-                 height: float,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None):
         """
         Object constructor.
 
+        :param height: The height of the pie slice.
         :param angle: The angle of the pie slice (implies starting angle is 0.0).
         :param start_angle: The start angle of the pie slice.
         :param end_angle: The end angle of the pie slice.
         :param radius: The radius of the pie slice (implies inner radius is 0.0).
         :param inner_radius: The inner radius of the pie slice.
         :param outer_radius: The outer radius of the pie slice.
-        :param height: The height of the pie slice.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
@@ -50,6 +51,15 @@ class PieSlice3D(ScadObject):
         """
         The 2D pie slice to be extruded to a 3D pie slice.
         """
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _validate_arguments(self) -> None:
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_required({'height'})
+        # Other validations are done by PieSlice2D.
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

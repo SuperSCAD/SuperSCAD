@@ -11,7 +11,10 @@ class Render(PrivateSingleChildScadCommand):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, convexity: int | None = None, child: ScadObject):
+    def __init__(self,
+                 *,
+                 convexity: int | None = None,
+                 child: ScadObject):
         """
         Object constructor.
 

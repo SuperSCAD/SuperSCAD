@@ -46,10 +46,6 @@ class Text(PrivateScadCommand):
         PrivateScadCommand.__init__(self, command='text', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
-        pass
-
-    # ------------------------------------------------------------------------------------------------------------------
     @property
     def fn(self) -> int | None:
         """

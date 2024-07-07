@@ -1,4 +1,5 @@
 from super_scad.d2.private.PrivateSquare import PrivateSquare
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 
@@ -9,7 +10,10 @@ class Square(ScadObject):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, size: float, center: bool = False):
+    def __init__(self,
+                 *,
+                 size: float,
+                 center: bool = False):
         """
         Object constructor.
 
@@ -20,7 +24,11 @@ class Square(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_required({'size'}, {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

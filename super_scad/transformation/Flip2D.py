@@ -1,3 +1,4 @@
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
@@ -15,8 +16,8 @@ class Flip2D(ScadSingleChildParent):
                  *,
                  horizontal: bool | None = None,
                  vertical: bool | None = None,
-                 flip_x: bool = False,
-                 flip_y: bool = False,
+                 flip_x: bool | None = None,
+                 flip_y: bool | None = None,
                  child: ScadObject) -> None:
         """
         Object constructor.
@@ -28,6 +29,14 @@ class Flip2D(ScadSingleChildParent):
         :param child: The child object to be flipped.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _validate_arguments(self) -> None:
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'horizontal', 'vertical'}, {'flip_x', 'flip_y'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

@@ -1,3 +1,4 @@
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
@@ -29,7 +30,11 @@ class Scale2D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'factor'}, {'factor_x', 'factor_y'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

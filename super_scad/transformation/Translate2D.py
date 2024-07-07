@@ -1,3 +1,4 @@
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
@@ -27,6 +28,14 @@ class Translate2D(ScadSingleChildParent):
         :param child: The child object to be translated.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _validate_arguments(self) -> None:
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'vector'}, {'x', 'y'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

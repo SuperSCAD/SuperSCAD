@@ -1,3 +1,4 @@
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
@@ -33,7 +34,12 @@ class Rotate3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'angle', 'vector'}, {'angle_x', 'angle_y', 'angle_z'})
+        admission.validate_required({'angle_x', 'angle_y', 'angle_z', 'angle'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

@@ -12,7 +12,11 @@ class Projection(ScadSingleChildParent):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, cut: bool = False, z: float | None = None, child: ScadObject):
+    def __init__(self,
+                 *,
+                 cut: bool = False,
+                 z: float | None = None,
+                 child: ScadObject):
         """
         Object constructor.
 
@@ -21,10 +25,6 @@ class Projection(ScadSingleChildParent):
         :param child: The 3D model.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
-        pass
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

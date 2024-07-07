@@ -30,10 +30,6 @@ class PieSlice2D4n(PrivatePieSlice2D):
         PrivatePieSlice2D.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
-        pass
-
-    # ------------------------------------------------------------------------------------------------------------------
     def _create_circle(self, radius: float) -> ScadObject:
         """
         Creates a circle with given radius.

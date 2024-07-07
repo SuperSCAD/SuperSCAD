@@ -75,7 +75,7 @@ class Scale3DTest(ScadTestCase):
         scad = Scad(unit_length_final=Unit.MM)
 
         cube = Cube(size=10.0)
-        scale = Scale3D(factor=2.0, factor_z=2.0, child=cube)
+        scale = Scale3D(factor=2.0, child=cube)
 
         self.assertAlmostEqual(scale.factor_x, 2.0)
         self.assertAlmostEqual(scale.factor_y, 2.0)

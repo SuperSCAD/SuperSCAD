@@ -5,6 +5,7 @@ from super_scad.boolean.Difference import Difference
 from super_scad.boolean.Empty import Empty
 from super_scad.boolean.Intersection import Intersection
 from super_scad.d2.Polygon import Polygon
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Angle import Angle
@@ -18,7 +19,13 @@ class PrivatePieSlice2D(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'angle'}, {'start_angle', 'end_angle'})
+        admission.validate_exclusive({'radius'}, {'inner_radius', 'outer_radius'})
+        admission.validate_required({'radius', 'outer_radius'}, {'angle', 'end_angle'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

@@ -1,5 +1,6 @@
 from super_scad.d2.Circle4n import Circle4n
 from super_scad.d3.Cone import Cone
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 
@@ -32,7 +33,16 @@ class Cone4n(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'bottom_radius'}, {'bottom_diameter'})
+        admission.validate_exclusive({'top_radius'}, {'top_diameter'})
+        admission.validate_required({'height'},
+                                    {'bottom_radius', 'bottom_diameter'},
+                                    {'top_radius', 'top_diameter'},
+                                    {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

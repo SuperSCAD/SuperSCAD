@@ -1,6 +1,7 @@
 from typing import Dict
 
 from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Color import Color
 
@@ -12,7 +13,10 @@ class Paint(PrivateSingleChildScadCommand):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, color: Color, child: ScadObject) -> None:
+    def __init__(self,
+                 *,
+                 color: Color,
+                 child: ScadObject) -> None:
         """
         Object constructor.
 
@@ -20,6 +24,14 @@ class Paint(PrivateSingleChildScadCommand):
         :param child: The child object to be painted.
         """
         PrivateSingleChildScadCommand.__init__(self, command='color', args=locals(), child=child)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _validate_arguments(self) -> None:
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'color'})
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

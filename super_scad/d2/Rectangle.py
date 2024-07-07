@@ -1,4 +1,5 @@
 from super_scad.d2.private.PrivateSquare import PrivateSquare
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Size2 import Size2
@@ -28,7 +29,14 @@ class Rectangle(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'size'}, {'width', 'depth'})
+        admission.validate_required({'width', 'size'},
+                                    {'depth', 'size'},
+                                    {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

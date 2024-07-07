@@ -1,6 +1,7 @@
 from typing import Dict, Set
 
 from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 
 
 class Sphere(PrivateScadCommand):
@@ -29,7 +30,12 @@ class Sphere(PrivateScadCommand):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'radius'}, {'diameter'})
+        admission.validate_required({'radius', 'diameter'})
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

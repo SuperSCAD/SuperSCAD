@@ -1,5 +1,6 @@
 from super_scad.d2.Circle4n import Circle4n
 from super_scad.d3.Sphere import Sphere
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.transformation.Resize3D import Resize3D
@@ -34,7 +35,16 @@ class Ellipsoid4n(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'radius_x'}, {'diameter_x'})
+        admission.validate_exclusive({'radius_y'}, {'diameter_y'})
+        admission.validate_exclusive({'radius_z'}, {'diameter_z'})
+        admission.validate_required({'radius_x', 'diameter_x'},
+                                    {'radius_y', 'diameter_y'},
+                                    {'radius_z', 'diameter_z'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

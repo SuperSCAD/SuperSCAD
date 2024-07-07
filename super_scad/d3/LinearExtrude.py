@@ -47,10 +47,6 @@ class LinearExtrude(PrivateSingleChildScadCommand):
         PrivateSingleChildScadCommand.__init__(self, command='linear_extrude', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
-        pass
-
-    # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.

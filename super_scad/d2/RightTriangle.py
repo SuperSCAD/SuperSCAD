@@ -1,4 +1,5 @@
 from super_scad.d2.Polygon import Polygon
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
@@ -10,7 +11,10 @@ class RightTriangle(ScadObject):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, width: float, depth: float):
+    def __init__(self,
+                 *,
+                 width: float,
+                 depth: float):
         """
         Object constructor.
 
@@ -18,6 +22,14 @@ class RightTriangle(ScadObject):
         :param depth: The depth of the right triangle.
         """
         ScadObject.__init__(self, args=locals())
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _validate_arguments(self) -> None:
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_required({'width'}, {'depth'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

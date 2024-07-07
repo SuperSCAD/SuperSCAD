@@ -1,6 +1,7 @@
 from typing import List
 
 from super_scad.d2.private.PrivatePolygon import PrivatePolygon
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
@@ -33,7 +34,13 @@ class Polygon(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'primary'}, {'points'})
+        admission.validate_exclusive({'secondary'}, {'secondaries'})
+        admission.validate_required({'primary', 'points'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

@@ -1,6 +1,7 @@
 from super_scad.boolean.Intersection import Intersection
 from super_scad.d2.Circle4n import Circle4n
 from super_scad.d2.Rectangle import Rectangle
+from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.transformation.Translate2D import Translate2D
@@ -12,20 +13,26 @@ class Semicircle4n(ScadObject):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, radius: float | None = None, diameter: float | None = None):
+    def __init__(self,
+                 *,
+                 radius: float | None = None,
+                 diameter: float | None = None):
         """
         Object constructor.
 
-        :param radius: See `OpenSCAD circle documentation`_.
-        :param diameter: See `OpenSCAD circle documentation`_.
-
-        .. _OpenSCAD circle documentation: https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#circle
+        :param radius: The radius of the semicircle.
+        :param diameter: The diameter of the semicircle.
         """
         ScadObject.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
-        pass
+        """
+        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        """
+        admission = ArgumentAdmission(self._args)
+        admission.validate_exclusive({'radius'}, {'diameter'})
+        admission.validate_required({'radius', 'diameter'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
