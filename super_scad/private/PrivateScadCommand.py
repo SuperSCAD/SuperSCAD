@@ -3,6 +3,7 @@ from typing import Any, Dict, List, Set, Tuple
 
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
+from super_scad.type.Color import Color
 from super_scad.type.Face3 import Face3
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
@@ -104,50 +105,55 @@ class PrivateScadCommand(ScadObject):
             if argument == '-0.0':
                 argument = '0.0'
 
-        elif isinstance(argument, Point2):
-            argument = "[{}, {}]".format(self.__format_argument(context, float(argument.x)),
-                                         self.__format_argument(context, float(argument.y)))
+            return argument
 
-        elif isinstance(argument, Point3):
-            argument = "[{}, {}, {}]".format(self.__format_argument(context, float(argument.x)),
-                                             self.__format_argument(context, float(argument.y)),
-                                             self.__format_argument(context, float(argument.z)))
+        if isinstance(argument, Point2):
+            return "[{}, {}]".format(self.__format_argument(context, float(argument.x)),
+                                     self.__format_argument(context, float(argument.y)))
 
-        elif isinstance(argument, Size2):
-            argument = "[{}, {}]".format(self.__format_argument(context, float(argument.width)),
-                                         self.__format_argument(context, float(argument.depth)))
+        if isinstance(argument, Point3):
+            return "[{}, {}, {}]".format(self.__format_argument(context, float(argument.x)),
+                                         self.__format_argument(context, float(argument.y)),
+                                         self.__format_argument(context, float(argument.z)))
 
-        elif isinstance(argument, Size3):
-            argument = "[{}, {}, {}]".format(self.__format_argument(context, float(argument.width)),
-                                             self.__format_argument(context, float(argument.depth)),
-                                             self.__format_argument(context, float(argument.height)))
+        if isinstance(argument, Size2):
+            return "[{}, {}]".format(self.__format_argument(context, float(argument.width)),
+                                     self.__format_argument(context, float(argument.depth)))
 
-        elif isinstance(argument, Face3):
-            argument = "[{}]".format(', '.join(str(point) for point in argument.points))
+        if isinstance(argument, Size3):
+            return "[{}, {}, {}]".format(self.__format_argument(context, float(argument.width)),
+                                         self.__format_argument(context, float(argument.depth)),
+                                         self.__format_argument(context, float(argument.height)))
 
-        elif isinstance(argument, bool):
-            argument = str(argument).lower()
+        if isinstance(argument, Face3):
+            return "[{}]".format(', '.join(str(point) for point in argument.points))
 
-        elif isinstance(argument, str):
-            argument = '"{}"'.format(re.sub(r'([\\\"])', r'\\\1', argument))
+        if isinstance(argument, bool):
+            return str(argument).lower()
 
-        elif isinstance(argument, int):
-            argument = str(argument)
+        if isinstance(argument, str):
+            return '"{}"'.format(re.sub(r'([\\\"])', r'\\\1', argument))
 
-        elif isinstance(argument, List):
+        if isinstance(argument, int):
+            return str(argument)
+
+        if isinstance(argument, List):
             parts = []
             for element in argument:
                 parts.append(self.__format_argument(context, element))
 
-            argument = '[{}]'.format(', '.join(parts))
+            return '[{}]'.format(', '.join(parts))
 
-        elif isinstance(argument, Tuple):
+        if isinstance(argument, Tuple):
             parts = []
             for element in argument:
                 parts.append(self.__format_argument(context, element))
 
-            argument = '[{}]'.format(', '.join(parts))
+            return '[{}]'.format(', '.join(parts))
 
-        return argument
+        if isinstance(argument, Color):
+            return str(argument)
+
+        raise ValueError(f'Can not format argument of type {argument.__class__}.')
 
 # ----------------------------------------------------------------------------------------------------------------------
