@@ -110,7 +110,8 @@ class Unit(Enum, boundary=STRICT):
 
     ATTOPARSEC = auto()
     """
-    Attoparsecs. One attoparsec 1e-18 parsec. See https://en.wikipedia.org/wiki/List_of_humorous_units_of_measurement#Attoparsec.
+    Attoparsecs. One attoparsec 1e-18 parsec. See 
+    https://en.wikipedia.org/wiki/List_of_humorous_units_of_measurement#Attoparsec.
     """
 
 # ----------------------------------------------------------------------------------------------------------------------
