@@ -1,11 +1,11 @@
 from typing import Any, Dict
 
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 
 
-class PrivateSingleChildScadCommand(PrivateScadCommand, ScadSingleChildParent):
+class PrivateSingleChildOpenScadCommand(PrivateOpenScadCommand, ScadSingleChildParent):
     """
     Parent class for OpenSCAD commands with a single child.
     """
@@ -19,7 +19,7 @@ class PrivateSingleChildScadCommand(PrivateScadCommand, ScadSingleChildParent):
         :param args: The arguments of the command.
         :param child: The child SuperSCAD object of this single-child parent.
         """
-        PrivateScadCommand.__init__(self, command=command, args=args)
+        PrivateOpenScadCommand.__init__(self, command=command, args=args)
         ScadSingleChildParent.__init__(self, args=args, child=child)
 
 # ----------------------------------------------------------------------------------------------------------------------

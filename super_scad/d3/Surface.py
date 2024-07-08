@@ -1,13 +1,13 @@
 from pathlib import Path
 from typing import Dict
 
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 
 
-class Surface(PrivateScadCommand):
+class Surface(PrivateOpenScadCommand):
     """
     Surface reads Heightmap information from text or image files. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#surface.
@@ -34,7 +34,7 @@ class Surface(PrivateScadCommand):
         if path is not None:
             path = str(path)
 
-        PrivateScadCommand.__init__(self, command='surface', args=locals())
+        PrivateOpenScadCommand.__init__(self, command='surface', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:

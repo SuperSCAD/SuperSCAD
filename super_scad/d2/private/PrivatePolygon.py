@@ -1,10 +1,10 @@
 from typing import List, Set
 
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.type.Point2 import Point2
 
 
-class PrivatePolygon(PrivateScadCommand):
+class PrivatePolygon(PrivateOpenScadCommand):
     """
     Class for polygons. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#polygon.
     """
@@ -23,7 +23,7 @@ class PrivatePolygon(PrivateScadCommand):
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child object.
         """
-        PrivateScadCommand.__init__(self, command='polygon', args=locals())
+        PrivateOpenScadCommand.__init__(self, command='polygon', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_lengths(self) -> Set[str]:

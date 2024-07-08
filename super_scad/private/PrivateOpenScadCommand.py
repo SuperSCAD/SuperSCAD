@@ -11,7 +11,7 @@ from super_scad.type.Size2 import Size2
 from super_scad.type.Size3 import Size3
 
 
-class PrivateScadCommand(ScadObject):
+class PrivateOpenScadCommand(ScadObject):
     """
     Parent class for OpenSCAD commands.
     """

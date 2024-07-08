@@ -1,7 +1,7 @@
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 
 
-class Text(PrivateScadCommand):
+class Text(PrivateOpenScadCommand):
     """
     Class for texts. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Text.
     """
@@ -43,7 +43,7 @@ class Text(PrivateScadCommand):
         :param script: The script of the text (e.g., "latin", "arabic", "hani").
         :param fn: Used for subdividing the curved path segments provided by freetype.
         """
-        PrivateScadCommand.__init__(self, command='text', args=locals())
+        PrivateOpenScadCommand.__init__(self, command='text', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

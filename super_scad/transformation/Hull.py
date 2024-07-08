@@ -1,10 +1,10 @@
 from typing import List
 
-from super_scad.private.PrivateMultiChildScadCommand import PrivateMultiChildScadCommand
+from super_scad.private.PrivateMultiChildOpenScadCommand import PrivateMultiChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 
 
-class Hull(PrivateMultiChildScadCommand):
+class Hull(PrivateMultiChildOpenScadCommand):
     """
     Displays the convex hull of child nodes. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#hull.
@@ -15,6 +15,6 @@ class Hull(PrivateMultiChildScadCommand):
         """
         Object constructor.
         """
-        PrivateMultiChildScadCommand.__init__(self, command='hull', args=locals(), children=children)
+        PrivateMultiChildOpenScadCommand.__init__(self, command='hull', args=locals(), children=children)
 
 # ----------------------------------------------------------------------------------------------------------------------

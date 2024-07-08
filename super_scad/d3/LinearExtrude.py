@@ -1,11 +1,11 @@
 from typing import Dict, Set
 
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
 
 
-class LinearExtrude(PrivateSingleChildScadCommand):
+class LinearExtrude(PrivateSingleChildOpenScadCommand):
     """
     Linear Extrusion is an operation that takes a 2D object as input and generates a 3D object as a result. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#linear_extrude.
@@ -44,7 +44,7 @@ class LinearExtrude(PrivateSingleChildScadCommand):
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='linear_extrude', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='linear_extrude', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

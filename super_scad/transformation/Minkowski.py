@@ -1,10 +1,10 @@
 from typing import List
 
-from super_scad.private.PrivateMultiChildScadCommand import PrivateMultiChildScadCommand
+from super_scad.private.PrivateMultiChildOpenScadCommand import PrivateMultiChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 
 
-class Minkowski(PrivateMultiChildScadCommand):
+class Minkowski(PrivateMultiChildOpenScadCommand):
     """
     Displays the minkowski sum of child nodes. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#minkowski.
@@ -19,6 +19,6 @@ class Minkowski(PrivateMultiChildScadCommand):
                           the child objects.
         :param children: The child objects.
         """
-        PrivateMultiChildScadCommand.__init__(self, command='minkowski', args=locals(), children=children)
+        PrivateMultiChildOpenScadCommand.__init__(self, command='minkowski', args=locals(), children=children)
 
 # ----------------------------------------------------------------------------------------------------------------------

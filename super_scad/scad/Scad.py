@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
 
-from super_scad.private.PrivateMultiChildScadCommand import PrivateMultiChildScadCommand
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateMultiChildOpenScadCommand import PrivateMultiChildOpenScadCommand
+from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.scad.Unit import Unit
@@ -51,26 +51,34 @@ class Scad:
         :param scad_object: The SuperSCAD object to run.
         :param openscad_path: The path to the file were to store the generated OpenSCAD code.
         """
-        self.__context.target_path = Path(openscad_path)
-        self.__run_super_scad(scad_object)
+        self.__run_super_scad_prepare(openscad_path)
+        self.__run_super_scad_walk_build_tree(scad_object)
+        self.__run_super_scad_finalize()
 
-        with open(openscad_path, 'wt') as handle:
+    # ------------------------------------------------------------------------------------------------------------------
+    def __run_super_scad_prepare(self, openscad_path: Path | str) -> None:
+        """
+        Executes the required steps before running SuperSCAD.
+
+        :param openscad_path: The path to the file were to store the generated OpenSCAD code.
+        """
+        self.__context.target_path = Path(openscad_path)
+        self.__context.set_unit_length_current(self.__context.get_unit_length_final())
+        self.__context.code_store.clear()
+        self.__context.code_store.add_line('// Unit of length: {}'.format(Context.get_unit_length_final()))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __run_super_scad_finalize(self) -> None:
+        """
+        Executes the required step after running SuperSCAD.
+        """
+        self.__context.code_store.add_line('')
+
+        with open(self.__context.target_path, 'wt') as handle:
             handle.write(self.__context.code_store.get_code())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __run_super_scad(self, scad_object: ScadObject) -> None:
-        """
-        Runs SuperSCAD on the ScadObject.
-
-        :param scad_object: The SuperSCAD object to run.
-        """
-        self.__context.code_store.clear()
-        self.__context.code_store.add_line('// Unit of length: {}'.format(Context.get_unit_length_final()))
-        self.__run_supe_scad_build_tree(scad_object)
-        self.__context.code_store.add_line('')
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def __run_supe_scad_build_tree(self, scad_object: ScadObject) -> None:
+    def __run_super_scad_walk_build_tree(self, scad_object: ScadObject) -> None:
         """
         Helper method for __run_super_scad. Runs recursively on the ScadObject and its children until it finds a
         OpenSCAD command. This OpenSCAD command is used to generate the OpenSCAD code.
@@ -79,25 +87,25 @@ class Scad:
         scad_object = scad_object.build(self.__context)
         Context.set_unit_length_current(old_unit)
 
-        if isinstance(scad_object, PrivateScadCommand):
+        if isinstance(scad_object, PrivateOpenScadCommand):
             self.__context.code_store.add_line('{}{}'.format(scad_object.command,
                                                              scad_object.generate_args(self.__context)))
 
-            if isinstance(scad_object, PrivateSingleChildScadCommand):
+            if isinstance(scad_object, PrivateSingleChildOpenScadCommand):
                 self.__context.code_store.add_line('{')
-                self.__run_supe_scad_build_tree(scad_object.child)
+                self.__run_super_scad_walk_build_tree(scad_object.child)
                 self.__context.code_store.add_line('}')
 
-            elif isinstance(scad_object, PrivateMultiChildScadCommand):
+            elif isinstance(scad_object, PrivateMultiChildOpenScadCommand):
                 self.__context.code_store.add_line('{')
                 for child in scad_object.children:
-                    self.__run_supe_scad_build_tree(child)
+                    self.__run_super_scad_walk_build_tree(child)
                 self.__context.code_store.add_line('}')
 
             else:
                 self.__context.code_store.append_to_last_line(';')
 
         else:
-            self.__run_supe_scad_build_tree(scad_object)
+            self.__run_super_scad_walk_build_tree(scad_object)
 
 # ----------------------------------------------------------------------------------------------------------------------

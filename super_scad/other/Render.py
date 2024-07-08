@@ -1,8 +1,8 @@
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 
 
-class Render(PrivateSingleChildScadCommand):
+class Render(PrivateSingleChildOpenScadCommand):
     """
     Forces the generation of a mesh even in preview mode. This is useful in certain situations, e.g. when the boolean
     operations become too slow to track. Render can also be used (typically in conjunction with convexity) to
@@ -21,7 +21,7 @@ class Render(PrivateSingleChildScadCommand):
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child object.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='render', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='render', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

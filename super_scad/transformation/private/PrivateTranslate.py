@@ -1,12 +1,12 @@
 from typing import Dict, Set
 
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
 
 
-class PrivateTranslate(PrivateSingleChildScadCommand):
+class PrivateTranslate(PrivateSingleChildOpenScadCommand):
     """
     Translates (moves) its child objects along the specified vector. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#translate.
@@ -19,7 +19,7 @@ class PrivateTranslate(PrivateSingleChildScadCommand):
 
         :param vector: The vector over which the child object is translated.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='translate', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='translate', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

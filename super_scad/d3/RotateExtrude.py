@@ -1,10 +1,10 @@
 from typing import Dict, Set
 
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 
 
-class RotateExtrude(PrivateSingleChildScadCommand):
+class RotateExtrude(PrivateSingleChildOpenScadCommand):
     """
     Rotational extrusion spins a 2D shape around the Z-axis to form a solid which has rotational symmetry. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#rotate_extrude.
@@ -31,7 +31,7 @@ class RotateExtrude(PrivateSingleChildScadCommand):
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         :param child: The 2D child object.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='rotate_extrude', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='rotate_extrude', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

@@ -1,10 +1,10 @@
 from typing import List
 
-from super_scad.private.PrivateMultiChildScadCommand import PrivateMultiChildScadCommand
+from super_scad.private.PrivateMultiChildOpenScadCommand import PrivateMultiChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 
 
-class Difference(PrivateMultiChildScadCommand):
+class Difference(PrivateMultiChildOpenScadCommand):
     """
     Subtracts the second (and all further) child nodes from the first one (logical and not).
     See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/CSG_Modelling#difference.
@@ -15,6 +15,6 @@ class Difference(PrivateMultiChildScadCommand):
         """
         Object constructor.
         """
-        PrivateMultiChildScadCommand.__init__(self, command='difference', args=locals(), children=children)
+        PrivateMultiChildOpenScadCommand.__init__(self, command='difference', args=locals(), children=children)
 
 # ----------------------------------------------------------------------------------------------------------------------

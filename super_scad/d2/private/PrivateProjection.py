@@ -1,8 +1,8 @@
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 
 
-class PrivateProjection(PrivateSingleChildScadCommand):
+class PrivateProjection(PrivateSingleChildOpenScadCommand):
 
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self, *, cut: bool, child: ScadObject) -> None:
@@ -12,6 +12,6 @@ class PrivateProjection(PrivateSingleChildScadCommand):
         :param cut: Whether to cut the 3D model at height 0.0.
         :param child: The child object.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='projection', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='projection', args=locals(), child=child)
 
 # ----------------------------------------------------------------------------------------------------------------------

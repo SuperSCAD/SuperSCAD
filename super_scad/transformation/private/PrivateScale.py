@@ -1,12 +1,12 @@
 from typing import Dict
 
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
 
 
-class PrivateScale(PrivateSingleChildScadCommand):
+class PrivateScale(PrivateSingleChildOpenScadCommand):
     """
     Scales its child objects using the specified vector. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#scale.
@@ -19,7 +19,7 @@ class PrivateScale(PrivateSingleChildScadCommand):
 
         :param factor: The scaling factor to apply.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='scale', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='scale', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

@@ -1,11 +1,11 @@
 from typing import List
 
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.type.Face3 import Face3
 from super_scad.type.Point3 import Point3
 
 
-class Polyhedron(PrivateScadCommand):
+class Polyhedron(PrivateOpenScadCommand):
     """
     Class for polyhedrons. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#polyhedron.
     """
@@ -29,7 +29,7 @@ class Polyhedron(PrivateScadCommand):
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child object.
         """
-        PrivateScadCommand.__init__(self, command='polyhedron', args=locals())
+        PrivateOpenScadCommand.__init__(self, command='polyhedron', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:

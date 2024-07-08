@@ -1,12 +1,12 @@
 from typing import Dict, Set
 
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
 
 
-class PrivateMirror(PrivateSingleChildScadCommand):
+class PrivateMirror(PrivateSingleChildOpenScadCommand):
     """
     Transforms the child object to a mirror of the original, as if it were the mirror image seen through a plane
     intersecting the origin. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#mirror.
@@ -21,7 +21,7 @@ class PrivateMirror(PrivateSingleChildScadCommand):
                         perpendicularly out of the plane. Each coordinate of the original object is altered such that
                         it becomes equidistant on the other side of this plane from the closest point on the plane.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='mirror', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='mirror', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

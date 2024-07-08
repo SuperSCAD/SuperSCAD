@@ -1,12 +1,12 @@
 from typing import Dict, Set, Tuple
 
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Size2 import Size2
 from super_scad.type.Size3 import Size3
 
 
-class PrivateResize(PrivateSingleChildScadCommand):
+class PrivateResize(PrivateSingleChildOpenScadCommand):
     """
     Modifies the size of the child object to match the given x and y. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#resize.
@@ -27,7 +27,7 @@ class PrivateResize(PrivateSingleChildScadCommand):
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child object.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='resize', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='resize', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

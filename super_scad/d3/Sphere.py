@@ -1,10 +1,10 @@
 from typing import Dict, Set
 
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 
 
-class Sphere(PrivateScadCommand):
+class Sphere(PrivateOpenScadCommand):
     """
     Class for spheres. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#sphere.
     """
@@ -26,7 +26,7 @@ class Sphere(PrivateScadCommand):
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
-        PrivateScadCommand.__init__(self, command='sphere', args=locals())
+        PrivateOpenScadCommand.__init__(self, command='sphere', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:

@@ -1,12 +1,12 @@
 from typing import Dict
 
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
 
 
-class PrivateRotate(PrivateSingleChildScadCommand):
+class PrivateRotate(PrivateSingleChildOpenScadCommand):
     """
     Rotates its child 'a' degrees about the axis of the coordinate system or around an arbitrary axis. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#rotate.
@@ -24,7 +24,7 @@ class PrivateRotate(PrivateSingleChildScadCommand):
         :param angle: The angle of the rotation.
         :param vector: The vector of the rotation.
         """
-        PrivateSingleChildScadCommand.__init__(self, command='rotate', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='rotate', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:

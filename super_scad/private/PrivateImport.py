@@ -2,13 +2,13 @@ from abc import ABC
 from pathlib import Path
 from typing import Dict
 
-from super_scad.private.PrivateScadCommand import PrivateScadCommand
+from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadObject import ScadObject
 
 
-class PrivateImport(PrivateScadCommand, ABC):
+class PrivateImport(PrivateOpenScadCommand, ABC):
     """
     Abstract parent class for Import2D and Import3D. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Importing_Geometry#import.
@@ -31,7 +31,7 @@ class PrivateImport(PrivateScadCommand, ABC):
         if isinstance(path, Path):
             path = str(path)
 
-        PrivateScadCommand.__init__(self, command='import', args=locals())
+        PrivateOpenScadCommand.__init__(self, command='import', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:

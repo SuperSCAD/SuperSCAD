@@ -1,10 +1,10 @@
 from typing import Dict, Set
 
-from super_scad.private.PrivateSingleChildScadCommand import PrivateSingleChildScadCommand
+from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadObject import ScadObject
 
 
-class Offset(PrivateSingleChildScadCommand):
+class Offset(PrivateSingleChildOpenScadCommand):
     """
     Offset generates a new 2d interior or exterior outline from an existing outline. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#offset.
@@ -38,7 +38,7 @@ class Offset(PrivateSingleChildScadCommand):
         else:
             chamfer = None
 
-        PrivateSingleChildScadCommand.__init__(self, command='offset', args=locals(), child=child)
+        PrivateSingleChildOpenScadCommand.__init__(self, command='offset', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
     def argument_map(self) -> Dict[str, str]:
