@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
+from super_scad.scad import Length
 from super_scad.scad.Context import Context
 from super_scad.scad.Unit import Unit
 from super_scad.type.Point2 import Point2
@@ -63,39 +64,19 @@ class ScadObject(ABC):
 
         :param length: The length.
         """
+        if Context.get_unit_length_current() == self.__unit:
+            if isinstance(length, int):
+                return float(length)
+            return length
+
         if length is None:
             return None
 
-        if isinstance(length, float) or isinstance(length, int):
-            unit_length_current = Context.get_unit_length_current()
-            match unit_length_current:
-                case Unit.MM:
-                    match self.__unit:
-                        case Unit.MM:
-                            return float(length)
+        if isinstance(length, float):
+            return Length.convert(length, self.__unit, Context.get_unit_length_current())
 
-                        case Unit.INCH:
-                            return 25.4 * length
-
-                        case _:
-                            raise ValueError('Can not convert unit {} to {}.'.format(self.__unit.name,
-                                                                                     unit_length_current.name))
-
-                case Unit.INCH:
-                    match self.__unit:
-                        case Unit.MM:
-                            return length / 25.4
-
-                        case Unit.INCH:
-                            return float(length)
-
-                        case _:
-                            raise ValueError('Can not convert unit {} to {}.'.format(self.__unit.name,
-                                                                                     unit_length_current.name))
-
-                case _:
-                    raise ValueError('Can not convert unit {} to {}.'.format(self.__unit.name,
-                                                                             unit_length_current.name))
+        if isinstance(length, int):
+            return Length.convert(float(length), self.__unit, Context.get_unit_length_current())
 
         if isinstance(length, Point2):
             return Point2(self.uc(length.x), self.uc(length.y))
