@@ -123,6 +123,8 @@
 
     <!-- Generates the documentation -->
     <target name="docs">
+        <exec command="sphinx-apidoc -o api --force --doc-project API --no-toc ../super_scad" dir="docs"
+              passthru="true" checkreturn="true"/>
         <exec command="make html" dir="docs" passthru="true" checkreturn="true"/>
     </target>
 
