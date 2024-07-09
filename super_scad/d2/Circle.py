@@ -2,6 +2,7 @@ from super_scad.d2.private.PrivateCircle import PrivateCircle
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.util.Radius2Sides4n import Radius2Sides4n
 
 
 class Circle(ScadWidget):
@@ -94,7 +95,7 @@ class Circle(ScadWidget):
         Returns the real fixed number of fragments in 360 degrees.
         """
         if self.fn4n:
-            return context.r2sides4n(self.radius)
+            return Radius2Sides4n.r2sides4n(self.radius, context)
 
         return self.fn
 

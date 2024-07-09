@@ -2,6 +2,7 @@ from super_scad.d3.private.PrivateCylinder import PrivateCylinder
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.util.Radius2Sides4n import Radius2Sides4n
 
 
 class Cone(ScadWidget):
@@ -138,7 +139,7 @@ class Cone(ScadWidget):
         Returns the real fixed number of fragments in 360 degrees.
         """
         if self.fn4n:
-            return context.r2sides4n(max(self.bottom_radius, self.top_radius))
+            return Radius2Sides4n.r2sides4n(max(self.bottom_radius, self.top_radius), context)
 
         return self.fn
 

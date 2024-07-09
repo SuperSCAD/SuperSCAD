@@ -1,5 +1,4 @@
 import inspect
-import math
 import os
 from pathlib import Path
 
@@ -122,27 +121,6 @@ class Context:
             return Path(os.path.relpath(absolute_path, self.target_path.parent))
 
         return absolute_path
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def __r2sides(self, radius: float) -> int:
-        """
-        Replicates the OpenSCAD logic to calculate the number of sides from the radius.
-
-        :param radius: The radius of the circle.
-        """
-        if self.fn > 0:
-            return self.fn
-
-        return int(math.ceil(max(min(360.0 / self.fa, radius * 2.0 * math.pi / self.fs), 5.0)))
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def r2sides4n(self, radius: float) -> int:
-        """
-        Rounds up the number of sides to a multiple of 4 to ensure points land on all axes.
-
-        :param radius: The radius of the circle.
-        """
-        return int(math.floor((self.__r2sides(radius) + 3) / 4) * 4)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
