@@ -8,18 +8,22 @@ from super_scad.type.Point3 import Point3
 
 class PrivateMirror(PrivateSingleChildOpenScadCommand):
     """
-    Transforms the child object to a mirror of the original, as if it were the mirror image seen through a plane
+    Transforms the child widget to a mirror of the original, as if it were the mirror image seen through a plane
     intersecting the origin. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#mirror.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, vector: Point2 | Point3, child: ScadWidget):
+    def __init__(self,
+                 *,
+                 vector: Point2 | Point3,
+                 child: ScadWidget):
         """
         Object constructor.
 
         :param vector:  The normal vector of the origin-intersecting mirror plane used, meaning the vector coming
-                        perpendicularly out of the plane. Each coordinate of the original object is altered such that
+                        perpendicularly out of the plane. Each coordinate of the original widget is altered such that
                         it becomes equidistant on the other side of this plane from the closest point on the plane.
+        :param child: The widget to be mirrored.
         """
         PrivateSingleChildOpenScadCommand.__init__(self, command='mirror', args=locals(), child=child)
 

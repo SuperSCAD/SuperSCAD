@@ -10,7 +10,7 @@ from super_scad.type.Size3 import Size3
 
 class Resize3D(ScadSingleChildParent):
     """
-    Modifies the size of the child object to match the given width, depth, and height. See
+    Modifies the size of the child widget to match the given width, depth, and height. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#resize.
     """
 
@@ -36,8 +36,8 @@ class Resize3D(ScadSingleChildParent):
         :param new_height: The new height size (the new size along the z-axis).
         :param auto: Whether to auto-scale any 0-dimensions to match.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
-        :param child: The child object to be resized.
+                          the child widget.
+        :param child: The child widget to be resized.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 

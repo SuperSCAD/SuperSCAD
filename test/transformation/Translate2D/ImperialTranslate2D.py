@@ -29,7 +29,7 @@ class ImperialTranslate2D(ScadWidget):
 
         self.child: ScadWidget = child
         """
-        The child object to be translated.
+        the child widget to be translated.
         """
 
     # ------------------------------------------------------------------------------------------------------------------

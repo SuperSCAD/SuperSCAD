@@ -27,7 +27,7 @@ class Polyhedron(PrivateOpenScadCommand):
                        enclose the solid, with no overlap. If points that describe a single face are not on the same
                        plane, the face is automatically split into triangles as needed.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
+                          the child widget.
         """
         PrivateOpenScadCommand.__init__(self, command='polyhedron', args=locals())
 

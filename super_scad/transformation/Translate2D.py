@@ -8,7 +8,7 @@ from super_scad.type.Point2 import Point2
 
 class Translate2D(ScadSingleChildParent):
     """
-    Translates (moves) its child object along the specified vector. See
+    Translates (moves) its child widget along the specified vector. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#translate.
     """
 
@@ -22,10 +22,10 @@ class Translate2D(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param vector: The vector over which the child object is translated.
-        :param x: The distance the child object is translated to along the x-axis.
-        :param y: The distance the child object is translated to along the y-axis.
-        :param child: The child object to be translated.
+        :param vector: The vector over which the child widget is translated.
+        :param x: The distance the child widget is translated to along the x-axis.
+        :param y: The distance the child widget is translated to along the y-axis.
+        :param child: The child widget to be translated.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
@@ -41,7 +41,7 @@ class Translate2D(ScadSingleChildParent):
     @property
     def vector(self) -> Point2:
         """
-        Returns the vector over which the child object is translated.
+        Returns the vector over which the child widget is translated.
         """
         return Point2(self.x, self.y)
 
@@ -49,7 +49,7 @@ class Translate2D(ScadSingleChildParent):
     @property
     def x(self) -> float:
         """
-        Returns distance the child object is translated to along the x-axis.
+        Returns distance the child widget is translated to along the x-axis.
         """
         if 'vector' in self._args:
             return self.uc(self._args['vector'].x)
@@ -60,7 +60,7 @@ class Translate2D(ScadSingleChildParent):
     @property
     def y(self) -> float:
         """
-        Returns distance the child object is translated to along the y-axis.
+        Returns distance the child widget is translated to along the y-axis.
         """
         if 'vector' in self._args:
             return self.uc(self._args['vector'].y)

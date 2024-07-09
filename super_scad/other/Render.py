@@ -19,7 +19,7 @@ class Render(PrivateSingleChildOpenScadCommand):
         Object constructor.
 
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
+                          the child widget.
         """
         PrivateSingleChildOpenScadCommand.__init__(self, command='render', args=locals(), child=child)
 

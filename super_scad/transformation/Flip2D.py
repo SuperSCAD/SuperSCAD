@@ -22,11 +22,11 @@ class Flip2D(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param horizontal: Whether to flip the child object horizontally (i.e. flip around the y-axis).
-        :param vertical: Whether to flip the child object vertically (i.e. flip around the x-axis).
-        :param flip_x: Whether to flip the child object around the x-asis (i.e. vertical flip).
-        :param flip_y: Whether to flip the child object around the y-asis (i.e. horizontal flip).
-        :param child: The child object to be flipped.
+        :param horizontal: Whether to flip the child widget horizontally (i.e. flip around the y-axis).
+        :param vertical: Whether to flip the child widget vertically (i.e. flip around the x-axis).
+        :param flip_x: Whether to flip the child widget around the x-asis (i.e. vertical flip).
+        :param flip_y: Whether to flip the child widget around the y-asis (i.e. horizontal flip).
+        :param child: The child widget to be flipped.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
@@ -42,7 +42,7 @@ class Flip2D(ScadSingleChildParent):
     @property
     def horizontal(self) -> bool:
         """
-        Returns whether to flip the child object horizontally (i.e. flip around the y-axis).
+        Returns whether to flip the child widget horizontally (i.e. flip around the y-axis).
         """
         return self._args.get('horizontal', False) or self._args.get('flip_y', False)
 
@@ -50,7 +50,7 @@ class Flip2D(ScadSingleChildParent):
     @property
     def vertical(self) -> bool:
         """
-        Returns whether to flip the child object vertically (i.e. flip around the x-axis).
+        Returns whether to flip the child widget vertically (i.e. flip around the x-axis).
         """
         return self._args.get('vertical', False) or self._args.get('flip_x', False)
 
@@ -58,7 +58,7 @@ class Flip2D(ScadSingleChildParent):
     @property
     def flip_x(self) -> bool:
         """
-        Returns whether to flip the child object around the x-asis (i.e. vertical flip).
+        Returns whether to flip the child widget around the x-asis (i.e. vertical flip).
         """
         return self.vertical
 
@@ -66,7 +66,7 @@ class Flip2D(ScadSingleChildParent):
     @property
     def flip_y(self) -> bool:
         """
-        Returns whether to flip the child object around the y-asis (i.e. horizontal flip).
+        Returns whether to flip the child widget around the y-asis (i.e. horizontal flip).
         """
         return self.horizontal
 

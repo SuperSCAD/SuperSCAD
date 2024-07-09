@@ -8,16 +8,20 @@ from super_scad.type.Point3 import Point3
 
 class PrivateTranslate(PrivateSingleChildOpenScadCommand):
     """
-    Translates (moves) its child objects along the specified vector. See
+    Translates (moves) its child widget along the specified vector. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#translate.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, vector: Point2 | Point3, child: ScadWidget):
+    def __init__(self,
+                 *,
+                 vector: Point2 | Point3,
+                 child: ScadWidget):
         """
         Object constructor.
 
-        :param vector: The vector over which the child object is translated.
+        :param vector: The vector over which the child node is translated.
+        :param child: The child widget to be translated.
         """
         PrivateSingleChildOpenScadCommand.__init__(self, command='translate', args=locals(), child=child)
 

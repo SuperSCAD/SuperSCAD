@@ -25,11 +25,11 @@ class RotateExtrude(PrivateSingleChildOpenScadCommand):
         :param angle: Specifies the number of degrees to sweep, starting at the positive X axis. The direction of the
                       sweep follows the Right Hand Rule, hence a negative angle sweeps clockwise.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
+                          the child widget.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
-        :param child: The 2D child object.
+        :param child: The 2D child widget.
         """
         PrivateSingleChildOpenScadCommand.__init__(self, command='rotate_extrude', args=locals(), child=child)
 

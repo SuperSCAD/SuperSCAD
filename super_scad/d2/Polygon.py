@@ -28,7 +28,7 @@ class Polygon(ScadWidget):
         :param secondary: The secondary path that will be subtracted form the polygon.
         :param secondaries: The secondary paths that will be subtracted form the polygon.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
+                          the child widget.
         """
         ScadWidget.__init__(self, args=locals())
 

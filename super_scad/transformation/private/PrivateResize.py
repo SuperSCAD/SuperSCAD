@@ -8,7 +8,7 @@ from super_scad.type.Size3 import Size3
 
 class PrivateResize(PrivateSingleChildOpenScadCommand):
     """
-    Modifies the size of the child object to match the given x and y. See
+    Modifies the size of the child widget to match the given x and y. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#resize.
     """
 
@@ -25,7 +25,8 @@ class PrivateResize(PrivateSingleChildOpenScadCommand):
         :param new_size: The new_size along all two axes.
         :param auto: Whether to auto-scale any 0-dimensions to match.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
+                          the child widget.
+        :param child: The widget to be resized.
         """
         PrivateSingleChildOpenScadCommand.__init__(self, command='resize', args=locals(), child=child)
 

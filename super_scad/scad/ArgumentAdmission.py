@@ -3,7 +3,7 @@ from typing import Any, List, Set
 
 class ArgumentAdmission:
     """
-    Class for validation arguments of a ScadObject constructor.
+    Class for validation arguments of a SupeSCAD widget constructor.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ class ArgumentAdmission:
         """
         self.__arguments_set: Set[str] = set(arguments.keys())
         """
-        A set with all the none empty arguments passed to the constructor of a ScadObject.
+        A set with all the none empty arguments passed to the constructor of a ScadWidget.
         """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ class ArgumentAdmission:
     def validate_exclusive(self, *args: Set[str]) -> None:
         """
         Validates that only arguments belonging to one of the given sets are passed to the constructor of the SuperScad
-        object.
+        widget.
         """
         supplied_sets = []
         for arg in args:

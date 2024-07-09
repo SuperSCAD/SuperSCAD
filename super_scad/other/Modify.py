@@ -23,15 +23,15 @@ class Modify(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param disable: Whether this child object is ignored.
-        :param show_only: Whether to ignore the rest of the design and use this child object as design root.
-        :param highlight: Whether this child object is used as usual in the rendering process but also draw it
+        :param disable: Whether the child widget is ignored.
+        :param show_only: Whether to ignore the rest of the design and use this child widget as design root.
+        :param highlight: Whether the child widget is used as usual in the rendering process but also draw it
                           unmodified in transparent pink.
         :param debug: Alias for highlight.
-        :param transparent: Whether this child object is used as usual in the rendering process but draw it in
+        :param transparent: Whether this child widget is used as usual in the rendering process but draw it in
                             transparent gray (all transformations are still applied to the nodes in this tree).
         :param background: Alias for transparent.
-        :param child: The child object.
+        :param child: The child widget.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 

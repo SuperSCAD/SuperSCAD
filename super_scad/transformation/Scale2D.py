@@ -8,7 +8,7 @@ from super_scad.type.Point2 import Point2
 
 class Scale2D(ScadSingleChildParent):
     """
-    Scales its child using a specified scaling factor.
+    Scales its child widget using a specified scaling factor.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ class Scale2D(ScadSingleChildParent):
         :param factor: The scaling factor along all two the axes.
         :param factor_x: The scaling factor along the x-axis.
         :param factor_y: The scaling factor along the y-axis.
-        :param child: The child of this object.
+        :param child: The child to be scaled.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 

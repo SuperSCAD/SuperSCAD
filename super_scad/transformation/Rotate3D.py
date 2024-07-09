@@ -29,6 +29,7 @@ class Rotate3D(ScadSingleChildParent):
         :param angle_y: The angle of rotation around the y-axis.
         :param angle_z: The angle of rotation around the z-axis.
         :param vector: The vector of rotation.
+        :param child: The widget to be rotated.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 

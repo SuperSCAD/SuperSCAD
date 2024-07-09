@@ -6,18 +6,21 @@ from super_scad.scad.ScadWidget import ScadWidget
 
 class Minkowski(PrivateMultiChildOpenScadCommand):
     """
-    Displays the minkowski sum of child nodes. See
+    Displays the minkowski sum of the child widgets. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#minkowski.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, convexity: int | None = None, children: List[ScadWidget]):
+    def __init__(self,
+                 *,
+                 convexity: int | None = None,
+                 children: List[ScadWidget]):
         """
         Object constructor.
 
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child objects.
-        :param children: The child objects.
+                          the child widgets.
+        :param children: The child widgets.
         """
         PrivateMultiChildOpenScadCommand.__init__(self, command='minkowski', args=locals(), children=children)
 

@@ -6,7 +6,7 @@ from super_scad.scad.ScadWidget import ScadWidget
 
 class Offset(PrivateSingleChildOpenScadCommand):
     """
-    Offset generates a new 2d interior or exterior outline from an existing outline. See
+    Offset generates a new 2D interior or exterior outline from an existing outline. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#offset.
     """
 
@@ -30,7 +30,7 @@ class Offset(PrivateSingleChildOpenScadCommand):
         :param chamfer: When using the delta parameter, this flag defines if edges should be chamfered (cut off with a
                         straight line) or not (extended to their intersection). This parameter has no effect on radial
                         offsets.
-        :param child: The child object.
+        :param child: The child widget.
         """
         if delta is not None:
             if chamfer is None:

@@ -8,7 +8,7 @@ from super_scad.type.Point3 import Point3
 
 class Mirror3D(ScadSingleChildParent):
     """
-    Transforms the child object to a mirror of the original, as if it were the mirror image seen through a plane
+    Transforms the child widget to a mirror of the original, as if it were the mirror image seen through a plane
     intersecting the origin. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#mirror.
     """
 
@@ -24,10 +24,11 @@ class Mirror3D(ScadSingleChildParent):
         Object constructor.
 
         :param vector:  The normal vector of the origin-intersecting mirror plane used, meaning the vector coming
-                        perpendicularly out of the plane. Each coordinate of the original object is altered such that
+                        perpendicularly out of the plane. Each coordinate of the original widget is altered such that
                         it becomes equidistant on the other side of this plane from the closest point on the plane.
         :param x:  The x-coordinate of the origin-intersecting mirror plane.
         :param y:  The y-coordinate of the origin-intersecting mirror plane.
+        :param child: The widget to be mirrored.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 

@@ -8,7 +8,7 @@ from super_scad.type.Point3 import Point3
 
 class Translate3D(ScadSingleChildParent):
     """
-    Translates (moves) its child object along the specified vector. See
+    Translates (moves) its child widget along the specified vector. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#translate.
     """
 
@@ -23,11 +23,11 @@ class Translate3D(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param vector: The vector over which the child object is translated.
-        :param x: The distance the child object is translated along the x-axis.
-        :param y: The distance the child object is translated along the y-axis.
-        :param z: The distance the child object is translated along the z-axis.
-        :param child: The child object to be translated.
+        :param vector: The vector over which the child widget is translated.
+        :param x: The distance the child widget is translated along the x-axis.
+        :param y: The distance the child widget is translated along the y-axis.
+        :param z: The distance the child widget is translated along the z-axis.
+        :param child: The child widget to be translated.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
@@ -43,7 +43,7 @@ class Translate3D(ScadSingleChildParent):
     @property
     def vector(self) -> Point3:
         """
-        Returns the vector over which the child object is translated.
+        Returns the vector over which the child widget is translated.
         """
         return Point3(self.x, self.y, self.z)
 
@@ -51,7 +51,7 @@ class Translate3D(ScadSingleChildParent):
     @property
     def x(self) -> float:
         """
-        Returns distance the child object is translated to along the x-axis.
+        Returns distance the child widget is translated to along the x-axis.
         """
         if 'vector' in self._args:
             return self.uc(self._args['vector'].x)
@@ -62,7 +62,7 @@ class Translate3D(ScadSingleChildParent):
     @property
     def y(self) -> float:
         """
-        Returns distance the child object is translated to along the y-axis.
+        Returns distance the child widget is translated to along the y-axis.
         """
         if 'vector' in self._args:
             return self.uc(self._args['vector'].y)
@@ -73,7 +73,7 @@ class Translate3D(ScadSingleChildParent):
     @property
     def z(self) -> float:
         """
-        Returns distance the child object is translated to along the z-axis.
+        Returns distance the child widget is translated to along the z-axis.
         """
         if 'vector' in self._args:
             return self.uc(self._args['vector'].z)

@@ -7,7 +7,7 @@ class ScadCodeStore:
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self):
         """
-        Object contructor.
+        Object constructor.
         """
         self.__lines: list[str] = list()
         """

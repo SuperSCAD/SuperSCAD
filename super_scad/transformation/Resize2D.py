@@ -10,7 +10,7 @@ from super_scad.type.Size2 import Size2
 
 class Resize2D(ScadSingleChildParent):
     """
-    Modifies the size of the child object to match the given width and depth. See
+    Modifies the size of the child widget to match the given width and depth. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#resize.
     """
 
@@ -33,8 +33,8 @@ class Resize2D(ScadSingleChildParent):
         :param new_depth: The new depth (the new size along the y-axis).
         :param auto: Whether to auto-scale any 0-dimensions to match.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
-        :param child: The child object to be resized.
+                          the child widget.
+        :param child: The child widget to be resized.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 

@@ -8,7 +8,7 @@ from super_scad.type.Color import Color
 
 class Paint(PrivateSingleChildOpenScadCommand):
     """
-    Displays a child object using a specified color and opacity. See
+    Paints a child widget using a specified color and opacity. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#color.
     """
 
@@ -20,8 +20,8 @@ class Paint(PrivateSingleChildOpenScadCommand):
         """
         Object constructor.
 
-        :param color: The color and opacity of the child object.
-        :param child: The child object to be painted.
+        :param color: The color and opacity of the child widget.
+        :param child: The child widget to be painted.
         """
         PrivateSingleChildOpenScadCommand.__init__(self, command='color', args=locals(), child=child)
 

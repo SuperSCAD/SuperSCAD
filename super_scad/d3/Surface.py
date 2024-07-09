@@ -29,7 +29,7 @@ class Surface(PrivateOpenScadCommand):
         :param invert: Whether to invert how the color values of imported images are translated into height values. This
                        has no effect when importing text data files.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
+                          the child widget.
         """
         if path is not None:
             path = str(path)
@@ -59,7 +59,7 @@ class Surface(PrivateOpenScadCommand):
     def convexity(self) -> int | None:
         """
         Returns the number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through the
-        child object.
+        child widget.
         """
         return self._args.get('convexity')
 

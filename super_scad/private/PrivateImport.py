@@ -25,7 +25,7 @@ class PrivateImport(PrivateOpenScadCommand, ABC):
 
         :param path: The absolute path or the relative path from the target script to the file that will be imported.
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child object.
+                          the child widget.
         :param layer: For DXF import only, specify a specific layer to import.
         """
         if isinstance(path, Path):

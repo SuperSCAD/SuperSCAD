@@ -19,7 +19,8 @@ class Rotate2D(ScadSingleChildParent):
         Object constructor.
 
         :param angle: The angle of rotation (around the z-axis).
-        :param child: The child object to be rotated (around the z-axis).
+        :param child: The child widget to be rotated (around the z-axis).
+        :param child: The widget to be rotated.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
