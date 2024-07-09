@@ -19,6 +19,6 @@ class MeterUnit(LengthUnit):
         """
         Returns one meter expressed in meters.
         """
-        return 1.0
+        return 1e0
 
 # ----------------------------------------------------------------------------------------------------------------------
