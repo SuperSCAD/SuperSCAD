@@ -24,7 +24,9 @@ classifiers = [
 python = "^3.10.0"
 
 [tool.poetry.group.dev.dependencies]
-coverage ="^7.5.4"
+coverage = "^7.5.4"
+sphinx = "^7.3.7"
+sphinx-rtd-theme = "^2.0.0"
 
 [build-system]
 requires = ["poetry-core"]
