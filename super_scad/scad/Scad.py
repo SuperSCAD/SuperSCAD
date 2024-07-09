@@ -44,15 +44,15 @@ class Scad:
         self.__project_home = project_home
 
     # ------------------------------------------------------------------------------------------------------------------
-    def run_super_scad(self, scad_object: ScadWidget, openscad_path: Path | str) -> None:
+    def run_super_scad(self, root_widget: ScadWidget, openscad_path: Path | str) -> None:
         """
         Runs SuperSCAD on a SuperSCAD widget and stores the generated OpenSCAD code.
 
-        :param scad_object: The SuperSCAD widget to build.
+        :param root_widget: The root SuperSCAD widget to build.
         :param openscad_path: The path to the file were to store the generated OpenSCAD code.
         """
         self.__run_super_scad_prepare(openscad_path)
-        self.__run_super_scad_walk_build_tree(scad_object)
+        self.__run_super_scad_walk_build_tree(root_widget)
         self.__run_super_scad_finalize()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -78,27 +78,29 @@ class Scad:
             handle.write(self.__context.code_store.get_code())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __run_super_scad_walk_build_tree(self, scad_object: ScadWidget) -> None:
+    def __run_super_scad_walk_build_tree(self, parent_widget: ScadWidget) -> None:
         """
-        Helper method for __run_super_scad. Runs recursively on the ScadObject and its children until it finds a
+        Helper method for __run_super_scad. Runs recursively on the SubSCAD widget and its children until it finds a
         widget for an OpenSCAD command. This OpenSCAD command is used to generate the OpenSCAD code.
+
+        :param parent_widget: The parent widget to build.
         """
         old_unit = Context.get_unit_length_current()
-        scad_object = scad_object.build(self.__context)
+        child_widget = parent_widget.build(self.__context)
         Context.set_unit_length_current(old_unit)
 
-        if isinstance(scad_object, PrivateOpenScadCommand):
-            self.__context.code_store.add_line('{}{}'.format(scad_object.command,
-                                                             scad_object.generate_args(self.__context)))
+        if isinstance(child_widget, PrivateOpenScadCommand):
+            self.__context.code_store.add_line('{}{}'.format(child_widget.command,
+                                                             child_widget.generate_args(self.__context)))
 
-            if isinstance(scad_object, PrivateSingleChildOpenScadCommand):
+            if isinstance(child_widget, PrivateSingleChildOpenScadCommand):
                 self.__context.code_store.add_line('{')
-                self.__run_super_scad_walk_build_tree(scad_object.child)
+                self.__run_super_scad_walk_build_tree(child_widget.child)
                 self.__context.code_store.add_line('}')
 
-            elif isinstance(scad_object, PrivateMultiChildOpenScadCommand):
+            elif isinstance(child_widget, PrivateMultiChildOpenScadCommand):
                 self.__context.code_store.add_line('{')
-                for child in scad_object.children:
+                for child in child_widget.children:
                     self.__run_super_scad_walk_build_tree(child)
                 self.__context.code_store.add_line('}')
 
@@ -106,6 +108,10 @@ class Scad:
                 self.__context.code_store.append_to_last_line(';')
 
         else:
-            self.__run_super_scad_walk_build_tree(scad_object)
+            if child_widget == parent_widget:
+                # Only OpenSCAD commands are allowed to build themselves.
+                ValueError(f'Widget {parent_widget.__class__} build itself.')
+
+            self.__run_super_scad_walk_build_tree(child_widget)
 
 # ----------------------------------------------------------------------------------------------------------------------
