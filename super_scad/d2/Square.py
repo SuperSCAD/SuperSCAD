@@ -1,12 +1,12 @@
 from super_scad.d2.private.PrivateSquare import PrivateSquare
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class Square(ScadObject):
+class Square(ScadWidget):
     """
-    Class for squares.
+    Widget for creating squares.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -20,12 +20,12 @@ class Square(ScadObject):
         :param size: The size of the square.
         :param center: Whether the square is centered at the origin.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_required({'size'}, {'center'})
@@ -47,9 +47,9 @@ class Square(ScadObject):
         return self._args['center']
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

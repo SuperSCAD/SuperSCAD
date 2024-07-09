@@ -3,13 +3,13 @@ from typing import List
 from super_scad.d2.private.PrivatePolygon import PrivatePolygon
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Point2 import Point2
 
 
-class Polygon(ScadObject):
+class Polygon(ScadWidget):
     """
-    Class for polygons. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#polygon.
+    Widget for creating polygons. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#polygon.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -30,12 +30,12 @@ class Polygon(ScadObject):
         :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
                           the child object.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'primary'}, {'points'})
@@ -77,9 +77,9 @@ class Polygon(ScadObject):
         return self._args.get('convexity')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

@@ -7,20 +7,20 @@ from super_scad.boolean.Intersection import Intersection
 from super_scad.d2.Polygon import Polygon
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Angle import Angle
 from super_scad.type.Point2 import Point2
 
 
-class PrivatePieSlice2D(ScadObject):
+class PrivatePieSlice2D(ScadWidget):
     """
-    Abstract parent class for 2D pie slices.
+    Abstract widget for creating 2D pie slices.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'angle'}, {'start_angle', 'end_angle'})
@@ -96,7 +96,7 @@ class PrivatePieSlice2D(ScadObject):
 
     # ------------------------------------------------------------------------------------------------------------------
     @abc.abstractmethod
-    def _create_circle(self, radius: float) -> ScadObject:
+    def _create_circle(self, radius: float) -> ScadWidget:
         """
         Creates a circle with given radius.
 
@@ -105,9 +105,9 @@ class PrivatePieSlice2D(ScadObject):
         raise NotImplementedError()
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

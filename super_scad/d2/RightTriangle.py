@@ -1,13 +1,13 @@
 from super_scad.d2.Polygon import Polygon
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Point2 import Point2
 
 
-class RightTriangle(ScadObject):
+class RightTriangle(ScadWidget):
     """
-    A class to represent a right triangle (a.k.a. right-angled triangle, orthogonal triangle, or rectangular triangle).
+    Widget for creating right triangles (a.k.a. right-angled triangle, orthogonal triangle, or rectangular triangle).
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -21,12 +21,12 @@ class RightTriangle(ScadObject):
         :param width: The width of the right triangle.
         :param depth: The depth of the right triangle.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_required({'width'}, {'depth'})
@@ -48,9 +48,9 @@ class RightTriangle(ScadObject):
         return self.uc(self._args['depth'])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

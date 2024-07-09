@@ -102,8 +102,7 @@ class Context:
     @target_path.setter
     def target_path(self, target_path: str) -> None:
         """
-        Set the
-        path to the OpenSCAD script that currently been generated.
+        Set the path to the OpenSCAD script that currently been generated.
         """
         self.__target_path = Path(os.path.realpath(target_path))
 
@@ -118,7 +117,7 @@ class Context:
         absolute_path = Path(caller.parent.joinpath(path).resolve())
 
         if os.path.commonprefix([absolute_path, self.__project_home]) == str(self.__project_home):
-            # works with python >=2.12 return absolute_path.relative_to(self.target_path.parent, walk_up=True)
+            # works with python >=3.12 return absolute_path.relative_to(self.target_path.parent, walk_up=True)
             return Path(os.path.relpath(absolute_path, self.target_path.parent))
 
         return absolute_path

@@ -2,10 +2,10 @@ from super_scad.d2.Circle4n import Circle4n
 from super_scad.d3.Cylinder import Cylinder
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class Cylinder4n(ScadObject):
+class Cylinder4n(ScadWidget):
     """
     Class for cylinders.
     """
@@ -25,12 +25,12 @@ class Cylinder4n(ScadObject):
         :param diameter: The diameter of the cylinder.
         :param center: Whether the cylinder is centered along the z-as.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius'}, {'diameter'})
@@ -71,9 +71,9 @@ class Cylinder4n(ScadObject):
         return self.uc(self._args['height'])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

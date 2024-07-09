@@ -1,11 +1,11 @@
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate2D import Translate2D
 from super_scad.type.Point2 import Point2
 
 
-class ImperialTranslate2D(ScadObject):
+class ImperialTranslate2D(ScadWidget):
     """
     Class for imperial translation.
     """
@@ -16,26 +16,26 @@ class ImperialTranslate2D(ScadObject):
                  vector: Point2 | None = None,
                  x: float | None = None,
                  y: float | None = None,
-                 child: ScadObject) -> None:
+                 child: ScadWidget) -> None:
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.imperial_translate: Translate2D | None = None
         """
         The imperial translation.
         """
 
-        self.child: ScadObject = child
+        self.child: ScadWidget = child
         """
         The child object to be translated.
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

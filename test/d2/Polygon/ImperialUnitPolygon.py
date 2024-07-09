@@ -1,11 +1,11 @@
 from super_scad.d2.Polygon import Polygon
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.type.Point2 import Point2
 
 
-class ImperialUnitPolygon(ScadObject):
+class ImperialUnitPolygon(ScadWidget):
     """
     Class for an imperial unit polygon.
     """
@@ -15,12 +15,12 @@ class ImperialUnitPolygon(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args={})
+        ScadWidget.__init__(self, args={})
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

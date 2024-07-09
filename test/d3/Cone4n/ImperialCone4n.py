@@ -1,11 +1,11 @@
 from super_scad.d3.Cone import Cone
 from super_scad.d3.Cone4n import Cone4n
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialCone4n(ScadObject):
+class ImperialCone4n(ScadWidget):
     """
     Class for imperial cones.
     """
@@ -20,7 +20,7 @@ class ImperialCone4n(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.imperial_cone: Cone | None = None
         """
@@ -28,9 +28,9 @@ class ImperialCone4n(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

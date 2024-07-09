@@ -2,7 +2,7 @@ from typing import Tuple
 
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.transformation.private.PrivateResize import PrivateResize
 from super_scad.type.Size3 import Size3
@@ -26,7 +26,7 @@ class Resize3D(ScadSingleChildParent):
                  auto_depth: bool | None = None,
                  auto_height: bool | None = None,
                  convexity: int | None = None,
-                 child: ScadObject) -> None:
+                 child: ScadWidget) -> None:
         """
         Object constructor.
 
@@ -44,7 +44,7 @@ class Resize3D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'new_size'}, {'new_width', 'new_depth', 'new_height'})
@@ -167,9 +167,9 @@ class Resize3D(ScadSingleChildParent):
         return self._args.get('convexity')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

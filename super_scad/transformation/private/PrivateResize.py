@@ -1,7 +1,7 @@
 from typing import Dict, Set, Tuple
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Size2 import Size2
 from super_scad.type.Size3 import Size3
 
@@ -18,7 +18,7 @@ class PrivateResize(PrivateSingleChildOpenScadCommand):
                  new_size: Size2 | Size3 | None = None,
                  auto: bool | Tuple[bool, bool] | Tuple[bool, bool, bool] = None,
                  convexity: int | None = None,
-                 child: ScadObject) -> None:
+                 child: ScadWidget) -> None:
         """
         Object constructor.
 

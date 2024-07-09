@@ -1,14 +1,14 @@
 from super_scad.d2.Circle import Circle
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Resize2D import Resize2D
 from super_scad.type.Size2 import Size2
 
 
-class Ellipse(ScadObject):
+class Ellipse(ScadWidget):
     """
-    Class for ellipsis.
+    Widget for creating ellipses.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -24,12 +24,12 @@ class Ellipse(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius_x'}, {'diameter_x'})
@@ -93,9 +93,9 @@ class Ellipse(ScadObject):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

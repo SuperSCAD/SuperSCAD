@@ -1,12 +1,12 @@
 from super_scad.d2.RightTriangle import RightTriangle
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialUnitRightTriangle(ScadObject):
+class ImperialUnitRightTriangle(ScadWidget):
     """
-    Class for an imperial unit rightTriangle.
+    Widget for creating an imperial unit rightTriangle.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ class ImperialUnitRightTriangle(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args={})
+        ScadWidget.__init__(self, args={})
 
         self.imperial_right_triangle: RightTriangle | None = None
         """
@@ -22,9 +22,9 @@ class ImperialUnitRightTriangle(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

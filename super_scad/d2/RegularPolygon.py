@@ -4,14 +4,14 @@ from typing import List
 from super_scad.d2.Polygon import Polygon
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.type.Point2 import Point2
 
 
-class RegularPolygon(ScadObject):
+class RegularPolygon(ScadWidget):
     """
-    Class for regular polygons.
+    Widget for creating regular polygons.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ class RegularPolygon(ScadObject):
         :param inner_radius: The inner radius (a.k.a. apothem) of the regular polygon.
         :param size: The length of a side of the regular polygon.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.__angles: List[float] = []
         """
@@ -51,7 +51,7 @@ class RegularPolygon(ScadObject):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'size'},
@@ -248,9 +248,9 @@ class RegularPolygon(ScadObject):
         return self.__nodes
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

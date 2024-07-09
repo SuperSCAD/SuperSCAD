@@ -2,7 +2,7 @@ from typing import Dict
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Color import Color
 
 
@@ -16,7 +16,7 @@ class Paint(PrivateSingleChildOpenScadCommand):
     def __init__(self,
                  *,
                  color: Color,
-                 child: ScadObject) -> None:
+                 child: ScadWidget) -> None:
         """
         Object constructor.
 
@@ -28,7 +28,7 @@ class Paint(PrivateSingleChildOpenScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'color'})

@@ -1,11 +1,11 @@
 from super_scad.d3.private.PrivateCube import PrivateCube
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Size3 import Size3
 
 
-class Cuboid(ScadObject):
+class Cuboid(ScadWidget):
     """
     Class for cuboids.
     """
@@ -27,12 +27,12 @@ class Cuboid(ScadObject):
         :param height: The height (the size along the y-axis) of the cuboid.
         :param center: Whether the cuboid is centered at the origin.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'size'}, {'width', 'depth', 'height'})
@@ -91,9 +91,9 @@ class Cuboid(ScadObject):
         return self.uc(self._args['height'])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

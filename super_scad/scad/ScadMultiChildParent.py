@@ -1,31 +1,31 @@
 from abc import ABC
 from typing import Any, Dict, List
 
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class ScadMultiChildParent(ScadObject, ABC):
+class ScadMultiChildParent(ScadWidget, ABC):
     """
-    Abstract parent class for SuperSCAD objects that have multiple children.
+    Abstract widget for creating SuperSCAD widgets that have multiple children.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, args: Dict[str, Any], children: List[ScadObject]):
+    def __init__(self, *, args: Dict[str, Any], children: List[ScadWidget]):
         """
         Object constructor.
 
-        :param children: The child SuperSCAD objects of this multi-child parent.
+        :param children: The child SuperSCAD widgets of this multi-child parent.
         """
-        ScadObject.__init__(self, args=args)
+        ScadWidget.__init__(self, args=args)
 
-        self.__children: List[ScadObject] = children
+        self.__children: List[ScadWidget] = children
         """
-        The child SuperSCAD objects of this multi-child parent.
+        The child OpenSCAD widgets of this multi-child parent.
         """
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def children(self) -> List[ScadObject]:
+    def children(self) -> List[ScadWidget]:
         """
         Returns the children of this multi-child parent.
         """

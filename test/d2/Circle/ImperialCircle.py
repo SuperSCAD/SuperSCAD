@@ -1,12 +1,12 @@
 from super_scad.d2.Circle import Circle
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialCircle(ScadObject):
+class ImperialCircle(ScadWidget):
     """
-    Class for imperial circles.
+    Widget for creating imperial circles.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ class ImperialCircle(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.imperial_circle: Circle | None = None
         """
@@ -27,9 +27,9 @@ class ImperialCircle(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

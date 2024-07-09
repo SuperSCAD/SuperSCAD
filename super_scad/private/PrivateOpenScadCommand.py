@@ -2,7 +2,7 @@ import re
 from typing import Any, Dict, List, Set, Tuple
 
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Color import Color
 from super_scad.type.Face3 import Face3
 from super_scad.type.Point2 import Point2
@@ -11,9 +11,9 @@ from super_scad.type.Size2 import Size2
 from super_scad.type.Size3 import Size3
 
 
-class PrivateOpenScadCommand(ScadObject):
+class PrivateOpenScadCommand(ScadWidget):
     """
-    Parent class for OpenSCAD commands.
+    Widget for creating OpenSCAD commands.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -24,7 +24,7 @@ class PrivateOpenScadCommand(ScadObject):
         :param command: The name of the OpenSCAD command.
         :param args: The arguments of the OpenSCAD command.
         """
-        ScadObject.__init__(self, args=args)
+        ScadWidget.__init__(self, args=args)
 
         self._command: str = command
         """
@@ -32,9 +32,9 @@ class PrivateOpenScadCommand(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

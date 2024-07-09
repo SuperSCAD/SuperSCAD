@@ -3,7 +3,7 @@ from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 
 class Text(PrivateOpenScadCommand):
     """
-    Class for texts. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Text.
+    Widget for creating texts. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Text.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

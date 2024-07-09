@@ -1,6 +1,6 @@
 from super_scad.d2.private.PrivateProjection import PrivateProjection
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.transformation.Translate3D import Translate3D
 
@@ -16,7 +16,7 @@ class Projection(ScadSingleChildParent):
                  *,
                  cut: bool = False,
                  z: float | None = None,
-                 child: ScadObject):
+                 child: ScadWidget):
         """
         Object constructor.
 
@@ -46,9 +46,9 @@ class Projection(ScadSingleChildParent):
         return self._args.get('z', 0.0)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

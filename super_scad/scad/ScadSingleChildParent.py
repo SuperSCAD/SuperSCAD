@@ -1,31 +1,31 @@
 from abc import ABC
 from typing import Any, Dict
 
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class ScadSingleChildParent(ScadObject, ABC):
+class ScadSingleChildParent(ScadWidget, ABC):
     """
-    Abstract parent class for SuperSCAD objects that have a single-child.
+    Abstract parent widget for SuperSCAD widgets that have a single-child.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, args: Dict[str, Any], child: ScadObject):
+    def __init__(self, args: Dict[str, Any], child: ScadWidget):
         """
         Object constructor.
 
-        :param child: The child SuperSCAD object of this single-child parent.
+        :param child: The child SuperSCAD widget of this single-child parent.
         """
-        ScadObject.__init__(self, args=args)
+        ScadWidget.__init__(self, args=args)
 
         self.__child = child
         """
-        The child SuperSCAD object of this single-child parent.
+        The child OpenSCAD widget of this single-child parent.
         """
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def child(self) -> ScadObject:
+    def child(self) -> ScadWidget:
         """
         Returns the child of this single-child parent.
         """

@@ -1,5 +1,5 @@
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.transformation.private.PrivateRotate import PrivateRotate
 from super_scad.type.Angle import Angle
@@ -14,7 +14,7 @@ class Rotate2D(ScadSingleChildParent):
     def __init__(self,
                  *,
                  angle: float | None = None,
-                 child: ScadObject) -> None:
+                 child: ScadWidget) -> None:
         """
         Object constructor.
 
@@ -32,9 +32,9 @@ class Rotate2D(ScadSingleChildParent):
         return Angle.normalize(self._args.get('angle', 0.0))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

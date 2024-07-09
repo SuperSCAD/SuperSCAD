@@ -2,10 +2,10 @@ from super_scad.d2.PieSlice2D4n import PieSlice2D4n
 from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class PieSlice3D4n(ScadObject):
+class PieSlice3D4n(ScadWidget):
     """
     Class for 3D pie slices.
     """
@@ -31,7 +31,7 @@ class PieSlice3D4n(ScadObject):
         :param inner_radius: The inner radius of the pie slice.
         :param outer_radius: The outer radius of the pie slice.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.__pie_slice2d: PieSlice2D4n = PieSlice2D4n(angle=angle,
                                                         start_angle=start_angle,
@@ -46,7 +46,7 @@ class PieSlice3D4n(ScadObject):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_required({'height'})
@@ -117,9 +117,9 @@ class PieSlice3D4n(ScadObject):
         return 1 if self.angle < 180.0 else 2
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

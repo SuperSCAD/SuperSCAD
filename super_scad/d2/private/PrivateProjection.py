@@ -1,11 +1,11 @@
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
 class PrivateProjection(PrivateSingleChildOpenScadCommand):
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, cut: bool, child: ScadObject) -> None:
+    def __init__(self, *, cut: bool, child: ScadWidget) -> None:
         """
         Object constructor.
 

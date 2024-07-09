@@ -1,12 +1,12 @@
 from super_scad.d3.Ellipsoid import Ellipsoid
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialEllipsoid(ScadObject):
+class ImperialEllipsoid(ScadWidget):
     """
-    Class for imperial ellipsoids.
+    Widget for creating imperial ellipsoids.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ class ImperialEllipsoid(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.imperial_ellipsoid: Ellipsoid | None = None
         """
@@ -31,9 +31,9 @@ class ImperialEllipsoid(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

@@ -1,12 +1,12 @@
 from super_scad.d3.private.PrivateCylinder import PrivateCylinder
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class Cylinder(ScadObject):
+class Cylinder(ScadWidget):
     """
-    Class for cylinders.
+    Widget for creating cylinders.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -30,12 +30,12 @@ class Cylinder(ScadObject):
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius'}, {'diameter'})
@@ -100,9 +100,9 @@ class Cylinder(ScadObject):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

@@ -1,13 +1,13 @@
 from super_scad.d2.private.PrivateSquare import PrivateSquare
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Size2 import Size2
 
 
-class Rectangle(ScadObject):
+class Rectangle(ScadWidget):
     """
-    Class for rectangles.
+    Widget for creating rectangles.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -25,12 +25,12 @@ class Rectangle(ScadObject):
         :param depth: The depth (the size along the y-axis) of the rectangle.
         :param center: Whether the rectangle is centered at the origin.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'size'}, {'width', 'depth'})
@@ -77,9 +77,9 @@ class Rectangle(ScadObject):
         return self._args['center']
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

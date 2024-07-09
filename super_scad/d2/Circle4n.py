@@ -3,12 +3,12 @@ import math
 from super_scad.d2.Circle import Circle
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class Circle4n(ScadObject):
+class Circle4n(ScadWidget):
     """
-    Class for circle. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#circle.
+    Widget for creating circles. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#circle.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -22,12 +22,12 @@ class Circle4n(ScadObject):
         :param radius: The radius of the circle.
         :param diameter: The diameter of the circle.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius'}, {'diameter'})
@@ -75,9 +75,9 @@ class Circle4n(ScadObject):
         return int(math.floor((Circle4n.r2sides(radius, context) + 3) / 4) * 4)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

@@ -1,6 +1,6 @@
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.transformation.private.PrivateTranslate import PrivateTranslate
 from super_scad.type.Point2 import Point2
@@ -18,7 +18,7 @@ class Translate2D(ScadSingleChildParent):
                  vector: Point2 | None = None,
                  x: float | None = None,
                  y: float | None = None,
-                 child: ScadObject):
+                 child: ScadWidget):
         """
         Object constructor.
 
@@ -32,7 +32,7 @@ class Translate2D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'vector'}, {'x', 'y'})
@@ -68,9 +68,9 @@ class Translate2D(ScadSingleChildParent):
         return self.uc(self._args.get('y', 0.0))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

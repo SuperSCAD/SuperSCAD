@@ -2,12 +2,12 @@ from super_scad.d2.PieSlice2D import PieSlice2D
 from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class PieSlice3D(ScadObject):
+class PieSlice3D(ScadWidget):
     """
-    Class for 3D pie slices.
+    Widget for creating 3D pie slices.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ class PieSlice3D(ScadObject):
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.__pie_slice2d: PieSlice2D = PieSlice2D(angle=angle,
                                                     start_angle=start_angle,
@@ -55,7 +55,7 @@ class PieSlice3D(ScadObject):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_required({'height'})
@@ -150,9 +150,9 @@ class PieSlice3D(ScadObject):
         return self.__pie_slice2d.fn
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

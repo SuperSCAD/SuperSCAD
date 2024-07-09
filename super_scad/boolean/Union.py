@@ -1,7 +1,7 @@
 from typing import List
 
 from super_scad.private.PrivateMultiChildOpenScadCommand import PrivateMultiChildOpenScadCommand
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
 class Union(PrivateMultiChildOpenScadCommand):
@@ -11,7 +11,7 @@ class Union(PrivateMultiChildOpenScadCommand):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, children: List[ScadObject]):
+    def __init__(self, *, children: List[ScadWidget]):
         """
         Object constructor.
         """

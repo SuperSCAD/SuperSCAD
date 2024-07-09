@@ -1,6 +1,6 @@
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.transformation.private.PrivateRotate import PrivateRotate
 from super_scad.type.Point3 import Point3
@@ -20,7 +20,7 @@ class Flip3D(ScadSingleChildParent):
                  flip_x: bool | None = None,
                  flip_y: bool | None = None,
                  flip_z: bool | None = None,
-                 child: ScadObject) -> None:
+                 child: ScadWidget) -> None:
         """
         Object constructor.
 
@@ -37,7 +37,7 @@ class Flip3D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'horizontal', 'vertical', 'both'}, {'flip_x', 'flip_y', 'flip_z'})
@@ -77,9 +77,9 @@ class Flip3D(ScadSingleChildParent):
         return self.horizontal
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

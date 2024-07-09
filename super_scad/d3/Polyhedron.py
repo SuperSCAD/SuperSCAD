@@ -7,7 +7,7 @@ from super_scad.type.Point3 import Point3
 
 class Polyhedron(PrivateOpenScadCommand):
     """
-    Class for polyhedrons. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#polyhedron.
+    Widget for creating polyhedrons. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#polyhedron.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

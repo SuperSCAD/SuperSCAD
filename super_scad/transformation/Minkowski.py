@@ -1,7 +1,7 @@
 from typing import List
 
 from super_scad.private.PrivateMultiChildOpenScadCommand import PrivateMultiChildOpenScadCommand
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
 class Minkowski(PrivateMultiChildOpenScadCommand):
@@ -11,7 +11,7 @@ class Minkowski(PrivateMultiChildOpenScadCommand):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, convexity: int | None = None, children: List[ScadObject]):
+    def __init__(self, *, convexity: int | None = None, children: List[ScadWidget]):
         """
         Object constructor.
 

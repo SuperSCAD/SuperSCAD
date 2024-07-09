@@ -2,12 +2,12 @@ from super_scad.d2.Circle4n import Circle4n
 from super_scad.d3.Sphere import Sphere
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Resize3D import Resize3D
 from super_scad.type.Size3 import Size3
 
 
-class Ellipsoid4n(ScadObject):
+class Ellipsoid4n(ScadWidget):
     """
     Class for ellipsoids.
     """
@@ -31,12 +31,12 @@ class Ellipsoid4n(ScadObject):
         :param diameter_y: The diameter of the ellipsoid in y-direction.
         :param diameter_z: The diameter of the ellipsoid in z-direction.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius_x'}, {'diameter_x'})
@@ -95,9 +95,9 @@ class Ellipsoid4n(ScadObject):
         return self.uc(self._args.get('diameter_z', 2.0 * self._args.get('radius_z', 0.0)))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

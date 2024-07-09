@@ -1,7 +1,7 @@
 from typing import Dict
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
 
@@ -17,7 +17,7 @@ class PrivateRotate(PrivateSingleChildOpenScadCommand):
                  *,
                  angle: float | Point2 | Point3,
                  vector: Point3 | None = None,
-                 child: ScadObject) -> None:
+                 child: ScadWidget) -> None:
         """
         Object constructor.
 

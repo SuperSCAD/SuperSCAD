@@ -7,7 +7,7 @@ from super_scad.d3.Cone import Cone
 from super_scad.d3.Cube import Cube
 from super_scad.d3.Cuboid import Cuboid
 from super_scad.scad.Scad import Scad
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Rotate3D import Rotate3D
 from super_scad.transformation.Translate3D import Translate3D
@@ -21,7 +21,7 @@ class ProjectionTest(ScadTestCase):
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def example002() -> ScadObject:
+    def example002() -> ScadWidget:
         """
         Returns the object from example002.
         """

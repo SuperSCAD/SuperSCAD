@@ -1,12 +1,12 @@
 from super_scad.d3.Cube import Cube
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialUnitCube(ScadObject):
+class ImperialUnitCube(ScadWidget):
     """
-    Class for an imperial unit cube.
+    Widget for creating an imperial unit cube.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ class ImperialUnitCube(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args={})
+        ScadWidget.__init__(self, args={})
 
         self.imperial_cube: Cube | None = None
         """
@@ -22,9 +22,9 @@ class ImperialUnitCube(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

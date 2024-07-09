@@ -6,7 +6,7 @@ from super_scad.type.Size2 import Size2
 
 class PrivateSquare(PrivateOpenScadCommand):
     """
-    Class for squares. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#square.
+    Widget for creating squares. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#square.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

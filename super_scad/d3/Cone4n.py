@@ -2,10 +2,10 @@ from super_scad.d2.Circle4n import Circle4n
 from super_scad.d3.Cone import Cone
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class Cone4n(ScadObject):
+class Cone4n(ScadWidget):
     """
     Class for cones. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cylinder.
     """
@@ -29,12 +29,12 @@ class Cone4n(ScadObject):
         :param bottom_diameter: The diameter at the bottom of the cone.
         :param center: Whether the cone is centered in the z-direction.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'bottom_radius'}, {'bottom_diameter'})
@@ -93,9 +93,9 @@ class Cone4n(ScadObject):
         return self.uc(self._args.get('height', 0.0))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

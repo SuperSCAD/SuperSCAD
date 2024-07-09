@@ -1,10 +1,10 @@
 from super_scad.d3.PieSlice3D4n import PieSlice3D4n
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialPieSlice3D4n(ScadObject):
+class ImperialPieSlice3D4n(ScadWidget):
     """
     Class for imperial pie slices.
     """
@@ -22,7 +22,7 @@ class ImperialPieSlice3D4n(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.imperial_pie_slice: PieSlice3D4n | None = None
         """
@@ -30,9 +30,9 @@ class ImperialPieSlice3D4n(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

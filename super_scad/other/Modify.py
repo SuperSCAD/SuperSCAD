@@ -1,6 +1,6 @@
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 
 
@@ -19,7 +19,7 @@ class Modify(ScadSingleChildParent):
                  debug: bool | None = None,
                  transparent: bool | None = None,
                  background: bool | None = None,
-                 child: ScadObject):
+                 child: ScadWidget):
         """
         Object constructor.
 
@@ -39,7 +39,7 @@ class Modify(ScadSingleChildParent):
     @property
     def disable(self) -> bool:
         """
-        Returns whether this SuperSCAD object is ignored.
+        Returns whether this SuperSCAD widget is ignored.
         """
         return self._args.get('disable', False)
 
@@ -47,7 +47,7 @@ class Modify(ScadSingleChildParent):
     @property
     def show_only(self) -> bool:
         """
-        Returns whether to ignore the rest of the design and use this SuperSCAD object as design root.
+        Returns whether to ignore the rest of the design and use this SuperSCAD widget as design root.
         """
         return self._args.get('show_only', False)
 
@@ -55,7 +55,7 @@ class Modify(ScadSingleChildParent):
     @property
     def highlight(self) -> bool:
         """
-        Returns whether this SuperSCAD object is used as usual in the rendering process but also draw it unmodified in
+        Returns whether this SuperSCAD widget is used as usual in the rendering process but also draw it unmodified in
         transparent pink.
         """
         return self._args.get('highlight', False) or self._args.get('debug', False)
@@ -64,15 +64,15 @@ class Modify(ScadSingleChildParent):
     @property
     def transparent(self) -> bool:
         """
-        Returns whether this SuperSCAD object is used as usual in the rendering process but draw it in transparent gray
+        Returns whether this SuperSCAD widget is used as usual in the rendering process but draw it in transparent gray
         (all transformations are still applied to the nodes in this tree).
         """
         return self._args.get('transparent', False) or self._args.get('background', False)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

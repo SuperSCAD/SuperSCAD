@@ -3,13 +3,13 @@ from super_scad.d2.Circle import Circle
 from super_scad.d2.Rectangle import Rectangle
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Translate2D import Translate2D
 
 
-class Semicircle(ScadObject):
+class Semicircle(ScadWidget):
     """
-    Class for semicircles.
+    Widget for creating semicircles.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -26,12 +26,12 @@ class Semicircle(ScadObject):
         :param radius: See `OpenSCAD circle documentation`_.
         :param diameter: See `OpenSCAD circle documentation`_.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius'}, {'diameter'})
@@ -78,9 +78,9 @@ class Semicircle(ScadObject):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

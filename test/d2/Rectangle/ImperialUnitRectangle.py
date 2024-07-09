@@ -1,12 +1,12 @@
 from super_scad.d2.Rectangle import Rectangle
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialUnitRectangle(ScadObject):
+class ImperialUnitRectangle(ScadWidget):
     """
-    Class for an imperial unit rectangle.
+    Widget for creating an imperial unit rectangle.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ class ImperialUnitRectangle(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args={})
+        ScadWidget.__init__(self, args={})
 
         self.imperial_rectangle: Rectangle | None = None
         """
@@ -22,9 +22,9 @@ class ImperialUnitRectangle(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

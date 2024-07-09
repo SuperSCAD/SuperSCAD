@@ -1,5 +1,5 @@
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
 class Render(PrivateSingleChildOpenScadCommand):
@@ -14,7 +14,7 @@ class Render(PrivateSingleChildOpenScadCommand):
     def __init__(self,
                  *,
                  convexity: int | None = None,
-                 child: ScadObject):
+                 child: ScadWidget):
         """
         Object constructor.
 

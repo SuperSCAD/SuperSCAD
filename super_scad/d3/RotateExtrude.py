@@ -1,7 +1,7 @@
 from typing import Dict, Set
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
 class RotateExtrude(PrivateSingleChildOpenScadCommand):
@@ -18,7 +18,7 @@ class RotateExtrude(PrivateSingleChildOpenScadCommand):
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
-                 child: ScadObject):
+                 child: ScadWidget):
         """
         Object constructor.
 

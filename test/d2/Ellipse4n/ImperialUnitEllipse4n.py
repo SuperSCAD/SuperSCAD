@@ -1,12 +1,12 @@
 from super_scad.d2.Ellipse4n import Ellipse4n
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialUnitEllipse4n(ScadObject):
+class ImperialUnitEllipse4n(ScadWidget):
     """
-    Class for an imperial unit ellipse4n.
+    Widget for creating an imperial unit ellipse4n.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ class ImperialUnitEllipse4n(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args={})
+        ScadWidget.__init__(self, args={})
 
         self.imperial_ellipse: Ellipse4n | None = None
         """
@@ -22,9 +22,9 @@ class ImperialUnitEllipse4n(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

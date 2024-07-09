@@ -5,7 +5,7 @@ from super_scad.private.PrivateMultiChildOpenScadCommand import PrivateMultiChil
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
@@ -44,11 +44,11 @@ class Scad:
         self.__project_home = project_home
 
     # ------------------------------------------------------------------------------------------------------------------
-    def run_super_scad(self, scad_object: ScadObject, openscad_path: Path | str) -> None:
+    def run_super_scad(self, scad_object: ScadWidget, openscad_path: Path | str) -> None:
         """
-        Runs SuperSCAD on a SuperSCAD object and stores the generated OpenSCAD code.
+        Runs SuperSCAD on a SuperSCAD widget and stores the generated OpenSCAD code.
 
-        :param scad_object: The SuperSCAD object to run.
+        :param scad_object: The SuperSCAD widget to build.
         :param openscad_path: The path to the file were to store the generated OpenSCAD code.
         """
         self.__run_super_scad_prepare(openscad_path)
@@ -78,10 +78,10 @@ class Scad:
             handle.write(self.__context.code_store.get_code())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __run_super_scad_walk_build_tree(self, scad_object: ScadObject) -> None:
+    def __run_super_scad_walk_build_tree(self, scad_object: ScadWidget) -> None:
         """
         Helper method for __run_super_scad. Runs recursively on the ScadObject and its children until it finds a
-        OpenSCAD command. This OpenSCAD command is used to generate the OpenSCAD code.
+        widget for an OpenSCAD command. This OpenSCAD command is used to generate the OpenSCAD code.
         """
         old_unit = Context.get_unit_length_current()
         scad_object = scad_object.build(self.__context)

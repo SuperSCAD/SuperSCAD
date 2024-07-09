@@ -1,10 +1,10 @@
 from super_scad.d2.Import2D import Import2D
 from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class Slot2D(ScadObject):
+class Slot2D(ScadWidget):
     """
     Extrudes Sample009.dxf.
     """
@@ -14,14 +14,14 @@ class Slot2D(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self)
+        ScadWidget.__init__(self)
 
         self.import2d: Import2D | None = None
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

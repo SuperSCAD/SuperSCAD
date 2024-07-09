@@ -1,12 +1,12 @@
 from super_scad.d3.private.PrivateCube import PrivateCube
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
-class Cube(ScadObject):
+class Cube(ScadWidget):
     """
-    Class for cubes. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cube.
+    Widget for creating cubes. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cube.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -20,12 +20,12 @@ class Cube(ScadObject):
         :param size: The size of the cube.
         :param center: Whether the cube is centered at the origin.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_required({'size'}, {'center'})
@@ -47,9 +47,9 @@ class Cube(ScadObject):
         return self.uc(self._args['size'])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

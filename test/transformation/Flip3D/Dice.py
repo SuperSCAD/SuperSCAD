@@ -4,14 +4,14 @@ from super_scad.boolean.Union import Union
 from super_scad.d3.Cube import Cube
 from super_scad.d3.Sphere import Sphere
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Translate3D import Translate3D
 from super_scad.type.Point3 import Point3
 
 
-class Dice(ScadObject):
+class Dice(ScadWidget):
     """
-    Class for a simple dice.
+    Widget for creating a simple dice.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -21,7 +21,7 @@ class Dice(ScadObject):
 
         :param size: The size of the dice.
         """
-        ScadObject.__init__(self)
+        ScadWidget.__init__(self)
 
         self.__size: float = size
         """
@@ -39,7 +39,7 @@ class Dice(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __build_body(self) -> ScadObject:
+    def __build_body(self) -> ScadWidget:
         """
         Build the body of the dice.
         """
@@ -75,7 +75,7 @@ class Dice(ScadObject):
                     j: int,
                     x: float | None = None,
                     y: float | None = None,
-                    z: float | None = None) -> ScadObject:
+                    z: float | None = None) -> ScadWidget:
         """
         Builds a single dot.
         """
@@ -83,14 +83,14 @@ class Dice(ScadObject):
                            child=Sphere(radius=self.__dot_size, fn=50))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __dots1(self) -> ScadObject:
+    def __dots1(self) -> ScadWidget:
         """
         Returns the dots for side 1.
         """
         return self.__build_dot(i=0, j=0, x=self.__size / 2.0)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __dots2(self) -> ScadObject:
+    def __dots2(self) -> ScadWidget:
         """
         Returns the dots for side 2.
         """
@@ -98,7 +98,7 @@ class Dice(ScadObject):
                                self.__build_dot(i=1, j=-1, y=self.__size / 2.0), ])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __dots3(self) -> ScadObject:
+    def __dots3(self) -> ScadWidget:
         """
         Returns the dots for side 3.
         """
@@ -107,7 +107,7 @@ class Dice(ScadObject):
                                self.__build_dot(i=1, j=-1, z=self.__size / 2.0), ])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __dots4(self) -> ScadObject:
+    def __dots4(self) -> ScadWidget:
         """
         Returns the dots for side 4.
         """
@@ -117,7 +117,7 @@ class Dice(ScadObject):
                                self.__build_dot(i=1, j=-1, z=-self.__size / 2.0)])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __dots5(self) -> ScadObject:
+    def __dots5(self) -> ScadWidget:
         """
         Returns the dots for side 5.
         """
@@ -128,7 +128,7 @@ class Dice(ScadObject):
                                self.__build_dot(i=1, j=-1, y=-self.__size / 2.0)])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __dots6(self) -> ScadObject:
+    def __dots6(self) -> ScadWidget:
         """
         Returns the dots for side 6.
         """
@@ -140,9 +140,9 @@ class Dice(ScadObject):
                                self.__build_dot(i=1, j=1, x=-self.__size / 2.0)])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

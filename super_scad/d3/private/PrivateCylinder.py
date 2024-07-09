@@ -6,7 +6,7 @@ from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 
 class PrivateCylinder(PrivateOpenScadCommand):
     """
-    Class for cylinders and cones. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cylinder.
+    Widget for creating cylinders and cones. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#cylinder.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ class PrivateCylinder(PrivateOpenScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius'}, {'diameter'})

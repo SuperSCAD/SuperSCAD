@@ -3,13 +3,13 @@ from super_scad.d2.Semicircle4n import Semicircle4n
 from super_scad.d3.RotateExtrude import RotateExtrude
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Rotate2D import Rotate2D
 
 
-class Sphere4n(ScadObject):
+class Sphere4n(ScadWidget):
     """
-    Class for spheres. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#sphere.
+    Widget for creating spheres. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#sphere.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -23,12 +23,12 @@ class Sphere4n(ScadObject):
         :param radius: The radius of the sphere.
         :param diameter: The diameter of the sphere.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius'}, {'diameter'})
@@ -51,9 +51,9 @@ class Sphere4n(ScadObject):
         return self.uc(self._args.get('diameter', 2.0 * self._args.get('radius', 0.0)))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

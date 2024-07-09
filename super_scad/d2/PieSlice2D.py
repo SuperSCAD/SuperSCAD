@@ -1,11 +1,11 @@
 from super_scad.d2.Circle import Circle
 from super_scad.d2.private.PrivatePieSlice2D import PrivatePieSlice2D
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
 class PieSlice2D(PrivatePieSlice2D):
     """
-    Class for 2D pie slices.
+    Widget for creating 2D pie slices.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ class PieSlice2D(PrivatePieSlice2D):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def _create_circle(self, radius: float) -> ScadObject:
+    def _create_circle(self, radius: float) -> ScadWidget:
         """
         Creates a circle with given radius.
 

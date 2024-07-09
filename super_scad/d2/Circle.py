@@ -6,7 +6,7 @@ from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 
 class Circle(PrivateOpenScadCommand):
     """
-    Class for circle. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#circle.
+    Widget for creating circles. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#circle.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ class Circle(PrivateOpenScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius'}, {'diameter'})

@@ -1,12 +1,12 @@
 from super_scad.d2.Circle import Circle
 from super_scad.d3.RotateExtrude import RotateExtrude
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate2D import Translate2D
 
 
-class ImperialUnitDonut(ScadObject):
+class ImperialUnitDonut(ScadWidget):
     """
     Extrudes an imperial donut.
     """
@@ -16,7 +16,7 @@ class ImperialUnitDonut(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.imperial_unit_donut: RotateExtrude | None = None
         """
@@ -24,9 +24,9 @@ class ImperialUnitDonut(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

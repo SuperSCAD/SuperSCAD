@@ -1,10 +1,10 @@
 from super_scad.d2.RegularPolygon import RegularPolygon
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialUnitPentagon(ScadObject):
+class ImperialUnitPentagon(ScadWidget):
     """
     Class for an imperial unit pentagon.
     """
@@ -14,7 +14,7 @@ class ImperialUnitPentagon(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args={})
+        ScadWidget.__init__(self, args={})
 
         self.imperial_pentagon: RegularPolygon | None = None
         """
@@ -22,9 +22,9 @@ class ImperialUnitPentagon(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

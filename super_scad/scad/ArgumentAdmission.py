@@ -11,7 +11,7 @@ class ArgumentAdmission:
         """
         Object constructor.
 
-        :param arguments: The arguments passed to the constructor of the SuperSCAD object.
+        :param arguments: The arguments passed to the constructor of the SuperSCAD widget.
         """
         self.__arguments_set: Set[str] = set(arguments.keys())
         """
@@ -60,7 +60,7 @@ class ArgumentAdmission:
     def validate_required(self, *args: Set[str]) -> None:
         """
         Validates that at least one argument belonging to each of the given sets are passed to the constructor of the
-        SuperScad object.
+        SuperSCAD widget.
         """
         for arg in args:
             supplied = set.intersection(self.__arguments_set, arg)

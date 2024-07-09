@@ -1,12 +1,12 @@
 from super_scad.d3.Sphere import Sphere
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialSphere(ScadObject):
+class ImperialSphere(ScadWidget):
     """
-    Class for imperial spheres.
+    Widget for creating imperial spheres.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ class ImperialSphere(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.imperial_sphere: Sphere | None = None
         """
@@ -27,9 +27,9 @@ class ImperialSphere(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

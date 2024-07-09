@@ -10,9 +10,9 @@ from super_scad.type.Size2 import Size2
 from super_scad.type.Size3 import Size3
 
 
-class ScadObject(ABC):
+class ScadWidget(ABC):
     """
-    Abstract parent class for OpenSCAD objects.
+    Abstract parent widget for all SuperSCAD widgets.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -22,12 +22,12 @@ class ScadObject(ABC):
         """
         self._args: Dict[str, Any] = {}
         """
-        The arguments of this SuperSCAD object.
+        The arguments of this OpenSCAD widget.
         """
 
         self.__unit: Unit = Context.get_unit_length_current()
         """
-        The unit of length of the Context of this SuperSCAD object.
+        The unit of length of the Context of this OpenSCAD widget.
         """
 
         if args is not None:
@@ -40,7 +40,7 @@ class ScadObject(ABC):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         pass
 
@@ -48,11 +48,11 @@ class ScadObject(ABC):
     @abstractmethod
     def build(self, context: Context):
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
 
-        :rtype: ScadObject
+        :rtype: ScadWidget
         """
         raise NotImplementedError()
 

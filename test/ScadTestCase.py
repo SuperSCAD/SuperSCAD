@@ -5,7 +5,7 @@ from pathlib import Path
 
 class ScadTestCase(unittest.TestCase):
     """
-    Parent class for SuperSCAD test cases.
+    Parent test case for SuperSCAD test cases.
     """
 
     # ------------------------------------------------------------------------------------------------------------------

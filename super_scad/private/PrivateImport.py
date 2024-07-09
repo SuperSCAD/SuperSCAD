@@ -5,12 +5,12 @@ from typing import Dict
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 
 
 class PrivateImport(PrivateOpenScadCommand, ABC):
     """
-    Abstract parent class for Import2D and Import3D. See
+    Abstract widget for Import2D and Import3D. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Importing_Geometry#import.
     """
 
@@ -36,7 +36,7 @@ class PrivateImport(PrivateOpenScadCommand, ABC):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_required({'path'})
@@ -77,9 +77,9 @@ class PrivateImport(PrivateOpenScadCommand, ABC):
         return Path(self._args['path'])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

@@ -1,6 +1,6 @@
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.transformation.private.PrivateScale import PrivateScale
 from super_scad.type.Point2 import Point2
@@ -17,7 +17,7 @@ class Scale2D(ScadSingleChildParent):
                  factor: Point2 | float | None = None,
                  factor_x: float | None = None,
                  factor_y: float | None = None,
-                 child: ScadObject):
+                 child: ScadWidget):
         """
         Object constructor.
 
@@ -31,7 +31,7 @@ class Scale2D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD object.
+        Validates the arguments supplied to the constructor of this SuperSCAD widget.
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'factor'}, {'factor_x', 'factor_y'})
@@ -73,9 +73,9 @@ class Scale2D(ScadSingleChildParent):
         return self._args.get('factor_y', 1.0)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

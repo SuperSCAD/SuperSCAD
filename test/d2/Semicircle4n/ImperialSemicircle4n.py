@@ -1,12 +1,12 @@
 from super_scad.d2.Semicircle4n import Semicircle4n
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 
 
-class ImperialSemicircle4n(ScadObject):
+class ImperialSemicircle4n(ScadWidget):
     """
-    Class for imperial semicircles.
+    Widget for creating imperial semicircles.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -16,7 +16,7 @@ class ImperialSemicircle4n(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
         self.imperial_semicircle4n: Semicircle4n | None = None
         """
@@ -24,9 +24,9 @@ class ImperialSemicircle4n(ScadObject):
         """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """

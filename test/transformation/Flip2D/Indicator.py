@@ -1,13 +1,13 @@
 from super_scad.d2.RightTriangle import RightTriangle
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadObject import ScadObject
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate2D import Translate2D
 
 
-class Indicator(ScadObject):
+class Indicator(ScadWidget):
     """
-    Class for an object with clear left/right and up/down indication.
+    Widget for an object with clear left/right and up/down indication.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -15,12 +15,12 @@ class Indicator(ScadObject):
         """
         Object constructor.
         """
-        ScadObject.__init__(self, args=locals())
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadObject:
+    def build(self, context: Context) -> ScadWidget:
         """
-        Builds a SuperSCAD object.
+        Builds a SuperSCAD widget.
 
         :param context: The build context.
         """
