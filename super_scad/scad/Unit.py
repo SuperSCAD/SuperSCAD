@@ -96,7 +96,7 @@ class Unit(Enum, boundary=STRICT):
 
     LIGHT_YEAR = auto()
     """
-    Light years. The distance that light travels in a vacuum in one Julian year. See
+    Light-years. The distance that light travels in a vacuum in one Julian year. See
     https://en.wikipedia.org/wiki/Light-year.
     """
 
