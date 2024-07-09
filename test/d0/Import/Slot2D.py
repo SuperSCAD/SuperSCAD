@@ -1,4 +1,4 @@
-from super_scad.d2.Import2D import Import2D
+from super_scad.d0.Import import Import
 from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
@@ -16,7 +16,7 @@ class Slot2D(ScadWidget):
         """
         ScadWidget.__init__(self)
 
-        self.import2d: Import2D | None = None
+        self.import2d: Import | None = None
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -25,9 +25,9 @@ class Slot2D(ScadWidget):
 
         :param context: The build context.
         """
-        self.import2d = Import2D(path=context.resolve_path('../../slot.dxf'),
-                                 convexity=10,
-                                 layer='Sketch')
+        self.import2d = Import(path=context.resolve_path('../../slot.dxf'),
+                               convexity=10,
+                               layer='Sketch')
 
         return LinearExtrude(height=5.0, center=True, convexity=10, child=self.import2d)
 

@@ -1,4 +1,3 @@
-from abc import ABC
 from pathlib import Path
 from typing import Dict
 
@@ -8,9 +7,9 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 
 
-class PrivateImport(PrivateOpenScadCommand, ABC):
+class Import(PrivateOpenScadCommand):
     """
-    Abstract widget for Import2D and Import3D. See
+    Widget for importing a file for use in the current OpenSCAD model. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Importing_Geometry#import.
     """
 
@@ -56,7 +55,7 @@ class PrivateImport(PrivateOpenScadCommand, ABC):
     def convexity(self) -> int | None:
         """
         Returns the number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through the
-        child object.
+        child widget.
         """
         return self._args.get('convexity')
 
@@ -64,7 +63,7 @@ class PrivateImport(PrivateOpenScadCommand, ABC):
     @property
     def layer(self) -> str | None:
         """
-        For DXF import only, return the specific layer to import.
+        For DXF import only, returns the specific layer to import.
         """
         return self._args.get('layer')
 
@@ -72,7 +71,7 @@ class PrivateImport(PrivateOpenScadCommand, ABC):
     @property
     def path(self) -> Path:
         """
-        Returns The absolute path or the relative path from the target script to the file that will be imported.
+        Returns the absolute path or the relative path from the target script to the file that will be imported.
         """
         return Path(self._args['path'])
 

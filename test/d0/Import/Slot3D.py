@@ -1,4 +1,4 @@
-from super_scad.d3.Import3D import Import3D
+from super_scad.d0.Import import Import
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Paint import Paint
@@ -17,7 +17,7 @@ class Slot3D(ScadWidget):
         """
         ScadWidget.__init__(self)
 
-        self.import3d: Import3D | None = None
+        self.import3d: Import | None = None
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -26,7 +26,7 @@ class Slot3D(ScadWidget):
 
         :param context: The build context.
         """
-        self.import3d = Import3D(path=context.resolve_path('../../slot.stl'), convexity=10)
+        self.import3d = Import(path=context.resolve_path('../../slot.stl'), convexity=10)
 
         return Paint(color=Color(color='Fuchsia'), child=self.import3d)
 
