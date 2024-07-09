@@ -5,8 +5,9 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class Point2:
     """
-    A point in 2D space.
+    A point in 2D space or a 2-dimensional vector.
     """
+    # ------------------------------------------------------------------------------------------------------------------
     x: float
     """
     The x-coordinate of this point.
@@ -36,6 +37,17 @@ class Point2:
     # ------------------------------------------------------------------------------------------------------------------
     def __mul__(self, other: float):
         return Point2(self.x * other, self.y * other)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def from_polar_coordinates(length: float, angle: float):
+        """
+        Creates a 2-dimensional vector from polar coordinates.
+
+        @param length: The length of the vector.
+        @param angle: The angle of the vector.
+        """
+        return Point2(length * math.cos(math.radians(angle)), length * math.sin(math.radians(angle)))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
