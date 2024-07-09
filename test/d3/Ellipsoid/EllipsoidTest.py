@@ -63,6 +63,33 @@ class EllipsoidTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def testEllipsoid4n(self):
+        """
+        Test for an ellipsoid with a multiple of 4 vertices.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        ellipsoid = Ellipsoid(radius_x=30.0, radius_y=20.0, radius_z=10.0, fn4n=True)
+
+        self.assertAlmostEqual(30.0, ellipsoid.radius_x)
+        self.assertAlmostEqual(20.0, ellipsoid.radius_y)
+        self.assertAlmostEqual(10.0, ellipsoid.radius_z)
+        self.assertAlmostEqual(60.0, ellipsoid.diameter_x)
+        self.assertAlmostEqual(40.0, ellipsoid.diameter_y)
+        self.assertAlmostEqual(20.0, ellipsoid.diameter_z)
+        self.assertIsNone(ellipsoid.fa)
+        self.assertIsNone(ellipsoid.fs)
+        self.assertIsNone(ellipsoid.fn)
+        self.assertTrue(ellipsoid.fn4n)
+
+        scad.run_super_scad(ellipsoid, path_actual)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def testEllipsoidAuxiliaryParameter(self):
         """
         Test auxiliary parameters.
@@ -81,6 +108,7 @@ class EllipsoidTestCase(ScadTestCase):
         self.assertAlmostEqual(12.0, ellipsoid.fa)
         self.assertAlmostEqual(2.0, ellipsoid.fs)
         self.assertEqual(0, ellipsoid.fn)
+        self.assertFalse(ellipsoid.fn4n)
 
         scad.run_super_scad(ellipsoid, path_actual)
 

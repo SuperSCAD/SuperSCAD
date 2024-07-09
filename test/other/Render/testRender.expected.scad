@@ -10,11 +10,11 @@ render(convexity = 2)
       }
       translate(v = [-10.0, -10.0, 40.0])
       {
-         sphere(r = 10.0);
+         sphere(d = 20.0);
       }
       translate(v = [-10.0, -10.0, -40.0])
       {
-         sphere(r = 10.0);
+         sphere(d = 20.0);
       }
    }
 }

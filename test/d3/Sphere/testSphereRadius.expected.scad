@@ -1,2 +1,2 @@
 // Unit of length: Unit.MM
-sphere(r = 2.0);
+sphere(d = 4.0);

@@ -20,9 +20,19 @@ class Ellipse(ScadWidget):
                  diameter_y: float | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
-                 fn: int | None = None):
+                 fn: int | None = None,
+                 fn4n: bool | None = None):
         """
         Object constructor.
+
+        param radius_x: The radius of the ellipsis along the x-axis.
+        param radius_y: The radius of the ellipsis along the y-axis.
+        :param diameter_x: The diameter of the ellipsis along the x-axis.
+        :param diameter_x: The diameter of the ellipsis along the y-axis.
+        :param fa: The minimum angle (in degrees) of each fragment.
+        :param fs: The minimum circumferential length of each fragment.
+        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        :param fn4n: Whether to create an ellipse with a multiple of 4 vertices.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -34,6 +44,7 @@ class Ellipse(ScadWidget):
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius_x'}, {'diameter_x'})
         admission.validate_exclusive({'radius_y'}, {'diameter_y'})
+        admission.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
         admission.validate_required({'radius_x', 'diameter_x'}, {'radius_y', 'diameter_y'})
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -93,6 +104,14 @@ class Ellipse(ScadWidget):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def fn4n(self) -> bool | None:
+        """
+        Returns whether to create a circle with multiple of 4 vertices.
+        """
+        return self._args.get('fn4n')
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
@@ -102,6 +121,6 @@ class Ellipse(ScadWidget):
         diameter: float = max(self.diameter_x, self.diameter_y)
 
         return Resize2D(new_size=Size2(self.diameter_x, self.diameter_y),
-                        child=Circle(diameter=diameter, fa=self.fa, fs=self.fs, fn=self.fn))
+                        child=Circle(diameter=diameter, fa=self.fa, fs=self.fs, fn=self.fn, fn4n=self.fn4n))
 
 # ----------------------------------------------------------------------------------------------------------------------

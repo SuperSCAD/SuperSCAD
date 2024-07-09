@@ -63,6 +63,30 @@ class ConeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def testCone4n(self):
+        """
+        Test for a cone with a multiple of 4 vertices.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        cone = Cone(height=10.0, bottom_radius=3.0, top_radius=2.0, fn4n=True)
+
+        self.assertAlmostEqual(10.0, cone.height)
+        self.assertAlmostEqual(2.0, cone.top_radius)
+        self.assertAlmostEqual(4.0, cone.top_diameter)
+        self.assertAlmostEqual(3.0, cone.bottom_radius)
+        self.assertAlmostEqual(6.0, cone.bottom_diameter)
+        self.assertIsNone(cone.fn)
+        self.assertTrue(cone.fn4n)
+
+        scad.run_super_scad(cone, path_actual)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def testConeAuxiliaryParameter(self):
         """
         Test auxiliary parameters.
@@ -81,6 +105,7 @@ class ConeTestCase(ScadTestCase):
         self.assertAlmostEqual(12.0, cone.fa)
         self.assertAlmostEqual(2.0, cone.fs)
         self.assertEqual(0, cone.fn)
+        self.assertFalse(cone.fn4n)
 
         scad.run_super_scad(cone, path_actual)
 

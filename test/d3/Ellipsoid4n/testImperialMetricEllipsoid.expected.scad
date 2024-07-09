@@ -1,5 +1,0 @@
-// Unit of length: Unit.MM
-resize(newsize = [1524.0, 1016.0, 508.0], auto = [false, false, false])
-{
-   sphere(d = 1524.0, $fn = 360);
-}

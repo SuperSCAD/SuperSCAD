@@ -1,7 +1,7 @@
 from super_scad.d2.private.PrivateProjection import PrivateProjection
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Translate3D import Translate3D
 
 

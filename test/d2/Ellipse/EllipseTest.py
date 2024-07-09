@@ -57,6 +57,30 @@ class EllipseTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def testEllipse4n(self):
+        """
+        Test a plain ellipse with a multiple of 4 vertices.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        ellipse = Ellipse(radius_x=20.0, radius_y=10.0, fn4n=True)
+
+        self.assertAlmostEqual(20.0, ellipse.radius_x)
+        self.assertAlmostEqual(10.0, ellipse.radius_y)
+        self.assertAlmostEqual(40.0, ellipse.diameter_x)
+        self.assertAlmostEqual(20.0, ellipse.diameter_y)
+        self.assertIsNone(ellipse.fa)
+        self.assertIsNone(ellipse.fs)
+        self.assertIsNone(ellipse.fn)
+        self.assertTrue(ellipse.fn4n)
+
+        scad.run_super_scad(ellipse, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def testCircleAuxiliaryParameter(self):
         """
         Test auxiliary parameters.
@@ -73,6 +97,7 @@ class EllipseTest(ScadTestCase):
         self.assertAlmostEqual(12.0, ellipse.fa)
         self.assertAlmostEqual(2.0, ellipse.fs)
         self.assertEqual(0, ellipse.fn)
+        self.assertFalse(ellipse.fn4n)
 
         scad.run_super_scad(ellipse, path_actual)
 

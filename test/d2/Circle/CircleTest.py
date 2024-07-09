@@ -66,6 +66,27 @@ class CircleTestCase(ScadTestCase):
         self.assertAlmostEqual(12.0, circle.fa)
         self.assertAlmostEqual(2.0, circle.fs)
         self.assertEqual(0, circle.fn)
+        self.assertFalse(circle.fn4n)
+
+        scad.run_super_scad(circle, path_actual)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testCircle4n(self):
+        """
+        Test a circle with a multiple of 4 vertices.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        circle = Circle(diameter=10.0, fn4n=True)
+
+        self.assertAlmostEqual(5.0, circle.radius)
+        self.assertAlmostEqual(10.0, circle.diameter)
+        self.assertTrue(circle.fn4n)
 
         scad.run_super_scad(circle, path_actual)
 

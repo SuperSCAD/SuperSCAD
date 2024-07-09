@@ -18,7 +18,8 @@ class Cylinder(ScadWidget):
                  center: bool = False,
                  fa: float | None = None,
                  fs: float | None = None,
-                 fn: int | None = None):
+                 fn: int | None = None,
+                 fn4n: bool | None = None):
         """
         Object constructor.
 
@@ -29,6 +30,7 @@ class Cylinder(ScadWidget):
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        :param fn4n: Whether to create a cylinder with a multiple of 4 vertices.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -39,6 +41,7 @@ class Cylinder(ScadWidget):
         """
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'radius'}, {'diameter'})
+        admission.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
         admission.validate_required({'height'},
                                     {'radius', 'diameter'},
                                     {'center'})
@@ -100,17 +103,36 @@ class Cylinder(ScadWidget):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def fn4n(self) -> bool | None:
+        """
+        Returns whether to create a circle with multiple of 4 vertices.
+        """
+        return self._args.get('fn4n')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def real_fn(self, context: Context) -> int | None:
+        """
+        Returns the real fixed number of fragments in 360 degrees.
+        """
+        if self.fn4n:
+            return context.r2sides4n(self.radius)
+
+        return self.fn
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
 
         :param context: The build context.
         """
+
         return PrivateCylinder(height=self.height,
                                diameter=self.diameter,
                                center=self.center,
                                fa=self.fa,
                                fs=self.fs,
-                               fn=self.fn)
+                               fn=self.real_fn(context))
 
 # ----------------------------------------------------------------------------------------------------------------------

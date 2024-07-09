@@ -20,7 +20,8 @@ class Cone(ScadWidget):
                  center: bool = False,
                  fa: float | None = None,
                  fs: float | None = None,
-                 fn: int | None = None):
+                 fn: int | None = None,
+                 fn4n: bool | None = None):
         """
         Object constructor.
 
@@ -33,6 +34,7 @@ class Cone(ScadWidget):
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        :param fn4n: Whether to create a cone with a multiple of 4 vertices.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -44,6 +46,7 @@ class Cone(ScadWidget):
         admission = ArgumentAdmission(self._args)
         admission.validate_exclusive({'bottom_radius'}, {'bottom_diameter'})
         admission.validate_exclusive({'top_radius'}, {'top_diameter'})
+        admission.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
         admission.validate_required({'height'},
                                     {'bottom_radius', 'bottom_diameter'},
                                     {'top_radius', 'top_diameter'},
@@ -122,6 +125,24 @@ class Cone(ScadWidget):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def fn4n(self) -> bool | None:
+        """
+        Returns whether to create a circle with multiple of 4 vertices.
+        """
+        return self._args.get('fn4n')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def real_fn(self, context: Context) -> int | None:
+        """
+        Returns the real fixed number of fragments in 360 degrees.
+        """
+        if self.fn4n:
+            return context.r2sides4n(max(self.bottom_radius, self.top_radius))
+
+        return self.fn
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
@@ -134,6 +155,6 @@ class Cone(ScadWidget):
                                center=self.center,
                                fa=self.fa,
                                fs=self.fs,
-                               fn=self.fn)
+                               fn=self.real_fn(context))
 
 # ----------------------------------------------------------------------------------------------------------------------

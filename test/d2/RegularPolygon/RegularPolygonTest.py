@@ -3,7 +3,7 @@ import math
 from d2.RegularPolygon.ImperialUnitPentagon import ImperialUnitPentagon
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
-from super_scad.d2.Circle4n import Circle4n
+from super_scad.d2.Circle import Circle
 from super_scad.d2.RegularPolygon import RegularPolygon
 from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
@@ -122,9 +122,10 @@ class RegularPolygonTestCase(ScadTestCase):
         self.assertAlmostEqual(306.0, angles[3])
         self.assertAlmostEqual(378.0, angles[4])
 
-        union = Union(children=[Paint(color=Color(color='blue'), child=Circle4n(radius=polygon.outer_radius)),
+        union = Union(children=[Paint(color=Color(color='blue'), child=Circle(radius=polygon.outer_radius, fn4n=True)),
                                 Paint(color=Color(color='red'), child=polygon),
-                                Paint(color=Color(color='green'), child=Circle4n(radius=polygon.inner_radius))])
+                                Paint(color=Color(color='green'),
+                                      child=Circle(radius=polygon.inner_radius, fn4n=True))])
 
         scad.run_super_scad(union, path_actual)
         actual = path_actual.read_text()
@@ -156,9 +157,10 @@ class RegularPolygonTestCase(ScadTestCase):
         self.assertAlmostEqual(306.0, angles[3])
         self.assertAlmostEqual(378.0, angles[4])
 
-        union = Union(children=[Paint(color=Color(color='blue'), child=Circle4n(radius=polygon.outer_radius)),
+        union = Union(children=[Paint(color=Color(color='blue'), child=Circle(radius=polygon.outer_radius, fn4n=True)),
                                 Paint(color=Color(color='red'), child=polygon),
-                                Paint(color=Color(color='green'), child=Circle4n(radius=polygon.inner_radius))])
+                                Paint(color=Color(color='green'),
+                                      child=Circle(radius=polygon.inner_radius, fn4n=True))])
 
         scad.run_super_scad(union, path_actual)
         actual = path_actual.read_text()

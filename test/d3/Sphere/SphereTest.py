@@ -52,6 +52,27 @@ class SphereTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def testSphere4n(self):
+        """
+        Test for a sphere with a multiple of 4 vertices.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        sphere = Sphere(radius=2.0, fn4n=True)
+
+        self.assertAlmostEqual(2.0, sphere.radius)
+        self.assertAlmostEqual(4.0, sphere.diameter)
+        self.assertIsNone(sphere.fn)
+        self.assertTrue(sphere.fn4n)
+
+        scad.run_super_scad(sphere, path_actual)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def testSphereAuxiliaryParameter(self):
         """
         Test auxiliary parameters.
@@ -66,6 +87,7 @@ class SphereTestCase(ScadTestCase):
         self.assertAlmostEqual(12.0, sphere.fa)
         self.assertAlmostEqual(2.0, sphere.fs)
         self.assertEqual(0, sphere.fn)
+        self.assertFalse(sphere.fn4n)
 
         scad.run_super_scad(sphere, path_actual)
 

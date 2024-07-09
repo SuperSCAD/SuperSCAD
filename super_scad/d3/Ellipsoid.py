@@ -22,7 +22,8 @@ class Ellipsoid(ScadWidget):
                  diameter_z: float | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
-                 fn: int | None = None):
+                 fn: int | None = None,
+                 fn4n: bool | None = None):
         """
         Object constructor.
 
@@ -35,6 +36,7 @@ class Ellipsoid(ScadWidget):
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        :param fn4n: Whether to create a circle with a ellipsoid of 4 vertices.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -47,6 +49,7 @@ class Ellipsoid(ScadWidget):
         admission.validate_exclusive({'radius_x'}, {'diameter_x'})
         admission.validate_exclusive({'radius_y'}, {'diameter_y'})
         admission.validate_exclusive({'radius_z'}, {'diameter_z'})
+        admission.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
         admission.validate_required({'radius_x', 'diameter_x'},
                                     {'radius_y', 'diameter_y'},
                                     {'radius_z', 'diameter_z'})
@@ -124,6 +127,24 @@ class Ellipsoid(ScadWidget):
         return self._args.get('fn')
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def fn4n(self) -> bool | None:
+        """
+        Returns whether to create a circle with multiple of 4 vertices.
+        """
+        return self._args.get('fn4n')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def real_fn(self, context: Context) -> int | None:
+        """
+        Returns the real fixed number of fragments in 360 degrees.
+        """
+        if self.fn4n:
+            return context.r2sides4n(max(self.radius_x, self.radius_y, self.radius_z))
+
+        return self.fn
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
@@ -133,6 +154,6 @@ class Ellipsoid(ScadWidget):
         diameter: float = max(self.diameter_x, self.diameter_y, self.diameter_z)
 
         return Resize3D(new_size=Size3(self.diameter_x, self.diameter_y, self.diameter_z),
-                        child=Sphere(diameter=diameter, fa=self.fa, fs=self.fs, fn=self.fn))
+                        child=Sphere(diameter=diameter, fa=self.fa, fs=self.fs, fn=self.real_fn(context)))
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -7,7 +7,7 @@ union()
       {
          translate(v = [40.0, 0.0])
          {
-            circle(r = 10.0);
+            circle(d = 20.0);
          }
       }
    }
@@ -15,7 +15,7 @@ union()
    {
       translate(v = [20.0, 0.0])
       {
-         circle(r = 10.0);
+         circle(d = 20.0);
       }
    }
    translate(v = [20.0, 0.01])

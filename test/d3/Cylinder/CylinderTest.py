@@ -59,6 +59,29 @@ class CylinderTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def testCylinder4n(self):
+        """
+        Test for a cylinder with a multiple of 4 vertices.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        cylinder = Cylinder(height=10.0, radius=2.0, fn4n=True)
+
+        self.assertAlmostEqual(10.0, cylinder.height)
+        self.assertAlmostEqual(2.0, cylinder.radius)
+        self.assertAlmostEqual(4.0, cylinder.diameter)
+        self.assertFalse(cylinder.center)
+        self.assertIsNone(cylinder.fn)
+        self.assertTrue(cylinder.fn4n)
+
+        scad.run_super_scad(cylinder, path_actual)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def testCylinderAuxiliaryParameter(self):
         """
         Test auxiliary parameters.
@@ -75,6 +98,7 @@ class CylinderTestCase(ScadTestCase):
         self.assertAlmostEqual(12.0, cylinder.fa)
         self.assertAlmostEqual(2.0, cylinder.fs)
         self.assertEqual(0, cylinder.fn)
+        self.assertFalse(cylinder.fn4n)
 
         scad.run_super_scad(cylinder, path_actual)
 
