@@ -2,8 +2,8 @@ from typing import Tuple
 
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateResize import PrivateResize
 from super_scad.type.Size2 import Size2
 

@@ -1,7 +1,7 @@
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
+from super_scad.scad.ScadWidget import ScadWidget
 
 
 class Modify(ScadSingleChildParent):

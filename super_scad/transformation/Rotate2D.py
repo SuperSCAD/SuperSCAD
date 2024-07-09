@@ -1,6 +1,6 @@
 from super_scad.scad.Context import Context
-from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
+from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateRotate import PrivateRotate
 from super_scad.type.Angle import Angle
 
