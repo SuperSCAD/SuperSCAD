@@ -23,6 +23,8 @@ class ScadSingleChildParent(ScadWidget, ABC):
         The child OpenSCAD widget of this single-child parent.
         """
 
+        assert isinstance(child, ScadWidget), f"Child is of type: {child.__class__}"
+
     # ------------------------------------------------------------------------------------------------------------------
     @property
     def child(self) -> ScadWidget:

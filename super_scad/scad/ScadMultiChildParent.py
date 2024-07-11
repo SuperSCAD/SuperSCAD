@@ -23,6 +23,9 @@ class ScadMultiChildParent(ScadWidget, ABC):
         The child OpenSCAD widgets of this multi-child parent.
         """
 
+        for key, child in enumerate(self.children):
+            assert isinstance(child, ScadWidget), f"Child {key} is of type: {child.__class__}"
+
     # ------------------------------------------------------------------------------------------------------------------
     @property
     def children(self) -> List[ScadWidget]:
