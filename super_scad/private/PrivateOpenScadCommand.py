@@ -4,7 +4,6 @@ from typing import Any, Dict, List, Set, Tuple
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Color import Color
-from super_scad.type.Face3 import Face3
 from super_scad.type.Point2 import Point2
 from super_scad.type.Point3 import Point3
 from super_scad.type.Size2 import Size2
@@ -124,9 +123,6 @@ class PrivateOpenScadCommand(ScadWidget):
             return "[{}, {}, {}]".format(self.__format_argument(context, float(argument.width)),
                                          self.__format_argument(context, float(argument.depth)),
                                          self.__format_argument(context, float(argument.height)))
-
-        if isinstance(argument, Face3):
-            return "[{}]".format(', '.join(str(point) for point in argument.points))
 
         if isinstance(argument, bool):
             return str(argument).lower()

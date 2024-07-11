@@ -74,9 +74,9 @@ class Context:
         The unit of length.
         """
 
-        self.__round_length = 4
+        self.__length_digits = 4
         """
-        The number of decimal places in a length.
+        The number of decimal places of a length in the generated OpenSCAD code.
         """
 
         Context.set_unit_length_current(unit_length_final)
@@ -105,6 +105,14 @@ class Context:
         Set the path to the OpenSCAD script that currently been generated.
         """
         self.__target_path = Path(os.path.realpath(target_path))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def length_digits(self) -> int:
+        """
+        Returns the number of decimal places of a length in the generated OpenSCAD code.
+        """
+        return self.__length_digits
 
     # ------------------------------------------------------------------------------------------------------------------
     def resolve_path(self, path: Path | str) -> Path:
@@ -144,7 +152,7 @@ class Context:
         """
         Returns the resolution of lengths in generated OpenSCAD code.
         """
-        return 10 ** -self.__round_length
+        return 10 ** -self.__length_digits
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -214,6 +222,6 @@ class Context:
 
         :param length: The length.
         """
-        return str(round(float(length), self.__round_length))
+        return str(round(float(length), self.__length_digits))
 
 # ----------------------------------------------------------------------------------------------------------------------
