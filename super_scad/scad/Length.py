@@ -16,6 +16,7 @@ from super_scad.scad.unit.MicrometerUnit import MicrometerUnit
 from super_scad.scad.unit.MileUnit import MileUnit
 from super_scad.scad.unit.MillimeterUnit import MillimeterUnit
 from super_scad.scad.unit.ParsecUnit import ParsecUnit
+from super_scad.scad.unit.RoyalCubitUnit import RoyalCubitUnit
 from super_scad.scad.unit.ThouUnit import ThouUnit
 from super_scad.scad.unit.YardUnit import YardUnit
 
@@ -45,6 +46,7 @@ class Length:
                      MileUnit,
                      MillimeterUnit,
                      ParsecUnit,
+                     RoyalCubitUnit,
                      ThouUnit,
                      YardUnit]
     """

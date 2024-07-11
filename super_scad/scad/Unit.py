@@ -82,6 +82,14 @@ class Unit(Enum, boundary=STRICT):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
+    # Ancient Egyptian units.
+
+    ROYAL_CUBIT = auto()
+    """
+    Royal cubit. See https://en.wikipedia.org/wiki/Cubit#Ancient_Egyptian_royal_cubit.
+    """
+
+    # ------------------------------------------------------------------------------------------------------------------
     # Pysics units.
 
     ANGSTROM = auto()
