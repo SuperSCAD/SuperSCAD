@@ -173,7 +173,7 @@ class Color:
         'zinc':                 (186 / 255, 196 / 255, 200 / 255)}
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, color: any = None, alpha: float | None = None):
+    def __init__(self, color: any = None, *, alpha: float | None = None):
         """
         Object constructor.
 
@@ -191,7 +191,7 @@ class Color:
         - #rrggbb
         - #rrggbbaa
         - color name
-        - Color(color=...)
+        - Color(...)
         For example, the following values result in the same color:
         - (119, 136, 153)
         - [119, 136, 153]
@@ -213,7 +213,7 @@ class Color:
         - 'LightSlateGrey'
         - 'LIGHTSLATEGRAY'
         - 'LIGHTSLATEGREY'
-        - Color(color='#778899FF')
+        - Color('#778899FF')
         :param alpha: The transparency of the color between 0.0 fully (transparent) and 1.0 (opaque). If the alpha
         value is given in both the color parameter and in the alpha parameter, the alpha parameter takes
         precedence.
@@ -329,7 +329,7 @@ class Color:
 
     # ------------------------------------------------------------------------------------------------------------------
     def __mul__(self, factor: float):
-        return Color(color=(self.__red * factor, self.__green * factor, self.__blue * factor, self.__alpha))
+        return Color((self.__red * factor, self.__green * factor, self.__blue * factor, self.__alpha))
 
     # ------------------------------------------------------------------------------------------------------------------
     def __repr__(self):
@@ -340,7 +340,7 @@ class Color:
 
     # ------------------------------------------------------------------------------------------------------------------
     def __truediv__(self, fraction: float):
-        return Color(color=(self.__red / fraction, self.__green / fraction, self.__blue / fraction, self.__alpha))
+        return Color((self.__red / fraction, self.__green / fraction, self.__blue / fraction, self.__alpha))
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod

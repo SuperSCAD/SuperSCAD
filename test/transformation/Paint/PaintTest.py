@@ -19,7 +19,7 @@ class PaintTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit_length_final=Unit.MM)
-        paint = Paint(color=Color(color='fuchsia'), child=Sphere(radius=10.0))
+        paint = Paint(color=Color('fuchsia'), child=Sphere(radius=10.0))
 
         scad.run_super_scad(paint, path_actual)
         actual = path_actual.read_text()

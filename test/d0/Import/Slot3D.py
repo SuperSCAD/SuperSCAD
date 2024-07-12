@@ -28,6 +28,6 @@ class Slot3D(ScadWidget):
         """
         self.import3d = Import(path=context.resolve_path('../../slot.stl'), convexity=10)
 
-        return Paint(color=Color(color='Fuchsia'), child=self.import3d)
+        return Paint(color=Color('Fuchsia'), child=self.import3d)
 
 # ----------------------------------------------------------------------------------------------------------------------

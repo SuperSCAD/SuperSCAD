@@ -202,15 +202,15 @@ class Polyhedron(ScadWidget):
         for key, point in enumerate(face):
             if is_real_face:
                 if key == 0:
-                    color = Color(color='red')
+                    color = Color('red')
                 elif key == 1:
-                    color = Color(color='orange')
+                    color = Color('orange')
                 elif key == 2:
-                    color = Color(color='green')
+                    color = Color('green')
                 else:
-                    color = Color(color='black')
+                    color = Color('black')
             else:
-                color = Color(color='pink')
+                color = Color('pink')
 
             node = Paint(color=color,
                          child=Translate3D(vector=point,
@@ -234,9 +234,9 @@ class Polyhedron(ScadWidget):
         :param context: The build context.
         """
         if is_real_face:
-            color = Color(color='black')
+            color = Color('black')
         else:
-            color = Color(color='pink')
+            color = Color('pink')
 
         edges = []
         prev_point = None
