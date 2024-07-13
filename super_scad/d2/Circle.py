@@ -95,7 +95,7 @@ class Circle(ScadWidget):
         Returns the real fixed number of fragments in 360 degrees.
         """
         if self.fn4n:
-            return Radius2Sides4n.r2sides4n(self.radius, context)
+            return Radius2Sides4n.r2sides4n(context, self.radius)
 
         return self.fn
 

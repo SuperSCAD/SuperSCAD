@@ -10,12 +10,12 @@ class Radius2Sides4n:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def r2sides(radius: float, context: Context) -> int:
+    def r2sides(context: Context, radius: float) -> int:
         """
         Replicates the OpenSCAD logic to calculate the number of sides from the radius.
 
-        :param radius: The radius of the circle.
         :param context: The build context.
+        :param radius: The radius of the circle.
         """
         if context.fn > 0:
             return context.fn
@@ -24,13 +24,13 @@ class Radius2Sides4n:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def r2sides4n(radius: float, context: Context) -> int:
+    def r2sides4n(context: Context, radius: float) -> int:
         """
         Rounds up the number of sides to a multiple of 4 to ensure points land on all axes.
 
-        :param radius: The radius of the circle.
         :param context: The build context.
+        :param radius: The radius of the circle.
         """
-        return int(math.floor((Radius2Sides4n.r2sides(radius, context) + 3) / 4) * 4)
+        return int(math.floor((Radius2Sides4n.r2sides(context, radius) + 3) / 4) * 4)
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -139,7 +139,7 @@ class Cone(ScadWidget):
         Returns the real fixed number of fragments in 360 degrees.
         """
         if self.fn4n:
-            return Radius2Sides4n.r2sides4n(max(self.bottom_radius, self.top_radius), context)
+            return Radius2Sides4n.r2sides4n(context, max(self.bottom_radius, self.top_radius))
 
         return self.fn
 
