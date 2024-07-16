@@ -57,8 +57,7 @@ class ScadWidget(ABC):
         raise NotImplementedError()
 
     # ------------------------------------------------------------------------------------------------------------------
-    def uc(self, length: int | float | Point2 | Point3 | Size2 | Size3 | List[Point2] | None) -> \
-            float | Point2 | Point3 | Size2 | Size3 | List[Point2] | None:
+    def uc(self, length: Any) -> Any:
         """
         Returns the length in the unit of the current context.
 

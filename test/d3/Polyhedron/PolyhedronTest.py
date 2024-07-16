@@ -1,3 +1,4 @@
+from d3.Polyhedron.ImperialUnitCube import ImperialUnitCube
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Polyhedron import Polyhedron
 from super_scad.scad.Scad import Scad
@@ -141,6 +142,38 @@ class PolyhedronTest(ScadTestCase):
         polyhedron = Polyhedron(faces=faces, highlight_face=len(faces) - 4)
 
         scad.run_super_scad(polyhedron, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testImperialMetricCube(self):
+        """
+        Test for an imperial unit cube in metric units.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.MM)
+        cube = ImperialUnitCube()
+
+        scad.run_super_scad(cube, path_actual)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testImperialImperialCube(self):
+        """
+        Test for an imperial unit cube in imperial units.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = Scad(unit_length_final=Unit.INCH)
+        cube = ImperialUnitCube()
+
+        scad.run_super_scad(cube, path_actual)
+
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)

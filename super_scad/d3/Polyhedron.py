@@ -64,6 +64,11 @@ class Polyhedron(ScadWidget):
         The map from the keys of the given faces to kes of the real faces.
         """
 
+        self.__is_ready: bool = False
+        """
+        Whether the faces and the points have been computed. 
+        """
+
     # ------------------------------------------------------------------------------------------------------------------
     @property
     def highlight_face(self) -> int | None:
@@ -104,7 +109,27 @@ class Polyhedron(ScadWidget):
         average_distance = total_distance / (len(face) + 1)
         diameter = 0.1 * average_distance
 
-        return max(diameter, 5.0 * context.resolution)
+        return self.uc(max(diameter, 5.0 * context.resolution))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def real_points(self, context: Context) -> List[Point3]:
+        """
+        Returns the real points of the polyhedron.
+        """
+        if not self.__is_ready:
+            self.__prepare_data(context)
+
+        return self.uc(self.__distinct_points)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def real_faces(self, context: Context) -> List[List[int]]:
+        """
+        Returns the real faces of the polyhedron.
+        """
+        if not self.__is_ready:
+            self.__prepare_data(context)
+
+        return self.__real_faces
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -290,16 +315,27 @@ class Polyhedron(ScadWidget):
         return nodes, edges
 
     # ------------------------------------------------------------------------------------------------------------------
+    def __prepare_data(self, context):
+        """
+        Prepares the data as expected by OpenSCAD polyhedron.
+
+        @param context: The build context.
+        """
+        self.__pass1(context)
+        self.__pass2()
+
+    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
 
         :param context: The build context.
         """
-        self.__pass1(context)
-        self.__pass2()
+        self.__prepare_data(context)
 
-        polyhedron = PrivatePolyhedron(points=self.__distinct_points, faces=self.__real_faces, convexity=self.convexity)
+        polyhedron = PrivatePolyhedron(points=self.real_points(context),
+                                       faces=self.real_faces(context),
+                                       convexity=self.convexity)
 
         if self.highlight_face is None:
             return polyhedron
