@@ -4,6 +4,7 @@
 <thead>
 <tr>
 <th>Legal</th>
+<th>Docs</th>
 <th>Release</th>
 <th>Code</th>
 </tr>
@@ -11,8 +12,10 @@
 <tbody>
 <tr>
 <td>
-<a href="https://pypi.org/project/Super-SCAD/" target="_blank"><img alt="PyPI - License" src="https://img.shields.io/pypi/l/Super-SCAD">
-</a>
+<a href="https://pypi.org/project/Super-SCAD/" target="_blank"><img alt="PyPI - License" src="https://img.shields.io/pypi/l/Super-SCAD"></a>
+</td>
+<td>
+<a href='https://superscad.readthedocs.io/en/latest/?badge=latest'> <img src='https://readthedocs.org/projects/superscad/badge/?version=latest' alt='Documentation Status'/></a>
 </td>
 <td>
 <a href="https://badge.fury.io/py/Super-SCAD" target="_blank"><img src="https://badge.fury.io/py/Super-SCAD.svg" alt="Latest Stable Version"/></a><br/>
