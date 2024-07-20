@@ -1,9 +1,4 @@
-# SuperSCAD: The OO Programmers Solid 3D CAD Modeller
-
-SuperSCAD is an advanced application/library for generating 2D and 3D models in [OpenSCAD](https://openscad.org) in
-Python. SuperSCAD is based, among others, on the factory pattern and delivers to you as 2D and 3D modeler the 
-superpowers of Python.
-
+# SuperSCAD
 
 <table>
 <thead>
@@ -30,7 +25,45 @@ superpowers of Python.
 </tbody>
 </table>
 
-# Demo
+## The OO Programmers Solid 3D CAD Modeller
+
+SuperSCAD is an advanced application/library for generating 2D and 3D models in [OpenSCAD](https://openscad.org) in
+Python. SuperSCAD is based, among others, on the factory pattern and delivers to you as 2D and 3D modeler the
+superpowers of Python.
+
+## Documentation
+
+The full documentation is available at https://superscad.readthedocs.io.
+
+## Getting Started and Installing SuperSCAD
+
+We advise to create a Python virtual environment in a project folder:
+
+```shell
+cd awsesome-project
+
+python -m venv .venv
+. .venv/bin/activate
+pip install super-scad
+```
+
+Using your favorite editor, copy-paste the code from the demo in the next section and save the file under
+`openscad-logo.py`.
+
+```shell
+vi openscad-logo.py  
+```
+
+Run python and open the generated `openscad-logo.scad` in openscad.
+
+```shell
+python openscad-logo.py
+openscad openscad-logo.scad
+```
+
+Congratulations, you just finished your first SuperSCAD project.
+
+## Demo
 
 Below is an example of SuperSCAD utilizing the factory pattern.
 
@@ -48,7 +81,7 @@ from super_scad.transformation.Rotate3D import Rotate3D
 
 class Logo(ScadWidget):
     """
-    SuperSCAD widget for generating OpenSCAD logo.
+    SuperSCAD widget for generating OpenSCAD's logo.
     """
 
     def build(self, context: Context):
@@ -76,7 +109,7 @@ class Logo(ScadWidget):
 if __name__ == '__main__':
     scad = Scad(unit_length_final=Unit.MM, fn=360)
     logo = Logo()
-    scad.run_super_scad(logo, 'logo.scad')
+    scad.run_super_scad(logo, 'openscad-logo.scad')
 ```
 
 The example generates the logo of OpenSCAD.
