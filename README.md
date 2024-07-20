@@ -1,6 +1,9 @@
-# SuperSCAD
+# SuperSCAD: The OO Programmers Solid 3D CAD Modeller
 
-An advanced Python application and library for generating 2D and 3D models in [OpenSCAD](https://openscad.org).
+SuperSCAD is an advanced application/library for generating 2D and 3D models in [OpenSCAD](https://openscad.org) in
+Python. SuperSCAD is based, among others, on the factory pattern and delivers to you as 2D and 3D modeler the 
+superpowers of Python.
+
 
 <table>
 <thead>
@@ -26,6 +29,59 @@ An advanced Python application and library for generating 2D and 3D models in [O
 </tr>
 </tbody>
 </table>
+
+# Demo
+
+Below is an example of SuperSCAD utilizing the factory pattern.
+
+```python3
+from super_scad.boolean.Difference import Difference
+from super_scad.d3.Cylinder import Cylinder
+from super_scad.d3.Sphere import Sphere
+from super_scad.other.Modify import Modify
+from super_scad.scad.Context import Context
+from super_scad.scad.Scad import Scad
+from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.scad.Unit import Unit
+from super_scad.transformation.Rotate3D import Rotate3D
+
+
+class Logo(ScadWidget):
+    """
+    SuperSCAD widget for generating OpenSCAD logo.
+    """
+
+    def build(self, context: Context):
+        """
+        Builds a SuperSCAD widget.
+
+        :param context: The build context.
+        """
+        size: float = 50.0
+        hole: float = size / 2.0
+        height: float = 1.25 * size
+
+        return Difference(children=[Sphere(diameter=size),
+                                    Cylinder(height=height, diameter=hole, center=True),
+                                    Modify(highlight=True,
+                                           child=Rotate3D(angle_x=90.0,
+                                                          child=Cylinder(height=height,
+                                                                         diameter=hole,
+                                                                         center=True,
+                                                                         fn4n=True))),
+                                    Rotate3D(angle_y=90.0,
+                                             child=Cylinder(height=height, diameter=hole, center=True))])
+
+
+if __name__ == '__main__':
+    scad = Scad(unit_length_final=Unit.MM, fn=360)
+    logo = Logo()
+    scad.run_super_scad(logo, 'logo.scad')
+```
+
+The example generates the logo of OpenSCAD.
+
+![OpenSCAD Logo](openscad-logo.png)
 
 # Links
 
