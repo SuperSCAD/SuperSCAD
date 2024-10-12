@@ -23,7 +23,11 @@ class Context:
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, project_home: Path, unit_length_final: Unit):
+    def __init__(self,
+                 *,
+                 project_home: Path,
+                 unit_length_final: Unit,
+                 fn: int):
         """
         Object constructor.
 
@@ -63,7 +67,7 @@ class Context:
         Known in OpenSCAD as $fs, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fs.
         """
 
-        self.__fn: int = 0
+        self.__fn: int = fn
         """
         The number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         Known in OpenSCAD as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.

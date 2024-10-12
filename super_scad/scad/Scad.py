@@ -11,7 +11,10 @@ from super_scad.scad.Unit import Unit
 
 class Scad:
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, unit_length_final: Unit):
+    def __init__(self,
+                 *,
+                 unit_length_final: Unit,
+                 fn: int = 0):
         """
         Object constructor.
 
@@ -23,7 +26,9 @@ class Scad:
         The current project's home directory.
         """
 
-        self.__context = Context(project_home=self.__project_home, unit_length_final=unit_length_final)
+        self.__context = Context(project_home=self.__project_home,
+                                 unit_length_final=unit_length_final,
+                                 fn=fn)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
