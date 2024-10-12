@@ -84,7 +84,7 @@ from super_scad.transformation.Rotate3D import Rotate3D
 
 class Logo(ScadWidget):
     """
-    SuperSCAD widget for generating OpenSCAD's logo.
+    SuperSCAD widget for generating OpenSCAD logo.
     """
 
     def build(self, context: Context):
@@ -97,22 +97,19 @@ class Logo(ScadWidget):
         hole: float = size / 2.0
         height: float = 1.25 * size
 
-        return Difference(children=[Sphere(diameter=size),
-                                    Cylinder(height=height, diameter=hole, center=True),
-                                    Modify(highlight=True,
-                                           child=Rotate3D(angle_x=90.0,
-                                                          child=Cylinder(height=height,
-                                                                         diameter=hole,
-                                                                         center=True,
-                                                                         fn4n=True))),
-                                    Rotate3D(angle_y=90.0,
-                                             child=Cylinder(height=height, diameter=hole, center=True))])
+        cylinder = Cylinder(height=height, diameter=hole, center=True, fn4n=True)
+        sphere = Sphere(diameter=size, fn4n=True)
+
+        return Difference(children=[sphere,
+                                    cylinder,
+                                    Modify(highlight=True, child=Rotate3D(angle_x=90.0, child=cylinder)),
+                                    Rotate3D(angle_y=90.0, child=cylinder)])
 
 
 if __name__ == '__main__':
     scad = Scad(unit_length_final=Unit.MM, fn=360)
     logo = Logo()
-    scad.run_super_scad(logo, 'openscad-logo.scad')
+    scad.run_super_scad(logo, 'logo.scad')
 ```
 
 The example generates the logo of OpenSCAD.
