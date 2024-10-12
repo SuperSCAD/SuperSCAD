@@ -1,7 +1,6 @@
 from super_scad.boolean.Intersection import Intersection
 from super_scad.d2.Circle import Circle
 from super_scad.d2.Rectangle import Rectangle
-from super_scad.d3.LinearExtrude import LinearExtrude
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
@@ -16,7 +15,6 @@ class Semicircle(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 height: float | None = None,
                  radius: float | None = None,
                  diameter: float | None = None,
                  fa: float | None = None,
@@ -26,13 +24,12 @@ class Semicircle(ScadWidget):
         """
         Object constructor.
 
-        :param height: The height of the pie slice. If height is None, a 2D widget will be created.
         :param radius: The radius of the semicircles.
         :param diameter: The diameter of the semicircles.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
-        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
-        :param fn4n: Whether to create a semicircles based on circle with a multiple of 4 vertices.
+        :param fn: The fixed number of fragments in 360 degrees. Values of three or more override fa and fs.
+        :param fn4n: Whether to create a semicircles based on circle with a multiple of four vertices.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -109,17 +106,13 @@ class Semicircle(ScadWidget):
 
         :param context: The build context.
         """
-        semicircle = Intersection(children=[Circle(diameter=self.diameter,
-                                                   fa=self.fa,
-                                                   fs=self.fs,
-                                                   fn=self.fn,
-                                                   fn4n=self.fn4n),
-                                            Translate2D(x=-(self.radius + context.eps),
-                                                        child=Rectangle(width=self.diameter + 2 * context.eps,
-                                                                        depth=self.radius + context.eps))])
-        if self.height is None:
-            return semicircle
-
-        return LinearExtrude(height=self.height, child=semicircle)
+        return Intersection(children=[Circle(diameter=self.diameter,
+                                             fa=self.fa,
+                                             fs=self.fs,
+                                             fn=self.fn,
+                                             fn4n=self.fn4n),
+                                      Translate2D(x=-(self.radius + context.eps),
+                                                  child=Rectangle(width=self.diameter + 2 * context.eps,
+                                                                  depth=self.radius + context.eps))])
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-from super_scad.d0.Semicircle import Semicircle
+from super_scad.d2.Semicircle import Semicircle
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
@@ -11,7 +11,6 @@ class ImperialSemicircle(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
-                 height: float | None = None,
                  radius: float | None = None,
                  diameter: float | None = None,
                  fa: float | None = None,
@@ -36,8 +35,7 @@ class ImperialSemicircle(ScadWidget):
         """
         Context.set_unit_length_current(Unit.INCH)
 
-        self.imperial_semicircle = Semicircle(height=self._args.get('height'),
-                                              radius=self._args.get('radius'),
+        self.imperial_semicircle = Semicircle(radius=self._args.get('radius'),
                                               diameter=self._args.get('diameter'),
                                               fa=self._args.get('fa'),
                                               fs=self._args.get('fs'),

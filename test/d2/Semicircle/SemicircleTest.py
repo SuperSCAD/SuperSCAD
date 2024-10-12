@@ -1,6 +1,6 @@
-from d0.Semicircle.ImperialSemicircle import ImperialSemicircle
+from d2.Semicircle.ImperialSemicircle import ImperialSemicircle
 from ScadTestCase import ScadTestCase
-from super_scad.d0.Semicircle import Semicircle
+from super_scad.d2.Semicircle import Semicircle
 from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 
@@ -54,7 +54,7 @@ class SemicircleTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def testSemicircle4n(self):
         """
-        Test for a semi_circle based on circle with a multiple of 4 vertices.
+        Test for a semi_circle based on circle with a multiple of four vertices.
         """
         path_actual, path_expected = self.paths()
 
@@ -97,7 +97,7 @@ class SemicircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricSemicircle2D(self):
+    def testImperialMetricSemicircle(self):
         """
         Test for an imperial 2D semi_circle in metric units.
         """
@@ -119,29 +119,7 @@ class SemicircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricSemicircle3D(self):
-        """
-        Test for an imperial 3D semi_circle in metric units.
-        """
-        path_actual, path_expected = self.paths()
-
-        scad = Scad(unit_length_final=Unit.MM)
-        semi_circle = ImperialSemicircle(height=10.0, radius=20.0, fa=12.0, fs=2.0, fn=0)
-        scad.run_super_scad(semi_circle, path_actual)
-
-        self.assertAlmostEqual(10.0 * 25.4, semi_circle.imperial_semicircle.height)
-        self.assertAlmostEqual(20.0 * 25.4, semi_circle.imperial_semicircle.radius)
-        self.assertAlmostEqual(40.0 * 25.4, semi_circle.imperial_semicircle.diameter)
-        self.assertAlmostEqual(12.0, semi_circle.imperial_semicircle.fa)
-        self.assertAlmostEqual(2.0 * 25.4, semi_circle.imperial_semicircle.fs)
-        self.assertEqual(0, semi_circle.imperial_semicircle.fn)
-
-        actual = path_actual.read_text()
-        expected = path_expected.read_text()
-        self.assertEqual(expected, actual)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialSemicircle2D(self):
+    def testImperialImperialSemicircle(self):
         """
         Test for an imperial 2D semi_circle in imperial units.
         """
@@ -152,28 +130,6 @@ class SemicircleTestCase(ScadTestCase):
         scad.run_super_scad(semi_circle, path_actual)
 
         self.assertIsNone(semi_circle.imperial_semicircle.height)
-        self.assertAlmostEqual(20.0, semi_circle.imperial_semicircle.radius)
-        self.assertAlmostEqual(40.0, semi_circle.imperial_semicircle.diameter)
-        self.assertAlmostEqual(12.0, semi_circle.imperial_semicircle.fa)
-        self.assertAlmostEqual(2.0, semi_circle.imperial_semicircle.fs)
-        self.assertEqual(0, semi_circle.imperial_semicircle.fn)
-
-        actual = path_actual.read_text()
-        expected = path_expected.read_text()
-        self.assertEqual(expected, actual)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialSemicircle3D(self):
-        """
-        Test for an imperial 3D semi_circle in imperial units.
-        """
-        path_actual, path_expected = self.paths()
-
-        scad = Scad(unit_length_final=Unit.INCH)
-        semi_circle = ImperialSemicircle(height=10.0, radius=20.0, fa=12.0, fs=2.0, fn=0)
-        scad.run_super_scad(semi_circle, path_actual)
-
-        self.assertAlmostEqual(10.0, semi_circle.imperial_semicircle.height)
         self.assertAlmostEqual(20.0, semi_circle.imperial_semicircle.radius)
         self.assertAlmostEqual(40.0, semi_circle.imperial_semicircle.diameter)
         self.assertAlmostEqual(12.0, semi_circle.imperial_semicircle.fa)

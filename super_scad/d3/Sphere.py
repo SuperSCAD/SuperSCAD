@@ -1,4 +1,4 @@
-from super_scad.d0.Semicircle import Semicircle
+from super_scad.d2.Semicircle import Semicircle
 from super_scad.d3.private.PrivateSphere import PrivateSphere
 from super_scad.d3.RotateExtrude import RotateExtrude
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
@@ -29,8 +29,8 @@ class Sphere(ScadWidget):
         :param diameter: The diameter of the sphere.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
-        :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
-        :param fn4n: Whether to create a sphere with a multiple of 4 vertices.
+        :param fn: The fixed number of fragments in 360 degrees. Values of three or more override fa and fs.
+        :param fn4n: Whether to create a sphere with a multiple of four vertices.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -79,7 +79,7 @@ class Sphere(ScadWidget):
     @property
     def fn(self) -> int | None:
         """
-        Returns the fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        Returns the fixed number of fragments in 360 degrees. Values of three or more override fa and fs.
         """
         return self._args.get('fn')
 
