@@ -25,10 +25,10 @@ class Polygon(ScadWidget):
 
         :param primary: The list of 2D points of the polygon.
         :param points: Alias for primary.
-        :param secondary: The secondary path that will be subtracted form the polygon.
+        :param secondary: The secondary path that will be subtracted from the polygon.
         :param secondaries: The secondary paths that will be subtracted form the polygon.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child widget.
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line
+                          through the child widget.
         """
         ScadWidget.__init__(self, args=locals())
 

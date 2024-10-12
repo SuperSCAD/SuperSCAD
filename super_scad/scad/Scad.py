@@ -54,7 +54,7 @@ class Scad:
         Runs SuperSCAD on a SuperSCAD widget and stores the generated OpenSCAD code.
 
         :param root_widget: The root SuperSCAD widget to build.
-        :param openscad_path: The path to the file were to store the generated OpenSCAD code.
+        :param openscad_path: The path to the file where to store the generated OpenSCAD code.
         """
         self.__run_super_scad_prepare(openscad_path)
         self.__run_super_scad_walk_build_tree(root_widget)
@@ -65,7 +65,7 @@ class Scad:
         """
         Executes the required steps before running SuperSCAD.
 
-        :param openscad_path: The path to the file were to store the generated OpenSCAD code.
+        :param openscad_path: The path to the file where to store the generated OpenSCAD code.
         """
         self.__context.target_path = Path(openscad_path)
         self.__context.set_unit_length_current(self.__context.get_unit_length_final())

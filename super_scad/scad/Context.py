@@ -180,7 +180,7 @@ class Context:
     @property
     def fn(self) -> int:
         """
-        Returns the number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
+        Returns the number of fragments in 360 degrees. Values of three or more override $fa and $fs.
         Known in OpenSCAD as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.
         """
         return self.__fn

@@ -50,7 +50,7 @@ class Semicircle(ScadWidget):
     @property
     def height(self) -> float | None:
         """
-        Returns teh height of the pie slice. If height is None, a 2D widget will be created.
+        Returns the height of the pie slice. If height is None, a 2D widget will be created.
         """
         return self.uc(self._args.get('height'))
 
@@ -98,7 +98,7 @@ class Semicircle(ScadWidget):
     @property
     def fn4n(self) -> bool | None:
         """
-        Returns whether to create a circle with multiple of 4 vertices.
+        Returns whether to create a circle with multiple of four vertices.
         """
         return self._args.get('fn4n')
 
