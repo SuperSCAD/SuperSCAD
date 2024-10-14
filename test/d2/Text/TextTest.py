@@ -17,8 +17,17 @@ class TextTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit_length_final=Unit.MM)
-        text = Text(text='SupeSCAD')
+        text = Text(text='SuperSCAD')
 
+        self.assertEqual('SuperSCAD', text.text)
+        self.assertEqual(10, text.size)
+        self.assertIsNone(text.font)
+        self.assertEqual('left', text.halign)
+        self.assertEqual('baseline', text.valign)
+        self.assertEqual(1.0, text.spacing)
+        self.assertEqual('ltr', text.direction)
+        self.assertEqual('en', text.language)
+        self.assertEqual('latin', text.script)
         self.assertIsNone(text.fn)
 
         scad.run_super_scad(text, path_actual)
@@ -35,8 +44,17 @@ class TextTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = Scad(unit_length_final=Unit.MM)
-        text = Text(text='SupeSCAD', halign='center', valign='center', fn=10)
+        text = Text(text='SuperSCAD', halign='center', valign='center', fn=10)
 
+        self.assertEqual('SuperSCAD', text.text)
+        self.assertEqual(10, text.size)
+        self.assertIsNone(text.font)
+        self.assertEqual('center', text.halign)
+        self.assertEqual('center', text.valign)
+        self.assertEqual(1.0, text.spacing)
+        self.assertEqual('ltr', text.direction)
+        self.assertEqual('en', text.language)
+        self.assertEqual('latin', text.script)
         self.assertEqual(10, text.fn)
 
         scad.run_super_scad(text, path_actual)

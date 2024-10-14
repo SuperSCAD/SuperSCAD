@@ -1,3 +1,5 @@
+from typing import Dict
+
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 
 
@@ -25,7 +27,7 @@ class Text(PrivateOpenScadCommand):
         :param text: The text to generate.
         :param size: The generated text has an ascent (height above the baseline) of approximately the given value.
                      Different fonts can vary somewhat and may not fill the size specified exactly, typically they
-                     render slightly smaller. On a metric system a size of 25.4 (1" imperial) will correspond to
+                     render slightly smaller. On a metric system, a size of 25.4 (1" imperial) will correspond to
                      100pt ⇒ a 12pt font size would be 12×0.254 for metric conversion or 0.12 in imperial.
         :param font: The name of the font that should be used. This is not the name of the font file, but the logical
                      font name (internally handled by the fontconfig library). This can also include a style parameter,
@@ -44,6 +46,85 @@ class Text(PrivateOpenScadCommand):
         :param fn: Used for subdividing the curved path segments provided by freetype.
         """
         PrivateOpenScadCommand.__init__(self, command='text', args=locals())
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def argument_map(self) -> Dict[str, str]:
+        """
+        Returns the map from SuperSCAD arguments to OpenSCAD arguments.
+        """
+        return {'fn': '$fn'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def text(self) -> str:
+        """
+        Returns the text to generate.
+        """
+        return self._args.get('text')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def size(self) -> int:
+        """
+        Returns the font size.
+        """
+        return self._args.get('size')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def font(self) -> str | None:
+        """
+        Returns the name of the font.
+        """
+        return self._args.get('font')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def halign(self) -> str:
+        """
+        Returns the horizontal alignment for the text.
+        """
+        return self._args.get('halign')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def valign(self) -> str:
+        """
+        Returns the vertical alignment for the text.
+        """
+        return self._args.get('valign')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def spacing(self) -> float:
+        """
+        Returns the factor to increase/decrease the character spacing.
+        """
+        return self._args.get('spacing')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def direction(self) -> str:
+        """
+        Returns the direction of the text flow.
+        """
+        return self._args.get('direction')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def language(self) -> str:
+        """
+        Returns the language of the text.
+        """
+        return self._args.get('language')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def script(self) -> str:
+        """
+        Returns the script of the text.
+        """
+        return self._args.get('script')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
