@@ -107,7 +107,7 @@ class Logo(ScadWidget):
 
 
 if __name__ == '__main__':
-    scad = Scad(unit_length_final=Unit.MM, fn=360)
+    scad = Scad(context=Context(fn=360))
     logo = Logo()
     scad.run_super_scad(logo, 'logo.scad')
 ```
