@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Set
 
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 
@@ -12,7 +12,7 @@ class Text(PrivateOpenScadCommand):
     def __init__(self,
                  *,
                  text: str,
-                 size: int = 10,
+                 size: float = 10.0,
                  font: str | None = None,
                  halign: str = 'left',
                  valign: str = 'baseline',
@@ -53,6 +53,20 @@ class Text(PrivateOpenScadCommand):
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
         return {'fn': '$fn'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_lengths(self) -> Set[str]:
+        """
+        Returns the set with arguments that are lengths.
+        """
+        return {'size'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_scales(self) -> Set[str]:
+        """
+        Returns the set with arguments that are scales and factors.
+        """
+        return {'spacing'}
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

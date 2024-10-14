@@ -23,9 +23,9 @@ class RotateExtrude(PrivateSingleChildOpenScadCommand):
         Object constructor.
 
         :param angle: Specifies the number of degrees to sweep, starting at the positive X axis. The direction of the
-                      sweep follows the Right Hand Rule, hence a negative angle sweeps clockwise.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child widget.
+                      sweep follows the Right-Hand Rule, hence a negative angle sweeps clockwise.
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line
+                          through the child widget.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
@@ -39,6 +39,13 @@ class RotateExtrude(PrivateSingleChildOpenScadCommand):
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
         return {'fa': '$fa', 'fs': '$fs', 'fn': '$fn'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_angles(self) -> Set[str]:
+        """
+        Returns the set with arguments that are angles.
+        """
+        return {'angle'}
 
     # ------------------------------------------------------------------------------------------------------------------
     def _argument_lengths(self) -> Set[str]:

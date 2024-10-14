@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Set
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadWidget import ScadWidget
@@ -33,5 +33,19 @@ class PrivateRotate(PrivateSingleChildOpenScadCommand):
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
         return {'angle': 'a', 'vector': 'v'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_angles(self) -> Set[str]:
+        """
+        Returns the set with arguments that are angles.
+        """
+        return {'a'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_lengths(self) -> Set[str]:
+        """
+        Returns the set with arguments that are lengths.
+        """
+        return {'v'}
 
 # ----------------------------------------------------------------------------------------------------------------------

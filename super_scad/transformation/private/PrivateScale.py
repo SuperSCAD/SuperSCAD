@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Set
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadWidget import ScadWidget
@@ -31,5 +31,12 @@ class PrivateScale(PrivateSingleChildOpenScadCommand):
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
         return {'factor': 'v'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_scales(self) -> Set[str]:
+        """
+        Returns the set with arguments that are scales and factors.
+        """
+        return {'v'}
 
 # ----------------------------------------------------------------------------------------------------------------------

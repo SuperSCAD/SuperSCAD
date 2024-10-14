@@ -14,7 +14,12 @@ class Scad:
     def __init__(self,
                  *,
                  unit_length_final: Unit,
-                 fn: int = 0):
+                 fa: float = 12.0,
+                 fs: float = 2.0,
+                 fn: int = 0,
+                 eps: float = 1E-2,
+                 angle_digits: int = 4,
+                 length_digits: int = 4):
         """
         Object constructor.
 
@@ -28,7 +33,12 @@ class Scad:
 
         self.__context = Context(project_home=self.__project_home,
                                  unit_length_final=unit_length_final,
-                                 fn=fn)
+                                 fa=fa,
+                                 fs=fs,
+                                 fn=fn,
+                                 eps=eps,
+                                 angle_digits=angle_digits,
+                                 length_digits=length_digits)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

@@ -27,7 +27,13 @@ class Context:
                  *,
                  project_home: Path,
                  unit_length_final: Unit,
-                 fn: int):
+                 fa: float = 12.0,
+                 fs: float = 2.0,
+                 fn: int = 0,
+                 eps: float = 1E-2,
+                 angle_digits: int = 4,
+                 length_digits: int = 4,
+                 scale_digits: int = 4):
         """
         Object constructor.
 
@@ -50,18 +56,18 @@ class Context:
         The place were we store the generated OpenSCAD code.
         """
 
-        self.__eps: float = 1E-2
+        self.__eps: float = eps
         """
         Epsilon value for clear overlap.
         """
 
-        self.__fa: float = 1.0
+        self.__fa: float = fa
         """
         The minimum angle (in degrees) of each fragment. 
         Known in OpenSCAD as $fa, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fa.
         """
 
-        self.__fs: float = 0.1
+        self.__fs: float = fs
         """
         The minimum circumferential length of each fragment.
         Known in OpenSCAD as $fs, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fs.
@@ -78,9 +84,19 @@ class Context:
         The unit of length.
         """
 
-        self.__length_digits = 4
+        self.__angle_digits = angle_digits
+        """
+        The number of decimal places of an angle in the generated OpenSCAD code.
+        """
+
+        self.__length_digits = length_digits
         """
         The number of decimal places of a length in the generated OpenSCAD code.
+        """
+
+        self.__scale_digits = scale_digits
+        """
+        The number of decimal places of a scale or factor in the generated OpenSCAD code.
         """
 
         Context.set_unit_length_current(unit_length_final)
@@ -109,6 +125,14 @@ class Context:
         Set the path to the OpenSCAD script that currently been generated.
         """
         self.__target_path = Path(os.path.realpath(target_path))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def angle_digits(self) -> int:
+        """
+        Returns the number of decimal places of an angle in the generated OpenSCAD code.
+        """
+        return self.__angle_digits
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -220,6 +244,15 @@ class Context:
         return Context.__unit_length_current
 
     # ------------------------------------------------------------------------------------------------------------------
+    def round_angle(self, angle: float) -> str:
+        """
+        Returns an angle rounded to the desired number of digits.
+
+        :param angle: The length.
+        """
+        return str(round(float(angle), self.__angle_digits))
+
+    # ------------------------------------------------------------------------------------------------------------------
     def round_length(self, length: float) -> str:
         """
         Returns a length rounded to the desired number of digits.
@@ -227,5 +260,14 @@ class Context:
         :param length: The length.
         """
         return str(round(float(length), self.__length_digits))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def round_scale(self, scale: float) -> str:
+        """
+        Returns a scale or factor rounded to the desired number of digits.
+
+        :param scale: The scale or factor.
+        """
+        return str(round(float(scale), self.__scale_digits))
 
 # ----------------------------------------------------------------------------------------------------------------------

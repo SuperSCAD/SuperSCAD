@@ -53,7 +53,9 @@ class PrivateOpenScadCommand(ScadWidget):
         Returns the arguments of the OpenSCAD command.
         """
         argument_map = self._argument_map()
+        argument_angles = self._argument_angles()
         argument_lengths = self._argument_lengths()
+        argument_scales = self._argument_scales()
 
         args_as_str = '('
         first = True
@@ -64,9 +66,14 @@ class PrivateOpenScadCommand(ScadWidget):
                 first = False
 
             real_name = argument_map.get(key, key)
-            real_value = self.uc(value) if real_name in argument_lengths else value
-
-            real_value = self.__format_argument(context, real_value)
+            if real_name in argument_angles:
+                real_value = self.__format_argument(context, value, True, False, False)
+            elif real_name in argument_lengths:
+                real_value = self.__format_argument(context, self.uc(value), False, True, False)
+            elif real_name in argument_scales:
+                real_value = self.__format_argument(context, value, False, False, True)
+            else:
+                real_value = self.__format_argument(context, value, False, False, False)
 
             if real_name is None:
                 args_as_str += '{}'.format(real_value)
@@ -84,6 +91,13 @@ class PrivateOpenScadCommand(ScadWidget):
         return {}
 
     # ------------------------------------------------------------------------------------------------------------------
+    def _argument_angles(self) -> Set[str]:
+        """
+        Returns the set with arguments that are angles.
+        """
+        return set()
+
+    # ------------------------------------------------------------------------------------------------------------------
     def _argument_lengths(self) -> Set[str]:
         """
         Returns the set with arguments that are lengths.
@@ -91,7 +105,19 @@ class PrivateOpenScadCommand(ScadWidget):
         return set()
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __format_argument(self, context: Context, argument: Any) -> str:
+    def _argument_scales(self) -> Set[str]:
+        """
+        Returns the set with arguments that are scales and factors.
+        """
+        return set()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __format_argument(self,
+                          context: Context,
+                          argument: Any,
+                          is_angle: bool,
+                          is_length: bool,
+                          is_scale: bool) -> str:
         """
         Returns an argument of the OpenSCAD command.
 
@@ -99,30 +125,37 @@ class PrivateOpenScadCommand(ScadWidget):
         :param argument: The argument of OpenSCAD command.
         """
         if isinstance(argument, float):
-            # xxx Distinguish between length, scale, and angle.
-            argument = context.round_length(argument)
+            if is_length:
+                argument = context.round_length(argument)
+            elif is_angle:
+                argument = context.round_angle(argument)
+            elif is_scale:
+                argument = context.round_scale(argument)
             if argument == '-0.0':
                 argument = '0.0'
 
             return argument
 
         if isinstance(argument, Point2):
-            return "[{}, {}]".format(self.__format_argument(context, float(argument.x)),
-                                     self.__format_argument(context, float(argument.y)))
+            return "[{}, {}]".format(self.__format_argument(context, float(argument.x), is_angle, is_length, is_scale),
+                                     self.__format_argument(context, float(argument.y), is_angle, is_length, is_scale))
 
         if isinstance(argument, Point3):
-            return "[{}, {}, {}]".format(self.__format_argument(context, float(argument.x)),
-                                         self.__format_argument(context, float(argument.y)),
-                                         self.__format_argument(context, float(argument.z)))
+            return "[{}, {}, {}]".format(
+                    self.__format_argument(context, float(argument.x), is_angle, is_length, is_scale),
+                    self.__format_argument(context, float(argument.y), is_angle, is_length, is_scale),
+                    self.__format_argument(context, float(argument.z), is_angle, is_length, is_scale))
 
         if isinstance(argument, Size2):
-            return "[{}, {}]".format(self.__format_argument(context, float(argument.width)),
-                                     self.__format_argument(context, float(argument.depth)))
+            return "[{}, {}]".format(
+                    self.__format_argument(context, float(argument.width), is_angle, is_length, is_scale),
+                    self.__format_argument(context, float(argument.depth), is_angle, is_length, is_scale))
 
         if isinstance(argument, Size3):
-            return "[{}, {}, {}]".format(self.__format_argument(context, float(argument.width)),
-                                         self.__format_argument(context, float(argument.depth)),
-                                         self.__format_argument(context, float(argument.height)))
+            return "[{}, {}, {}]".format(
+                    self.__format_argument(context, float(argument.width), is_angle, is_length, is_scale),
+                    self.__format_argument(context, float(argument.depth), is_angle, is_length, is_scale),
+                    self.__format_argument(context, float(argument.height), is_angle, is_length, is_scale))
 
         if isinstance(argument, bool):
             return str(argument).lower()
@@ -136,14 +169,14 @@ class PrivateOpenScadCommand(ScadWidget):
         if isinstance(argument, List):
             parts = []
             for element in argument:
-                parts.append(self.__format_argument(context, element))
+                parts.append(self.__format_argument(context, element, is_angle, is_length, is_scale))
 
             return '[{}]'.format(', '.join(parts))
 
         if isinstance(argument, Tuple):
             parts = []
             for element in argument:
-                parts.append(self.__format_argument(context, element))
+                parts.append(self.__format_argument(context, element, is_angle, is_length, is_scale))
 
             return '[{}]'.format(', '.join(parts))
 

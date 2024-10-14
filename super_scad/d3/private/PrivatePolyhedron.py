@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Set
 
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.type.Point3 import Point3
@@ -20,9 +20,16 @@ class PrivatePolyhedron(PrivateOpenScadCommand):
 
         :param points: String representation of a list of 3D points.
         :param faces:  String representation of the faces that collectively enclose the solid.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through
                           the child widget.
         """
         PrivateOpenScadCommand.__init__(self, command='polyhedron', args=locals())
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_lengths(self) -> Set[str]:
+        """
+        Returns the set with arguments that are lengths.
+        """
+        return {'points'}
 
 # ----------------------------------------------------------------------------------------------------------------------

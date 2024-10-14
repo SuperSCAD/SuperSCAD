@@ -35,6 +35,13 @@ class PrivateCircle(PrivateOpenScadCommand):
         return {'radius': 'r', 'diameter': 'd', 'fa': '$fa', 'fs': '$fs', 'fn': '$fn'}
 
     # ------------------------------------------------------------------------------------------------------------------
+    def _argument_angles(self) -> Set[str]:
+        """
+        Returns the set with arguments that are angles.
+        """
+        return {'$fa'}
+
+    # ------------------------------------------------------------------------------------------------------------------
     def _argument_lengths(self) -> Set[str]:
         """
         Returns the set with arguments that are lengths.

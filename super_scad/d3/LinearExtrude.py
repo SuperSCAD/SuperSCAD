@@ -54,11 +54,25 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
         return {'fa': '$fa', 'fs': '$fs', 'fn': '$fn'}
 
     # ------------------------------------------------------------------------------------------------------------------
+    def _argument_angles(self) -> Set[str]:
+        """
+        Returns the set with arguments that are angles.
+        """
+        return {'$fa', 'twist'}
+
+    # ------------------------------------------------------------------------------------------------------------------
     def _argument_lengths(self) -> Set[str]:
         """
         Returns the set with arguments that are lengths.
         """
         return {'height', '$fs'}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_scales(self) -> Set[str]:
+        """
+        Returns the set with arguments that are scales and factors.
+        """
+        return {'scale'}
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
