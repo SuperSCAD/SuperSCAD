@@ -32,13 +32,13 @@ class Polyhedron(ScadWidget):
         :param highlight_face: The index of the face to highlight. Each point of the face is marked, the first point is
                            colored red, the second orange, the third green, and all other points are color black.
         :param highlight_diameter: The diameter of the spheres that highlight the nodes of the faces.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
                           the polyhedron.
 
         Each face consists of 3 or more points. Faces may be defined in any order, but the points of each face must be
-        ordered correctly, must be ordered in clockwise direction when looking at each face from outside inward. Define
-        enough faces to fully enclose the solid, with no overlap. If points that describe a single face are not on the
-        same plane, the face is by OpenSCAD automatically split into triangles as needed.
+        ordered correctly, must be ordered in clockwise direction when looking at each face from the outside inwards.
+        Define enough faces to fully enclose the solid, with no overlap. If points that describe a single face are not
+        on the same plane, the face is by OpenSCAD automatically split into triangles as needed.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -135,7 +135,7 @@ class Polyhedron(ScadWidget):
     @property
     def convexity(self) -> int | None:
         """
-        Returns the number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through the
+        Returns the number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through the
         child widget.
         """
         return self._args.get('convexity')
@@ -160,7 +160,7 @@ class Polyhedron(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def __pass1(self, context: Context) -> None:
         """
-        Pass 1: Remove fused points and enumerate points in faces.
+        Pass 1: Remove fused points and enumerate points in the faces.
 
         @param context: The build context.
         """

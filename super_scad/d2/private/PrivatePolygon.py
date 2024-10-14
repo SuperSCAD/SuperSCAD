@@ -20,8 +20,8 @@ class PrivatePolygon(PrivateOpenScadCommand):
 
         :param points: The list of 2D points of the polygon.
         :param paths: The order to traverse the points.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child widget.
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
+                          through the child widget.
         """
         PrivateOpenScadCommand.__init__(self, command='polygon', args=locals())
 

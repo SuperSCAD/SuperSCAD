@@ -23,8 +23,8 @@ class Import(PrivateOpenScadCommand):
         Object constructor.
 
         :param path: The absolute path or the relative path from the target script to the file that will be imported.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child widget.
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
+                          through the child widget.
         :param layer: For DXF import only, specify a specific layer to import.
         """
         if isinstance(path, Path):
@@ -54,7 +54,7 @@ class Import(PrivateOpenScadCommand):
     @property
     def convexity(self) -> int | None:
         """
-        Returns the number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through the
+        Returns the number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through the
         child widget.
         """
         return self._args.get('convexity')

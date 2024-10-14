@@ -18,7 +18,7 @@ class Minkowski(PrivateMultiChildOpenScadCommand):
         """
         Object constructor.
 
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
                           the child widgets.
         :param children: The child widgets.
         """

@@ -20,8 +20,8 @@ class PrivatePolyhedron(PrivateOpenScadCommand):
 
         :param points: String representation of a list of 3D points.
         :param faces:  String representation of the faces that collectively enclose the solid.
-        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through
-                          the child widget.
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
+                          through the child widget.
         """
         PrivateOpenScadCommand.__init__(self, command='polyhedron', args=locals())
 

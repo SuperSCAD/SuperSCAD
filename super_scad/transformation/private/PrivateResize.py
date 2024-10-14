@@ -24,8 +24,8 @@ class PrivateResize(PrivateSingleChildOpenScadCommand):
 
         :param new_size: The new_size along all two axes.
         :param auto: Whether to auto-scale any 0-dimensions to match.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child widget.
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
+                          through the child widget.
         :param child: The widget to be resized.
         """
         PrivateSingleChildOpenScadCommand.__init__(self, command='resize', args=locals(), child=child)

@@ -32,8 +32,8 @@ class Resize2D(ScadSingleChildParent):
         :param new_width: The new width (the new size along the x-axis).
         :param new_depth: The new depth (the new size along the y-axis).
         :param auto: Whether to auto-scale any 0-dimensions to match.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child widget.
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
+                          through the child widget.
         :param child: The child widget to be resized.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)

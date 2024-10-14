@@ -30,8 +30,8 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
 
         :param height: The height of the extruded object.
         :param center: Whether the cylinder is centered along the z-as.
-        :param convexity: Number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through
-                          the child widget.
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
+                          through the child widget.
         :param twist: The number of degrees of through which the shape is extruded. Setting the parameter twist = 360
                       extrudes through one revolution. The twist direction follows the left hand rule.
         :param scale: Scales the 2D shape by this value over the height of the extrusion.
@@ -94,7 +94,7 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
     @property
     def convexity(self) -> int | None:
         """
-        Returns the number of "inward" curves, i.e. expected number of path crossings of an arbitrary line through the
+        Returns the number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through the
         child widget.
         """
         return self._args.get('convexity')
@@ -104,7 +104,7 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
     def twist(self) -> float:
         """
         Returns the number of degrees of through which the shape is extruded. Setting the parameter twist = 360
-        extrudes through one revolution. The twist direction follows the left hand rule.
+        extrudes through one revolution. The twist direction follows the left-hand rule.
         """
         return self._args.get('twist')
 
@@ -113,7 +113,7 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
     def scale(self) -> float | Point2:
         """
         Returns the number of degrees of through which the shape is extruded. Setting the parameter twist = 360
-        extrudes through one revolution. The twist direction follows the left hand rule.
+        extrudes through one revolution. The twist direction follows the left-hand rule.
         """
         return self._args.get('scale')
 
