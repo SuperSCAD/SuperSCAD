@@ -22,7 +22,7 @@ class ModifyTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         difference = Difference(children=[Cylinder(height=12,
                                                    radius=5,
                                                    center=True,
@@ -51,7 +51,7 @@ class ModifyTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         difference = Difference(children=[Cylinder(height=12,
                                                    radius=5,
                                                    center=True,
@@ -80,7 +80,7 @@ class ModifyTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         difference = \
             Difference(children=[Cube(size=10,
                                       center=True),
@@ -105,7 +105,7 @@ class ModifyTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         cube = Cube(size=10, center=True)
         cylinders = Compound(children=[Rotate3D(angle_y=90,
                                                 child=Cylinder(height=20,
@@ -133,7 +133,7 @@ class ModifyTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         cylinder = Modify(child=Cylinder(height=20, radius=2, center=True, fn=40))
 
         scad.run_super_scad(cylinder, path_actual)

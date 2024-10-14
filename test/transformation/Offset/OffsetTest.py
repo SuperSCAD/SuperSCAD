@@ -18,7 +18,7 @@ class OffsetTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         points = [Point2(0.0, 0.0), Point2(0.0, 15.0), Point2(5.0, 5.0), Point2(10.0, 10.0), Point2(10.0, 0.0)]
         offset = Offset(radius=1.0, fn=100, child=Polygon(points=points))
 
@@ -41,7 +41,7 @@ class OffsetTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         points = [Point2(0.0, 0.0), Point2(0.0, 15.0), Point2(5.0, 5.0), Point2(10.0, 10.0), Point2(10.0, 0.0)]
         offset = Offset(radius=-1.0, chamfer=True, fn=100, child=Polygon(points=points))
 
@@ -64,7 +64,7 @@ class OffsetTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         points = [Point2(0.0, 0.0), Point2(0.0, 15.0), Point2(5.0, 5.0), Point2(10.0, 10.0), Point2(10.0, 0.0)]
         offset = Offset(delta=1.0, fn=100, child=Polygon(points=points))
 
@@ -87,7 +87,7 @@ class OffsetTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         points = [Point2(0.0, 0.0), Point2(0.0, 15.0), Point2(5.0, 5.0), Point2(10.0, 10.0), Point2(10.0, 0.0)]
         offset = Offset(delta=-1.0, fn=100, child=Polygon(points=points))
 
@@ -110,7 +110,7 @@ class OffsetTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         points = [Point2(0.0, 0.0), Point2(0.0, 15.0), Point2(5.0, 5.0), Point2(10.0, 10.0), Point2(10.0, 0.0)]
         offset = Offset(delta=1.0, chamfer=True, fn=100, child=Polygon(points=points))
 
@@ -133,7 +133,7 @@ class OffsetTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         points = [Point2(0.0, 0.0), Point2(0.0, 15.0), Point2(5.0, 5.0), Point2(10.0, 10.0), Point2(10.0, 0.0)]
         offset = Offset(delta=-1.0, chamfer=True, fn=100, child=Polygon(points=points))
 

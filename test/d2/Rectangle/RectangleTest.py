@@ -18,7 +18,7 @@ class RectangleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         rectangle = Rectangle(size=Size2(20, 10))
 
         self.assertAlmostEqual(20.0, rectangle.width)
@@ -39,7 +39,7 @@ class RectangleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         rectangle = Rectangle(size=Size2(20, 10), center=True)
 
         self.assertAlmostEqual(20.0, rectangle.width)
@@ -60,7 +60,7 @@ class RectangleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         rectangle = ImperialUnitRectangle()
         scad.run_super_scad(rectangle, path_actual)
 
@@ -81,7 +81,7 @@ class RectangleTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.INCH)
+        scad = self.create_scad(unit_length_final=Unit.INCH)
         rectangle = ImperialUnitRectangle()
         scad.run_super_scad(rectangle, path_actual)
 

@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from super_scad.private.PrivateMultiChildOpenScadCommand import PrivateMultiChildOpenScadCommand
@@ -6,57 +5,25 @@ from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.scad.Unit import Unit
 
 
 class Scad:
+    """
+    The SuperSCAD super object for running SuperSCAD.
+    """
+
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self,
-                 *,
-                 unit_length_final: Unit,
-                 fa: float = 12.0,
-                 fs: float = 2.0,
-                 fn: int = 0,
-                 eps: float = 1E-2,
-                 angle_digits: int = 4,
-                 length_digits: int = 4):
+    def __init__(self, *, context: Context):
         """
         Object constructor.
 
-        :param unit_length_final: The unit of length used in the generated OpenSCAD code.
+        :param context: The build context.
         """
 
-        self.__project_home: Path = Path(os.getcwd()).resolve()
+        self.__context: Context = context
         """
-        The current project's home directory.
+        The build context.
         """
-
-        self.__context = Context(project_home=self.__project_home,
-                                 unit_length_final=unit_length_final,
-                                 fa=fa,
-                                 fs=fs,
-                                 fn=fn,
-                                 eps=eps,
-                                 angle_digits=angle_digits,
-                                 length_digits=length_digits)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def project_home(self) -> Path:
-        """
-        Returns the current project's home directory.
-        """
-        return self.__project_home
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @project_home.setter
-    def project_home(self, project_home: Path) -> None:
-        """
-        Sets the current project's home directory.
-
-        :param Path project_home: The current project's home directory.
-        """
-        self.__project_home = project_home
 
     # ------------------------------------------------------------------------------------------------------------------
     def run_super_scad(self, root_widget: ScadWidget, openscad_path: Path | str) -> None:

@@ -21,7 +21,7 @@ class TenderTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         radius = 10.0
         render = Render(convexity=2,
                         child=Difference(children=[Cuboid(width=20,

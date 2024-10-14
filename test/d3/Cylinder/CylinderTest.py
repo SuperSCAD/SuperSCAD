@@ -22,7 +22,7 @@ class CylinderTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         cylinder = Cylinder(height=10.0, radius=2.0)
 
         self.assertAlmostEqual(10.0, cylinder.height)
@@ -52,7 +52,7 @@ class CylinderTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         cylinder = Cylinder(height=10.0, diameter=2.0, center=True)
 
         self.assertAlmostEqual(10.0, cylinder.height)
@@ -82,7 +82,7 @@ class CylinderTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         start_point = Point3(3.0, 2.0, 1.0)
         end_point = Point3(30.0, 20.0, 10.0)
         diff = end_point - start_point
@@ -118,7 +118,7 @@ class CylinderTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         cylinder = Cylinder(height=10.0, radius=2.0, fn4n=True)
 
         self.assertAlmostEqual(10.0, cylinder.height)
@@ -147,7 +147,7 @@ class CylinderTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         cylinder = Cylinder(height=100.0, diameter=10.0, fa=12.0, fs=2.0, fn=0)
 
         self.assertAlmostEqual(100.0, cylinder.height)
@@ -178,7 +178,7 @@ class CylinderTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         cylinder = ImperialCylinder(height=100.0, radius=20.0, fa=12.0, fs=2.0, fn=0)
         scad.run_super_scad(cylinder, path_actual)
 
@@ -207,7 +207,7 @@ class CylinderTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.INCH)
+        scad = self.create_scad(unit_length_final=Unit.INCH)
         cylinder = ImperialCylinder(height=100.0, radius=20.0, fa=12.0, fs=2.0, fn=0)
         scad.run_super_scad(cylinder, path_actual)
 

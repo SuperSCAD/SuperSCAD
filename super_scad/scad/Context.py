@@ -25,8 +25,7 @@ class Context:
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 project_home: Path,
-                 unit_length_final: Unit,
+                 unit_length_final: Unit = Unit.MM,
                  fa: float = 12.0,
                  fs: float = 2.0,
                  fn: int = 0,
@@ -37,11 +36,19 @@ class Context:
         """
         Object constructor.
 
-        :param Path project_home: The home folder of the current project.
         :param unit_length_final: The unit of length used in the generated OpenSCAD code.
+        :param fa: The minimum angle (in degrees) of each fragment. Known in OpenSCAD as $fa,
+                   see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fa.
+        :param fs: The minimum circumferential length of each fragment. Known in OpenSCAD as $fs,
+                   see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fs.
+        :param fn: The number of fragments in 360 degrees. Values of 3 or more override $fa and $fs. Known in OpenSCAD
+                   as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.
+        :param eps: Epsilon value for clear overlap.
+        :param angle_digits: The number of decimal places of an angle in the generated OpenSCAD code.
+        :param length_digits: The number of decimal places of a length in the generated OpenSCAD code.
+        :param scale_digits:  The number of decimal places of a scale or factor in the generated OpenSCAD code.
         """
-
-        self.__project_home: Path = project_home
+        self.__project_home: Path = Path(os.getcwd()).resolve()
         """
         The home folder of the current project. 
         """
@@ -54,11 +61,6 @@ class Context:
         self.__code_store: ScadCodeStore = ScadCodeStore()
         """
         The place were we store the generated OpenSCAD code.
-        """
-
-        self.__eps: float = eps
-        """
-        Epsilon value for clear overlap.
         """
 
         self.__fa: float = fa
@@ -77,6 +79,11 @@ class Context:
         """
         The number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         Known in OpenSCAD as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.
+        """
+
+        self.__eps: float = eps
+        """
+        Epsilon value for clear overlap.
         """
 
         self.__unit_length_final: Unit = unit_length_final

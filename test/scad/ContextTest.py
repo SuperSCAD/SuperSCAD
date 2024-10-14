@@ -16,7 +16,7 @@ class ContextTest(unittest.TestCase):
         """
         Test method resolve_path.
         """
-        context = Context(project_home=Path(os.getcwd()).resolve(), unit_length_final=Unit.MM, fn=360)
+        context = Context(unit_length_final=Unit.MM, fn=360)
 
         context.target_path = 'test/test.scad'
         self.assertEqual(Path('/etc/password'), context.resolve_path('/etc/password'))

@@ -2,11 +2,27 @@ import inspect
 import unittest
 from pathlib import Path
 
+from super_scad.scad.Context import Context
+from super_scad.scad.Scad import Scad
+from super_scad.scad.Unit import Unit
+
 
 class ScadTestCase(unittest.TestCase):
     """
     Parent test case for SuperSCAD test cases.
     """
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def create_scad(*, unit_length_final: Unit = Unit.MM) -> Scad:
+        """
+        Creates the SuperSCAD super object.
+
+        @param unit_length_final: The unit of length used in the generated OpenSCAD code.
+        """
+        context = Context(unit_length_final=unit_length_final)
+
+        return Scad(context=context)
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod

@@ -17,7 +17,7 @@ class SphereTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         sphere = Sphere(radius=2.0)
 
         self.assertAlmostEqual(2.0, sphere.radius)
@@ -36,7 +36,7 @@ class SphereTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         sphere = Sphere(diameter=2.0)
 
         self.assertAlmostEqual(1.0, sphere.radius)
@@ -58,7 +58,7 @@ class SphereTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         sphere = Sphere(radius=2.0, fn4n=True)
 
         self.assertAlmostEqual(2.0, sphere.radius)
@@ -79,7 +79,7 @@ class SphereTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         sphere = Sphere(diameter=10.0, fa=12.0, fs=2.0, fn=0)
 
         self.assertAlmostEqual(5.0, sphere.radius)
@@ -102,7 +102,7 @@ class SphereTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         sphere = ImperialSphere(radius=20.0, fa=12.0, fs=2.0, fn=0)
         scad.run_super_scad(sphere, path_actual)
 
@@ -123,7 +123,7 @@ class SphereTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.INCH)
+        scad = self.create_scad(unit_length_final=Unit.INCH)
         sphere = ImperialSphere(radius=20.0, fa=12.0, fs=2.0, fn=0)
         scad.run_super_scad(sphere, path_actual)
 

@@ -18,7 +18,7 @@ class Flip2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         original = Indicator()
         flipped = Flip2D(flip_x=True, child=original)
 
@@ -40,7 +40,7 @@ class Flip2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         original = Indicator()
         flipped = Flip2D(flip_y=True, child=original)
 
@@ -62,7 +62,7 @@ class Flip2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         original = Indicator()
         flipped = Flip2D(flip_x=True, flip_y=True, child=original)
 

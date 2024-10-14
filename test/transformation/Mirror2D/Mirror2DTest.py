@@ -21,7 +21,7 @@ class Mirror2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         original = Indicator()
         mirrored = Mirror2D(x=2.0, child=original)
 
@@ -42,7 +42,7 @@ class Mirror2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         original = Indicator()
         mirrored = Mirror2D(y=1.0, child=original)
 
@@ -63,7 +63,7 @@ class Mirror2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         original = Indicator()
         mirrored = Mirror2D(vector=Point2(1.0, 1.0), child=original)
 

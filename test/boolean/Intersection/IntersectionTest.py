@@ -18,7 +18,7 @@ class IntersectionTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         intersection = Intersection(children=[Cylinder(height=4, radius=1, center=True, fn=100),
                                               Rotate3D(angle_x=90,
                                                        child=Cylinder(height=4, radius=0.9, center=True, fn=100))])

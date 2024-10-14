@@ -25,7 +25,7 @@ class Rotate3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         end_point = Point3(x=10.0, y=10.0, z=10.0)
         length = end_point.length
@@ -57,7 +57,7 @@ class Rotate3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         end_point = Point3(x=10.0, y=10.0, z=10.0)
         length = end_point.length
@@ -89,7 +89,7 @@ class Rotate3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         rotate = Rotate3D(angle=45.0, vector=Point3(1, 1, 0), child=Cuboid(width=50, depth=30, height=15))
 

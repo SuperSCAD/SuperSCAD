@@ -18,7 +18,7 @@ class EchoTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         echo = Echo(message='Hello, world!', pi=math.pi, quot="'", double_qoute='"')
 
         scad.run_super_scad(echo, path_actual)

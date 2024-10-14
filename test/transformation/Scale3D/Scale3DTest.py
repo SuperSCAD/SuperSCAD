@@ -20,7 +20,7 @@ class Scale3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         cube = Cube(size=10.0)
         scale = Scale3D(factor=Point3(x=0.5, y=1.0, z=2.0), child=cube)
@@ -46,7 +46,7 @@ class Scale3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         cube = Cube(size=10.0)
         scale = Scale3D(factor_x=0.5, factor_z=2.0, child=cube)
@@ -72,7 +72,7 @@ class Scale3DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         cube = Cube(size=10.0)
         scale = Scale3D(factor=2.0, child=cube)

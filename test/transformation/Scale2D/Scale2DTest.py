@@ -20,7 +20,7 @@ class Scale2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         square = Square(size=10.0)
         scale = Scale2D(factor=Point2(x=0.5, y=1.0), child=square)
@@ -44,7 +44,7 @@ class Scale2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         square = Square(size=10.0)
         scale = Scale2D(factor_x=0.5, child=square)
@@ -68,7 +68,7 @@ class Scale2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         square = Square(size=10.0)
         scale = Scale2D(factor=2.0, child=square)

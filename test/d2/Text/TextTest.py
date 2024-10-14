@@ -16,7 +16,7 @@ class TextTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         text = Text(text='SuperSCAD')
 
         self.assertEqual('SuperSCAD', text.text)
@@ -43,7 +43,7 @@ class TextTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         text = Text(text='SuperSCAD', halign='center', valign='center', fn=10)
 
         self.assertEqual('SuperSCAD', text.text)

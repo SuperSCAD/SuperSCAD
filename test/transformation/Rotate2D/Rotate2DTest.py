@@ -17,7 +17,7 @@ class Rotate2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         rotate = Rotate2D(angle=45.0, child=Square(size=10.0))
 
@@ -35,7 +35,7 @@ class Rotate2DTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         rotate = Rotate2D(child=Square(size=10.0))
 

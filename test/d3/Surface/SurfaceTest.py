@@ -17,7 +17,7 @@ class SurfaceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         example = SurfaceDat()
         scad.run_super_scad(example, path_actual)
 
@@ -36,7 +36,7 @@ class SurfaceTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         example = Surface(path='nonexistent.txt')
 
         self.assertRaises(FileNotFoundError, lambda: scad.run_super_scad(example, path_actual))

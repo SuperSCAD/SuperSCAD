@@ -18,7 +18,7 @@ class HullTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         hull = Hull(children=[Translate2D(x=15, y=10, child=Circle(radius=10)),
                               Circle(radius=10)])
 

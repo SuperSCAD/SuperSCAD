@@ -18,7 +18,7 @@ class PolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
                                              Point2(100.0, 0.0),
                                              Point2(130.0, 50.0),
@@ -36,7 +36,7 @@ class PolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
                                              Point2(100.0, 0.0),
                                              Point2(0.0, 100.0)],
@@ -57,7 +57,7 @@ class PolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
                                              Point2(100.0, 0.0),
                                              Point2(130.0, 50.0),
@@ -89,7 +89,7 @@ class PolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         scad.run_super_scad(ImperialUnitPolygon(), path_actual)
 
         actual = path_actual.read_text()
@@ -103,7 +103,7 @@ class PolygonTestCase(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.INCH)
+        scad = self.create_scad(unit_length_final=Unit.INCH)
         scad.run_super_scad(ImperialUnitPolygon(), path_actual)
 
         actual = path_actual.read_text()

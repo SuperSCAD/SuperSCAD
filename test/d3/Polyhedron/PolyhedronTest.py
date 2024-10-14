@@ -17,7 +17,7 @@ class PolyhedronTest(ScadTestCase):
         Test where all faces are given as lists.
         """
         path_actual, path_expected = self.paths()
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         point1 = Point3(0.0, 0.0, 0.0)
         point2 = Point3(440.0, 0.0, 0.0)
@@ -44,7 +44,7 @@ class PolyhedronTest(ScadTestCase):
         Test where all faces are given as tuples.
         """
         path_actual, path_expected = self.paths()
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         point1 = Point3(0.0, 0.0, 0.0)
         point2 = Point3(440.0, 0.0, 0.0)
@@ -68,10 +68,10 @@ class PolyhedronTest(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def testDebug(self):
         """
-        Test where one face is been highlighted.
+        Test where one face is being highlighted.
         """
         path_actual, path_expected = self.paths()
-        scad = Scad(unit_length_final=Unit.ROYAL_CUBIT)
+        scad = self.create_scad(unit_length_final=Unit.ROYAL_CUBIT)
 
         base = 440.0
         height = 280.0
@@ -100,7 +100,7 @@ class PolyhedronTest(ScadTestCase):
         Test where some points are fused.
         """
         path_actual, path_expected = self.paths()
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
 
         size = 2.0
         height = 2.0
@@ -153,7 +153,7 @@ class PolyhedronTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.MM)
+        scad = self.create_scad()
         cube = ImperialUnitCube()
 
         scad.run_super_scad(cube, path_actual)
@@ -169,7 +169,7 @@ class PolyhedronTest(ScadTestCase):
         """
         path_actual, path_expected = self.paths()
 
-        scad = Scad(unit_length_final=Unit.INCH)
+        scad = self.create_scad(unit_length_final=Unit.INCH)
         cube = ImperialUnitCube()
 
         scad.run_super_scad(cube, path_actual)
