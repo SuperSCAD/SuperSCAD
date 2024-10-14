@@ -4,7 +4,7 @@ from super_scad.scad.unit.LengthUnit import LengthUnit
 
 class AttoparsecUnit(LengthUnit):
     """
-    The attoparsec unit is 3.085 677 581 491 367 3 m. See
+    The attoparsec unit is 3.085 677 581 491 367 3 cm. See
     https://en.wikipedia.org/wiki/List_of_humorous_units_of_measurement#Attoparsec.
     """
 

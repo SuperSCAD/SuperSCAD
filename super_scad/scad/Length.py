@@ -55,9 +55,9 @@ class Length:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def init_rations() -> None:
+    def init_ratios() -> None:
         """
-        Initializes the rations of lengths.
+        Initializes the ratios of lengths.
         """
         max_value = max(unit.value for unit in Unit)
         for i in range(max_value + 1):
