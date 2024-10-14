@@ -34,7 +34,7 @@ class Paint(PrivateSingleChildOpenScadCommand):
         admission.validate_exclusive({'color'})
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
+    def _argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """

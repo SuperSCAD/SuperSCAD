@@ -26,7 +26,7 @@ class PrivatePolygon(PrivateOpenScadCommand):
         PrivateOpenScadCommand.__init__(self, command='polygon', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_lengths(self) -> Set[str]:
+    def _argument_lengths(self) -> Set[str]:
         """
         Returns the set with arguments that are lengths.
         """

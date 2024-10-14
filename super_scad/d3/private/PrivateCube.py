@@ -20,7 +20,7 @@ class PrivateCube(PrivateOpenScadCommand):
         PrivateOpenScadCommand.__init__(self, command='cube', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_lengths(self) -> Set[str]:
+    def _argument_lengths(self) -> Set[str]:
         """
         Returns the set with arguments that are lengths.
         """

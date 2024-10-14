@@ -19,7 +19,7 @@ class Echo(PrivateOpenScadCommand):
         PrivateOpenScadCommand.__init__(self, command='echo', args=args)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str | None]:
+    def _argument_map(self) -> Dict[str, str | None]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """

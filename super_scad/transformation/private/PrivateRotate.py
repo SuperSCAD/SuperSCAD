@@ -28,7 +28,7 @@ class PrivateRotate(PrivateSingleChildOpenScadCommand):
         PrivateSingleChildOpenScadCommand.__init__(self, command='rotate', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
+    def _argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """

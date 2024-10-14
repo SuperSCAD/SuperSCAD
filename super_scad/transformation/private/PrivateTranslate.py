@@ -26,14 +26,14 @@ class PrivateTranslate(PrivateSingleChildOpenScadCommand):
         PrivateSingleChildOpenScadCommand.__init__(self, command='translate', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
+    def _argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
         return {'vector': 'v'}
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_lengths(self) -> Set[str]:
+    def _argument_lengths(self) -> Set[str]:
         """
         Returns the set with arguments that are lengths.
         """

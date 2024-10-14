@@ -26,7 +26,7 @@ class PrivateScale(PrivateSingleChildOpenScadCommand):
         PrivateSingleChildOpenScadCommand.__init__(self, command='scale', args=locals(), child=child)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
+    def _argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """

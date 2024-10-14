@@ -48,26 +48,12 @@ class PrivateOpenScadCommand(ScadWidget):
         return self._command
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str | None]:
-        """
-        Returns the map from SuperSCAD arguments to OpenSCAD arguments.
-        """
-        return {}
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def argument_lengths(self) -> Set[str]:
-        """
-        Returns the set with arguments that are lengths.
-        """
-        return set()
-
-    # ------------------------------------------------------------------------------------------------------------------
     def generate_args(self, context: Context) -> str:
         """
         Returns the arguments of the OpenSCAD command.
         """
-        argument_map = self.argument_map()
-        argument_lengths = self.argument_lengths()
+        argument_map = self._argument_map()
+        argument_lengths = self._argument_lengths()
 
         args_as_str = '('
         first = True
@@ -89,6 +75,20 @@ class PrivateOpenScadCommand(ScadWidget):
         args_as_str += ')'
 
         return args_as_str
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_map(self) -> Dict[str, str | None]:
+        """
+        Returns the map from SuperSCAD arguments to OpenSCAD arguments.
+        """
+        return {}
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _argument_lengths(self) -> Set[str]:
+        """
+        Returns the set with arguments that are lengths.
+        """
+        return set()
 
     # ------------------------------------------------------------------------------------------------------------------
     def __format_argument(self, context: Context, argument: Any) -> str:

@@ -48,7 +48,7 @@ class Text(PrivateOpenScadCommand):
         PrivateOpenScadCommand.__init__(self, command='text', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
+    def _argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """

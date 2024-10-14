@@ -55,7 +55,7 @@ class PrivateCylinder(PrivateOpenScadCommand):
                                     {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
+    def _argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
@@ -71,7 +71,7 @@ class PrivateCylinder(PrivateOpenScadCommand):
                 'fn':              '$fn'}
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_lengths(self) -> Set[str]:
+    def _argument_lengths(self) -> Set[str]:
         """
         Returns the set with arguments that are lengths.
         """

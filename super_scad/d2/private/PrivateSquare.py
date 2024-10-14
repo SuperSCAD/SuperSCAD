@@ -20,7 +20,7 @@ class PrivateSquare(PrivateOpenScadCommand):
         PrivateOpenScadCommand.__init__(self, command='square', args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_lengths(self) -> Set[str]:
+    def _argument_lengths(self) -> Set[str]:
         """
         Returns the set with arguments that are lengths.
         """

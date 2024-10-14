@@ -44,7 +44,7 @@ class Import(PrivateOpenScadCommand):
         # that. So, we test the existence of the file in the build method.
 
     # ------------------------------------------------------------------------------------------------------------------
-    def argument_map(self) -> Dict[str, str]:
+    def _argument_map(self) -> Dict[str, str]:
         """
         Returns the map from SuperSCAD arguments to OpenSCAD arguments.
         """
