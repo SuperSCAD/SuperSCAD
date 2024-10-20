@@ -33,7 +33,7 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
         :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
                           through the child widget.
         :param twist: The number of degrees of through which the shape is extruded. Setting the parameter twist = 360
-                      extrudes through one revolution. The twist direction follows the left hand rule.
+                      extrudes through one revolution. The twist direction follows the left-hand rule.
         :param scale: Scales the 2D shape by this value over the height of the extrusion.
         :param slices: Defines the number of intermediate points along the Z axis of the extrusion. Its default
                        increases with the value of twist. Explicitly setting slices may improve the output refinement.
