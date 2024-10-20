@@ -18,7 +18,7 @@ class Radius2Sides4n:
         :param radius: The radius of the circle.
         """
         if context.fn > 0:
-            return context.fn
+            return max(context.fn, 3)
 
         return int(math.ceil(max(min(360.0 / context.fa, radius * 2.0 * math.pi / context.fs), 5.0)))
 
