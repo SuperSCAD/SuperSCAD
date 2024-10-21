@@ -51,6 +51,14 @@ class Point2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
+    def angle(self) -> float:
+        """
+        Returns the angle of this vector.
+        """
+        return math.degrees(math.atan2(self.y, self.x))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
     def length(self) -> float:
         """
         Returns the length of this vector.
@@ -68,5 +76,92 @@ class Point2:
         length = self.length
 
         return Point2(self.x / length, self.y / length)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def _on_segment(p, q, r) -> bool:
+        """
+        Given three collinear points p, q, r, returns whether point q lies on the line segment (p, r).
+
+        @param p: Point p.
+        @param q: Point q.
+        @param r: Point r.
+        """
+        if ((q.x <= max(p.x, r.x)) and (q.x >= min(p.x, r.x)) and
+                (q.y <= max(p.y, r.y)) and (q.y >= min(p.y, r.y))):
+            return True
+
+        return False
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def _orientation(p, q, r) -> int:
+        """
+        Returns the orientation of an ordered triplet (p, q, r).
+        * 0 : Collinear points
+        * 1 : Clockwise points
+        * 2 : Counterclockwise
+
+        @param p: Point p.
+        @param q: Point q.
+        @param r: Point r.
+        """
+        val = ((q.y - p.y) * (r.x - q.x)) - ((q.x - p.x) * (r.y - q.y))
+        if val > 0:
+            return 1
+
+        elif val < 0:
+            return 2
+
+        return 0
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def do_intersect(p1, q1, p2, q2) -> bool:
+        """
+        Returns whether line segments (p1, q1) and (p1, q2) intersect.
+
+        @see https://www.geeksforgeeks.org/check-if-two-given-line-segments-intersect/ for some background information.
+
+        @param p1: The start point of the first segment.
+        @param q1: The end point of the first segment.
+        @param p2: The start point of the second segment.
+        @param q2: The end point of the second segment.
+        """
+        o1 = Point2._orientation(p1, q1, p2)
+        o2 = Point2._orientation(p1, q1, q2)
+        o3 = Point2._orientation(p2, q2, p1)
+        o4 = Point2._orientation(p2, q2, q1)
+
+        if (o1 != o2) and (o3 != o4):
+            return True
+
+        if (o1 == 0) and Point2._on_segment(p1, p2, q1):
+            return True
+
+        if (o2 == 0) and Point2._on_segment(p1, q2, q1):
+            return True
+
+        if (o3 == 0) and Point2._on_segment(p2, p1, q2):
+            return True
+
+        if (o4 == 0) and Point2._on_segment(p2, q1, q2):
+            return True
+
+        return False
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def angle_3p(p, q, r) -> float:
+        """
+        Returns the angle between line segments (p, q) and (r, q).
+
+        @param p: Point p.
+        @param q: Point q
+        @param r: Point r.
+        """
+        return math.degrees(math.acos(((q - p).length ** 2 +
+                                       (q - r).length ** 2 -
+                                       (p - r).length ** 2) / (2 * (q - p).length * (q - r).length)))
 
 # ----------------------------------------------------------------------------------------------------------------------

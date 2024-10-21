@@ -1,3 +1,4 @@
+import random
 from typing import List
 
 from super_scad.d2.private.PrivatePolygon import PrivatePolygon
@@ -41,6 +42,37 @@ class Polygon(ScadWidget):
         admission.validate_exclusive({'primary'}, {'points'})
         admission.validate_exclusive({'secondary'}, {'secondaries'})
         admission.validate_required({'primary', 'points'})
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def inner_angels(self) -> List[float]:
+        """
+        Returns the inner angels of the polygon (in the same order as the primary points).
+        """
+        angles = []
+
+        radius: float = 0.0
+        nodes = self.primary
+        for point in nodes:
+            radius = max(radius, point.x, point.y)
+
+        n = len(nodes)
+        for i in range(n):
+            p1 = nodes[(i - 1) % n]
+            p2 = nodes[i]
+            p3 = nodes[(i + 1) % n]
+
+            q1 = Point2((p1.x + p2.x + p3.x) / 3, (p1.y + p2.y + p3.y) / 3)
+            q2 = Point2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
+
+            number_of_intersections = Polygon._count_intersections(nodes, q1, q2)
+            angle = Point2.angle_3p(p1, p2,p3)
+            if number_of_intersections % 2 == 0:
+                angle = 360.0 - angle
+
+            angles.append(angle)
+
+        return angles
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -100,5 +132,27 @@ class Polygon(ScadWidget):
             n = m
 
         return PrivatePolygon(points=points, paths=paths, convexity=self.convexity)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def _count_intersections(nodes: List[Point2], p1: Point2, q1: Point2) -> int:
+        """
+        Returns the number of intersections between a line segment (p1, q1) and the vertices of the polygon.
+
+        @param nodes: The nodes of the polygon.
+        @param p1: Start point of the line segment.
+        @param q1: End point of the line segment.
+        """
+        intersections = 0
+
+        n = len(nodes)
+        for i in range(n):
+            p2 = nodes[i]
+            q2 = nodes[(i + 1) % n]
+
+            if Point2.do_intersect(p1, q1, p2, q2):
+                intersections += 1
+
+        return intersections
 
 # ----------------------------------------------------------------------------------------------------------------------
