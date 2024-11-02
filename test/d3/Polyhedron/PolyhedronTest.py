@@ -87,59 +87,7 @@ class PolyhedronTest(ScadTestCase):
                  [point3, point5, point4],  # back
                  [point4, point5, point1]]  # left side
 
-        polyhedron = Polyhedron(faces=faces, highlight_face=0)
-
-        scad.run_super_scad(polyhedron, path_actual)
-        actual = path_actual.read_text()
-        expected = path_expected.read_text()
-        self.assertEqual(expected, actual)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def testFusedPoints(self):
-        """
-        Test where some points are fused.
-        """
-        path_actual, path_expected = self.paths()
-        scad = self.create_scad()
-
-        size = 2.0
-        height = 2.0
-
-        def p0(h: float) -> Point3:
-            return Point3(0.5 * size * h / height, 0.5 * size * h / height, h)
-
-        def p1(h: float) -> Point3:
-            return Point3(size - 0.5 * size * h / height, 0.5 * size * h / height, h)
-
-        def p2(h: float) -> Point3:
-            return Point3(size - 0.5 * size * h / height, size - 0.5 * size * h / height, h)
-
-        def p3(h: float) -> Point3:
-            return Point3(0.5 * size * h / height, size - 0.5 * size * h / height, h)
-
-        faces = []
-        current_height = 0.0
-        level0 = (p0(current_height), p1(current_height), p2(current_height), p3(current_height))
-        faces.append(level0)
-        for i in range(0, 16):
-            current_height += (height - current_height) / 2.0
-            level1 = (p0(current_height), p1(current_height), p2(current_height), p3(current_height))
-
-            faces.append((level0[0], level1[0], level1[1], level0[1]))  # front
-            faces.append((level0[1], level1[1], level1[2], level0[2]))  # right
-            faces.append((level0[2], level1[2], level1[3], level0[3]))  # back
-            faces.append((level0[3], level1[3], level1[0], level0[0]))  # left
-
-            level0 = level1
-
-        # Apex
-        apex = Point3(0.5 * size, 0.5 * size, height)
-        faces.append((level0[0], apex, level0[1]))  # front
-        faces.append((level0[1], apex, level0[2]))  # right
-        faces.append((level0[2], apex, level0[3]))  # back
-        faces.append((level0[3], apex, level0[0]))  # left
-
-        polyhedron = Polyhedron(faces=faces, highlight_face=len(faces) - 4)
+        polyhedron = Polyhedron(faces=faces, highlight_faces=0)
 
         scad.run_super_scad(polyhedron, path_actual)
         actual = path_actual.read_text()

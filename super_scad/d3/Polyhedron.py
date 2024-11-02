@@ -1,4 +1,3 @@
-import itertools
 from typing import Dict, Iterable, List, Tuple
 
 from super_scad.boolean.Union import Union
@@ -13,6 +12,40 @@ from super_scad.type.Color import Color
 from super_scad.type.Point3 import Point3
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+
+class Node:
+    """
+    A node of a polyhedron.
+    """
+
+    next_node_id: int = 0
+    """
+    The next node ID.
+    """
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __init__(self, point: Point3):
+        """
+        Object constructor.
+
+        :param point: The rounded position of the node.
+        """
+
+        self.point: Point3 = point
+        """
+        The rounded position of this node.
+        """
+
+        self.node_id: int = Node.next_node_id
+        """
+        The ID of this node as implicitly implied by the invoker.
+        """
+
+        Node.next_node_id += 1
+
+
+# ----------------------------------------------------------------------------------------------------------------------
 class Polyhedron(ScadWidget):
     """
     Widget for creating polyhedrons. See https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Primitive_Solids#polyhedron.
@@ -22,79 +55,97 @@ class Polyhedron(ScadWidget):
     def __init__(self,
                  *,
                  faces: List[List[Point3] | Tuple[Point3, ...]],
-                 highlight_face: int | None = None,
+                 highlight_faces: int | List[int] | None = None,
+                 highlight_nodes: int | List[int] = None,
                  highlight_diameter: float | None = None,
-                 convexity: int | None = None):
+                 convexity: int | None = None,
+                 validate: bool = False,
+                 highlight_issues: bool = False):
         """
         Object constructor.
 
         :param faces:  The faces that collectively enclose the solid.
-        :param highlight_face: The index of the face to highlight. Each point of the face is marked, the first point is
-                           colored red, the second orange, the third green, and all other points are color black.
+        :param highlight_faces: The ID of the faces to highlight. Each node of the face is marked, the first point
+                                is colored red, the second orange, the third green, and all other points are color
+                                black.
+        :param highlight_nodes: The IDs of the nodes to highlight.
         :param highlight_diameter: The diameter of the spheres that highlight the nodes of the faces.
-        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
+        :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line
                           the polyhedron.
+        :param validate: Whether to validate polyhedron.
+        :param highlight_issues: Whether to highlight all issues found by the validation. This will override
+                                 highlight_faces and highlight_nodes.
 
-        Each face consists of 3 or more points. Faces may be defined in any order, but the points of each face must be
+        Each face consists of three or more nodes. Faces may be defined in any order, but the nodes of each face must be
         ordered correctly, must be ordered in clockwise direction when looking at each face from the outside inwards.
-        Define enough faces to fully enclose the solid, with no overlap. If points that describe a single face are not
+        Define enough faces to fully enclose the solid, with no overlap. If nodes that describe a single face are not
         on the same plane, the face is by OpenSCAD automatically split into triangles as needed.
         """
         ScadWidget.__init__(self, args=locals())
 
-        for key, face in enumerate(faces):
-            assert len(face) >= 3, f'Each face must have 3 or more points. Face {key} as only {len(face)} points'
-
-        if highlight_face is not None:
-            assert highlight_face < len(
-                    faces), f'Can not highlight face {highlight_face} as the polyhedron has only {len(faces)} points'
-
-        self.__real_faces: List[List[int]] = []
+        self.__nodes: Dict[int, Node] = {}
         """
-        The real faces of the polyhedron.
+        Look up table from the memory address of a position of a node to the node.
         """
 
-        self.__distinct_points: List[Point3] = []
+        self.__faces: List[List[Node]] = []
         """
-        The distinct points of the polyhedron.
-        """
-
-        self.__map_faces_real_faces: Dict[int, int] = {}
-        """
-        The map from the keys of the given faces to kes of the real faces.
+        The faces of the polyhedron.
         """
 
         self.__is_ready: bool = False
         """
-        Whether the faces and the points have been computed. 
+        Whether the real faces and the real nodes have been computed. 
         """
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def highlight_face(self) -> int | None:
+    def highlight_faces(self) -> List[int]:
         """
-        Returns the index of the face to highlight
+        Returns the IDs of the faces to highlight
         """
-        return self._args.get('highlight_face')
+        tmp = self._args.get('highlight_faces')
+        if tmp is None:
+            return []
+
+        if isinstance(tmp, int):
+            return [tmp]
+
+        return tmp
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def highlight_nodes(self) -> List[int]:
+        """
+        Returns the IDs of the nodes to highlight
+        """
+        tmp = self._args.get('highlight_nodes')
+        if tmp is None:
+            return []
+
+        if isinstance(tmp, int):
+            return [tmp]
+
+        return tmp
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
     def highlight_diameter(self) -> float | None:
         """
-        Returns the diameter of the spheres that highlight the nodes of the faces.
+        Returns the diameter of the spheres that highlight the nodes.
         """
         return self._args.get('highlight_diameter')
 
     # ------------------------------------------------------------------------------------------------------------------
     def real_highlight_diameter(self, context: Context) -> float:
         """
-        Returns the real diameter of the spheres that highlight the nodes of the faces.
+        Returns the real diameter of the spheres that highlight the nodes.
         """
         diameter = self.highlight_diameter
         if diameter is not None:
             return max(diameter, 5.0 * context.resolution)
 
-        face = self._args['faces'][self.highlight_face]
+        face = self._args['faces'][self.highlight_faces[0]]
 
         total_distance = 0.0
         prev_point = None
@@ -112,24 +163,22 @@ class Polyhedron(ScadWidget):
         return self.uc(max(diameter, 5.0 * context.resolution))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def real_points(self, context: Context) -> List[Point3]:
+    def nodes(self, context: Context) -> List[Point3]:
         """
-        Returns the real points of the polyhedron.
+        Returns the nodes of the polyhedron.
         """
-        if not self.__is_ready:
-            self.__prepare_data(context)
+        self.__prepare_data(context)
 
-        return self.uc(self.__distinct_points)
+        return [node.point for node in self.__nodes.values()]
 
     # ------------------------------------------------------------------------------------------------------------------
-    def real_faces(self, context: Context) -> List[List[int]]:
+    def faces(self, context: Context) -> List[List[int]]:
         """
         Returns the real faces of the polyhedron.
         """
-        if not self.__is_ready:
-            self.__prepare_data(context)
+        self.__prepare_data(context)
 
-        return self.__real_faces
+        return [[node.node_id for node in face] for face in self.__faces]
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -141,119 +190,62 @@ class Polyhedron(ScadWidget):
         return self._args.get('convexity')
 
     # ------------------------------------------------------------------------------------------------------------------
-    @staticmethod
-    def __clean_face(face: List[int]) -> List[int] | None:
+    @property
+    def validate(self) -> bool:
         """
-        Removes fused point from a face. If face has only two or fewer points, returns None.
-
-        @param face: The face.
+        Returns whether to validate polyhedron.
         """
-        new_face = [key for key, _g in itertools.groupby(face)]
-        if new_face[0] == new_face[-1]:
-            new_face.pop()
-
-        if len(new_face) >= 3:
-            return new_face
-
-        return None
+        return self._args.get('validate')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __pass1(self, context: Context) -> None:
+    @property
+    def highlight_issues(self) -> bool:
         """
-        Pass 1: Remove fused points and enumerate points in the faces.
-
-        @param context: The build context.
+        Returns whether to highlight all issues found by the validation.
         """
-        digits = context.length_digits
-
-        distinct_point_map = {}
-        self.__distinct_points = []
-        self.__real_faces = []
-        for key, face in enumerate(self._args['faces']):
-            new_face = []
-            for point in face:
-                point_rounded = Point3(round(float(point.x), digits),
-                                       round(float(point.y), digits),
-                                       round(float(point.z), digits))
-                point_str = str(point_rounded)
-                index = distinct_point_map.get(point_str)
-                if index is None:
-                    index = len(self.__distinct_points)
-                    distinct_point_map[point_str] = index
-                    self.__distinct_points.append(point_rounded)
-                new_face.append(index)
-
-            if self.__clean_face(new_face) is not None:
-                self.__real_faces.append(new_face)
-                self.__map_faces_real_faces[key] = len(self.__real_faces) - 1
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def __pass2(self):
-        """
-        Pass 2: Remove unused points and renumber points.
-        """
-        point_keys = set()
-        for face in self.__real_faces:
-            point_keys.update(face)
-
-        if len(point_keys) == len(self.__distinct_points):
-            return
-
-        new_points = []
-        key_map = {}
-        for key, point in enumerate(self.__distinct_points):
-            if key in point_keys:
-                new_points.append(point)
-                key_map[key] = len(new_points) - 1
-        self.__distinct_points = new_points
-
-        for key, face in enumerate(self.__real_faces):
-            new_face = []
-            for index in face:
-                new_face.append(key_map[index])
-            self.__real_faces[key] = new_face
+        return self._args.get('highlight_issues')
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def __crate_markers_nodes(face: Iterable[Point3], is_real_face: bool, diameter: float) -> List[ScadWidget]:
+    def __create_face_marker_nodes(points: Iterable[Point3], is_real_face: bool, diameter: float) -> List[ScadWidget]:
         """
-        Create markers of the nodes of a face.
+        Creates markers of the nodes of a face.
 
-        :param face: The face.
+        :param points: The face, given as an iterable over its nodes given as points.
         :param is_real_face: Whether the face is a real face.
         :param diameter: The diameter of the markers.
         """
-        nodes = []
-        for key, point in enumerate(face):
+        markers = []
+        for node_id, node in enumerate(points):
             if is_real_face:
-                if key == 0:
+                if node_id == 0:
                     color = Color('red')
-                elif key == 1:
+                elif node_id == 1:
                     color = Color('orange')
-                elif key == 2:
+                elif node_id == 2:
                     color = Color('green')
                 else:
                     color = Color('black')
             else:
                 color = Color('pink')
 
-            node = Paint(color=color,
-                         child=Translate3D(vector=point,
-                                           child=Sphere(diameter=diameter, fn=16)))
-            nodes.append(node)
+            marker = Paint(color=color,
+                           child=Translate3D(vector=node,
+                                             child=Sphere(diameter=diameter, fn=16)))
+            markers.append(marker)
 
-        return nodes
+        return markers
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def __crate_markers_edges(face: Iterable[Point3],
-                              is_real_face: bool,
-                              diameter: float,
-                              context: Context) -> List[ScadWidget]:
+    def __create_face_marker_edges(points: Iterable[Point3],
+                                   is_real_face: bool,
+                                   diameter: float,
+                                   context: Context) -> List[ScadWidget]:
         """
-        Create markers of the edges of a face.
+        Creates markers of the edges of a face.
 
-        :param face: The face.
+        :param points: The face, given as an iterable over its nodes given as points.
         :param is_real_face: Whether the face is a real face.
         :param diameter: The diameter of cylinders on the edges.
         :param context: The build context.
@@ -266,7 +258,7 @@ class Polyhedron(ScadWidget):
         edges = []
         prev_point = None
         first_point = None
-        for key, point in enumerate(face):
+        for point in points:
             if prev_point is None:
                 first_point = point
             else:
@@ -291,7 +283,19 @@ class Polyhedron(ScadWidget):
         return edges
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __crate_markers(self, context: Context) -> Tuple[List[ScadWidget], List[ScadWidget]]:
+    def __create_markers(self, context: Context) -> List[ScadWidget]:
+        """
+        Create markers to faces and points.
+
+        :param context: The build context.
+        """
+        markers = self.__create_markers_faces(context)
+        markers += self.__create_markers_node(context)
+
+        return markers
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __create_markers_faces(self, context: Context) -> List[ScadWidget]:
         """
         Create markers to highlight a face.
 
@@ -299,20 +303,51 @@ class Polyhedron(ScadWidget):
         """
         diameter_node = self.real_highlight_diameter(context)
         diameter_edge = 0.2 * diameter_node
+        markers = []
 
-        if self.highlight_face in self.__map_faces_real_faces:
-            real_face = self.__real_faces[self.__map_faces_real_faces[self.highlight_face]]
-            face = []
-            for key in real_face:
-                face.append(self.__distinct_points[key])
-            is_real_face = True
-        else:
-            face = self._args['faces'][self.highlight_face]
-            is_real_face = False
-        nodes = self.__crate_markers_nodes(face, is_real_face, diameter_node)
-        edges = self.__crate_markers_edges(face, is_real_face, diameter_edge, context)
+        for face_id in self.highlight_faces:
+            if 0 <= face_id < len(self.__faces):
+                face = self.__faces[face_id]
 
-        return nodes, edges
+                points = [node.point for node in face]
+                markers += self.__create_face_marker_nodes(points, True, diameter_node)
+                markers += self.__create_face_marker_edges(points, True, diameter_edge, context)
+
+                node_ids = ', '.join(str(node.node_id) for node in face)
+                print(f'Note: Highlighting face {face_id}: [{node_ids}].')
+                for node in face:
+                    print(f'      Node {node.node_id}: {node.point}.')
+            else:
+                print(f'Warning: Face {face_id} not found.')
+
+        return markers
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __create_markers_node(self, context: Context) -> List[ScadWidget]:
+        """
+        Create markers to highlight a node.
+
+        :param context: The build context.
+        """
+        diameter_node = self.real_highlight_diameter(context)
+        markers = []
+
+        map_node_id_to_node = {}
+        for node in self.__nodes.values():
+            map_node_id_to_node[node.node_id] = node
+
+        for node_id in self.highlight_nodes:
+            if node_id in map_node_id_to_node:
+                point = map_node_id_to_node[node_id].point
+                markers.append(Paint(color=Color('blue'),
+                                     child=Translate3D(vector=point,
+                                                       child=Sphere(diameter=diameter_node, fn=16))))
+
+                print(f'Note: Highlighting node {node_id}: {point}.')
+            else:
+                print(f'Warning: Node {node_id} not found.')
+
+        return markers
 
     # ------------------------------------------------------------------------------------------------------------------
     def __prepare_data(self, context):
@@ -321,8 +356,95 @@ class Polyhedron(ScadWidget):
 
         @param context: The build context.
         """
-        self.__pass1(context)
-        self.__pass2()
+        if not self.__is_ready:
+            Node.next_node_id = 0
+            digits = context.length_digits
+
+            for points in self._args['faces']:
+                face = []
+                for point in points:
+                    node = self.__nodes.get(id(point))
+                    if node is None:
+                        point_rounded = Point3(round(self.uc(point.x), digits),
+                                               round(self.uc(point.y), digits),
+                                               round(self.uc(point.z), digits))
+                        node = Node(point_rounded)
+                        self.__nodes[id(point)] = node
+                    face.append(node)
+                self.__faces.append(face)
+
+            self.__is_ready = True
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __validate_line_segments(self) -> None:
+        """
+        Validates that all line segments are connected to exactly two faces.
+        """
+        line_segment_to_faces_map: Dict[Tuple[int, int], List[int]] = {}
+        for face_id, face in enumerate(self.__faces):
+            length = len(face)
+            for index in range(length):
+                node_id1 = face[index].node_id
+                node_id2 = face[(index + 1) % length].node_id
+                line_segment = (min(node_id1, node_id2), max(node_id1, node_id2))
+                if line_segment in line_segment_to_faces_map:
+                    line_segment_to_faces_map[line_segment].append(face_id)
+                else:
+                    line_segment_to_faces_map[line_segment] = [face_id]
+
+        for line_segment, original_face_ids in line_segment_to_faces_map.items():
+            if len(original_face_ids) != 2:
+                face_ids = ', '.join(str(original_face_id) for original_face_id in original_face_ids)
+
+                if len(original_face_ids) > 2:
+                    print(f'Warning: Line segment {line_segment} is part of one face only.')
+                    print(f'         Add highlight_nodes=[{line_segment}] to locate this line segment.')
+                    print(f'         Add highlight_faces=[{face_ids}] to locate the face.')
+
+                elif len(original_face_ids) < 2:
+                    numer_of_faces = len(original_face_ids)
+                    print(f'Warning: Line segment {line_segment} is part of {numer_of_faces} faces.')
+                    print(f'         Add highlight_nodes=[{line_segment}] to locate this line segment.')
+                    print(f'         Add highlight_faces=[{face_ids}] to locate the faces.')
+
+                if self.highlight_issues:
+                    self._args['highlight_nodes'].append(line_segment[0])
+                    self._args['highlight_nodes'].append(line_segment[1])
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __validate_faces1(self) -> None:
+        """
+        Validates that faces have three or more nodes.
+        """
+        for face_id, face in enumerate(self.__faces):
+            length = len(face)
+            if length < 3:
+                print(f'Warning: Face has less than three nodes.')
+                print(f'         Add highlight_faces=[{face_id}] to locate the face.')
+
+                if self.highlight_issues:
+                    self._args['highlight_face'].append(face_id)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __validate_faces2(self) -> None:
+        """
+        Validates that the nodes of all faces are ordered in clockwise direction.
+        """
+        # For now, press F12.
+        pass
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def __validate(self) -> None:
+        """
+        Validates the polyhedron.
+        """
+        if self.highlight_issues:
+            self._args['highlight_faces'] = []
+            self._args['highlight_nodes'] = []
+
+        self.__validate_line_segments()
+        self.__validate_faces1()
+        self.__validate_faces2()
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -332,16 +454,18 @@ class Polyhedron(ScadWidget):
         :param context: The build context.
         """
         self.__prepare_data(context)
+        if self.validate:
+            self.__validate()
 
-        polyhedron = PrivatePolyhedron(points=self.real_points(context),
-                                       faces=self.real_faces(context),
+        polyhedron = PrivatePolyhedron(points=self.nodes(context),
+                                       faces=self.faces(context),
                                        convexity=self.convexity)
 
-        if self.highlight_face is None:
+        if not self.highlight_faces and not self.highlight_nodes:
             return polyhedron
 
-        markers = self.__crate_markers(context)
+        markers = self.__create_markers(context)
 
-        return Union(children=[polyhedron] + markers[0] + markers[1])
+        return Union(children=[polyhedron] + markers)
 
 # ----------------------------------------------------------------------------------------------------------------------
