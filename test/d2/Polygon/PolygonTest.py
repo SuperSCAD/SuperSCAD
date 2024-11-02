@@ -114,11 +114,18 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def testInnerAngles1(self):
         """
-        Test inner angles.
+        Test inner and normal angles.
         """
         polygon = Polygon(primary=[Point2(0.0, 0.0), Point2(10.0, 0.0), Point2(0.0, 10.0)])
+
         actual = polygon.inner_angels
         expected = [90.0, 45.0, 45.0]
+        self.assertEqual(len(expected), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected[i], actual[i])
+
+        actual = polygon.normal_angels
+        expected = [45.0, 157.5, 292.5]
         self.assertEqual(len(expected), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected[i], actual[i])
@@ -129,8 +136,15 @@ class PolygonTestCase(ScadTestCase):
         Test inner angles.
         """
         polygon = Polygon(primary=[Point2(-10.0, 0.0), Point2(10.0, 0.0), Point2(0.0, 10.0 * math.sqrt(3.0))])
+
         actual = polygon.inner_angels
         expected = [60.0, 60.0, 60.0]
+        self.assertEqual(len(expected), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected[i], actual[i])
+
+        actual = polygon.normal_angels
+        expected = [30.0, 150.0, 270.0]
         self.assertEqual(len(expected), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected[i], actual[i])
@@ -159,6 +173,7 @@ class PolygonTestCase(ScadTestCase):
                                    Point2(1.0, -2.0),
                                    Point2(2.0, -2.0),
                                    Point2(2.0, -1.0)])
+
         actual = polygon.inner_angels
         expected = [90.0, 225.0,
                     90.0, 225.0,
@@ -172,4 +187,18 @@ class PolygonTestCase(ScadTestCase):
         for i in range(len(actual)):
             self.assertAlmostEqual(expected[i], actual[i])
 
-# ----------------------------------------------------------------------------------------------------------------------
+        actual = polygon.normal_angels
+        expected = [180.0, 22.5,
+                    225.0, 337.5,
+                    270.0, 292.5,
+                    315.0, 247.5,
+                    0.0, 202.5,
+                    45.0, 157.5,
+                    90.0, 112.5,
+                    135.0, 67.5]
+        self.assertEqual(len(expected), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(math.fmod(expected[i] - actual[i], 360.0), 0.0,
+                                   msg = 'expected: {}, actual: {}, i: {}'.format(expected[i], actual[i], i))
+
+    # ----------------------------------------------------------------------------------------------------------------------

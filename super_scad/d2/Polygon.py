@@ -5,6 +5,7 @@ from super_scad.d2.private.PrivatePolygon import PrivatePolygon
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.type.Angle import Angle
 from super_scad.type.Point2 import Point2
 
 
@@ -33,6 +34,16 @@ class Polygon(ScadWidget):
         """
         ScadWidget.__init__(self, args=locals())
 
+        self._inner_angles: List[float] | None = None
+        """
+        The inner angels of the polygon (in the same order as the primary points).
+        """
+
+        self._normal_angles: List[float] | None = None
+        """
+        The absolute angel of the normal of each node.
+        """
+
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
         """
@@ -49,30 +60,21 @@ class Polygon(ScadWidget):
         """
         Returns the inner angels of the polygon (in the same order as the primary points).
         """
-        angles = []
+        if self._inner_angles is None:
+            self._compute_angles()
 
-        radius: float = 0.0
-        nodes = self.primary
-        for point in nodes:
-            radius = max(radius, point.x, point.y)
+        return self._inner_angles
 
-        n = len(nodes)
-        for i in range(n):
-            p1 = nodes[(i - 1) % n]
-            p2 = nodes[i]
-            p3 = nodes[(i + 1) % n]
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def normal_angels(self) -> List[float]:
+        """
+        Returns the absolute angel of the normal of each node.
+        """
+        if self._normal_angles is None:
+            self._compute_angles()
 
-            q1 = Point2((p1.x + p2.x + p3.x) / 3, (p1.y + p2.y + p3.y) / 3)
-            q2 = Point2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
-
-            number_of_intersections = Polygon._count_intersections(nodes, q1, q2)
-            angle = Point2.angle_3p(p1, p2,p3)
-            if number_of_intersections % 2 == 0:
-                angle = 360.0 - angle
-
-            angles.append(angle)
-
-        return angles
+        return self._normal_angles
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -154,5 +156,37 @@ class Polygon(ScadWidget):
                 intersections += 1
 
         return intersections
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _compute_angles(self) -> None:
+        """
+        Returns the inner angels of the polygon (in the same order as the primary points).
+        """
+        self._inner_angles = []
+        self._normal_angles = []
+
+        radius: float = 0.0
+        nodes = self.primary
+        for point in nodes:
+            radius = max(radius, point.x, point.y)
+
+        n = len(nodes)
+        for i in range(n):
+            p1 = nodes[(i - 1) % n]
+            p2 = nodes[i]
+            p3 = nodes[(i + 1) % n]
+
+            q1 = Point2((p1.x + p2.x + p3.x) / 3, (p1.y + p2.y + p3.y) / 3)
+            q2 = Point2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
+
+            number_of_intersections = Polygon._count_intersections(nodes, q1, q2)
+            inner_angle = Point2.angle_3p(p1, p2, p3)
+            normal_angle = (p3 - p2).angle + 0.5 * inner_angle
+            if number_of_intersections % 2 == 0:
+                inner_angle = 360.0 - inner_angle
+                normal_angle = 180.0 - normal_angle
+
+            self._inner_angles.append(inner_angle)
+            self._normal_angles.append(Angle.normalize(normal_angle))
 
 # ----------------------------------------------------------------------------------------------------------------------
