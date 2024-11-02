@@ -1,9 +1,7 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Circle import Circle
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Resize2D import Resize2D
-from super_scad.type.Size2 import Size2
+from super_scad.type.Vector2 import Vector2
 
 
 class Resize2DTest(ScadTestCase):
@@ -16,57 +14,57 @@ class Resize2DTest(ScadTestCase):
         """
         Test cases for auto depth.
         """
-        resize = Resize2D(new_size=Size2(30.0, 60.0), child=Circle(radius=10.0))
+        resize = Resize2D(new_size=Vector2(30.0, 60.0), child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
         self.assertAlmostEqual(resize.new_depth, 60.0)
-        self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 60.0)
+        self.assertAlmostEqual(resize.new_size.x, 30.0)
+        self.assertAlmostEqual(resize.new_size.y, 60.0)
         self.assertFalse(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 
-        resize = Resize2D(new_size=Size2(30.0, 0.0), child=Circle(radius=10.0))
+        resize = Resize2D(new_size=Vector2(30.0, 0.0), child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
         self.assertAlmostEqual(resize.new_depth, 0.0)
-        self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 0.0)
+        self.assertAlmostEqual(resize.new_size.x, 30.0)
+        self.assertAlmostEqual(resize.new_size.y, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 
-        resize = Resize2D(new_size=Size2(30.0, 0.0), auto=True, child=Circle(radius=10.0))
+        resize = Resize2D(new_size=Vector2(30.0, 0.0), auto=True, child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
         self.assertAlmostEqual(resize.new_depth, 0.0)
-        self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 0.0)
+        self.assertAlmostEqual(resize.new_size.x, 30.0)
+        self.assertAlmostEqual(resize.new_size.y, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertTrue(resize.auto_depth)
 
-        resize = Resize2D(new_size=Size2(30.0, 0.0), auto_depth=True, child=Circle(radius=10.0))
+        resize = Resize2D(new_size=Vector2(30.0, 0.0), auto_depth=True, child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
         self.assertAlmostEqual(resize.new_depth, 0.0)
-        self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 0.0)
+        self.assertAlmostEqual(resize.new_size.x, 30.0)
+        self.assertAlmostEqual(resize.new_size.y, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertTrue(resize.auto_depth)
 
-        resize = Resize2D(new_size=Size2(30.0, 0.0), auto=(True, True), child=Circle(radius=10.0))
+        resize = Resize2D(new_size=Vector2(30.0, 0.0), auto=(True, True), child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
         self.assertAlmostEqual(resize.new_depth, 0.0)
-        self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 0.0)
+        self.assertAlmostEqual(resize.new_size.x, 30.0)
+        self.assertAlmostEqual(resize.new_size.y, 0.0)
         self.assertFalse(resize.auto_width)
         self.assertTrue(resize.auto_depth)
 
-        resize = Resize2D(new_size=Size2(0.0, 60.0), child=Circle(radius=10.0))
+        resize = Resize2D(new_size=Vector2(0.0, 60.0), child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 0.0)
         self.assertAlmostEqual(resize.new_depth, 60.0)
-        self.assertAlmostEqual(resize.new_size.width, 0.0)
-        self.assertAlmostEqual(resize.new_size.depth, 60.0)
+        self.assertAlmostEqual(resize.new_size.x, 0.0)
+        self.assertAlmostEqual(resize.new_size.y, 60.0)
         self.assertFalse(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 
@@ -79,12 +77,12 @@ class Resize2DTest(ScadTestCase):
 
         scad = self.create_scad()
 
-        resize = Resize2D(new_size=Size2(30.0, 60.0), child=Circle(radius=10.0))
+        resize = Resize2D(new_size=Vector2(30.0, 60.0), child=Circle(radius=10.0))
 
         self.assertAlmostEqual(resize.new_width, 30.0)
         self.assertAlmostEqual(resize.new_depth, 60.0)
-        self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 60.0)
+        self.assertAlmostEqual(resize.new_size.x, 30.0)
+        self.assertAlmostEqual(resize.new_size.y, 60.0)
         self.assertFalse(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 
@@ -106,8 +104,8 @@ class Resize2DTest(ScadTestCase):
 
         self.assertAlmostEqual(resize.new_width, 30.0)
         self.assertAlmostEqual(resize.new_depth, 60.0)
-        self.assertAlmostEqual(resize.new_size.width, 30.0)
-        self.assertAlmostEqual(resize.new_size.depth, 60.0)
+        self.assertAlmostEqual(resize.new_size.x, 30.0)
+        self.assertAlmostEqual(resize.new_size.y, 60.0)
         self.assertFalse(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 
@@ -129,8 +127,8 @@ class Resize2DTest(ScadTestCase):
 
         self.assertAlmostEqual(resize.new_width, 0.0)
         self.assertAlmostEqual(resize.new_depth, 60.0)
-        self.assertAlmostEqual(resize.new_size.width, 0.0)
-        self.assertAlmostEqual(resize.new_size.depth, 60.0)
+        self.assertAlmostEqual(resize.new_size.x, 0.0)
+        self.assertAlmostEqual(resize.new_size.y, 60.0)
         self.assertTrue(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 
@@ -152,8 +150,8 @@ class Resize2DTest(ScadTestCase):
 
         self.assertAlmostEqual(resize.new_width, 0.0)
         self.assertAlmostEqual(resize.new_depth, 60.0)
-        self.assertAlmostEqual(resize.new_size.width, 0.0)
-        self.assertAlmostEqual(resize.new_size.depth, 60.0)
+        self.assertAlmostEqual(resize.new_size.x, 0.0)
+        self.assertAlmostEqual(resize.new_size.y, 60.0)
         self.assertTrue(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 
@@ -175,8 +173,8 @@ class Resize2DTest(ScadTestCase):
 
         self.assertAlmostEqual(resize.new_width, 0.0)
         self.assertAlmostEqual(resize.new_depth, 60.0)
-        self.assertAlmostEqual(resize.new_size.width, 0.0)
-        self.assertAlmostEqual(resize.new_size.depth, 60.0)
+        self.assertAlmostEqual(resize.new_size.x, 0.0)
+        self.assertAlmostEqual(resize.new_size.y, 60.0)
         self.assertTrue(resize.auto_width)
         self.assertFalse(resize.auto_depth)
 

@@ -9,7 +9,7 @@ from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Paint import Paint
 from super_scad.transformation.Translate3D import Translate3D
 from super_scad.type.Color import Color
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -25,14 +25,14 @@ class Node:
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, point: Point3):
+    def __init__(self, point: Vector3):
         """
         Object constructor.
 
         :param point: The rounded position of the node.
         """
 
-        self.point: Point3 = point
+        self.point: Vector3 = point
         """
         The rounded position of this node.
         """
@@ -54,7 +54,7 @@ class Polyhedron(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 faces: List[List[Point3] | Tuple[Point3, ...]],
+                 faces: List[List[Vector3] | Tuple[Vector3, ...]],
                  highlight_faces: int | List[int] | None = None,
                  highlight_nodes: int | List[int] = None,
                  highlight_diameter: float | None = None,
@@ -163,7 +163,7 @@ class Polyhedron(ScadWidget):
         return self.uc(max(diameter, 5.0 * context.resolution))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def nodes(self, context: Context) -> List[Point3]:
+    def nodes(self, context: Context) -> List[Vector3]:
         """
         Returns the nodes of the polyhedron.
         """
@@ -207,7 +207,7 @@ class Polyhedron(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def __create_face_marker_nodes(points: Iterable[Point3], is_real_face: bool, diameter: float) -> List[ScadWidget]:
+    def __create_face_marker_nodes(points: Iterable[Vector3], is_real_face: bool, diameter: float) -> List[ScadWidget]:
         """
         Creates markers of the nodes of a face.
 
@@ -238,7 +238,7 @@ class Polyhedron(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def __create_face_marker_edges(points: Iterable[Point3],
+    def __create_face_marker_edges(points: Iterable[Vector3],
                                    is_real_face: bool,
                                    diameter: float,
                                    context: Context) -> List[ScadWidget]:
@@ -365,9 +365,9 @@ class Polyhedron(ScadWidget):
                 for point in points:
                     node = self.__nodes.get(id(point))
                     if node is None:
-                        point_rounded = Point3(round(self.uc(point.x), digits),
-                                               round(self.uc(point.y), digits),
-                                               round(self.uc(point.z), digits))
+                        point_rounded = Vector3(round(self.uc(point.x), digits),
+                                                round(self.uc(point.y), digits),
+                                                round(self.uc(point.z), digits))
                         node = Node(point_rounded)
                         self.__nodes[id(point)] = node
                     face.append(node)

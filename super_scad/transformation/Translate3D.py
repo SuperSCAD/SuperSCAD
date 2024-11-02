@@ -3,7 +3,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateTranslate import PrivateTranslate
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Translate3D(ScadSingleChildParent):
@@ -15,7 +15,7 @@ class Translate3D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 vector: Point3 | None = None,
+                 vector: Vector3 | None = None,
                  x: float | None = None,
                  y: float | None = None,
                  z: float | None = None,
@@ -41,11 +41,11 @@ class Translate3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def vector(self) -> Point3:
+    def vector(self) -> Vector3:
         """
         Returns the vector over which the child widget is translated.
         """
-        return Point3(self.x, self.y, self.z)
+        return Vector3(self.x, self.y, self.z)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -87,6 +87,6 @@ class Translate3D(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        return PrivateTranslate(vector=Point3(x=self.x, y=self.y, z=self.z), child=self.child)
+        return PrivateTranslate(vector=Vector3(x=self.x, y=self.y, z=self.z), child=self.child)
 
 # ----------------------------------------------------------------------------------------------------------------------

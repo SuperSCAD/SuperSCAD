@@ -1,8 +1,7 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Rectangle import Rectangle
-from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
-from super_scad.type.Size2 import Size2
+from super_scad.type.Vector2 import Vector2
 from test.d2.Rectangle.ImperialUnitRectangle import ImperialUnitRectangle
 
 
@@ -19,12 +18,12 @@ class RectangleTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = self.create_scad()
-        rectangle = Rectangle(size=Size2(20, 10))
+        rectangle = Rectangle(size=Vector2(20, 10))
 
         self.assertAlmostEqual(20.0, rectangle.width)
         self.assertAlmostEqual(10.0, rectangle.depth)
-        self.assertAlmostEqual(20.0, rectangle.size.width)
-        self.assertAlmostEqual(10.0, rectangle.size.depth)
+        self.assertAlmostEqual(20.0, rectangle.size.x)
+        self.assertAlmostEqual(10.0, rectangle.size.y)
         self.assertFalse(rectangle.center)
 
         scad.run_super_scad(rectangle, path_actual)
@@ -40,12 +39,12 @@ class RectangleTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = self.create_scad()
-        rectangle = Rectangle(size=Size2(20, 10), center=True)
+        rectangle = Rectangle(size=Vector2(20, 10), center=True)
 
         self.assertAlmostEqual(20.0, rectangle.width)
         self.assertAlmostEqual(10.0, rectangle.depth)
-        self.assertAlmostEqual(20.0, rectangle.size.width)
-        self.assertAlmostEqual(10.0, rectangle.size.depth)
+        self.assertAlmostEqual(20.0, rectangle.size.x)
+        self.assertAlmostEqual(10.0, rectangle.size.y)
         self.assertTrue(rectangle.center)
 
         scad.run_super_scad(rectangle, path_actual)
@@ -66,8 +65,8 @@ class RectangleTestCase(ScadTestCase):
 
         self.assertAlmostEqual(50.8, rectangle.imperial_rectangle.width)
         self.assertAlmostEqual(25.4, rectangle.imperial_rectangle.depth)
-        self.assertAlmostEqual(50.8, rectangle.imperial_rectangle.size.width)
-        self.assertAlmostEqual(25.4, rectangle.imperial_rectangle.size.depth)
+        self.assertAlmostEqual(50.8, rectangle.imperial_rectangle.size.x)
+        self.assertAlmostEqual(25.4, rectangle.imperial_rectangle.size.y)
         self.assertFalse(rectangle.imperial_rectangle.center)
 
         actual = path_actual.read_text()
@@ -87,8 +86,8 @@ class RectangleTestCase(ScadTestCase):
 
         self.assertAlmostEqual(2.0, rectangle.imperial_rectangle.width)
         self.assertAlmostEqual(1.0, rectangle.imperial_rectangle.depth)
-        self.assertAlmostEqual(2.0, rectangle.imperial_rectangle.size.width)
-        self.assertAlmostEqual(1.0, rectangle.imperial_rectangle.size.depth)
+        self.assertAlmostEqual(2.0, rectangle.imperial_rectangle.size.x)
+        self.assertAlmostEqual(1.0, rectangle.imperial_rectangle.size.y)
         self.assertFalse(rectangle.imperial_rectangle.center)
 
         actual = path_actual.read_text()

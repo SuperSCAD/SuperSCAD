@@ -2,8 +2,8 @@ from typing import Dict, Set
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.type.Point2 import Point2
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector2 import Vector2
+from super_scad.type.Vector3 import Vector3
 
 
 class PrivateMirror(PrivateSingleChildOpenScadCommand):
@@ -15,7 +15,7 @@ class PrivateMirror(PrivateSingleChildOpenScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 vector: Point2 | Point3,
+                 vector: Vector2 | Vector3,
                  child: ScadWidget):
         """
         Object constructor.

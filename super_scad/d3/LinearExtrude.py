@@ -2,7 +2,7 @@ from typing import Dict, Set
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class LinearExtrude(PrivateSingleChildOpenScadCommand):
@@ -18,7 +18,7 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
                  center: bool = False,
                  convexity: int | None = None,
                  twist: float = 0.0,
-                 scale: float | Point2 = 1.0,
+                 scale: float | Vector2 = 1.0,
                  slices: int | None = None,
                  segments: int | None = None,
                  fa: float | None = None,
@@ -110,7 +110,7 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def scale(self) -> float | Point2:
+    def scale(self) -> float | Vector2:
         """
         Returns the number of degrees of through which the shape is extruded. Setting the parameter twist = 360
         extrudes through one revolution. The twist direction follows the left-hand rule.

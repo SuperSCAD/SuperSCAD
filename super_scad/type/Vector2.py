@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class Point2:
+class Vector2:
     """
     A point in 2D space or a 2-dimensional vector.
     """
@@ -24,19 +24,19 @@ class Point2:
 
     # ------------------------------------------------------------------------------------------------------------------
     def __add__(self, other):
-        return Point2(self.x + other.x, self.y + other.y)
+        return Vector2(self.x + other.x, self.y + other.y)
 
     # ------------------------------------------------------------------------------------------------------------------
     def __sub__(self, other):
-        return Point2(self.x - other.x, self.y - other.y)
+        return Vector2(self.x - other.x, self.y - other.y)
 
     # ------------------------------------------------------------------------------------------------------------------
     def __truediv__(self, other: float):
-        return Point2(self.x / other, self.y / other)
+        return Vector2(self.x / other, self.y / other)
 
     # ------------------------------------------------------------------------------------------------------------------
     def __mul__(self, other: float):
-        return Point2(self.x * other, self.y * other)
+        return Vector2(self.x * other, self.y * other)
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -47,7 +47,7 @@ class Point2:
         @param length: The length of the vector.
         @param angle: The angle of the vector.
         """
-        return Point2(length * math.cos(math.radians(angle)), length * math.sin(math.radians(angle)))
+        return Vector2(length * math.cos(math.radians(angle)), length * math.sin(math.radians(angle)))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -71,11 +71,11 @@ class Point2:
         """
         Returns the unit vector of this vector.
 
-        :rtype: super_scad.type.Point2.Point2
+        :rtype: super_scad.type.Vector2.Vector2
         """
         length = self.length
 
-        return Point2(self.x / length, self.y / length)
+        return Vector2(self.x / length, self.y / length)
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -128,24 +128,24 @@ class Point2:
         @param p2: The start point of the second segment.
         @param q2: The end point of the second segment.
         """
-        o1 = Point2._orientation(p1, q1, p2)
-        o2 = Point2._orientation(p1, q1, q2)
-        o3 = Point2._orientation(p2, q2, p1)
-        o4 = Point2._orientation(p2, q2, q1)
+        o1 = Vector2._orientation(p1, q1, p2)
+        o2 = Vector2._orientation(p1, q1, q2)
+        o3 = Vector2._orientation(p2, q2, p1)
+        o4 = Vector2._orientation(p2, q2, q1)
 
         if (o1 != o2) and (o3 != o4):
             return True
 
-        if (o1 == 0) and Point2._on_segment(p1, p2, q1):
+        if (o1 == 0) and Vector2._on_segment(p1, p2, q1):
             return True
 
-        if (o2 == 0) and Point2._on_segment(p1, q2, q1):
+        if (o2 == 0) and Vector2._on_segment(p1, q2, q1):
             return True
 
-        if (o3 == 0) and Point2._on_segment(p2, p1, q2):
+        if (o3 == 0) and Vector2._on_segment(p2, p1, q2):
             return True
 
-        if (o4 == 0) and Point2._on_segment(p2, q1, q2):
+        if (o4 == 0) and Vector2._on_segment(p2, q1, q2):
             return True
 
         return False

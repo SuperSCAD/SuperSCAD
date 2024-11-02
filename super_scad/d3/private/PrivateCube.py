@@ -1,7 +1,7 @@
 from typing import Set
 
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
-from super_scad.type.Size3 import Size3
+from super_scad.type.Vector3 import Vector3
 
 
 class PrivateCube(PrivateOpenScadCommand):
@@ -10,7 +10,7 @@ class PrivateCube(PrivateOpenScadCommand):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, size: float | Size3, center: bool = False):
+    def __init__(self, *, size: float | Vector3, center: bool = False):
         """
         Object constructor.
 

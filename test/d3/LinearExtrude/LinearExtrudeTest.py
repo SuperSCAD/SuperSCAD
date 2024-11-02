@@ -2,10 +2,9 @@ from d3.LinearExtrude.ImperialUnitCube import ImperialUnitCube
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Circle import Circle
 from super_scad.d3.LinearExtrude import LinearExtrude
-from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate2D import Translate2D
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class LinearExtrudeTest(ScadTestCase):
@@ -266,11 +265,11 @@ class LinearExtrudeTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = self.create_scad()
-        polygon = [Point2(0.0, 0.0), Point2(20.0, 10.0), Point2(20.0, -10.0)]
+        polygon = [Vector2(0.0, 0.0), Vector2(20.0, 10.0), Vector2(20.0, -10.0)]
         extrude = LinearExtrude(height=10.0,
                                 center=True,
                                 convexity=10,
-                                scale=Point2(1, 5),
+                                scale=Vector2(1, 5),
                                 slices=20,
                                 fn=100,
                                 child=Translate2D(x=2.0, child=Circle(radius=1)))

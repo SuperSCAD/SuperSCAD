@@ -4,10 +4,9 @@ from super_scad.boolean.Union import Union
 from super_scad.d3.Cuboid import Cuboid
 from super_scad.d3.Cylinder import Cylinder
 from super_scad.other.Modify import Modify
-from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate3D import Translate3D
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class CylinderTestCase(ScadTestCase):
@@ -83,8 +82,8 @@ class CylinderTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = self.create_scad()
-        start_point = Point3(3.0, 2.0, 1.0)
-        end_point = Point3(30.0, 20.0, 10.0)
+        start_point = Vector3(3.0, 2.0, 1.0)
+        end_point = Vector3(30.0, 20.0, 10.0)
         diff = end_point - start_point
         cylinder = Cylinder(start_point=start_point, end_point=end_point, diameter=0.1, fn=64)
         cuboid = Modify(transparent=True,

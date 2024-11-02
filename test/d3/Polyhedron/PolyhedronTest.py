@@ -1,9 +1,8 @@
 from d3.Polyhedron.ImperialUnitCube import ImperialUnitCube
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Polyhedron import Polyhedron
-from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class PolyhedronTest(ScadTestCase):
@@ -19,11 +18,11 @@ class PolyhedronTest(ScadTestCase):
         path_actual, path_expected = self.paths()
         scad = self.create_scad()
 
-        point1 = Point3(0.0, 0.0, 0.0)
-        point2 = Point3(440.0, 0.0, 0.0)
-        point3 = Point3(440.0, 440.0, 0.0)
-        point4 = Point3(0.0, 440.0, 0.0)
-        point5 = Point3(220.0, 220.0, 280.0)  # apex
+        point1 = Vector3(0.0, 0.0, 0.0)
+        point2 = Vector3(440.0, 0.0, 0.0)
+        point3 = Vector3(440.0, 440.0, 0.0)
+        point4 = Vector3(0.0, 440.0, 0.0)
+        point5 = Vector3(220.0, 220.0, 280.0)  # apex
 
         faces = [[point1, point2, point3, point4],  # base plane
                  [point1, point5, point2],  # front
@@ -46,11 +45,11 @@ class PolyhedronTest(ScadTestCase):
         path_actual, path_expected = self.paths()
         scad = self.create_scad()
 
-        point1 = Point3(0.0, 0.0, 0.0)
-        point2 = Point3(440.0, 0.0, 0.0)
-        point3 = Point3(440.0, 440.0, 0.0)
-        point4 = Point3(0.0, 440.0, 0.0)
-        point5 = Point3(220.0, 220.0, 280.0)  # apex
+        point1 = Vector3(0.0, 0.0, 0.0)
+        point2 = Vector3(440.0, 0.0, 0.0)
+        point3 = Vector3(440.0, 440.0, 0.0)
+        point4 = Vector3(0.0, 440.0, 0.0)
+        point5 = Vector3(220.0, 220.0, 280.0)  # apex
 
         faces = [(point1, point2, point3, point4),  # base plane
                  (point1, point5, point2),  # front
@@ -75,11 +74,11 @@ class PolyhedronTest(ScadTestCase):
 
         base = 440.0
         height = 280.0
-        point1 = Point3(0.0, 0.0, 0.0)
-        point2 = Point3(base, 0.0, 0.0)
-        point3 = Point3(base, base, 0.0)
-        point4 = Point3(0.0, base, 0.0)
-        point5 = Point3(base / 2.0, base / 2.0, height)  # apex
+        point1 = Vector3(0.0, 0.0, 0.0)
+        point2 = Vector3(base, 0.0, 0.0)
+        point3 = Vector3(base, base, 0.0)
+        point4 = Vector3(0.0, base, 0.0)
+        point5 = Vector3(base / 2.0, base / 2.0, height)  # apex
 
         faces = [[point1, point2, point3, point4],  # base plane
                  [point1, point5, point2],  # front

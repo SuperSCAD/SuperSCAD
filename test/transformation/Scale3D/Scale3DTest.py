@@ -1,11 +1,9 @@
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
 from super_scad.d3.Cube import Cube
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Scale3D import Scale3D
 from super_scad.transformation.Translate3D import Translate3D
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Scale3DTest(ScadTestCase):
@@ -23,7 +21,7 @@ class Scale3DTest(ScadTestCase):
         scad = self.create_scad()
 
         cube = Cube(size=10.0)
-        scale = Scale3D(factor=Point3(x=0.5, y=1.0, z=2.0), child=cube)
+        scale = Scale3D(factor=Vector3(x=0.5, y=1.0, z=2.0), child=cube)
 
         self.assertAlmostEqual(scale.factor_x, 0.5)
         self.assertAlmostEqual(scale.factor_y, 1.0)

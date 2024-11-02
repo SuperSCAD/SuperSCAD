@@ -4,10 +4,8 @@ from typing import Any, Dict, List
 from super_scad.scad import Length
 from super_scad.scad.Context import Context
 from super_scad.scad.Unit import Unit
-from super_scad.type.Point2 import Point2
-from super_scad.type.Point3 import Point3
-from super_scad.type.Size2 import Size2
-from super_scad.type.Size3 import Size3
+from super_scad.type.Vector2 import Vector2
+from super_scad.type.Vector3 import Vector3
 
 
 class ScadWidget(ABC):
@@ -77,17 +75,11 @@ class ScadWidget(ABC):
         if isinstance(length, int):
             return Length.convert(float(length), self.__unit, Context.get_unit_length_current())
 
-        if isinstance(length, Point2):
-            return Point2(self.uc(length.x), self.uc(length.y))
+        if isinstance(length, Vector2):
+            return Vector2(self.uc(length.x), self.uc(length.y))
 
-        if isinstance(length, Point3):
-            return Point3(self.uc(length.x), self.uc(length.y), self.uc(length.z))
-
-        if isinstance(length, Size2):
-            return Size2(self.uc(length.width), self.uc(length.depth))
-
-        if isinstance(length, Size3):
-            return Size3(self.uc(length.width), self.uc(length.depth), self.uc(length.height))
+        if isinstance(length, Vector3):
+            return Vector3(self.uc(length.x), self.uc(length.y), self.uc(length.z))
 
         if isinstance(length, List):
             points = []

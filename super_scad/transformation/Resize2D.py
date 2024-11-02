@@ -5,7 +5,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateResize import PrivateResize
-from super_scad.type.Size2 import Size2
+from super_scad.type.Vector2 import Vector2
 
 
 class Resize2D(ScadSingleChildParent):
@@ -17,7 +17,7 @@ class Resize2D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 new_size: Size2 | None = None,
+                 new_size: Vector2 | None = None,
                  new_width: float | None = None,
                  new_depth: float | None = None,
                  auto: bool | Tuple[bool, bool] | None = None,
@@ -51,11 +51,11 @@ class Resize2D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def new_size(self) -> Size2:
+    def new_size(self) -> Vector2:
         """
         Returns the new_size along all three axes.
         """
-        return Size2(self.new_width, self.new_depth)
+        return Vector2(self.new_width, self.new_depth)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -64,7 +64,7 @@ class Resize2D(ScadSingleChildParent):
         Returns new width (the new size along the x-axis).
         """
         if 'new_size' in self._args:
-            return self.uc(self._args['new_size'].width)
+            return self.uc(self._args['new_size'].x)
 
         return self.uc(self._args.get('new_width', 0.0))
 
@@ -75,7 +75,7 @@ class Resize2D(ScadSingleChildParent):
         Returns the new depth (the new size along the y-axis).
         """
         if 'new_size' in self._args:
-            return self.uc(self._args['new_size'].depth)
+            return self.uc(self._args['new_size'].y)
 
         return self.uc(self._args.get('new_depth', 0.0))
 

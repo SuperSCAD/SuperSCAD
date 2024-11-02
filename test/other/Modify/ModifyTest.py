@@ -4,8 +4,6 @@ from super_scad.boolean.Difference import Difference
 from super_scad.d3.Cube import Cube
 from super_scad.d3.Cylinder import Cylinder
 from super_scad.other.Modify import Modify
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Rotate3D import Rotate3D
 from super_scad.transformation.Translate3D import Translate3D
 

@@ -2,10 +2,8 @@ import math
 
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Mirror3D import Mirror3D
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 from transformation.Mirror3D.Indicator import Indicator
 
 
@@ -87,7 +85,7 @@ class Mirror3DTest(ScadTestCase):
 
         scad = self.create_scad()
         original = Indicator()
-        mirrored = Mirror3D(vector=Point3(1.0, 1.0, 1.0), child=original)
+        mirrored = Mirror3D(vector=Vector3(1.0, 1.0, 1.0), child=original)
 
         self.assertAlmostEqual(math.sqrt(3.0) / 3.0, mirrored.vector.x)
         self.assertAlmostEqual(math.sqrt(3.0) / 3.0, mirrored.vector.y)

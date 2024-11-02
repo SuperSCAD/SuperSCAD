@@ -2,7 +2,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate3D import Translate3D
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class ImperialTranslate3D(ScadWidget):
@@ -13,7 +13,7 @@ class ImperialTranslate3D(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 vector: Point3 | None = None,
+                 vector: Vector3 | None = None,
                  x: float | None = None,
                  y: float | None = None,
                  z: float | None = None,

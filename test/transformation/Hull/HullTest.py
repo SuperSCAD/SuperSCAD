@@ -1,7 +1,5 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Circle import Circle
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Hull import Hull
 from super_scad.transformation.Translate2D import Translate2D
 

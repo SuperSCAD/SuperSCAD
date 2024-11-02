@@ -2,7 +2,7 @@ from super_scad.d3.private.PrivateCube import PrivateCube
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.type.Size3 import Size3
+from super_scad.type.Vector3 import Vector3
 
 
 class Cuboid(ScadWidget):
@@ -13,7 +13,7 @@ class Cuboid(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 size: Size3 | None = None,
+                 size: Vector3 | None = None,
                  width: float | None = None,
                  depth: float | None = None,
                  height: float | None = None,
@@ -51,11 +51,11 @@ class Cuboid(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def size(self) -> Size3:
+    def size(self) -> Vector3:
         """
         Returns the size of the cuboid.
         """
-        return Size3(width=self.width, depth=self.depth, height=self.height)
+        return Vector3(x=self.width, y=self.depth, z=self.height)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -64,7 +64,7 @@ class Cuboid(ScadWidget):
         Returns the width of the cuboid.
         """
         if 'size' in self._args:
-            return self.uc(self._args['size'].width)
+            return self.uc(self._args['size'].x)
 
         return self.uc(self._args['width'])
 
@@ -75,7 +75,7 @@ class Cuboid(ScadWidget):
         Returns the depth of the cuboid.
         """
         if 'size' in self._args:
-            return self.uc(self._args['size'].depth)
+            return self.uc(self._args['size'].y)
 
         return self.uc(self._args['depth'])
 
@@ -86,7 +86,7 @@ class Cuboid(ScadWidget):
         Returns the height of the cuboid.
         """
         if 'size' in self._args:
-            return self.uc(self._args['size'].height)
+            return self.uc(self._args['size'].z)
 
         return self.uc(self._args['height'])
 

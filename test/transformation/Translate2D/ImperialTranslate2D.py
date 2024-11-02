@@ -2,7 +2,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate2D import Translate2D
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class ImperialTranslate2D(ScadWidget):
@@ -13,7 +13,7 @@ class ImperialTranslate2D(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 vector: Point2 | None = None,
+                 vector: Vector2 | None = None,
                  x: float | None = None,
                  y: float | None = None,
                  child: ScadWidget) -> None:

@@ -1,7 +1,7 @@
 from typing import List, Set
 
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class PrivatePolygon(PrivateOpenScadCommand):
@@ -12,7 +12,7 @@ class PrivatePolygon(PrivateOpenScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 points: List[Point2],
+                 points: List[Vector2],
                  paths: List[List[int]] | None = None,
                  convexity: int | None = None):
         """

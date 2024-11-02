@@ -3,7 +3,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateRotate import PrivateRotate
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class Flip2D(ScadSingleChildParent):
@@ -77,7 +77,7 @@ class Flip2D(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        angle = Point2(x=180.0 if self.flip_x else 0.0, y=180.0 if self.flip_y else 0.0)
+        angle = Vector2(x=180.0 if self.flip_x else 0.0, y=180.0 if self.flip_y else 0.0)
 
         return PrivateRotate(angle=angle, child=self.child)
 

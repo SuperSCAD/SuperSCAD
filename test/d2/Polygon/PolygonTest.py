@@ -4,7 +4,7 @@ from d2.Polygon.ImperialUnitPolygon import ImperialUnitPolygon
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Polygon import Polygon
 from super_scad.scad.Unit import Unit
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class PolygonTestCase(ScadTestCase):
@@ -20,10 +20,10 @@ class PolygonTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = self.create_scad()
-        scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
-                                             Point2(100.0, 0.0),
-                                             Point2(130.0, 50.0),
-                                             Point2(30.0, 50.0)]),
+        scad.run_super_scad(Polygon(primary=[Vector2(0.0, 0.0),
+                                             Vector2(100.0, 0.0),
+                                             Vector2(130.0, 50.0),
+                                             Vector2(30.0, 50.0)]),
                             path_actual)
 
         actual = path_actual.read_text()
@@ -38,12 +38,12 @@ class PolygonTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = self.create_scad()
-        scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
-                                             Point2(100.0, 0.0),
-                                             Point2(0.0, 100.0)],
-                                    secondary=[Point2(10.0, 10.0),
-                                               Point2(80.0, 10.0),
-                                               Point2(10.0, 80.0)],
+        scad.run_super_scad(Polygon(primary=[Vector2(0.0, 0.0),
+                                             Vector2(100.0, 0.0),
+                                             Vector2(0.0, 100.0)],
+                                    secondary=[Vector2(10.0, 10.0),
+                                               Vector2(80.0, 10.0),
+                                               Vector2(10.0, 80.0)],
                                     convexity=10),
                             path_actual)
 
@@ -59,24 +59,24 @@ class PolygonTestCase(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = self.create_scad()
-        scad.run_super_scad(Polygon(primary=[Point2(0.0, 0.0),
-                                             Point2(100.0, 0.0),
-                                             Point2(130.0, 50.0),
-                                             Point2(30.0, 50.0)],
-                                    secondaries=[[Point2(20.0, 20.0),
-                                                  Point2(40.0, 20.0),
-                                                  Point2(30.0, 30.0)],
-                                                 [Point2(50.0, 20.0),
-                                                  Point2(60.0, 20.0),
-                                                  Point2(40.0, 30.0)],
-                                                 [Point2(65.0, 10.0),
-                                                  Point2(80.0, 10.0),
-                                                  Point2(80.0, 40.0),
-                                                  Point2(65.0, 40.0)],
-                                                 [Point2(98.0, 10.0),
-                                                  Point2(115.0, 40.0),
-                                                  Point2(85.0, 40.0),
-                                                  Point2(85.0, 10.0)]]),
+        scad.run_super_scad(Polygon(primary=[Vector2(0.0, 0.0),
+                                             Vector2(100.0, 0.0),
+                                             Vector2(130.0, 50.0),
+                                             Vector2(30.0, 50.0)],
+                                    secondaries=[[Vector2(20.0, 20.0),
+                                                  Vector2(40.0, 20.0),
+                                                  Vector2(30.0, 30.0)],
+                                                 [Vector2(50.0, 20.0),
+                                                  Vector2(60.0, 20.0),
+                                                  Vector2(40.0, 30.0)],
+                                                 [Vector2(65.0, 10.0),
+                                                  Vector2(80.0, 10.0),
+                                                  Vector2(80.0, 40.0),
+                                                  Vector2(65.0, 40.0)],
+                                                 [Vector2(98.0, 10.0),
+                                                  Vector2(115.0, 40.0),
+                                                  Vector2(85.0, 40.0),
+                                                  Vector2(85.0, 10.0)]]),
                             path_actual)
 
         actual = path_actual.read_text()
@@ -116,7 +116,7 @@ class PolygonTestCase(ScadTestCase):
         """
         Test inner and normal angles.
         """
-        polygon = Polygon(primary=[Point2(0.0, 0.0), Point2(10.0, 0.0), Point2(0.0, 10.0)])
+        polygon = Polygon(primary=[Vector2(0.0, 0.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0)])
 
         actual = polygon.inner_angels
         expected = [90.0, 45.0, 45.0]
@@ -135,7 +135,7 @@ class PolygonTestCase(ScadTestCase):
         """
         Test inner angles.
         """
-        polygon = Polygon(primary=[Point2(-10.0, 0.0), Point2(10.0, 0.0), Point2(0.0, 10.0 * math.sqrt(3.0))])
+        polygon = Polygon(primary=[Vector2(-10.0, 0.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0 * math.sqrt(3.0))])
 
         actual = polygon.inner_angels
         expected = [60.0, 60.0, 60.0]
@@ -154,25 +154,25 @@ class PolygonTestCase(ScadTestCase):
         """
         Test inner angles.
         """
-        polygon = Polygon(primary=[Point2(3.0, 0.0),
-                                   Point2(2.0, 1.0),
-                                   Point2(2.0, 2.0),
-                                   Point2(1.0, 2.0),
+        polygon = Polygon(primary=[Vector2(3.0, 0.0),
+                                   Vector2(2.0, 1.0),
+                                   Vector2(2.0, 2.0),
+                                   Vector2(1.0, 2.0),
 
-                                   Point2(0.0, 3.0),
-                                   Point2(-1.0, 2.0),
-                                   Point2(-2.0, 2.0),
-                                   Point2(-2.0, 1.0),
+                                   Vector2(0.0, 3.0),
+                                   Vector2(-1.0, 2.0),
+                                   Vector2(-2.0, 2.0),
+                                   Vector2(-2.0, 1.0),
 
-                                   Point2(-3.0, 0.0),
-                                   Point2(-2.0, -1.0),
-                                   Point2(-2.0, -2.0),
-                                   Point2(-1.0, -2.0),
+                                   Vector2(-3.0, 0.0),
+                                   Vector2(-2.0, -1.0),
+                                   Vector2(-2.0, -2.0),
+                                   Vector2(-1.0, -2.0),
 
-                                   Point2(0.0, -3.0),
-                                   Point2(1.0, -2.0),
-                                   Point2(2.0, -2.0),
-                                   Point2(2.0, -1.0)])
+                                   Vector2(0.0, -3.0),
+                                   Vector2(1.0, -2.0),
+                                   Vector2(2.0, -2.0),
+                                   Vector2(2.0, -1.0)])
 
         actual = polygon.inner_angels
         expected = [90.0, 225.0,
@@ -199,6 +199,6 @@ class PolygonTestCase(ScadTestCase):
         self.assertEqual(len(expected), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(math.fmod(expected[i] - actual[i], 360.0), 0.0,
-                                   msg = 'expected: {}, actual: {}, i: {}'.format(expected[i], actual[i], i))
+                                   msg='expected: {}, actual: {}, i: {}'.format(expected[i], actual[i], i))
 
     # ----------------------------------------------------------------------------------------------------------------------

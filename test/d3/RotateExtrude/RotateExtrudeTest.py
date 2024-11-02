@@ -4,7 +4,6 @@ from super_scad.boolean.Union import Union
 from super_scad.d2.Circle import Circle
 from super_scad.d3.Cylinder import Cylinder
 from super_scad.d3.RotateExtrude import RotateExtrude
-from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Rotate3D import Rotate3D
 from super_scad.transformation.Translate2D import Translate2D

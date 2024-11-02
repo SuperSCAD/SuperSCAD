@@ -1,6 +1,5 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Square import Square
-from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 from test.d2.Square.ImperialUnitSquare import ImperialUnitSquare
 

@@ -2,8 +2,8 @@ from typing import Dict, Set
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.type.Point2 import Point2
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector2 import Vector2
+from super_scad.type.Vector3 import Vector3
 
 
 class PrivateRotate(PrivateSingleChildOpenScadCommand):
@@ -15,8 +15,8 @@ class PrivateRotate(PrivateSingleChildOpenScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 angle: float | Point2 | Point3,
-                 vector: Point3 | None = None,
+                 angle: float | Vector2 | Vector3,
+                 vector: Vector3 | None = None,
                  child: ScadWidget) -> None:
         """
         Object constructor.

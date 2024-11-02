@@ -1,7 +1,6 @@
 from d2.Semicircle.ImperialSemicircle import ImperialSemicircle
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Semicircle import Semicircle
-from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 
 

@@ -1,10 +1,8 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Cuboid import Cuboid
 from super_scad.d3.Cylinder import Cylinder
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Minkowski import Minkowski
-from super_scad.type.Size3 import Size3
+from super_scad.type.Vector3 import Vector3
 
 
 class MinkowskiTest(ScadTestCase):
@@ -20,7 +18,7 @@ class MinkowskiTest(ScadTestCase):
         path_actual, path_expected = self.paths()
 
         scad = self.create_scad()
-        minkowski = Minkowski(children=[Cuboid(size=Size3(10, 10, 1)),
+        minkowski = Minkowski(children=[Cuboid(size=Vector3(10, 10, 1)),
                                         Cylinder(radius=2.0, height=1.0)])
 
         scad.run_super_scad(minkowski, path_actual)
@@ -37,7 +35,7 @@ class MinkowskiTest(ScadTestCase):
 
         scad = self.create_scad()
         minkowski = Minkowski(convexity=10,
-                              children=[Cuboid(size=Size3(10, 10, 1)),
+                              children=[Cuboid(size=Vector3(10, 10, 1)),
                                         Cylinder(radius=2.0, height=1.0)])
 
         scad.run_super_scad(minkowski, path_actual)

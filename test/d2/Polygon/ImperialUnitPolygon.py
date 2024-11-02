@@ -2,7 +2,7 @@ from super_scad.d2.Polygon import Polygon
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class ImperialUnitPolygon(ScadWidget):
@@ -26,14 +26,14 @@ class ImperialUnitPolygon(ScadWidget):
         """
         Context.set_unit_length_current(Unit.INCH)
 
-        return Polygon(primary=[Point2(0.0, 0.0),
-                                Point2(2.0, 0.0),
-                                Point2(2.0, 2.0),
-                                Point2(0.0, 2.0)],
-                       secondary=[Point2(0.5, 0.5),
-                                  Point2(1.5, 0.5),
-                                  Point2(1.5, 1.5),
-                                  Point2(0.5, 1.5)],
+        return Polygon(primary=[Vector2(0.0, 0.0),
+                                Vector2(2.0, 0.0),
+                                Vector2(2.0, 2.0),
+                                Vector2(0.0, 2.0)],
+                       secondary=[Vector2(0.5, 0.5),
+                                  Vector2(1.5, 0.5),
+                                  Vector2(1.5, 1.5),
+                                  Vector2(0.5, 1.5)],
                        convexity=4)
 
 # ----------------------------------------------------------------------------------------------------------------------

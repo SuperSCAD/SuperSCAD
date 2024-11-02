@@ -5,12 +5,10 @@ from super_scad.boolean.Union import Union
 from super_scad.d3.Cube import Cube
 from super_scad.d3.Cuboid import Cuboid
 from super_scad.d3.Cylinder import Cylinder
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Paint import Paint
 from super_scad.transformation.Rotate3D import Rotate3D
 from super_scad.type.Color import Color
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Rotate3DTest(ScadTestCase):
@@ -27,12 +25,12 @@ class Rotate3DTest(ScadTestCase):
 
         scad = self.create_scad()
 
-        end_point = Point3(x=10.0, y=10.0, z=10.0)
+        end_point = Vector3(x=10.0, y=10.0, z=10.0)
         length = end_point.length
         b = math.degrees(math.acos(end_point.z / length))
         c = math.degrees(math.atan2(end_point.y, end_point.x))
 
-        rotate = Rotate3D(angle=Point3(0.0, b, c), child=Cylinder(height=length, radius=0.5))
+        rotate = Rotate3D(angle=Vector3(0.0, b, c), child=Cylinder(height=length, radius=0.5))
         cube = Paint(color=Color('gray', alpha=0.5), child=Cube(size=end_point.x))
 
         self.assertAlmostEqual(rotate.angle_x, 0.0)
@@ -59,7 +57,7 @@ class Rotate3DTest(ScadTestCase):
 
         scad = self.create_scad()
 
-        end_point = Point3(x=10.0, y=10.0, z=10.0)
+        end_point = Vector3(x=10.0, y=10.0, z=10.0)
         length = end_point.length
         b = math.degrees(math.acos(end_point.z / length))
         c = math.degrees(math.atan2(end_point.y, end_point.x))
@@ -91,7 +89,7 @@ class Rotate3DTest(ScadTestCase):
 
         scad = self.create_scad()
 
-        rotate = Rotate3D(angle=45.0, vector=Point3(1, 1, 0), child=Cuboid(width=50, depth=30, height=15))
+        rotate = Rotate3D(angle=45.0, vector=Vector3(1, 1, 0), child=Cuboid(width=50, depth=30, height=15))
 
         self.assertIsNone(rotate.angle_x)
         self.assertIsNone(rotate.angle_y)

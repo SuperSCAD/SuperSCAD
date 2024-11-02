@@ -1,4 +1,4 @@
-from typing import Any, Dict, Set
+from typing import Any, Dict
 
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent

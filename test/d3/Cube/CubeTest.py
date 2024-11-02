@@ -1,6 +1,5 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Cube import Cube
-from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 from test.d3.Cube.ImperialUnitCube import ImperialUnitCube
 

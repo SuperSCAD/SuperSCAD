@@ -3,7 +3,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateScale import PrivateScale
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Scale3D(ScadSingleChildParent):
@@ -14,7 +14,7 @@ class Scale3D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 factor: Point3 | float | None = None,
+                 factor: Vector3 | float | None = None,
                  factor_x: float | None = None,
                  factor_y: float | None = None,
                  factor_z: float | None = None,
@@ -40,11 +40,11 @@ class Scale3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def factor(self) -> Point3:
+    def factor(self) -> Vector3:
         """
         Returns the scaling factor along all three the axes.
         """
-        return Point3(self.factor_x, self.factor_y, self.factor_z)
+        return Vector3(self.factor_x, self.factor_y, self.factor_z)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

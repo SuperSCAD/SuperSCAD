@@ -3,7 +3,7 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
-class Point3:
+class Vector3:
     """
     A point in 3D space.
     """
@@ -28,19 +28,19 @@ class Point3:
 
     # ------------------------------------------------------------------------------------------------------------------
     def __add__(self, other):
-        return Point3(self.x + other.x, self.y + other.y, self.z + other.z)
+        return Vector3(self.x + other.x, self.y + other.y, self.z + other.z)
 
     # ------------------------------------------------------------------------------------------------------------------
     def __sub__(self, other):
-        return Point3(self.x - other.x, self.y - other.y, self.z - other.z)
+        return Vector3(self.x - other.x, self.y - other.y, self.z - other.z)
 
     # ------------------------------------------------------------------------------------------------------------------
     def __truediv__(self, other: float):
-        return Point3(self.x / other, self.y / other, self.z / other)
+        return Vector3(self.x / other, self.y / other, self.z / other)
 
     # ------------------------------------------------------------------------------------------------------------------
     def __mul__(self, other: float):
-        return Point3(self.x * other, self.y * other, self.z * other)
+        return Vector3(self.x * other, self.y * other, self.z * other)
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -55,9 +55,9 @@ class Point3:
         phi_radians = math.radians(phi)
         theta_radians = math.radians(theta)
 
-        return Point3(length * math.sin(theta_radians) * math.cos(phi_radians),
-                      length * math.sin(theta_radians) * math.sin(phi_radians),
-                      length * math.cos(theta_radians))
+        return Vector3(length * math.sin(theta_radians) * math.cos(phi_radians),
+                       length * math.sin(theta_radians) * math.sin(phi_radians),
+                       length * math.cos(theta_radians))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -73,11 +73,11 @@ class Point3:
         """
         Returns the unit vector of this vector.
 
-        :rtype: super_scad.type.Point3.Point3
+        :rtype: super_scad.type.Vector3.Vector3
         """
         length = self.length
 
-        return Point3(self.x / length, self.y / length, self.z / length)
+        return Vector3(self.x / length, self.y / length, self.z / length)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -101,11 +101,11 @@ class Point3:
         """
         Returns cross product of two vectors.
 
-        :rtype: super_scad.type.Point3.Point3
+        :rtype: super_scad.type.Vector3.Vector3
         """
-        return Point3(v1.y * v2.z - v1.z * v2.y,
-                      v1.z * v2.x - v1.x * v2.z,
-                      v1.x * v2.y - v1.y * v2.x)
+        return Vector3(v1.y * v2.z - v1.z * v2.y,
+                       v1.z * v2.x - v1.x * v2.z,
+                       v1.x * v2.y - v1.y * v2.x)
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -121,13 +121,13 @@ class Point3:
         Returns a copy of this vector rotated around the x-axis using the right-hand rule.
 
         :param angle: The angle of rotation.
-        :rtype: super_scad.type.Point3.Point3
+        :rtype: super_scad.type.Vector3.Vector3
         """
         radians = math.radians(angle)
 
-        return Point3(self.x,
-                      self.y * math.cos(radians) - self.z * math.sin(radians),
-                      self.y * math.sin(radians) + self.z * math.cos(radians))
+        return Vector3(self.x,
+                       self.y * math.cos(radians) - self.z * math.sin(radians),
+                       self.y * math.sin(radians) + self.z * math.cos(radians))
 
     # ------------------------------------------------------------------------------------------------------------------
     def rotate_y(self, angle: float):
@@ -135,13 +135,13 @@ class Point3:
         Returns a copy of this vector rotated around the y-axis using the right-hand rule.
 
         :param angle: The angle of rotation.
-        :rtype: super_scad.type.Point3.Point3
+        :rtype: super_scad.type.Vector3.Vector3
         """
         radians = math.radians(angle)
 
-        return Point3(self.x * math.cos(radians) + self.z * math.sin(radians),
-                      self.y,
-                      -self.x * math.sin(radians) + self.z * math.cos(radians))
+        return Vector3(self.x * math.cos(radians) + self.z * math.sin(radians),
+                       self.y,
+                       -self.x * math.sin(radians) + self.z * math.cos(radians))
 
     # ------------------------------------------------------------------------------------------------------------------
     def rotate_z(self, angle: float):
@@ -149,12 +149,12 @@ class Point3:
         Returns a copy of this vector rotated around the z-axis using the right-hand rule.
 
         :param angle: The angle of rotation.
-        :rtype: super_scad.type.Point3.Point3
+        :rtype: super_scad.type.Vector3.Vector3
         """
         radians = math.radians(angle)
 
-        return Point3(self.x * math.cos(radians) - self.y * math.sin(radians),
-                      self.x * math.sin(radians) + self.y * math.cos(radians),
-                      self.z)
+        return Vector3(self.x * math.cos(radians) - self.y * math.sin(radians),
+                       self.x * math.sin(radians) + self.y * math.cos(radians),
+                       self.z)
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -6,7 +6,7 @@ from super_scad.d3.Sphere import Sphere
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Translate3D import Translate3D
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Dice(ScadWidget):
@@ -53,18 +53,18 @@ class Dice(ScadWidget):
                              j: int,
                              x: float | None = None,
                              y: float | None = None,
-                             z: float | None = None) -> Point3:
+                             z: float | None = None) -> Vector3:
         """
         Converts coordinates for a dot to a vector.
         """
         if x is not None:
-            return Point3(x=x, y=i * self.__dot_sep, z=j * self.__dot_sep)
+            return Vector3(x=x, y=i * self.__dot_sep, z=j * self.__dot_sep)
 
         if y is not None:
-            return Point3(x=i * self.__dot_sep, y=y, z=j * self.__dot_sep)
+            return Vector3(x=i * self.__dot_sep, y=y, z=j * self.__dot_sep)
 
         if z is not None:
-            return Point3(x=i * self.__dot_sep, y=j * self.__dot_sep, z=z)
+            return Vector3(x=i * self.__dot_sep, y=j * self.__dot_sep, z=z)
 
         raise ValueError('Missing fixed plane')
 

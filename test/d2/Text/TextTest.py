@@ -1,7 +1,5 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Text import Text
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 
 
 class TextTestCase(ScadTestCase):

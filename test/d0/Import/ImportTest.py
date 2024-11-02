@@ -2,8 +2,6 @@ from d0.Import.Slot2D import Slot2D
 from d0.Import.Slot3D import Slot3D
 from ScadTestCase import ScadTestCase
 from super_scad.d0.Import import Import
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 
 
 class Import3DTest(ScadTestCase):

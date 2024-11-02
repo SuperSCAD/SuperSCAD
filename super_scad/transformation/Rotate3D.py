@@ -3,7 +3,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateRotate import PrivateRotate
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Rotate3D(ScadSingleChildParent):
@@ -15,11 +15,11 @@ class Rotate3D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 angle: float | Point3 | None = None,
+                 angle: float | Vector3 | None = None,
                  angle_x: float | None = None,
                  angle_y: float | None = None,
                  angle_z: float | None = None,
-                 vector: Point3 | None = None,
+                 vector: Vector3 | None = None,
                  child: ScadWidget) -> None:
         """
         Object constructor.
@@ -44,14 +44,14 @@ class Rotate3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def angle(self) -> float | Point3 | None:
+    def angle(self) -> float | Vector3 | None:
         """
         Returns angle of rotation around all axis or a vector.
         """
         if 'vector' in self._args:
             return self._args.get('angle')
 
-        return Point3(self.angle_x, self.angle_y, self.angle_z)
+        return Vector3(self.angle_x, self.angle_y, self.angle_z)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -97,7 +97,7 @@ class Rotate3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def vector(self) -> Point3 | None:
+    def vector(self) -> Vector3 | None:
         """
         Returns the vector of rotation.
         """

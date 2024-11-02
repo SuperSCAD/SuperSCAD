@@ -3,7 +3,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateMirror import PrivateMirror
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class Mirror2D(ScadSingleChildParent):
@@ -15,7 +15,7 @@ class Mirror2D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 vector: Point2 | None = None,
+                 vector: Vector2 | None = None,
                  x: float | None = None,
                  y: float | None = None,
                  child: ScadWidget):
@@ -31,7 +31,7 @@ class Mirror2D(ScadSingleChildParent):
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
-        self.__vector: Point2 | None = None
+        self.__vector: Vector2 | None = None
         """
         The normalized normal vector of the origin-intersecting mirror plane used.
         """
@@ -47,7 +47,7 @@ class Mirror2D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def vector(self) -> Point2:
+    def vector(self) -> Vector2:
         """
         The normal vector of the origin-intersecting mirror plane.
         """
@@ -56,8 +56,8 @@ class Mirror2D(ScadSingleChildParent):
                 self.__vector = self.uc(self._args['vector']).normal
 
             if 'x' in self._args or 'y' in self._args or 'z' in self._args:
-                self.__vector = self.uc(Point2(self._args.get('x', 0.0),
-                                               self._args.get('y', 0.0))).normal
+                self.__vector = self.uc(Vector2(self._args.get('x', 0.0),
+                                                self._args.get('y', 0.0))).normal
 
             self.__vector = self.__vector * (-1.0 if self.__vector.x < 0.0 else 1.0)
 

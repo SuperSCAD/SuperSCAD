@@ -4,10 +4,8 @@ from typing import Any, Dict, List, Set, Tuple
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Color import Color
-from super_scad.type.Point2 import Point2
-from super_scad.type.Point3 import Point3
-from super_scad.type.Size2 import Size2
-from super_scad.type.Size3 import Size3
+from super_scad.type.Vector2 import Vector2
+from super_scad.type.Vector3 import Vector3
 
 
 class PrivateOpenScadCommand(ScadWidget):
@@ -136,26 +134,15 @@ class PrivateOpenScadCommand(ScadWidget):
 
             return argument
 
-        if isinstance(argument, Point2):
+        if isinstance(argument, Vector2):
             return "[{}, {}]".format(self.__format_argument(context, float(argument.x), is_angle, is_length, is_scale),
                                      self.__format_argument(context, float(argument.y), is_angle, is_length, is_scale))
 
-        if isinstance(argument, Point3):
+        if isinstance(argument, Vector3):
             return "[{}, {}, {}]".format(
                     self.__format_argument(context, float(argument.x), is_angle, is_length, is_scale),
                     self.__format_argument(context, float(argument.y), is_angle, is_length, is_scale),
                     self.__format_argument(context, float(argument.z), is_angle, is_length, is_scale))
-
-        if isinstance(argument, Size2):
-            return "[{}, {}]".format(
-                    self.__format_argument(context, float(argument.width), is_angle, is_length, is_scale),
-                    self.__format_argument(context, float(argument.depth), is_angle, is_length, is_scale))
-
-        if isinstance(argument, Size3):
-            return "[{}, {}, {}]".format(
-                    self.__format_argument(context, float(argument.width), is_angle, is_length, is_scale),
-                    self.__format_argument(context, float(argument.depth), is_angle, is_length, is_scale),
-                    self.__format_argument(context, float(argument.height), is_angle, is_length, is_scale))
 
         if isinstance(argument, bool):
             return str(argument).lower()

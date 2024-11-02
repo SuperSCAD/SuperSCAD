@@ -5,7 +5,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateResize import PrivateResize
-from super_scad.type.Size3 import Size3
+from super_scad.type.Vector3 import Vector3
 
 
 class Resize3D(ScadSingleChildParent):
@@ -17,7 +17,7 @@ class Resize3D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 new_size: Size3 | None = None,
+                 new_size: Vector3 | None = None,
                  new_width: float | None = None,
                  new_depth: float | None = None,
                  new_height: float | None = None,
@@ -57,11 +57,11 @@ class Resize3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def new_size(self) -> Size3:
+    def new_size(self) -> Vector3:
         """
         Returns the new_size along all three axes.
         """
-        return Size3(self.new_width, self.new_depth, self.new_height)
+        return Vector3(self.new_width, self.new_depth, self.new_height)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -70,7 +70,7 @@ class Resize3D(ScadSingleChildParent):
         Returns new width (the new size along the x-axis).
         """
         if 'new_size' in self._args:
-            return self.uc(self._args['new_size'].width)
+            return self.uc(self._args['new_size'].x)
 
         return self.uc(self._args.get('new_width', 0.0))
 
@@ -81,7 +81,7 @@ class Resize3D(ScadSingleChildParent):
         Returns the new depth (the new size along the y-axis).
         """
         if 'new_size' in self._args:
-            return self.uc(self._args['new_size'].depth)
+            return self.uc(self._args['new_size'].y)
 
         return self.uc(self._args.get('new_depth', 0.0))
 
@@ -92,7 +92,7 @@ class Resize3D(ScadSingleChildParent):
         Returns the new height (the new size along the z-axis).
         """
         if 'new_size' in self._args:
-            return self.uc(self._args['new_size'].height)
+            return self.uc(self._args['new_size'].z)
 
         return self.uc(self._args.get('new_height', 0.0))
 

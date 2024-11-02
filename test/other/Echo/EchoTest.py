@@ -2,8 +2,6 @@ import math
 
 from ScadTestCase import ScadTestCase
 from super_scad.other.Echo import Echo
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 
 
 class EchoTest(ScadTestCase):

@@ -3,7 +3,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate2D import Translate2D
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class Indicator(ScadWidget):
@@ -27,8 +27,8 @@ class Indicator(ScadWidget):
         """
         Context.set_unit_length_current(self._args['unit'])
 
-        return Translate2D(x=5.0, y=5.0, child=Polygon(points=[Point2(0.0, 0.0),
-                                                               Point2(10.0, 0.0),
-                                                               Point2(0.0, 5.0)]))
+        return Translate2D(x=5.0, y=5.0, child=Polygon(points=[Vector2(0.0, 0.0),
+                                                               Vector2(10.0, 0.0),
+                                                               Vector2(0.0, 5.0)]))
 
     # ------------------------------------------------------------------------------------------------------------------

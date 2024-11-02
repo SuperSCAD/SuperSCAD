@@ -2,8 +2,6 @@ from ScadTestCase import ScadTestCase
 from super_scad.boolean.Compound import Compound
 from super_scad.d3.Cube import Cube
 from super_scad.d3.Sphere import Sphere
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate3D import Translate3D
 
 

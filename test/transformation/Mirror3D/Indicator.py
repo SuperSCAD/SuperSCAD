@@ -3,7 +3,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate3D import Translate3D
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Indicator(ScadWidget):
@@ -27,11 +27,11 @@ class Indicator(ScadWidget):
         """
         Context.set_unit_length_current(self._args['unit'])
 
-        point0 = Point3(20.0, 20.0, 0.0)
-        point1 = Point3(20.0, 0.0, 0.0)
-        point2 = Point3(0.0, 0.0, 0.0)
-        point3 = Point3(0.0, 20.0, 0.0)
-        point4 = Point3(20.0, 20.0, 20.0)
+        point0 = Vector3(20.0, 20.0, 0.0)
+        point1 = Vector3(20.0, 0.0, 0.0)
+        point2 = Vector3(0.0, 0.0, 0.0)
+        point3 = Vector3(0.0, 20.0, 0.0)
+        point4 = Vector3(20.0, 20.0, 20.0)
 
         faces = [[point0, point1, point4],
                  [point1, point2, point4],

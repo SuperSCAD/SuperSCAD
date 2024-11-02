@@ -6,7 +6,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Rotate3D import Rotate3D
 from super_scad.transformation.Translate3D import Translate3D
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 from super_scad.util.Radius2Sides4n import Radius2Sides4n
 
 
@@ -19,8 +19,8 @@ class Cylinder(ScadWidget):
     def __init__(self,
                  *,
                  height: float | None = None,
-                 start_point: Point3 | None = None,
-                 end_point: Point3 | None = None,
+                 start_point: Vector3 | None = None,
+                 end_point: Vector3 | None = None,
                  radius: float | None = None,
                  diameter: float | None = None,
                  center: bool | None = None,
@@ -94,25 +94,25 @@ class Cylinder(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def start_point(self) -> Point3:
+    def start_point(self) -> Vector3:
         """
         Returns the start point of the cylinder.
         """
         if 'start_point' in self._args:
             return self.uc(self._args['start_point'])
 
-        return Point3(0.0, 0.0, -self.height / 2.0 if self.center else 0.0)
+        return Vector3(0.0, 0.0, -self.height / 2.0 if self.center else 0.0)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def end_point(self) -> Point3:
+    def end_point(self) -> Vector3:
         """
         Returns the end point of the cylinder.
         """
         if 'end_point' in self._args:
             return self.uc(self._args['end_point'])
 
-        return Point3(0.0, 0.0, self.height / 2.0 if self.center else self.height)
+        return Vector3(0.0, 0.0, self.height / 2.0 if self.center else self.height)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

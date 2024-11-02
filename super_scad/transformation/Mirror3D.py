@@ -3,7 +3,7 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.private.PrivateMirror import PrivateMirror
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Mirror3D(ScadSingleChildParent):
@@ -15,7 +15,7 @@ class Mirror3D(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 vector: Point3 | None = None,
+                 vector: Vector3 | None = None,
                  x: float | None = None,
                  y: float | None = None,
                  z: float | None = None,
@@ -32,7 +32,7 @@ class Mirror3D(ScadSingleChildParent):
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
-        self.__vector: Point3 | None = None
+        self.__vector: Vector3 | None = None
         """
         The normalized normal vector of the origin-intersecting mirror plane used.
         """
@@ -48,7 +48,7 @@ class Mirror3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def vector(self) -> Point3:
+    def vector(self) -> Vector3:
         """
         The normal vector of the origin-intersecting mirror plane.
         """
@@ -57,9 +57,9 @@ class Mirror3D(ScadSingleChildParent):
                 self.__vector = self.uc(self._args['vector']).normal
 
             if 'x' in self._args or 'y' in self._args or 'z' in self._args:
-                self.__vector = self.uc(Point3(self._args.get('x', 0.0),
-                                               self._args.get('y', 0.0),
-                                               self._args.get('z', 0.0))).normal
+                self.__vector = self.uc(Vector3(self._args.get('x', 0.0),
+                                                self._args.get('y', 0.0),
+                                                self._args.get('z', 0.0))).normal
 
             self.__vector = self.__vector * (-1.0 if self.__vector.x < 0.0 else 1.0)
 

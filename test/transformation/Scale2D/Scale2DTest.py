@@ -1,11 +1,9 @@
 from ScadTestCase import ScadTestCase
 from super_scad.boolean.Union import Union
 from super_scad.d2.Square import Square
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 from super_scad.transformation.Scale2D import Scale2D
 from super_scad.transformation.Translate2D import Translate2D
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class Scale2DTest(ScadTestCase):
@@ -23,7 +21,7 @@ class Scale2DTest(ScadTestCase):
         scad = self.create_scad()
 
         square = Square(size=10.0)
-        scale = Scale2D(factor=Point2(x=0.5, y=1.0), child=square)
+        scale = Scale2D(factor=Vector2(x=0.5, y=1.0), child=square)
 
         self.assertAlmostEqual(scale.factor_x, 0.5)
         self.assertAlmostEqual(scale.factor_y, 1.0)

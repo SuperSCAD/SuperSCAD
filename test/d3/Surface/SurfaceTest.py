@@ -1,8 +1,6 @@
 from d3.Surface.SurfaceDat import SurfaceDat
 from ScadTestCase import ScadTestCase
 from super_scad.d3.Surface import Surface
-from super_scad.scad.Scad import Scad
-from super_scad.scad.Unit import Unit
 
 
 class SurfaceTest(ScadTestCase):

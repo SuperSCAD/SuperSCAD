@@ -2,7 +2,7 @@ from super_scad.d2.private.PrivateSquare import PrivateSquare
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.type.Size2 import Size2
+from super_scad.type.Vector2 import Vector2
 
 
 class Rectangle(ScadWidget):
@@ -13,7 +13,7 @@ class Rectangle(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 size: Size2 | None = None,
+                 size: Vector2 | None = None,
                  width: float | None = None,
                  depth: float | None = None,
                  center: bool = False):
@@ -40,11 +40,11 @@ class Rectangle(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def size(self) -> Size2:
+    def size(self) -> Vector2:
         """
         Returns the size of the rectangle.
         """
-        return Size2(width=self.width, depth=self.depth)
+        return Vector2(x=self.width, y=self.depth)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -53,7 +53,7 @@ class Rectangle(ScadWidget):
         Returns the width (the size along the x-axis) of the rectangle.
         """
         if 'size' in self._args:
-            return self.uc(self._args['size'].width)
+            return self.uc(self._args['size'].x)
 
         return self.uc(self._args['width'])
 
@@ -64,7 +64,7 @@ class Rectangle(ScadWidget):
         Returns the depth (the size along the y-axis) of the rectangle.
         """
         if 'size' in self._args:
-            return self.uc(self._args['size'].depth)
+            return self.uc(self._args['size'].y)
 
         return self.uc(self._args['depth'])
 

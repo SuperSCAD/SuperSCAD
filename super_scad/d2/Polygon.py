@@ -6,7 +6,7 @@ from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Angle import Angle
-from super_scad.type.Point2 import Point2
+from super_scad.type.Vector2 import Vector2
 
 
 class Polygon(ScadWidget):
@@ -17,10 +17,10 @@ class Polygon(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 primary: List[Point2] | None = None,
-                 points: List[Point2] | None = None,
-                 secondary: List[Point2] | None = None,
-                 secondaries: List[List[Point2]] | None = None,
+                 primary: List[Vector2] | None = None,
+                 points: List[Vector2] | None = None,
+                 secondary: List[Vector2] | None = None,
+                 secondaries: List[List[Vector2]] | None = None,
                  convexity: int | None = None):
         """
         Object constructor.
@@ -78,7 +78,7 @@ class Polygon(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def primary(self) -> List[Point2]:
+    def primary(self) -> List[Vector2]:
         """
         Returns the points of the polygon.
         """
@@ -86,7 +86,7 @@ class Polygon(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def secondaries(self) -> List[List[Point2]] | None:
+    def secondaries(self) -> List[List[Vector2]] | None:
         """
         Returns the points of the polygon.
         """
@@ -137,7 +137,7 @@ class Polygon(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def _count_intersections(nodes: List[Point2], p1: Point2, q1: Point2) -> int:
+    def _count_intersections(nodes: List[Vector2], p1: Vector2, q1: Vector2) -> int:
         """
         Returns the number of intersections between a line segment (p1, q1) and the vertices of the polygon.
 
@@ -152,7 +152,7 @@ class Polygon(ScadWidget):
             p2 = nodes[i]
             q2 = nodes[(i + 1) % n]
 
-            if Point2.do_intersect(p1, q1, p2, q2):
+            if Vector2.do_intersect(p1, q1, p2, q2):
                 intersections += 1
 
         return intersections
@@ -176,11 +176,11 @@ class Polygon(ScadWidget):
             p2 = nodes[i]
             p3 = nodes[(i + 1) % n]
 
-            q1 = Point2((p1.x + p2.x + p3.x) / 3, (p1.y + p2.y + p3.y) / 3)
-            q2 = Point2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
+            q1 = Vector2((p1.x + p2.x + p3.x) / 3, (p1.y + p2.y + p3.y) / 3)
+            q2 = Vector2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
 
             number_of_intersections = Polygon._count_intersections(nodes, q1, q2)
-            inner_angle = Point2.angle_3p(p1, p2, p3)
+            inner_angle = Vector2.angle_3p(p1, p2, p3)
             normal_angle = (p3 - p2).angle + 0.5 * inner_angle
             if number_of_intersections % 2 == 0:
                 inner_angle = 360.0 - inner_angle

@@ -2,7 +2,7 @@ from super_scad.d3.Polyhedron import Polyhedron
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.scad.Unit import Unit
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class ImperialUnitCube(ScadWidget):
@@ -31,14 +31,14 @@ class ImperialUnitCube(ScadWidget):
         """
         Context.set_unit_length_current(Unit.INCH)
 
-        p0 = Point3(0.0, 0.0, 0.0)
-        p1 = Point3(1.0, 0.0, 0.0)
-        p2 = Point3(1.0, 1.0, 0.0)
-        p3 = Point3(0.0, 1.0, 0.0)
-        p4 = Point3(0.0, 0.0, 1.0)
-        p5 = Point3(1.0, 0.0, 1.0)
-        p6 = Point3(1.0, 1.0, 1.0)
-        p7 = Point3(0.0, 1.0, 1.0)
+        p0 = Vector3(0.0, 0.0, 0.0)
+        p1 = Vector3(1.0, 0.0, 0.0)
+        p2 = Vector3(1.0, 1.0, 0.0)
+        p3 = Vector3(0.0, 1.0, 0.0)
+        p4 = Vector3(0.0, 0.0, 1.0)
+        p5 = Vector3(1.0, 0.0, 1.0)
+        p6 = Vector3(1.0, 1.0, 1.0)
+        p7 = Vector3(0.0, 1.0, 1.0)
         faces = [[p0, p1, p2, p3],  # bottom
                  [p4, p5, p1, p0],  # front
                  [p7, p6, p5, p4],  # top

@@ -1,6 +1,6 @@
 import unittest
 
-from super_scad.type.Point3 import Point3
+from super_scad.type.Vector3 import Vector3
 
 
 class Point3Test(unittest.TestCase):
@@ -13,8 +13,8 @@ class Point3Test(unittest.TestCase):
         """
         Test adding two points.
         """
-        p1 = Point3(1.0, 2.0, 3.0)
-        p2 = Point3(4.0, 5.0, 6.0)
+        p1 = Vector3(1.0, 2.0, 3.0)
+        p2 = Vector3(4.0, 5.0, 6.0)
         p3 = p1 + p2
         self.assertAlmostEqual(1.0, p1.x)
         self.assertAlmostEqual(2.0, p1.y)
@@ -31,8 +31,8 @@ class Point3Test(unittest.TestCase):
         """
         Test subtraction two points.
         """
-        p1 = Point3(1.0, 2.0, 3.0)
-        p2 = Point3(4.0, 6.0, 8.0)
+        p1 = Vector3(1.0, 2.0, 3.0)
+        p2 = Vector3(4.0, 6.0, 8.0)
 
         p3 = p1 - p2
         self.assertAlmostEqual(1.0, p1.x)
@@ -61,7 +61,7 @@ class Point3Test(unittest.TestCase):
         """
         Test division of a point.
         """
-        p1 = Point3(1.0, 2.0, 3.0)
+        p1 = Vector3(1.0, 2.0, 3.0)
         p2 = p1 / 2.0
         self.assertAlmostEqual(1.0, p1.x)
         self.assertAlmostEqual(2.0, p1.y)
@@ -75,7 +75,7 @@ class Point3Test(unittest.TestCase):
         """
         Test multiplication of a point.
         """
-        p1 = Point3(1.0, 2.0, 3.0)
+        p1 = Vector3(1.0, 2.0, 3.0)
         p2 = p1 * 4.0
         self.assertAlmostEqual(1.0, p1.x)
         self.assertAlmostEqual(2.0, p1.y)
@@ -89,7 +89,7 @@ class Point3Test(unittest.TestCase):
         """
         Test length of a vector.
         """
-        point = Point3(2.0, 3.0, 4.0)
+        point = Vector3(2.0, 3.0, 4.0)
         self.assertAlmostEqual(2.0, point.x)
         self.assertAlmostEqual(3.0, point.y)
         self.assertAlmostEqual(4.0, point.z)
@@ -100,13 +100,13 @@ class Point3Test(unittest.TestCase):
         """
         Test normalized vector of a vector.
         """
-        point = Point3(2.0, 3.0, 4.0).normal
+        point = Vector3(2.0, 3.0, 4.0).normal
         self.assertAlmostEqual(0.3713906763541037, point.x)
         self.assertAlmostEqual(0.5570860145311556, point.y)
         self.assertAlmostEqual(0.7427813527082074, point.z)
         self.assertAlmostEqual(1.0, point.length)
 
-        point = Point3(2.0, -3.0, 4.0).normal
+        point = Vector3(2.0, -3.0, 4.0).normal
         self.assertAlmostEqual(0.3713906763541037, point.x)
         self.assertAlmostEqual(-0.5570860145311556, point.y)
         self.assertAlmostEqual(0.7427813527082074, point.z)

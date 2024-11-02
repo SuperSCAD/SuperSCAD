@@ -2,8 +2,8 @@ from typing import Dict, Set, Tuple
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.type.Size2 import Size2
-from super_scad.type.Size3 import Size3
+from super_scad.type.Vector2 import Vector2
+from super_scad.type.Vector3 import Vector3
 
 
 class PrivateResize(PrivateSingleChildOpenScadCommand):
@@ -15,7 +15,7 @@ class PrivateResize(PrivateSingleChildOpenScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 new_size: Size2 | Size3 | None = None,
+                 new_size: Vector2 | Vector3 | None = None,
                  auto: bool | Tuple[bool, bool] | Tuple[bool, bool, bool] = None,
                  convexity: int | None = None,
                  child: ScadWidget) -> None:
