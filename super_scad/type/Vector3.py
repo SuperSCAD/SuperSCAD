@@ -94,9 +94,25 @@ class Vector3:
     @property
     def theta(self) -> float:
         """
-        Returns the inclination, i.e., the angle of the vector in the z-axis.
+        Returns the inclination, i.e., the angle of this vector in the z-axis.
         """
         return math.acos(self.z / self.length)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def is_origin(self) -> bool:
+        """
+        Returns whether this vector is the origin.
+        """
+        return self.x == 0.0 and self.y == 0.0 and self.z == 0.0
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def is_not_origin(self) -> bool:
+        """
+        Returns whether this vector is not the origin.
+        """
+        return self.x != 0.0 or self.y != 0.0 or self.z != 0.0
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod

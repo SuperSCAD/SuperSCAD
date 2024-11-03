@@ -96,4 +96,32 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(0.8, vector.y)
         self.assertAlmostEqual(1.0, vector.length)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    def testOrigin(self):
+        """
+        Test the origin is at the origin.
+        """
+        self.assertEqual(Vector2.origin.x, 0.0)
+        self.assertEqual(Vector2.origin.y, 0.0)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testIsOrigin(self):
+        """
+        Test is_origin.
+        """
+        self.assertTrue(Vector2.origin.is_origin)
+        self.assertFalse(Vector2.origin.is_not_origin)
+
+        vector = Vector2(0.0, 0.0)
+        self.assertTrue(vector.is_origin)
+        self.assertFalse(vector.is_not_origin)
+
+        vector = Vector2(1.0, 0.0)
+        self.assertFalse(vector.is_origin)
+        self.assertTrue(vector.is_not_origin)
+
+        vector = Vector2(0.0, 1.0)
+        self.assertFalse(vector.is_origin)
+        self.assertTrue(vector.is_not_origin)
+
 # ----------------------------------------------------------------------------------------------------------------------

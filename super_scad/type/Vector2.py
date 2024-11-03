@@ -63,6 +63,22 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
+    def is_origin(self) -> bool:
+        """
+        Returns whether this vector is the origin.
+        """
+        return self.x == 0.0 and self.y == 0.0
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def is_not_origin(self) -> bool:
+        """
+        Returns whether this vector is not the origin.
+        """
+        return self.x != 0.0 or self.y != 0.0
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
     def length(self) -> float:
         """
         Returns the length of this vector.
@@ -165,5 +181,6 @@ class Vector2:
         return math.degrees(math.acos(((q - p).length ** 2 +
                                        (q - r).length ** 2 -
                                        (p - r).length ** 2) / (2 * (q - p).length * (q - r).length)))
+
 
 # ----------------------------------------------------------------------------------------------------------------------
