@@ -5,6 +5,7 @@ from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Translate2D import Translate2D
+from super_scad.type.Vector2 import Vector2
 
 
 class Semicircle(ScadWidget):
@@ -17,6 +18,7 @@ class Semicircle(ScadWidget):
                  *,
                  radius: float | None = None,
                  diameter: float | None = None,
+                 position: Vector2 | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
@@ -24,12 +26,13 @@ class Semicircle(ScadWidget):
         """
         Object constructor.
 
-        :param radius: The radius of the semicircles.
-        :param diameter: The diameter of the semicircles.
+        :param radius: The radius of the semicircle.
+        :param diameter: The diameter of the semicircle.
+        :param position: The position of the semicircle. The default value is the origin.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of three or more override fa and fs.
-        :param fn4n: Whether to create a semicircles based on circle with a multiple of four vertices.
+        :param fn4n: Whether to create a semicircle based on circle with a multiple of four vertices.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -55,7 +58,7 @@ class Semicircle(ScadWidget):
     @property
     def radius(self) -> float:
         """
-        Returns the radius of the circle.
+        Returns the radius of this semicircle.
         """
         return self.uc(self._args.get('radius', 0.5 * self._args.get('diameter', 0.0)))
 
@@ -63,9 +66,17 @@ class Semicircle(ScadWidget):
     @property
     def diameter(self) -> float:
         """
-        Returns the diameter of the circle.
+        Returns the diameter of this semicircle.
         """
         return self.uc(self._args.get('diameter', 2.0 * self._args.get('radius', 0.0)))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def position(self) -> Vector2:
+        """
+        Returns position of this semicircle.
+        """
+        return self.uc(self._args.get('position', Vector2.origin))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -95,7 +106,7 @@ class Semicircle(ScadWidget):
     @property
     def fn4n(self) -> bool | None:
         """
-        Returns whether to create a circle with multiple of four vertices.
+        Returns whether to create a semicircle with multiple of four vertices.
         """
         return self._args.get('fn4n')
 
@@ -106,13 +117,19 @@ class Semicircle(ScadWidget):
 
         :param context: The build context.
         """
-        return Intersection(children=[Circle(diameter=self.diameter,
-                                             fa=self.fa,
-                                             fs=self.fs,
-                                             fn=self.fn,
-                                             fn4n=self.fn4n),
-                                      Translate2D(x=-(self.radius + context.eps),
-                                                  child=Rectangle(width=self.diameter + 2 * context.eps,
-                                                                  depth=self.radius + context.eps))])
+        semicircle = Intersection(children=[Circle(diameter=self.diameter,
+                                                   fa=self.fa,
+                                                   fs=self.fs,
+                                                   fn=self.fn,
+                                                   fn4n=self.fn4n),
+                                            Translate2D(x=-(self.radius + context.eps),
+                                                        child=Rectangle(width=self.diameter + 2 * context.eps,
+                                                                        depth=self.radius + context.eps))])
+
+        position = self.position
+        if position.is_not_origin:
+            semicircle = Translate2D(vector=position, child=semicircle)
+
+        return semicircle
 
 # ----------------------------------------------------------------------------------------------------------------------

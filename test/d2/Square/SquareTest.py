@@ -1,6 +1,7 @@
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Square import Square
 from super_scad.scad.Unit import Unit
+from super_scad.type.Vector2 import Vector2
 from test.d2.Square.ImperialUnitSquare import ImperialUnitSquare
 
 
@@ -76,6 +77,25 @@ class SquareTestCase(ScadTestCase):
 
         self.assertAlmostEqual(1.0, square.imperial_square.size)
         self.assertFalse(square.imperial_square.center)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testSquarePosition(self):
+        """
+        Test the position of a square.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = self.create_scad()
+        rectangle =  Square(size=10, center=True, position=Vector2(30.0, 20.0))
+        scad.run_super_scad(rectangle, path_actual)
+
+        self.assertAlmostEqual(10.0, rectangle.size)
+        self.assertEqual(Vector2(30.0, 20.0), rectangle.position)
+        self.assertTrue(rectangle.center)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()

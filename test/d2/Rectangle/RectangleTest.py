@@ -94,4 +94,26 @@ class RectangleTestCase(ScadTestCase):
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    def testRectanglePosition(self):
+        """
+        Test the position of a rectangle.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = self.create_scad()
+        rectangle =  Rectangle(size=Vector2(15.0, 10.0), center=True, position=Vector2(30.0, 20.0))
+        scad.run_super_scad(rectangle, path_actual)
+
+        self.assertAlmostEqual(15.0, rectangle.width)
+        self.assertAlmostEqual(10.0, rectangle.depth)
+        self.assertAlmostEqual(15.0, rectangle.size.x)
+        self.assertAlmostEqual(10.0, rectangle.size.y)
+        self.assertEqual(Vector2(30.0, 20.0), rectangle.position)
+        self.assertTrue(rectangle.center)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
 # ----------------------------------------------------------------------------------------------------------------------

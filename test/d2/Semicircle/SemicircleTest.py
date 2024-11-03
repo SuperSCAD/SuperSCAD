@@ -2,6 +2,7 @@ from d2.Semicircle.ImperialSemicircle import ImperialSemicircle
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Semicircle import Semicircle
 from super_scad.scad.Unit import Unit
+from super_scad.type.Vector2 import Vector2
 
 
 class SemicircleTestCase(ScadTestCase):
@@ -134,6 +135,24 @@ class SemicircleTestCase(ScadTestCase):
         self.assertAlmostEqual(12.0, semi_circle.imperial_semicircle.fa)
         self.assertAlmostEqual(2.0, semi_circle.imperial_semicircle.fs)
         self.assertEqual(0, semi_circle.imperial_semicircle.fn)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testSemicirclePosition(self):
+        """
+        Test the position of a semicircle.
+        """
+        path_actual, path_expected = self.paths()
+
+        scad = self.create_scad()
+        rectangle =  Semicircle(radius=10.0, position=Vector2(30.0, 20.0))
+        scad.run_super_scad(rectangle, path_actual)
+
+        self.assertAlmostEqual(10.0, rectangle.radius)
+        self.assertEqual(Vector2(30.0, 20.0), rectangle.position)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()

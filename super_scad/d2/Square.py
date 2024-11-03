@@ -2,6 +2,8 @@ from super_scad.d2.private.PrivateSquare import PrivateSquare
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.transformation.Translate2D import Translate2D
+from super_scad.type.Vector2 import Vector2
 
 
 class Square(ScadWidget):
@@ -13,12 +15,14 @@ class Square(ScadWidget):
     def __init__(self,
                  *,
                  size: float,
-                 center: bool = False):
+                 center: bool = False,
+                 position: Vector2 = None):
         """
         Object constructor.
 
         :param size: The size of the square.
-        :param center: Whether the square is centered at the origin.
+        :param center: Whether the square is centered at its position.
+        :param position: The position of the square. The default value is the origin.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -34,7 +38,7 @@ class Square(ScadWidget):
     @property
     def size(self) -> float:
         """
-        Returns the size of the square.
+        Returns the size of this square.
         """
         return self.uc(self._args['size'])
 
@@ -42,9 +46,17 @@ class Square(ScadWidget):
     @property
     def center(self) -> bool:
         """
-        Returns whether the rectangle is centered at the origin.
+        Returns whether this square is centered at its position.
         """
         return self._args['center']
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def position(self) -> Vector2:
+        """
+        Returns position of this square.
+        """
+        return self.uc(self._args.get('position', Vector2.origin))
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -53,6 +65,12 @@ class Square(ScadWidget):
 
         :param context: The build context.
         """
-        return PrivateSquare(size=self.size, center=self.center)
+        square = PrivateSquare(size=self.size, center=self.center)
+
+        position = self.position
+        if position.is_not_origin:
+            square = Translate2D(vector=position, child=square)
+
+        return square
 
 # ----------------------------------------------------------------------------------------------------------------------
