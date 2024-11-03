@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Super-SCAD"
-version = "0.8.0"
+version = "0.8.1"
 description = "An advanced Python application and library for generating 2D and 3D models in OpenSCAD"
 authors = ["P.R. Water <p.r.water@setbased.nl>"]
 license = "MIT"

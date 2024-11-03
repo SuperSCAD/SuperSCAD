@@ -1,3 +1,4 @@
+import typing
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
@@ -6,6 +7,8 @@ from super_scad.scad.Context import Context
 from super_scad.scad.Unit import Unit
 from super_scad.type.Vector2 import Vector2
 from super_scad.type.Vector3 import Vector3
+
+ScadWidget = typing.NewType('ScadWidget', None)
 
 
 class ScadWidget(ABC):
@@ -44,13 +47,11 @@ class ScadWidget(ABC):
 
     # ------------------------------------------------------------------------------------------------------------------
     @abstractmethod
-    def build(self, context: Context):
+    def build(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
 
         :param context: The build context.
-
-        :rtype: ScadWidget
         """
         raise NotImplementedError()
 
