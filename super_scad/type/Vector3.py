@@ -1,12 +1,17 @@
 import math
+import typing
 from dataclasses import dataclass
+
+Vector3 = typing.NewType('Vector3', None)
 
 
 @dataclass(frozen=True)
 class Vector3:
     """
-    A point in 3D space.
+    A coordinate in 3D space.
     """
+
+    # ------------------------------------------------------------------------------------------------------------------
     x: float
     """
     The x-coordinate of this point.
@@ -27,11 +32,11 @@ class Vector3:
         return f"[{self.x}, {self.y}, {self.z}]"
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __add__(self, other):
+    def __add__(self, other: Vector3):
         return Vector3(self.x + other.x, self.y + other.y, self.z + other.z)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __sub__(self, other):
+    def __sub__(self, other: Vector3):
         return Vector3(self.x - other.x, self.y - other.y, self.z - other.z)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -44,16 +49,16 @@ class Vector3:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def from_polar_coordinates(length: float, phi: float, theta: float):
+    def from_polar_coordinates(length: float, *, azimuth: float, inclination: float) -> Vector3:
         """
         Creates a 3-dimensional vector from polar coordinates.
 
         @param length: The length of the vector.
-        @param phi: The azimuth, i.e., the angle of the vector in the xy-plane.
-        @param theta: The inclination, i.e., the angle of the vector in the z-axis.
+        @param azimuth: The azimuth, i.e., the angle of the vector in the xy-plane.
+        @param inclination: The inclination, i.e., the angle of the vector in the z-axis.
         """
-        phi_radians = math.radians(phi)
-        theta_radians = math.radians(theta)
+        phi_radians = math.radians(azimuth)
+        theta_radians = math.radians(inclination)
 
         return Vector3(length * math.sin(theta_radians) * math.cos(phi_radians),
                        length * math.sin(theta_radians) * math.sin(phi_radians),
@@ -69,11 +74,9 @@ class Vector3:
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def normal(self):
+    def normal(self) -> Vector3:
         """
         Returns the unit vector of this vector.
-
-        :rtype: super_scad.type.Vector3.Vector3
         """
         length = self.length
 
@@ -81,7 +84,7 @@ class Vector3:
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def phi(self) -> float:
+    def azimuth(self) -> float:
         """
         Returns the azimuth, i.e., the angle of the vector in the xy-plane.
         """
@@ -97,11 +100,9 @@ class Vector3:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def cross_product(v1, v2):
+    def cross_product(v1: Vector3, v2: Vector3) -> Vector3:
         """
         Returns cross product of two vectors.
-
-        :rtype: super_scad.type.Vector3.Vector3
         """
         return Vector3(v1.y * v2.z - v1.z * v2.y,
                        v1.z * v2.x - v1.x * v2.z,
@@ -109,19 +110,18 @@ class Vector3:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def dot_product(v1, v2) -> float:
+    def dot_product(v1: Vector3, v2: Vector3) -> float:
         """
         Returns the dot product of two vectors.
         """
         return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z
 
     # ------------------------------------------------------------------------------------------------------------------
-    def rotate_x(self, angle: float):
+    def rotate_x(self, angle: float) -> Vector3:
         """
         Returns a copy of this vector rotated around the x-axis using the right-hand rule.
 
         :param angle: The angle of rotation.
-        :rtype: super_scad.type.Vector3.Vector3
         """
         radians = math.radians(angle)
 
@@ -130,12 +130,11 @@ class Vector3:
                        self.y * math.sin(radians) + self.z * math.cos(radians))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def rotate_y(self, angle: float):
+    def rotate_y(self, angle: float) -> Vector3:
         """
         Returns a copy of this vector rotated around the y-axis using the right-hand rule.
 
         :param angle: The angle of rotation.
-        :rtype: super_scad.type.Vector3.Vector3
         """
         radians = math.radians(angle)
 
@@ -144,12 +143,11 @@ class Vector3:
                        -self.x * math.sin(radians) + self.z * math.cos(radians))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def rotate_z(self, angle: float):
+    def rotate_z(self, angle: float) -> Vector3:
         """
         Returns a copy of this vector rotated around the z-axis using the right-hand rule.
 
         :param angle: The angle of rotation.
-        :rtype: super_scad.type.Vector3.Vector3
         """
         radians = math.radians(angle)
 

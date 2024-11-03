@@ -1,12 +1,16 @@
 import math
+import typing
 from dataclasses import dataclass
+
+Vector2 = typing.NewType('Vector2', None)
 
 
 @dataclass(frozen=True)
 class Vector2:
     """
-    A point in 2D space or a 2-dimensional vector.
+    A coordinate in 2D space.
     """
+
     # ------------------------------------------------------------------------------------------------------------------
     x: float
     """
@@ -23,11 +27,11 @@ class Vector2:
         return f"[{self.x}, {self.y}]"
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __add__(self, other):
+    def __add__(self, other: Vector2):
         return Vector2(self.x + other.x, self.y + other.y)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __sub__(self, other):
+    def __sub__(self, other: Vector2):
         return Vector2(self.x - other.x, self.y - other.y)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -40,7 +44,7 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def from_polar_coordinates(length: float, angle: float):
+    def from_polar_coordinates(length: float, angle: float) -> Vector2:
         """
         Creates a 2-dimensional vector from polar coordinates.
 
@@ -67,11 +71,9 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def normal(self):
+    def normal(self) -> Vector2:
         """
         Returns the unit vector of this vector.
-
-        :rtype: super_scad.type.Vector2.Vector2
         """
         length = self.length
 
@@ -79,7 +81,7 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def _on_segment(p, q, r) -> bool:
+    def _on_segment(p: Vector2, q: Vector2, r: Vector2) -> bool:
         """
         Given three collinear points p, q, r, returns whether point q lies on the line segment (p, r).
 
@@ -95,7 +97,7 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def _orientation(p, q, r) -> int:
+    def _orientation(p: Vector2, q: Vector2, r: Vector2) -> int:
         """
         Returns the orientation of an ordered triplet (p, q, r).
         * 0 : Collinear points
@@ -117,7 +119,7 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def do_intersect(p1, q1, p2, q2) -> bool:
+    def do_intersect(p1: Vector2, q1: Vector2, p2: Vector2, q2: Vector2) -> bool:
         """
         Returns whether line segments (p1, q1) and (p1, q2) intersect.
 
@@ -152,7 +154,7 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def angle_3p(p, q, r) -> float:
+    def angle_3p(p: Vector2, q: Vector2, r: Vector2) -> float:
         """
         Returns the angle between line segments (p, q) and (r, q).
 
