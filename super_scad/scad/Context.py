@@ -12,6 +12,21 @@ class Context:
     """
 
     # ------------------------------------------------------------------------------------------------------------------
+    DEFAULT_FA: float = 12.0
+    """
+    OpenSCAD default value for $fa.
+    """
+
+    DEFAULT_FS: float = 2.0
+    """
+    OpenSCAD default value for $fs.
+    """
+
+    DEFAULT_FN: int = 0
+    """
+    OpenSCAD default value for $fn.
+    """
+
     __unit_length_current: Unit = Unit.FREE
     """
     The current unit of length.
@@ -26,9 +41,9 @@ class Context:
     def __init__(self,
                  *,
                  unit_length_final: Unit = Unit.MM,
-                 fa: float = 12.0,
-                 fs: float = 2.0,
-                 fn: int = 0,
+                 fa: float = DEFAULT_FA,
+                 fs: float = DEFAULT_FS,
+                 fn: int = DEFAULT_FN,
                  eps: float = 1E-2,
                  angle_digits: int = 4,
                  length_digits: int = 4,

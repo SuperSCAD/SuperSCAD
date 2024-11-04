@@ -47,7 +47,18 @@ class Scad:
         self.__context.target_path = Path(openscad_path)
         self.__context.set_unit_length_current(self.__context.get_unit_length_final())
         self.__context.code_store.clear()
+
         self.__context.code_store.add_line('// Unit of length: {}'.format(Context.get_unit_length_final()))
+
+        if self.__context.fa != Context.DEFAULT_FA:
+            self.__context.code_store.add_line(f'$fa = {self.__context.round_angle(self.__context.fa)};')
+        if self.__context.fs != Context.DEFAULT_FS:
+            self.__context.code_store.add_line(f'$fs = {self.__context.round_length(self.__context.fs)};')
+        if self.__context.fn != Context.DEFAULT_FN:
+            self.__context.code_store.add_line(f'$fn = {self.__context.fn};')
+
+        if self.__context.code_store.line_count() > 1:
+            self.__context.code_store.add_line('')
 
     # ------------------------------------------------------------------------------------------------------------------
     def __run_super_scad_finalize(self) -> None:
