@@ -18,7 +18,7 @@ class Angle:
         """
         angle = math.fmod(angle, norm)
         if angle < 0.0:
-            angle += norm
+            angle = math.fmod(angle + norm, norm)
 
         return angle
 

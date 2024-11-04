@@ -36,12 +36,12 @@ class Polygon(ScadWidget):
 
         self._inner_angles: List[float] | None = None
         """
-        The inner angels of the polygon (in the same order as the primary points).
+        The inner angles of the polygon (in the same order as the primary points).
         """
 
         self._normal_angles: List[float] | None = None
         """
-        The absolute angel of the normal of each node.
+        The absolute angles of the normal of each node.
         """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -56,9 +56,9 @@ class Polygon(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def inner_angels(self) -> List[float]:
+    def inner_angles(self) -> List[float]:
         """
-        Returns the inner angels of the polygon (in the same order as the primary points).
+        Returns the inner angles of the polygon (in the same order as the primary points).
         """
         if self._inner_angles is None:
             self._compute_angles()
@@ -67,7 +67,7 @@ class Polygon(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def normal_angels(self) -> List[float]:
+    def normal_angles(self) -> List[float]:
         """
         Returns the absolute angel of the normal of each node.
         """
@@ -160,7 +160,7 @@ class Polygon(ScadWidget):
     # ------------------------------------------------------------------------------------------------------------------
     def _compute_angles(self) -> None:
         """
-        Returns the inner angels of the polygon (in the same order as the primary points).
+        Returns the inner angles of the polygon (in the same order as the primary points).
         """
         self._inner_angles = []
         self._normal_angles = []
@@ -180,13 +180,26 @@ class Polygon(ScadWidget):
             q2 = Vector2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
 
             number_of_intersections = Polygon._count_intersections(nodes, q1, q2)
+
             inner_angle = Vector2.angle_3p(p1, p2, p3)
-            normal_angle = (p3 - p2).angle + 0.5 * inner_angle
             if number_of_intersections % 2 == 0:
                 inner_angle = 360.0 - inner_angle
-                normal_angle = 180.0 - normal_angle
+            inner_angle=Angle.normalize(inner_angle)
+
+            clockwise = Angle.normalize((p2 - q1).angle - (p1 - q1).angle) > 180.0
+            if clockwise and number_of_intersections % 2 == 0:
+                normal_angle = (p1 - p2).angle - 0.5 * inner_angle
+            elif not clockwise and number_of_intersections % 2 == 0:
+                normal_angle = (p1 - p2).angle + 0.5 * inner_angle
+            elif clockwise and number_of_intersections % 2 == 1:
+                normal_angle = (p1 - p2).angle + 0.5 * inner_angle
+            elif not clockwise and number_of_intersections % 2 == 1:
+                normal_angle = (p1 - p2).angle - 0.5 * inner_angle
+            else:
+                raise RuntimeError('Should not happen.')
+            normal_angle=Angle.normalize(normal_angle)
 
             self._inner_angles.append(inner_angle)
-            self._normal_angles.append(Angle.normalize(normal_angle))
+            self._normal_angles.append(normal_angle)
 
 # ----------------------------------------------------------------------------------------------------------------------
