@@ -153,17 +153,8 @@ class PrivateOpenScadCommand(ScadWidget):
         if isinstance(argument, int):
             return str(argument)
 
-        if isinstance(argument, List):
-            parts = []
-            for element in argument:
-                parts.append(self.__format_argument(context, element, is_angle, is_length, is_scale))
-
-            return '[{}]'.format(', '.join(parts))
-
-        if isinstance(argument, Tuple):
-            parts = []
-            for element in argument:
-                parts.append(self.__format_argument(context, element, is_angle, is_length, is_scale))
+        if isinstance(argument, List) or isinstance(argument, Tuple):
+            parts = [self.__format_argument(context, element, is_angle, is_length, is_scale) for element in argument]
 
             return '[{}]'.format(', '.join(parts))
 

@@ -91,11 +91,7 @@ class Polygon(ScadWidget):
         Returns the points of the polygon.
         """
         if 'secondaries' in self._args:
-            tmp = []
-            for points in self._args['secondaries']:
-                tmp.append(self.uc(points))
-
-            return tmp
+            return [self.uc(point) for point in self._args.get('secondaries')]
 
         if 'secondary' in self._args:
             return [self.uc(self._args['secondary'])]

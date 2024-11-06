@@ -83,11 +83,7 @@ class ScadWidget(ABC):
             return Vector3(self.uc(length.x), self.uc(length.y), self.uc(length.z))
 
         if isinstance(length, List):
-            points = []
-            for point in length:
-                points.append(self.uc(point))
-
-            return points
+            return [self.uc(point) for point in length]
 
         raise ValueError('Can not convert length of type {}.'.format(type(length)))
 
