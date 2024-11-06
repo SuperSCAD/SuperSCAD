@@ -2,7 +2,6 @@ from super_scad.d2.private.PrivateSquare import PrivateSquare
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.transformation.Translate2D import Translate2D
 from super_scad.type.Vector2 import Vector2
 
 
@@ -17,8 +16,7 @@ class Rectangle(ScadWidget):
                  size: Vector2 | None = None,
                  width: float | None = None,
                  depth: float | None = None,
-                 center: bool = False,
-                 position: Vector2 | None = None):
+                 center: bool = False):
         """
         Object constructor.
 
@@ -26,7 +24,6 @@ class Rectangle(ScadWidget):
         :param width: The width (the size along the x-axis) of the rectangle.
         :param depth: The depth (the size along the y-axis) of the rectangle.
         :param center: Whether the rectangle is centered at its position.
-        :param position: The position of the square. The default value is the origin.
         """
         ScadWidget.__init__(self, args=locals())
 
@@ -80,26 +77,12 @@ class Rectangle(ScadWidget):
         return self._args['center']
 
     # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def position(self) -> Vector2:
-        """
-        Returns position this rectangle.
-        """
-        return self.uc(self._args.get('position', Vector2.origin))
-
-    # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
 
         :param context: The build context.
         """
-        rectangle = PrivateSquare(size=self.size, center=self.center)
-
-        position = self.position
-        if position.is_not_origin:
-            rectangle = Translate2D(vector=position, child=rectangle)
-
-        return rectangle
+        return PrivateSquare(size=self.size, center=self.center)
 
 # ----------------------------------------------------------------------------------------------------------------------

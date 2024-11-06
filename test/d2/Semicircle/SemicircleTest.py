@@ -140,22 +140,4 @@ class SemicircleTestCase(ScadTestCase):
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    def testSemicirclePosition(self):
-        """
-        Test the position of a semicircle.
-        """
-        path_actual, path_expected = self.paths()
-
-        scad = self.create_scad()
-        rectangle =  Semicircle(radius=10.0, position=Vector2(30.0, 20.0))
-        scad.run_super_scad(rectangle, path_actual)
-
-        self.assertAlmostEqual(10.0, rectangle.radius)
-        self.assertEqual(Vector2(30.0, 20.0), rectangle.position)
-
-        actual = path_actual.read_text()
-        expected = path_expected.read_text()
-        self.assertEqual(expected, actual)
-
 # ----------------------------------------------------------------------------------------------------------------------

@@ -31,7 +31,8 @@ class PolygonTestCase(ScadTestCase):
         nodes = polygon.primary
         rectangles = []
         for i in range(len(nodes)):
-            rectangle = Rectangle(width=0.5, depth=0.1, position=Vector2(0.0, -0.05))
+            rectangle = Rectangle(width=0.5, depth=0.1)
+            rectangle = Translate2D(y=-0.05, child=rectangle)
             rectangle = Rotate2D(angle=normal_angel[i], child=rectangle)
             rectangle = Translate2D(vector=nodes[i], child=rectangle)
             rectangle = Paint(color=Color('red'), child=rectangle)

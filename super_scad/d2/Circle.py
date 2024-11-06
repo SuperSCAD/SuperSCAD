@@ -2,8 +2,6 @@ from super_scad.d2.private.PrivateCircle import PrivateCircle
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
-from super_scad.transformation.Translate2D import Translate2D
-from super_scad.type.Vector2 import Vector2
 from super_scad.util.Radius2Sides4n import Radius2Sides4n
 
 
@@ -17,7 +15,6 @@ class Circle(ScadWidget):
                  *,
                  radius: float | None = None,
                  diameter: float | None = None,
-                 position: Vector2 | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
@@ -27,7 +24,6 @@ class Circle(ScadWidget):
 
         :param radius: The radius of the circle.
         :param diameter: The diameter of the circle.
-        :param position: The position of the center circle. The default value is the origin.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
@@ -60,14 +56,6 @@ class Circle(ScadWidget):
         Returns the diameter of the circle.
         """
         return self.uc(self._args.get('diameter', 2.0 * self._args.get('radius', 0.0)))
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def position(self) -> Vector2:
-        """
-        Returns position of the center of the circle.
-        """
-        return self.uc(self._args.get('position', Vector2.origin))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -118,12 +106,6 @@ class Circle(ScadWidget):
 
         :param context: The build context.
         """
-        circle = PrivateCircle(diameter=self.diameter, fa=self.fa, fs=self.fs, fn=self.real_fn(context))
-
-        position = self.position
-        if position.is_not_origin:
-            circle = Translate2D(vector=position, child=circle)
-
-        return circle
+        return PrivateCircle(diameter=self.diameter, fa=self.fa, fs=self.fs, fn=self.real_fn(context))
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -5,7 +5,6 @@ from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Translate2D import Translate2D
-from super_scad.type.Vector2 import Vector2
 
 
 class Semicircle(ScadWidget):
@@ -18,7 +17,6 @@ class Semicircle(ScadWidget):
                  *,
                  radius: float | None = None,
                  diameter: float | None = None,
-                 position: Vector2 | None = None,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
@@ -28,7 +26,6 @@ class Semicircle(ScadWidget):
 
         :param radius: The radius of the semicircle.
         :param diameter: The diameter of the semicircle.
-        :param position: The position of the semicircle. The default value is the origin.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of three or more override fa and fs.
@@ -72,14 +69,6 @@ class Semicircle(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def position(self) -> Vector2:
-        """
-        Returns position of this semicircle.
-        """
-        return self.uc(self._args.get('position', Vector2.origin))
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
     def fa(self) -> float | None:
         """
         Returns the minimum angle (in degrees) of each fragment.
@@ -117,19 +106,13 @@ class Semicircle(ScadWidget):
 
         :param context: The build context.
         """
-        semicircle = Intersection(children=[Circle(diameter=self.diameter,
-                                                   fa=self.fa,
-                                                   fs=self.fs,
-                                                   fn=self.fn,
-                                                   fn4n=self.fn4n),
-                                            Translate2D(x=-(self.radius + context.eps),
-                                                        child=Rectangle(width=self.diameter + 2 * context.eps,
-                                                                        depth=self.radius + context.eps))])
-
-        position = self.position
-        if position.is_not_origin:
-            semicircle = Translate2D(vector=position, child=semicircle)
-
-        return semicircle
+        return Intersection(children=[Circle(diameter=self.diameter,
+                                             fa=self.fa,
+                                             fs=self.fs,
+                                             fn=self.fn,
+                                             fn4n=self.fn4n),
+                                      Translate2D(x=-(self.radius + context.eps),
+                                                  child=Rectangle(width=self.diameter + 2 * context.eps,
+                                                                  depth=self.radius + context.eps))])
 
 # ----------------------------------------------------------------------------------------------------------------------
