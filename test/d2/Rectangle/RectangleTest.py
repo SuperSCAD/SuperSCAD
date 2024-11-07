@@ -25,6 +25,7 @@ class RectangleTestCase(ScadTestCase):
         self.assertAlmostEqual(20.0, rectangle.size.x)
         self.assertAlmostEqual(10.0, rectangle.size.y)
         self.assertFalse(rectangle.center)
+        self.assertIsNone(rectangle.convexity)
 
         scad.run_super_scad(rectangle, path_actual)
         actual = path_actual.read_text()
@@ -46,6 +47,7 @@ class RectangleTestCase(ScadTestCase):
         self.assertAlmostEqual(20.0, rectangle.size.x)
         self.assertAlmostEqual(10.0, rectangle.size.y)
         self.assertTrue(rectangle.center)
+        self.assertIsNone(rectangle.convexity)
 
         scad.run_super_scad(rectangle, path_actual)
         actual = path_actual.read_text()

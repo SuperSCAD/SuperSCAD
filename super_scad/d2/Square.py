@@ -1,10 +1,14 @@
+from typing import List
+
+from super_scad.d2.PolygonMixin import PolygonMixin
 from super_scad.d2.private.PrivateSquare import PrivateSquare
 from super_scad.scad.ArgumentAdmission import ArgumentAdmission
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.type import Vector2
 
 
-class Square(ScadWidget):
+class Square(ScadWidget, PolygonMixin):
     """
     Widget for creating squares.
     """
@@ -18,9 +22,10 @@ class Square(ScadWidget):
         Object constructor.
 
         :param size: The size of the square.
-        :param center: Whether the square is centered at its position.
+        :param center: Whether the square is centered at the origin.
         """
         ScadWidget.__init__(self, args=locals())
+        PolygonMixin.__init__(self)
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
@@ -47,12 +52,46 @@ class Square(ScadWidget):
         return self._args['center']
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadWidget:
+    @property
+    def sides(self) -> int:
+        """
+        Returns the number of sides of this square.
+        """
+        return 4
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def nodes(self) -> List[Vector2]:
+        """
+        Returns the nodes of this rectangle.
+        """
+        if self.center:
+            return [Vector2(-0.5 * self.size, -0.5 * self.size),
+                    Vector2(-0.5 * self.size, 0.5 * self.size),
+                    Vector2(0.5 * self.size, 0.5 * self.size),
+                    Vector2(0.5 * self.size, -0.5 * self.size)]
+
+        return [Vector2.origin,
+                Vector2(0.0, self.size),
+                Vector2(self.size, self.size),
+                Vector2(self.size, 0.0)]
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def build_polygon(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
 
         :param context: The build context.
         """
         return PrivateSquare(size=self.size, center=self.center)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def build(self, context: Context) -> ScadWidget:
+        """
+        Builds a SuperSCAD widget.
+
+        :param context: The build context.
+        """
+        return self.build_polygon(context)
 
 # ----------------------------------------------------------------------------------------------------------------------

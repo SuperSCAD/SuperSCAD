@@ -150,11 +150,15 @@ class PolygonTestCase(ScadTestCase):
 
         polygon1 = Polygon(points=points)
 
+        self.assertEqual(3, polygon1.sides)
+
+        # First, inner angles.
         actual = polygon1.inner_angles
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_inner_angles[i], actual[i])
 
+        # Second, normal angles.
         actual = polygon1.normal_angles
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):
@@ -164,17 +168,21 @@ class PolygonTestCase(ScadTestCase):
         points.reverse()
         polygon2 = Polygon(points=points)
 
-        actual = polygon2.inner_angles
-        expected_inner_angles.reverse()
-        self.assertEqual(len(expected_inner_angles), len(actual))
-        for i in range(len(actual)):
-            self.assertAlmostEqual(expected_inner_angles[i], actual[i])
+        self.assertEqual(3, polygon2.sides)
 
+        # First, normal angles.
         actual = polygon2.normal_angles
         expected_normal_angles.reverse()
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_normal_angles[i], actual[i])
+
+        # Second, inner angles.
+        actual = polygon2.inner_angles
+        expected_inner_angles.reverse()
+        self.assertEqual(len(expected_inner_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_inner_angles[i], actual[i])
 
         path_actual, path_expected = self.paths()
         scad = Scad(context=Context())

@@ -22,6 +22,7 @@ class SquareTestCase(ScadTestCase):
 
         self.assertAlmostEqual(10.0, square.size)
         self.assertFalse(square.center)
+        self.assertIsNone(square.convexity)
 
         scad.run_super_scad(square, path_actual)
         actual = path_actual.read_text()
@@ -40,6 +41,7 @@ class SquareTestCase(ScadTestCase):
 
         self.assertAlmostEqual(10.0, square.size)
         self.assertTrue(square.center)
+        self.assertIsNone(square.convexity)
 
         scad.run_super_scad(square, path_actual)
         actual = path_actual.read_text()
