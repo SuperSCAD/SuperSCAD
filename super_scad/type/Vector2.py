@@ -97,6 +97,33 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
+    def distance(p: Vector2, q: Vector2) -> float:
+        """
+        Returns the Euclidean distance between two vectors p and q.
+
+        @param p: Vector p.
+        @param q: Vector q.
+        """
+        return math.sqrt((p.x - q.x) ** 2 + (p.y - q.y) ** 2)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def cross_product(p: Vector2, q: Vector2) -> float:
+        """
+        Returns cross product of two vectors.
+        """
+        return p.x * q.y - p.y * q.x
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def dot_product(p: Vector2, q: Vector2) -> float:
+        """
+        Returns the dot product of two vectors.
+        """
+        return p.x * q.x + p.y * q.y
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
     def _on_segment(p: Vector2, q: Vector2, r: Vector2) -> bool:
         """
         Given three collinear points p, q, r, returns whether point q lies on the line segment (p, r).
@@ -113,25 +140,18 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def _orientation(p: Vector2, q: Vector2, r: Vector2) -> int:
+    def orientation(p: Vector2, q: Vector2, r: Vector2) -> int:
         """
-        Returns the orientation of an ordered triplet (p, q, r).
-        * 0 : Collinear points
-        * 1 : Clockwise points
-        * 2 : Counterclockwise
+        Returns the orientation of an ordered triplet (p, q, r), a.k.a., the cross product of q - p and q - r.
+        * = 0.0: Collinear points;
+        * > 0.0: Clockwise points;
+        * < 0.0: Counterclockwise points.
 
         @param p: Point p.
         @param q: Point q.
         @param r: Point r.
         """
-        val = ((q.y - p.y) * (r.x - q.x)) - ((q.x - p.x) * (r.y - q.y))
-        if val > 0:
-            return 1
-
-        elif val < 0:
-            return 2
-
-        return 0
+        return ((q.y - p.y) * (r.x - q.x)) - ((q.x - p.x) * (r.y - q.y))
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -170,17 +190,24 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def angle_3p(p: Vector2, q: Vector2, r: Vector2) -> float:
+    def _orientation(p: Vector2, q: Vector2, r: Vector2) -> int:
         """
-        Returns the angle between line segments (p, q) and (r, q).
+        Returns the orientation of an ordered triplet (p, q, r).
+        * 0 : Collinear points
+        * 1 : Clockwise points
+        * 2 : Counterclockwise
 
         @param p: Point p.
-        @param q: Point q
+        @param q: Point q.
         @param r: Point r.
         """
-        return math.degrees(math.acos(((q - p).length ** 2 +
-                                       (q - r).length ** 2 -
-                                       (p - r).length ** 2) / (2 * (q - p).length * (q - r).length)))
+        val = Vector2.orientation(p, q, r)
+        if val > 0:
+            return 1
 
+        if val < 0:
+            return 2
+
+        return 0
 
 # ----------------------------------------------------------------------------------------------------------------------

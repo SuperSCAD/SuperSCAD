@@ -1,3 +1,4 @@
+import random
 import unittest
 
 from super_scad.type.Vector2 import Vector2
@@ -9,7 +10,7 @@ class Vector2Test(unittest.TestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testAddition(self):
+    def test_addition(self):
         """
         Test adding two vectors.
         """
@@ -24,7 +25,7 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(6.0, vector3.y)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSubtraction(self):
+    def test_subtraction(self):
         """
         Test subtraction two vectors.
         """
@@ -48,7 +49,7 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(3.0, vector3.y)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testDivision(self):
+    def test_division(self):
         """
         Test division of a vector.
         """
@@ -60,7 +61,7 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(1.0, vector2.y)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMultiplication(self):
+    def test_multiplication(self):
         """
         Test multiplication of a vector.
         """
@@ -72,7 +73,7 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(6.0, vector2.y)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testLength(self):
+    def test_length(self):
         """
         Test length of a vector.
         """
@@ -82,7 +83,7 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(5.0, vector.length)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNormal(self):
+    def test_normal(self):
         """
         Test normalized vector of a vector.
         """
@@ -97,7 +98,7 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(1.0, vector.length)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testOrigin(self):
+    def test_origin(self):
         """
         Test the origin is at the origin.
         """
@@ -105,7 +106,7 @@ class Vector2Test(unittest.TestCase):
         self.assertEqual(Vector2.origin.y, 0.0)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testIsOrigin(self):
+    def test_is_origin(self):
         """
         Test is_origin.
         """
@@ -123,5 +124,26 @@ class Vector2Test(unittest.TestCase):
         vector = Vector2(0.0, 1.0)
         self.assertFalse(vector.is_origin)
         self.assertTrue(vector.is_not_origin)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_distance(self):
+        """
+        Test distance between two vectors.
+        """
+        self.assertAlmostEqual(1.0, Vector2.distance(Vector2(0.0, 0.0), Vector2(1.0, 0.0)))
+        self.assertAlmostEqual(1.0, Vector2.distance(Vector2(1.0, 0.0), Vector2(0.0, 0.0)))
+        self.assertAlmostEqual(5.0, Vector2.distance(Vector2(4.0, 0.0), Vector2(0.0, 3.0)))
+        self.assertAlmostEqual(5.0, Vector2.distance(Vector2(-4.0, 0.0), Vector2(0.0, -3.0)))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_orientation(self):
+        """
+        Test the orientation of three vectors.
+        """
+        p = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
+        q = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
+        r = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
+
+        self.assertAlmostEqual(Vector2.cross_product(q - p, q - r), Vector2.orientation(p, q, r))
 
 # ----------------------------------------------------------------------------------------------------------------------
