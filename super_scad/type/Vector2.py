@@ -87,7 +87,7 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def normal(self) -> Vector2:
+    def unit(self) -> Vector2:
         """
         Returns the unit vector of this vector.
         """
@@ -140,7 +140,7 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def orientation(p: Vector2, q: Vector2, r: Vector2) -> int:
+    def orientation(p: Vector2, q: Vector2, r: Vector2) -> float:
         """
         Returns the orientation of an ordered triplet (p, q, r), a.k.a., the cross product of q - p and q - r.
         * = 0.0: Collinear points;

@@ -1,3 +1,4 @@
+import math
 import random
 import unittest
 
@@ -83,16 +84,16 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(5.0, vector.length)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_normal(self):
+    def test_unit(self):
         """
-        Test normalized vector of a vector.
+        Test unit vector of a vector.
         """
-        vector = Vector2(3.0, 4.0).normal
+        vector = Vector2(3.0, 4.0).unit
         self.assertAlmostEqual(0.6, vector.x)
         self.assertAlmostEqual(0.8, vector.y)
         self.assertAlmostEqual(1.0, vector.length)
 
-        vector = Vector2(-3.0, 4.0).normal
+        vector = Vector2(-3.0, 4.0).unit
         self.assertAlmostEqual(-0.6, vector.x)
         self.assertAlmostEqual(0.8, vector.y)
         self.assertAlmostEqual(1.0, vector.length)
@@ -145,5 +146,21 @@ class Vector2Test(unittest.TestCase):
         r = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
 
         self.assertAlmostEqual(Vector2.cross_product(q - p, q - r), Vector2.orientation(p, q, r))
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_dot_product(self):
+        """
+        Test the dit product of two vectors.
+        """
+        p = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
+        self.assertAlmostEqual(Vector2.dot_product(p, p), p.length ** 2)
+
+        p = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
+        q = Vector2.from_polar_coordinates(p.length, p.angle + 90.0)
+        self.assertAlmostEqual(Vector2.dot_product(p, q), 0.0)
+
+        p = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
+        q = Vector2.from_polar_coordinates(p.length, p.angle + 45.0)
+        self.assertAlmostEqual(Vector2.dot_product(p, q), 1.0 / math.sqrt(2.0) * p.length ** 2)
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -53,11 +53,11 @@ class Mirror2D(ScadSingleChildParent):
         """
         if self.__vector is None:
             if 'vector' in self._args:
-                self.__vector = self.uc(self._args['vector']).normal
+                self.__vector = self.uc(self._args['vector']).unit
 
             if 'x' in self._args or 'y' in self._args or 'z' in self._args:
                 self.__vector = self.uc(Vector2(self._args.get('x', 0.0),
-                                                self._args.get('y', 0.0))).normal
+                                                self._args.get('y', 0.0))).unit
 
             self.__vector = self.__vector * (-1.0 if self.__vector.x < 0.0 else 1.0)
 
