@@ -25,7 +25,7 @@ class Square(ScadWidget, PolygonMixin):
         :param center: Whether the square is centered at the origin.
         """
         ScadWidget.__init__(self, args=locals())
-        PolygonMixin.__init__(self)
+        PolygonMixin.__init__(self, delta=None)
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:

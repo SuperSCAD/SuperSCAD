@@ -27,13 +27,15 @@ class PolygonTestCase(ScadTestCase):
         """
         Add arrows to a polygon.
         """
-        normal_angel = polygon.normal_angles
+        context = Context()
+
+        normal_angles = polygon.normal_angles(context)
         nodes = polygon.primary
         rectangles = []
         for i in range(len(nodes)):
             rectangle = Rectangle(width=0.5, depth=0.1)
             rectangle = Translate2D(y=-0.05, child=rectangle)
-            rectangle = Rotate2D(angle=normal_angel[i], child=rectangle)
+            rectangle = Rotate2D(angle=normal_angles[i], child=rectangle)
             rectangle = Translate2D(vector=nodes[i], child=rectangle)
             rectangle = Paint(color=Color('red'), child=rectangle)
             rectangles.append(rectangle)
@@ -45,12 +47,13 @@ class PolygonTestCase(ScadTestCase):
         """
         Plain test for a plain polygon.
         """
-        path_actual, path_expected = self.paths()
-        scad = self.create_scad()
+        context = Context()
+        scad = Scad(context=context)
 
         polygon = Polygon(primary=[Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(130.0, 50.0), Vector2(30.0, 50.0)])
-        self.assertFalse(polygon.is_clockwise)
+        self.assertFalse(polygon.is_clockwise(context))
 
+        path_actual, path_expected = self.paths()
         scad.run_super_scad(polygon, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -61,14 +64,15 @@ class PolygonTestCase(ScadTestCase):
         """
         Plain test for a polygon with one hole.
         """
-        path_actual, path_expected = self.paths()
-        scad = self.create_scad()
+        context = Context()
+        scad = Scad(context=context)
 
         polygon = Polygon(primary=[Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(0.0, 100.0)],
                           secondary=[Vector2(10.0, 10.0), Vector2(80.0, 10.0), Vector2(10.0, 80.0)],
                           convexity=10)
-        self.assertFalse(polygon.is_clockwise)
+        self.assertFalse(polygon.is_clockwise(context))
 
+        path_actual, path_expected = self.paths()
         scad.run_super_scad(polygon, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -79,8 +83,8 @@ class PolygonTestCase(ScadTestCase):
         """
         Plain test for a polygon with multiple holes.
         """
-        path_actual, path_expected = self.paths()
-        scad = self.create_scad()
+        context = Context()
+        scad = Scad(context=context)
 
         polygon = Polygon(primary=[Vector2(0.0, 0.0), Vector2(100.0, 0.0), Vector2(130.0, 50.0), Vector2(30.0, 50.0)],
                           secondaries=[[Vector2(20.0, 20.0), Vector2(40.0, 20.0), Vector2(30.0, 30.0)],
@@ -89,8 +93,9 @@ class PolygonTestCase(ScadTestCase):
                                         Vector2(65.0, 40.0)],
                                        [Vector2(98.0, 10.0), Vector2(115.0, 40.0), Vector2(85.0, 40.0),
                                         Vector2(85.0, 10.0)]])
-        self.assertFalse(polygon.is_clockwise)
+        self.assertFalse(polygon.is_clockwise(context))
 
+        path_actual, path_expected = self.paths()
         scad.run_super_scad(polygon, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -129,6 +134,8 @@ class PolygonTestCase(ScadTestCase):
         """
         Test inner and normal angles.
         """
+        context = Context()
+
         points = [Vector2(0.0, 0.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0)]
         expected_inner_angles = [90.0, 45.0, 45.0]
         expected_normal_angles = [45.0, 157.5, 292.5]
@@ -136,16 +143,16 @@ class PolygonTestCase(ScadTestCase):
         polygon1 = Polygon(points=points)
 
         self.assertEqual(3, polygon1.sides)
-        self.assertFalse(polygon1.is_clockwise)
+        self.assertFalse(polygon1.is_clockwise(context))
 
         # First, inner angles.
-        actual = polygon1.inner_angles
+        actual = polygon1.inner_angles(context)
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_inner_angles[i], actual[i])
 
         # Second, normal angles.
-        actual = polygon1.normal_angles
+        actual = polygon1.normal_angles(context)
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_normal_angles[i], actual[i])
@@ -158,14 +165,14 @@ class PolygonTestCase(ScadTestCase):
         self.assertTrue(polygon2.is_clockwise)
 
         # First, normal angles.
-        actual = polygon2.normal_angles
+        actual = polygon2.normal_angles(context)
         expected_normal_angles.reverse()
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_normal_angles[i], actual[i])
 
         # Second, inner angles.
-        actual = polygon2.inner_angles
+        actual = polygon2.inner_angles(context)
         expected_inner_angles.reverse()
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
@@ -185,6 +192,8 @@ class PolygonTestCase(ScadTestCase):
         """
         Test inner angles.
         """
+        context = Context()
+
         points = [Vector2(-10.0, 0.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0 * math.sqrt(3.0))]
         expected_inner_angles = [60.0, 60.0, 60.0]
         expected_normal_angles = [30.0, 150.0, 270.0]
@@ -192,14 +201,14 @@ class PolygonTestCase(ScadTestCase):
         polygon1 = Polygon(points=points)
 
         self.assertEqual(3, polygon1.sides)
-        self.assertFalse(polygon1.is_clockwise)
+        self.assertFalse(polygon1.is_clockwise(context))
 
-        actual = polygon1.inner_angles
+        actual = polygon1.inner_angles(context)
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_inner_angles[i], actual[i])
 
-        actual = polygon1.normal_angles
+        actual = polygon1.normal_angles(context)
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_normal_angles[i], actual[i])
@@ -211,13 +220,13 @@ class PolygonTestCase(ScadTestCase):
         self.assertEqual(3, polygon2.sides)
         self.assertTrue(polygon2.is_clockwise)
 
-        actual = polygon2.inner_angles
+        actual = polygon2.inner_angles(context)
         expected_inner_angles.reverse()
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_inner_angles[i], actual[i])
 
-        actual = polygon2.normal_angles
+        actual = polygon2.normal_angles(context)
         expected_normal_angles.reverse()
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):
@@ -237,6 +246,8 @@ class PolygonTestCase(ScadTestCase):
         """
         Test inner angles.
         """
+        context = Context()
+
         points = [Vector2(3.0, 0.0),
                   Vector2(2.0, 1.0),
                   Vector2(2.0, 2.0),
@@ -276,14 +287,14 @@ class PolygonTestCase(ScadTestCase):
         polygon1 = Polygon(points=points)
 
         self.assertEqual(16, polygon1.sides)
-        self.assertFalse(polygon1.is_clockwise)
+        self.assertFalse(polygon1.is_clockwise(context))
 
-        actual = polygon1.inner_angles
+        actual = polygon1.inner_angles(context)
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_inner_angles[i], actual[i])
 
-        actual = polygon1.normal_angles
+        actual = polygon1.normal_angles(context)
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_normal_angles[i], actual[i])
@@ -295,13 +306,13 @@ class PolygonTestCase(ScadTestCase):
         self.assertEqual(16, polygon2.sides)
         self.assertTrue(polygon2.is_clockwise)
 
-        actual = polygon2.inner_angles
+        actual = polygon2.inner_angles(context)
         expected_inner_angles.reverse()
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_inner_angles[i], actual[i])
 
-        actual = polygon2.normal_angles
+        actual = polygon2.normal_angles(context)
         expected_normal_angles.reverse()
 
         self.assertEqual(len(expected_normal_angles), len(actual))
@@ -322,6 +333,8 @@ class PolygonTestCase(ScadTestCase):
         """
         Test inner angles.
         """
+        context = Context()
+
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
         expected_inner_angles = [53.1301, 18.4349, 270.0, 18.4349]
         expected_normal_angles = [270.0, 125.7825, 90.0, 54.2175]
@@ -329,14 +342,14 @@ class PolygonTestCase(ScadTestCase):
         polygon1 = Polygon(points=points)
 
         self.assertEqual(4, polygon1.sides)
-        self.assertTrue(polygon1.is_clockwise)
+        self.assertTrue(polygon1.is_clockwise(context))
 
-        actual = polygon1.inner_angles
+        actual = polygon1.inner_angles(context)
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_inner_angles[i], actual[i], places=4)
 
-        actual = polygon1.normal_angles
+        actual = polygon1.normal_angles(context)
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_normal_angles[i], actual[i], places=4)
@@ -346,15 +359,76 @@ class PolygonTestCase(ScadTestCase):
         polygon2 = Polygon(points=points)
 
         self.assertEqual(4, polygon2.sides)
-        self.assertFalse(polygon2.is_clockwise)
+        self.assertFalse(polygon2.is_clockwise(context))
 
-        actual = polygon2.inner_angles
+        actual = polygon2.inner_angles(context)
         expected_inner_angles.reverse()
         self.assertEqual(len(expected_inner_angles), len(actual))
         for i in range(len(actual)):
             self.assertAlmostEqual(expected_inner_angles[i], actual[i], places=4)
 
-        actual = polygon2.normal_angles
+        actual = polygon2.normal_angles(context)
+        expected_normal_angles.reverse()
+        self.assertEqual(len(expected_normal_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_normal_angles[i], actual[i], places=4)
+
+        path_actual, path_expected = self.paths()
+        scad = Scad(context=Context())
+        polygons = Union(children=[Translate2D(x=-11, child=self.normal_angle_arrows(polygon1)),
+                                   Translate2D(x=11, child=self.normal_angle_arrows(polygon2))])
+        scad.run_super_scad(polygons, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_angles_collinear_points(self):
+        """
+        Test inner angles with collinear points.
+        """
+        context = Context()
+
+        points = [Vector2(-10, 0.0),
+                  Vector2(-10, 10),
+                  Vector2(0, 10),
+                  Vector2(10, 10),
+                  Vector2(10, 0),
+                  Vector2(10, -10),
+                  Vector2(0, -10),
+                  Vector2(-10, -10)]
+        expected_inner_angles = [180.0, 90.0, 180.0, 90.0, 180.0, 90.0, 180.0, 90.0]
+        expected_normal_angles = [0.0, 315.0, 270.0, 225.0, 180.0, 135.0, 90.0, 45.0]
+
+        polygon1 = Polygon(points=points)
+
+        self.assertEqual(8, polygon1.sides)
+        self.assertTrue(polygon1.is_clockwise(context))
+
+        actual = polygon1.inner_angles(context)
+        self.assertEqual(len(expected_inner_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_inner_angles[i], actual[i], places=4)
+
+        actual = polygon1.normal_angles(context)
+        self.assertEqual(len(expected_normal_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_normal_angles[i], actual[i], places=4)
+
+        points = points.copy()
+        points.reverse()
+        polygon2 = Polygon(points=points)
+
+        self.assertEqual(8, polygon2.sides)
+        self.assertFalse(polygon2.is_clockwise(context))
+
+        actual = polygon2.inner_angles(context)
+        expected_inner_angles.reverse()
+        self.assertEqual(len(expected_inner_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_inner_angles[i], actual[i], places=4)
+
+        actual = polygon2.normal_angles(context)
         expected_normal_angles.reverse()
         self.assertEqual(len(expected_normal_angles), len(actual))
         for i in range(len(actual)):

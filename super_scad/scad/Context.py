@@ -202,7 +202,7 @@ class Context:
         """
         Returns the resolution of lengths in generated OpenSCAD code.
         """
-        return 10 ** -self.__length_digits
+        return 10.0 ** -self.__length_digits
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

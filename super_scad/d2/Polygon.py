@@ -20,7 +20,8 @@ class Polygon(PolygonMixin, ScadWidget):
                  points: List[Vector2] | None = None,
                  secondary: List[Vector2] | None = None,
                  secondaries: List[List[Vector2]] | None = None,
-                 convexity: int | None = None):
+                 convexity: int | None = None,
+                 delta: float | None = None):
         """
         Object constructor.
 
@@ -30,8 +31,10 @@ class Polygon(PolygonMixin, ScadWidget):
         :param secondaries: The secondary paths that will be subtracted form the polygon.
         :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line
                           through the child widget.
+        :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
+                      separation between line segments and nodes.
         """
-        PolygonMixin.__init__(self)
+        PolygonMixin.__init__(self, delta=delta)
         ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------

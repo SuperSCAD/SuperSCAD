@@ -29,7 +29,7 @@ class Rectangle(ScadWidget, PolygonMixin):
         :param center: Whether the rectangle is centered at its position.
         """
         ScadWidget.__init__(self, args=locals())
-        PolygonMixin.__init__(self)
+        PolygonMixin.__init__(self, delta=None)
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
