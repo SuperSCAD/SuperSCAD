@@ -1,5 +1,4 @@
 import random
-import typing
 from abc import ABC, abstractmethod
 from typing import List
 
@@ -7,8 +6,6 @@ from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type import Vector2
 from super_scad.type.Angle import Angle
-
-Polygon = typing.NewType('Polygon', None)
 
 
 class PolygonMixin(ABC):
@@ -30,6 +27,41 @@ class PolygonMixin(ABC):
         """
         The absolute angles of the normal of each node.
         """
+
+        self._is_clockwise: bool | None = None
+        """
+        Whether the nodes of the polygon are in a clockwise order.
+        """
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def is_clockwise_order(nodes: List[Vector2]) -> bool:
+        """
+        Returns whether the nodes of a polygon are given in a clockwise order.
+
+        @param nodes: The nodes of the polygon.
+        """
+        radius = 0.0
+        for node in nodes:
+            radius = max(radius, node.x, node.y)
+
+        min_distance = radius
+        for index in range(1, len(nodes)):
+            min_distance = min(min_distance, Vector2.distance(nodes[0], nodes[index]))
+
+        p1 = nodes[-1]
+        p2 = nodes[0]
+        p3 = nodes[1]
+
+        q1 = p2 - Vector2.from_polar_coordinates(0.5 * min_distance, ((p2 - p1).angle + (p2 - p3).angle) / 2.0)
+        q2 = Vector2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
+        number_of_intersections = PolygonMixin._count_intersections(nodes, q1, q2)
+        orientation = Vector2.orientation(p1, p2, q1)
+
+        if orientation == 0.0:
+            raise ValueError('Nodes are to close.')
+
+        return (orientation > 0.0) and (number_of_intersections % 2 == 1)
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -61,42 +93,36 @@ class PolygonMixin(ABC):
         self._inner_angles = []
         self._normal_angles = []
 
-        radius: float = 0.0
         nodes = self.nodes
-        for point in nodes:
-            radius = max(radius, point.x, point.y)
+        self._is_clockwise = self.is_clockwise_order(nodes)
 
         n = len(nodes)
         for i in range(n):
-            p1 = nodes[(i - 1) % n]
-            p2 = nodes[i]
-            p3 = nodes[(i + 1) % n]
-
-            q1 = Vector2((p1.x + p2.x + p3.x) / 3, (p1.y + p2.y + p3.y) / 3)
-            q2 = Vector2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
-
-            number_of_intersections = PolygonMixin._count_intersections(nodes, q1, q2)
-
-            inner_angle = Vector2.angle_3p(p1, p2, p3)
-            if number_of_intersections % 2 == 0:
-                inner_angle = 360.0 - inner_angle
-            inner_angle = Angle.normalize(inner_angle)
-
-            clockwise = Angle.normalize((p2 - q1).angle - (p1 - q1).angle) > 180.0
-            if clockwise and number_of_intersections % 2 == 0:
-                normal_angle = (p1 - p2).angle - 0.5 * inner_angle
-            elif not clockwise and number_of_intersections % 2 == 0:
-                normal_angle = (p1 - p2).angle + 0.5 * inner_angle
-            elif clockwise and number_of_intersections % 2 == 1:
-                normal_angle = (p1 - p2).angle + 0.5 * inner_angle
-            elif not clockwise and number_of_intersections % 2 == 1:
-                normal_angle = (p1 - p2).angle - 0.5 * inner_angle
+            if self._is_clockwise:
+                p1 = nodes[(i - 1) % n]
+                p2 = nodes[i]
+                p3 = nodes[(i + 1) % n]
             else:
-                raise RuntimeError('Should not happen.')
-            normal_angle = Angle.normalize(normal_angle)
+                p1 = nodes[(i + 1) % n]
+                p2 = nodes[i]
+                p3 = nodes[(i - 1) % n]
+
+            inner_angle = Angle.normalize((p3 - p2).angle - (p2 - p1).angle - 180.0)
+            normal_angle = Angle.normalize((p1 - p2).angle + 0.5 * inner_angle)
 
             self._inner_angles.append(inner_angle)
             self._normal_angles.append(normal_angle)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def is_clockwise(self) -> bool:
+        """
+        Returns whether the nodes of this polygon are in a clockwise order.
+        """
+        if self._is_clockwise is None:
+            self._compute_angles()
+
+        return self._is_clockwise
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
