@@ -443,4 +443,17 @@ class PolygonTestCase(ScadTestCase):
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_nodes_to_close(self):
+        """
+        Test polygon with nodes to close to reliable computation of the separation between line segments and nodes.
+        """
+        context = Context()
+        scad = Scad(context=Context())
+
+        points = [Vector2(0.0, 0.0), Vector2(1.0, 0.0), Vector2(1.0, 1.0), Vector2(0.0, 1.0)]
+        polygon1 = Polygon(points=points, delta=2.0)
+
+        self.assertRaises(ValueError, lambda: Color(polygon1.is_clockwise(context)))
+
 # ----------------------------------------------------------------------------------------------------------------------

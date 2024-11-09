@@ -19,8 +19,8 @@ class PolygonMixin(ABC):
         """
         Object constructor.
 
-        :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the separation
-                      between line segments and nodes.
+        :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
+                      separation between line segments and nodes.
         """
         self._inner_angles: List[float] | None = None
         """
