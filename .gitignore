@@ -3,12 +3,10 @@
 /.idea/
 /.venv/
 /bin/phing
+/bin/yaml-lint
 /composer.lock
 /demo.scad
 /dist/
-/docs/_build/
-/docs/_static/
-/docs/_templates/
 /poetry.lock
 /run_super_scad.py
 /test/**/*.actual.scad
