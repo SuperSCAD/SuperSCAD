@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Set
 
 from super_scad.d2.PolygonMixin import PolygonMixin
 from super_scad.d2.private.PrivateSquare import PrivateSquare
@@ -17,14 +17,16 @@ class Square(PolygonMixin, ScadWidget):
     def __init__(self,
                  *,
                  size: float,
-                 center: bool = False):
+                 center: bool = False,
+                 extend_sides_by_eps: bool | Set[int] | None = None):
         """
         Object constructor.
 
         :param size: The size of the square.
         :param center: Whether the square is centered at the origin.
+        :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
         """
-        PolygonMixin.__init__(self, delta=None)
+        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps, delta=None)
         ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -77,7 +79,7 @@ class Square(PolygonMixin, ScadWidget):
                 Vector2(self.size, 0.0)]
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build_polygon(self, context: Context) -> ScadWidget:
+    def _build_polygon(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
 

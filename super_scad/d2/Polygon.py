@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Set
 
 from super_scad.d2.PolygonMixin import PolygonMixin
 from super_scad.d2.private.PrivatePolygon import PrivatePolygon
@@ -21,6 +21,7 @@ class Polygon(PolygonMixin, ScadWidget):
                  secondary: List[Vector2] | None = None,
                  secondaries: List[List[Vector2]] | None = None,
                  convexity: int | None = None,
+                 extend_sides_by_eps: bool | Set[int] | None = None,
                  delta: float | None = None):
         """
         Object constructor.
@@ -31,10 +32,11 @@ class Polygon(PolygonMixin, ScadWidget):
         :param secondaries: The secondary paths that will be subtracted form the polygon.
         :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line
                           through the child widget.
+        :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
         :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
                       separation between line segments and nodes.
         """
-        PolygonMixin.__init__(self, delta=delta)
+        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps, delta=delta)
         ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -86,7 +88,7 @@ class Polygon(PolygonMixin, ScadWidget):
         return self._args.get('convexity')
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build_polygon(self, context: Context) -> ScadWidget:
+    def _build_polygon(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
 

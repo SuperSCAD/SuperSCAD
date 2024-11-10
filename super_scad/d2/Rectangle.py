@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Set
 
 from super_scad.d2.PolygonMixin import PolygonMixin
 from super_scad.d2.private.PrivateSquare import PrivateSquare
@@ -19,7 +19,8 @@ class Rectangle(PolygonMixin, ScadWidget):
                  size: Vector2 | None = None,
                  width: float | None = None,
                  depth: float | None = None,
-                 center: bool = False):
+                 center: bool = False,
+                 extend_sides_by_eps: bool | Set[int] | None = None):
         """
         Object constructor.
 
@@ -27,8 +28,9 @@ class Rectangle(PolygonMixin, ScadWidget):
         :param width: The width (the size along the x-axis) of the rectangle.
         :param depth: The depth (the size along the y-axis) of the rectangle.
         :param center: Whether the rectangle is centered at its position.
+        :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
         """
-        PolygonMixin.__init__(self, delta=None)
+        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps, delta=None)
         ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -106,7 +108,7 @@ class Rectangle(PolygonMixin, ScadWidget):
                 Vector2(self.width, 0.0)]
 
     # ------------------------------------------------------------------------------------------------------------------
-    def build_polygon(self, context: Context) -> ScadWidget:
+    def _build_polygon(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.
 

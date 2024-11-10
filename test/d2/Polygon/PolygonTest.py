@@ -456,4 +456,219 @@ class PolygonTestCase(ScadTestCase):
 
         self.assertRaises(ValueError, lambda: Color(polygon1.is_clockwise(context)))
 
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_one_side1(self):
+        """
+        Extend one side by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={1}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_one_side1_counterclockwise(self):
+        """
+        Extend one side by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+        points.reverse()
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={1}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_one_side2(self):
+        """
+        Extend one side by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={2}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_one_side2_counterclockwise(self):
+        """
+        Extend one side by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+        points.reverse()
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={2}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_two_sides1(self):
+        """
+        Extend two adjacent sides by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={1, 2}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_two_sides1_counterclockwise(self):
+        """
+        Extend two adjacent sides by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+        points.reverse()
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={1, 2}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_two_sides2(self):
+        """
+        Extend two adjacent sides by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={0, 3}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_two_sides2_counterclockwise(self):
+        """
+        Extend two adjacent sides by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+        points.reverse()
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={0, 3}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_all_sides(self):
+        """
+        Extend all sides by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps=True))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_all_sides_counterclockwise(self):
+        """
+        Extend all sides by extended by eps.
+        """
+        points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
+        points.reverse()
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps=True))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
 # ----------------------------------------------------------------------------------------------------------------------

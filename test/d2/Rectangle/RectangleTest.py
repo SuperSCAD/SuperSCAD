@@ -1,7 +1,11 @@
 from ScadTestCase import ScadTestCase
+from super_scad.boolean.Union import Union
 from super_scad.d2.Rectangle import Rectangle
 from super_scad.scad.Context import Context
+from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
+from super_scad.transformation.Paint import Paint
+from super_scad.type.Color import Color
 from super_scad.type.Vector2 import Vector2
 from test.d2.Rectangle.ImperialUnitRectangle import ImperialUnitRectangle
 
@@ -118,5 +122,66 @@ class RectangleTestCase(ScadTestCase):
             self.assertAlmostEqual(expected_nodes[index].y, nodes[index].y)
             self.assertAlmostEqual(expected_inner_angles[index], inner_angles[index])
             self.assertAlmostEqual(expected_normal_angles[index], normal_angles[index])
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_one_side(self):
+        """
+        Extend one side by extended by eps.
+        """
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        square1 = Paint(color=Color('red'), child=Rectangle(width=20.0, depth=10.0, extend_sides_by_eps={1}))
+        square2 = Rectangle(width=20.0, depth=10.0)
+        union = Union(children=[square1, square2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_two_sides(self):
+        """
+        Extend two adjacent sides by extended by eps.
+        """
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        square1 = Paint(color=Color('red'),
+                        child=Rectangle(width=20.0,
+                                        depth=10.0,
+                                        center=True,
+                                        extend_sides_by_eps={1, 2}))
+        square2 = Rectangle(width=20.0,
+                            depth=10.0,
+                            center=True)
+        union = Union(children=[square1, square2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_all_sides(self):
+        """
+        Extend all sides by extended by eps.
+        """
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        square1 = Paint(color=Color('red'), child=Rectangle(width=20.0, depth=10.0, extend_sides_by_eps=True))
+        square2 = Rectangle(width=20.0, depth=10.0)
+        union = Union(children=[square1, square2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
 
 # ----------------------------------------------------------------------------------------------------------------------
