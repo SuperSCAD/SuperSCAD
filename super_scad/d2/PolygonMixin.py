@@ -75,7 +75,7 @@ class PolygonMixin(ABC):
                     orientation = Vector2.orientation(p1, p2, q1)
                     assert orientation != 0.0
 
-                    return (orientation > 0.0) and (number_of_intersections % 2 == 1)
+                    return (orientation > 0.0) == (number_of_intersections % 2 == 1)
 
         raise ValueError('Not a proper polygon.')
 
