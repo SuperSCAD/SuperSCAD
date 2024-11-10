@@ -77,9 +77,9 @@ class PolygonMixin(ABC):
             p2 = nodes[index1 % n]
             p3 = nodes[(index1 + 1) % n]
 
-            if not PolygonMixin._to_close(p1, p3, p2, delta):
-                q1 = p2 - Vector2.from_polar_coordinates(random.uniform(0.25, 0.75) * min_distance,
-                                                         ((p2 - p1).angle + (p2 - p3).angle) / 2.0)
+            q1 = p2 + Vector2.from_polar_coordinates(random.uniform(0.25, 0.75) * min_distance,
+                                                     ((p2 - p1).angle + (p2 - p3).angle) / 2.0)
+            if not PolygonMixin._to_close(p1, p3, q1, delta):
                 q2 = Vector2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
                 number_of_intersections = PolygonMixin._count_intersections(nodes, q1, q2, delta)
                 if number_of_intersections is not None:
