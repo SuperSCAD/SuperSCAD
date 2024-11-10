@@ -383,6 +383,60 @@ class PolygonTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def test_angles5(self):
+        """
+        Test inner angles.
+        """
+        context = Context()
+
+        points = [Vector2(0, 4.999999999999), Vector2(10.0, 0.0), Vector2(-10.0, 0.0)]
+        expected_inner_angles = [126.8699, 26.5651, 26.5651]
+        expected_normal_angles = [270.0, 166.7175, 13.2825]
+
+        polygon1 = Polygon(points=points)
+
+        self.assertEqual(3, polygon1.sides)
+        self.assertTrue(polygon1.is_clockwise(context))
+
+        actual = polygon1.inner_angles(context)
+        self.assertEqual(len(expected_inner_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_inner_angles[i], actual[i], places=4)
+
+        actual = polygon1.normal_angles(context)
+        self.assertEqual(len(expected_normal_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_normal_angles[i], actual[i], places=4)
+
+        points = points.copy()
+        points.reverse()
+        polygon2 = Polygon(points=points)
+
+        self.assertEqual(3, polygon2.sides)
+        self.assertFalse(polygon2.is_clockwise(context))
+
+        actual = polygon2.inner_angles(context)
+        expected_inner_angles.reverse()
+        self.assertEqual(len(expected_inner_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_inner_angles[i], actual[i], places=4)
+
+        actual = polygon2.normal_angles(context)
+        expected_normal_angles.reverse()
+        self.assertEqual(len(expected_normal_angles), len(actual))
+        for i in range(len(actual)):
+            self.assertAlmostEqual(expected_normal_angles[i], actual[i], places=4)
+
+        path_actual, path_expected = self.paths()
+        scad = Scad(context=Context())
+        polygons = Union(children=[Translate2D(x=-11, child=self.normal_angle_arrows(polygon1)),
+                                   Translate2D(x=11, child=self.normal_angle_arrows(polygon2))])
+        scad.run_super_scad(polygons, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def test_angles_collinear_points(self):
         """
         Test inner angles with collinear points.
@@ -459,7 +513,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_one_side1(self):
         """
-        Extend one side by extended by eps.
+        Extend one side by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
 
@@ -480,7 +534,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_one_side1_counterclockwise(self):
         """
-        Extend one side by extended by eps.
+        Extend one side by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
         points.reverse()
@@ -502,7 +556,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_one_side2(self):
         """
-        Extend one side by extended by eps.
+        Extend one side by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
 
@@ -523,7 +577,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_one_side2_counterclockwise(self):
         """
-        Extend one side by extended by eps.
+        Extend one side by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
         points.reverse()
@@ -545,7 +599,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_two_sides1(self):
         """
-        Extend two adjacent sides by extended by eps.
+        Extend two adjacent sides by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
 
@@ -566,7 +620,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_two_sides1_counterclockwise(self):
         """
-        Extend two adjacent sides by extended by eps.
+        Extend two adjacent sides by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
         points.reverse()
@@ -588,7 +642,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_two_sides2(self):
         """
-        Extend two adjacent sides by extended by eps.
+        Extend two adjacent sides by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
 
@@ -609,7 +663,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_two_sides2_counterclockwise(self):
         """
-        Extend two adjacent sides by extended by eps.
+        Extend two adjacent sides by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
         points.reverse()
@@ -629,9 +683,30 @@ class PolygonTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_two_sides2_shallow(self):
+        """
+        Extend two adjacent sides with a shallow angle by eps.
+        """
+        points = [Vector2(0, 4.0), Vector2(10.0, 0.0), Vector2(-10.0, 0.0)]
+
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        polygon1 = Paint(color=Color('red'),
+                         child=Polygon(points=points, extend_sides_by_eps={0, 2}))
+        polygon2 = Polygon(points=points)
+        union = Union(children=[polygon1, polygon2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_all_sides(self):
         """
-        Extend all sides by extended by eps.
+        Extend all sides by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
 
@@ -652,7 +727,7 @@ class PolygonTestCase(ScadTestCase):
     # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_all_sides_counterclockwise(self):
         """
-        Extend all sides by extended by eps.
+        Extend all sides by eps.
         """
         points = [Vector2(0, 20.0), Vector2(10.0, 0.0), Vector2(0.0, 10.0), Vector2(-10.0, 0.0)]
         points.reverse()

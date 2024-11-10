@@ -77,8 +77,9 @@ class PolygonMixin(ABC):
             p2 = nodes[index1 % n]
             p3 = nodes[(index1 + 1) % n]
 
-            if not PolygonMixin._to_close(p1, (p3 - p1).angle, (p3 - p1).length, delta, p2):
-                q1 = p2 - Vector2.from_polar_coordinates(0.5 * min_distance, ((p2 - p1).angle + (p2 - p3).angle) / 2.0)
+            if not PolygonMixin._to_close(p1, p3, p2, delta):
+                q1 = p2 - Vector2.from_polar_coordinates(random.uniform(0.25, 0.75) * min_distance,
+                                                         ((p2 - p1).angle + (p2 - p3).angle) / 2.0)
                 q2 = Vector2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
                 number_of_intersections = PolygonMixin._count_intersections(nodes, q1, q2, delta)
                 if number_of_intersections is not None:
@@ -91,19 +92,22 @@ class PolygonMixin(ABC):
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def _to_close(offset: Vector2, angle: float, length: float, delta: float, node: Vector2) -> bool:
+    def _to_close(segment_start: Vector2, segment_end: Vector2, node: Vector2, delta: float) -> bool:
         """
         Returns whether a node is to close to a line segment for reliable computation of the separation between line
         segments and nodes.
 
-        @param offset: The start point of the line segment.
-        @param angle: The angle of the line segment.
-        @param length: The length of the line segment.
-        @param node: The node.
-        """
-        diff = (node - offset).rotate(-angle)
+        :param segment_start: The start point of the line segment.
+        :param segment_end: The end point of the line segment.
+        :param node: The node.
+        :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
+                      separation between line segments and nodes.
 
-        return -delta <= diff.x <= (length + delta) and -delta <= diff.y <= delta
+        """
+        tmp1 = segment_end - segment_start
+        tmp2 = (node - segment_start).rotate(-tmp1.angle)
+
+        return -delta <= tmp2.x <= (tmp1.length + delta) and -delta <= tmp2.y <= delta
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -145,17 +149,18 @@ class PolygonMixin(ABC):
         """
         intersections = 0
 
-        offset = segment_start
-        angle = (segment_end - segment_start).angle
-        length = Vector2.distance(segment_start, segment_end)
-
         n = len(nodes)
         for i in range(n):
             vertex_start = nodes[i]
             vertex_end = nodes[(i + 1) % n]
 
-            if PolygonMixin._to_close(offset, angle, length, delta, vertex_start):
+            if PolygonMixin._to_close(segment_start, segment_end, vertex_start, delta):
                 return None
+
+            if PolygonMixin._to_close(vertex_start, vertex_end, segment_start, delta):
+                return None
+
+            # segment_end is twice as far from the origin as any node from the origin.
 
             if PolygonMixin._do_intersect(segment_start, segment_end, vertex_start, vertex_end):
                 intersections += 1
