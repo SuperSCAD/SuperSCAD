@@ -365,7 +365,7 @@ class PolygonMixin(ABC):
                     if (index - 1) % n in extend_sides_by_eps:
                         # The previous side is extended by eps, also.
                         alpha = 0.5 * (360.0 - inner_angle)
-                        eps0 = Vector2.from_polar_coordinates(context.eps / math.cos(math.radians(alpha)),
+                        eps0 = Vector2.from_polar_coordinates(context.eps / math.sin(math.radians(alpha)),
                                                               normal_angle + 180.0)
                         new_nodes.append(node + eps0)
                     else:
