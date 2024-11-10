@@ -13,7 +13,7 @@ class LinearExtrudeTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample1(self):
+    def test_sample1(self):
         """
         Test sample 1 from the OpenSCAD cheatsheet.
         """
@@ -43,7 +43,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample2(self):
+    def test_sample2(self):
         """
         Test sample 2 from the OpenSCAD cheatsheet.
         """
@@ -74,7 +74,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample3(self):
+    def test_sample3(self):
         """
         Test sample 3 from the OpenSCAD cheatsheet.
         """
@@ -105,7 +105,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample4(self):
+    def test_sample4(self):
         """
         Test sample 4 from the OpenSCAD cheatsheet.
         """
@@ -136,7 +136,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample5(self):
+    def test_sample5(self):
         """
         Test sample 5 from the OpenSCAD cheatsheet.
         """
@@ -166,7 +166,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample6(self):
+    def test_sample6(self):
         """
         Test sample 6 from the OpenSCAD cheatsheet.
         """
@@ -197,7 +197,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample7(self):
+    def test_sample7(self):
         """
         Test sample 7 from the OpenSCAD cheatsheet.
         """
@@ -228,7 +228,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample8(self):
+    def test_sample8(self):
         """
         Test sample 8 from the OpenSCAD cheatsheet.
         """
@@ -258,7 +258,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample9(self):
+    def test_sample9(self):
         """
         Test sample 9 from the OpenSCAD cheatsheet.
         """
@@ -293,7 +293,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricLinearExtrude(self):
+    def test_imperial_metric_linear_extrude(self):
         """
         Test for an extrude imperial unit cube in metric units.
         """
@@ -320,7 +320,7 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialLinearExtrude(self):
+    def test_imperial_imperial_linear_extrude(self):
         """
         Test for an extruded imperial unit cube in imperial units.
         """

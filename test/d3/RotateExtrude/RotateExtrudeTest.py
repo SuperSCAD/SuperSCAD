@@ -16,7 +16,7 @@ class RotateExtrudeTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample1(self):
+    def test_sample1(self):
         """
         Test sample 1 from the OpenSCAD cheatsheet.
         """
@@ -39,7 +39,7 @@ class RotateExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample2(self):
+    def test_sample2(self):
         """
         Test sample 2 from the OpenSCAD cheatsheet.
         """
@@ -63,7 +63,7 @@ class RotateExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSample3(self):
+    def test_sample3(self):
         """
         Test sample 3 from the OpenSCAD cheatsheet.
         """
@@ -94,7 +94,7 @@ class RotateExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricLinearExtrude(self):
+    def test_imperial_metric_linear_extrude(self):
         """
         Test for an extrude imperial unit cube in metric units.
         """
@@ -111,7 +111,7 @@ class RotateExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialLinearExtrude(self):
+    def test_imperial_imperial_linear_extrude(self):
         """
         Test for an extruded imperial unit donut in imperial units.
         """

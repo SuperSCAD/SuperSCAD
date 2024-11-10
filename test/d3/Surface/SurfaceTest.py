@@ -9,7 +9,7 @@ class SurfaceTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSurface(self):
+    def test_surface(self):
         """
         The test case for Surface.
         """
@@ -28,7 +28,7 @@ class SurfaceTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testFileNotExists(self):
+    def test_file_not_exists(self):
         """
         Test for non-existent file.
         """

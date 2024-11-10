@@ -11,7 +11,7 @@ class MinkowskiTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMinkowski(self):
+    def test_minkowski(self):
         """
         Test case for minkowski without convexity.
         """
@@ -27,7 +27,7 @@ class MinkowskiTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMinkowskiWithConvexity(self):
+    def test_minkowski_with_convexity(self):
         """
         Test case for minkowski with convexity.
         """

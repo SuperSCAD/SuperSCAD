@@ -15,7 +15,7 @@ class CylinderTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCylinderRadius(self):
+    def test_cylinder_radius(self):
         """
         Test for a cylinder defined by a radius.
         """
@@ -45,7 +45,7 @@ class CylinderTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCylinderDiameter(self):
+    def test_cylinder_diameter(self):
         """
         Test for a cylinder defined by a diameter.
         """
@@ -75,7 +75,7 @@ class CylinderTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCylinderStartEndPoint(self):
+    def test_cylinder_start_end_point(self):
         """
         Test for a cylinder defined by a start and end point.
         """
@@ -111,7 +111,7 @@ class CylinderTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCylinder4n(self):
+    def test_cylinder4n(self):
         """
         Test for a cylinder with a multiple of 4 vertices.
         """
@@ -140,7 +140,7 @@ class CylinderTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCylinderAuxiliaryParameter(self):
+    def test_cylinder_auxiliary_parameter(self):
         """
         Test auxiliary parameters.
         """
@@ -171,7 +171,7 @@ class CylinderTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricCylinder(self):
+    def test_imperial_metric_cylinder(self):
         """
         Test for an imperial cylinder in metric units.
         """
@@ -200,7 +200,7 @@ class CylinderTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialCylinder(self):
+    def test_imperial_imperial_cylinder(self):
         """
         Test for an imperial cylinder in imperial units.
         """

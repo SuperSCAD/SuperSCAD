@@ -11,7 +11,7 @@ class CuboidTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCuboidBySize(self):
+    def test_cuboid_by_size(self):
         """
         Test for a cuboid defined by size.
         """
@@ -34,7 +34,7 @@ class CuboidTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCuboidByWidthAndDepth(self):
+    def test_cuboid_by_width_and_depth(self):
         """
         Test for a cuboid defined by width and depth.
         """
@@ -57,7 +57,7 @@ class CuboidTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricCuboid(self):
+    def test_imperial_metric_cuboid(self):
         """
         Test for an imperial unit cuboid in metric units.
         """
@@ -80,7 +80,7 @@ class CuboidTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialCuboid(self):
+    def test_imperial_imperial_cuboid(self):
         """
         Test for an imperial unit cuboid in imperial units.
         """

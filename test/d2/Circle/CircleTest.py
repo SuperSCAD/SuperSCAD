@@ -2,7 +2,6 @@ from d2.Circle.ImperialCircle import ImperialCircle
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Circle import Circle
 from super_scad.scad.Unit import Unit
-from super_scad.type.Vector2 import Vector2
 
 
 class CircleTestCase(ScadTestCase):
@@ -11,7 +10,7 @@ class CircleTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleRadius(self):
+    def test_circle_radius(self):
         """
         Test for a circle defined by a radius.
         """
@@ -30,7 +29,7 @@ class CircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleDiameter(self):
+    def test_circle_diameter(self):
         """
         Test for a circle defined by a diameter.
         """
@@ -52,7 +51,7 @@ class CircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircleAuxiliaryParameter(self):
+    def test_circle_auxiliary_parameter(self):
         """
         Test auxiliary parameters.
         """
@@ -75,7 +74,7 @@ class CircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCircle4n(self):
+    def test_circle4n(self):
         """
         Test a circle with a multiple of 4 vertices.
         """
@@ -95,7 +94,7 @@ class CircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricCircle(self):
+    def test_imperial_metric_circle(self):
         """
         Test for an imperial circle in metric units.
         """
@@ -116,7 +115,7 @@ class CircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialCircle(self):
+    def test_imperial_imperial_circle(self):
         """
         Test for an imperial circle in imperial units.
         """

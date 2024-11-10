@@ -10,7 +10,7 @@ class PaintTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPaint(self):
+    def test_paint(self):
         """
         The test case for paint.
         """

@@ -10,7 +10,7 @@ class IntersectionTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testIntersection(self):
+    def test_intersection(self):
         """
         The test case for Intersection.
         """

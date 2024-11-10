@@ -35,7 +35,7 @@ class ProjectionTest(ScadTestCase):
         return Intersection(children=[Difference(children=[body, cross]), cone])
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testProjectionWithCut(self):
+    def test_projection_with_cut(self):
         """
         Test with a cut.
         """
@@ -54,7 +54,7 @@ class ProjectionTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testProjectionWithCutAtHeight(self):
+    def test_projection_with_cut_at_height(self):
         """
         Test with a cut at a specified height.
         """
@@ -73,7 +73,7 @@ class ProjectionTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testProjectionWithoutCut(self):
+    def test_projection_without_cut(self):
         """
         Test with a cut.
         """
@@ -92,7 +92,7 @@ class ProjectionTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testProjectionSideView(self):
+    def test_projection_side_view(self):
         """
         Test without a cut.
         """

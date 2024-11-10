@@ -10,7 +10,7 @@ class Resize3DTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testAutoDepth(self):
+    def test_auto_depth(self):
         """
         Test cases for auto depth.
         """
@@ -75,7 +75,7 @@ class Resize3DTest(ScadTestCase):
         self.assertFalse(resize.auto_height)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testResizeByVector(self):
+    def test_resize_by_vector(self):
         """
         Test case for resize with 3 explicit sizes.
         """
@@ -101,7 +101,7 @@ class Resize3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testResizeBySizes(self):
+    def test_resize_by_sizes(self):
         """
         Test case for resize with 3 explicit sizes.
         """
@@ -127,7 +127,7 @@ class Resize3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testResizeByOneSizeAndTwoAutoSizeAsTuple(self):
+    def test_resize_by_one_size_and_two_auto_size_as_tuple(self):
         """
         Test case for resize with 1 explicit size (depth) and 2 auto sizes as a tuple.
         """
@@ -153,7 +153,7 @@ class Resize3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testResizeByOneSizeAndTwoAutoSizeAsArgs(self):
+    def test_resize_by_one_size_and_two_auto_size_as_args(self):
         """
         Test case for resize with 1 explicit size and 2 auto sizes as a tuple.
         """
@@ -179,7 +179,7 @@ class Resize3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testResizeByOneSizeAndTwoAutoSize(self):
+    def test_resize_by_one_size_and_two_auto_size(self):
         """
         Test case for resize with 1 explicit size and 2 auto sizes.
         """

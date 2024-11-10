@@ -12,7 +12,7 @@ class Scale2DTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testScaleWithVector(self):
+    def test_scale_with_vector(self):
         """
         Test scaling with a vector.
         """
@@ -36,7 +36,7 @@ class Scale2DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testScaleWith1Factor(self):
+    def test_scale_with1_factor(self):
         """
         Test scaling with one explicit factor and 1 implicit factor.
         """
@@ -60,7 +60,7 @@ class Scale2DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testScaleWithFactor(self):
+    def test_scale_with_factor(self):
         """
         Test scaling with one factor for all axis.
         """

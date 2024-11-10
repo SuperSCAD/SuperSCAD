@@ -10,7 +10,7 @@ class UnionTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testUnion(self):
+    def test_union(self):
         """
         The test case for Union.
         """

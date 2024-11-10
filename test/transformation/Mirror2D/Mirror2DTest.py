@@ -13,7 +13,7 @@ class Mirror2DTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMirrorHorizontally(self):
+    def test_mirror_horizontally(self):
         """
         Test mirror horizontally.
         """
@@ -34,7 +34,7 @@ class Mirror2DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMirrorVertically(self):
+    def test_mirror_vertically(self):
         """
         Test mirror vertically.
         """
@@ -55,7 +55,7 @@ class Mirror2DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMirrorByVector(self):
+    def test_mirror_by_vector(self):
         """
         Test mirror by a vector.
         """

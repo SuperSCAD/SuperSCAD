@@ -10,7 +10,7 @@ class OffsetTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPositiveRadius(self):
+    def test_positive_radius(self):
         """
         Test with a positive radius
         """
@@ -33,7 +33,7 @@ class OffsetTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNegativeRadius(self):
+    def test_negative_radius(self):
         """
         Test with a positive radius
         """
@@ -56,7 +56,7 @@ class OffsetTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPositiveDeltaNoChamfer(self):
+    def test_positive_delta_no_chamfer(self):
         """
         Test with a positive delta and no chamfer.
         """
@@ -79,7 +79,7 @@ class OffsetTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNegativeDeltaNoChamfer(self):
+    def test_negative_delta_no_chamfer(self):
         """
         Test with a negative delta and no chamfer.
         """
@@ -102,7 +102,7 @@ class OffsetTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPositiveDeltaChamfer(self):
+    def test_positive_delta_chamfer(self):
         """
         Test with a positive delta and with chamfer.
         """
@@ -125,7 +125,7 @@ class OffsetTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNegativeDeltaChamfer(self):
+    def test_negative_delta_chamfer(self):
         """
         Test with a negative delta and with chamfer.
         """

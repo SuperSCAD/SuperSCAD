@@ -12,7 +12,7 @@ class Translate3DTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testTranslateByVector(self):
+    def test_translate_by_vector(self):
         """
         Test translate given a vector.
         """
@@ -35,7 +35,7 @@ class Translate3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testTranslateByCoordinates(self):
+    def test_translate_by_coordinates(self):
         """
         Test translate given coordinates.
         """
@@ -81,7 +81,7 @@ class Translate3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricTranslation(self):
+    def test_imperial_metric_translation(self):
         """
         Test for an imperial translation in metric units.
         """
@@ -115,7 +115,7 @@ class Translate3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialTranslation(self):
+    def test_imperial_imperial_translation(self):
         """
         Test for an imperial translation in imperial units.
         """

@@ -8,7 +8,7 @@ class TextTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPlainText1(self):
+    def test_plain_text1(self):
         """
         Plain test for plain text.
         """
@@ -35,7 +35,7 @@ class TextTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPlainText2(self):
+    def test_plain_text2(self):
         """
         Plain test for plain text.
         """

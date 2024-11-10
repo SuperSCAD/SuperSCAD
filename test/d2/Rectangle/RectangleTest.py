@@ -12,7 +12,7 @@ class RectangleTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRectangleBySize(self):
+    def test_rectangle_by_size(self):
         """
         Test for a rectangle defined by size.
         """
@@ -34,7 +34,7 @@ class RectangleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRectangleByWidthAndDepth(self):
+    def test_rectangle_by_width_and_depth(self):
         """
         Test for a rectangle defined by width and depth.
         """
@@ -56,7 +56,7 @@ class RectangleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricRectangle(self):
+    def test_imperial_metric_rectangle(self):
         """
         Test for an imperial unit rectangle in metric units.
         """
@@ -77,7 +77,7 @@ class RectangleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialRectangle(self):
+    def test_imperial_imperial_rectangle(self):
         """
         Test for an imperial unit rectangle in imperial units.
         """

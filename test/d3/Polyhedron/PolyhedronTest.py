@@ -11,7 +11,7 @@ class PolyhedronTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testWithLists(self):
+    def test_with_lists(self):
         """
         Test where all faces are given as lists.
         """
@@ -38,7 +38,7 @@ class PolyhedronTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testWithTuples(self):
+    def test_with_tuples(self):
         """
         Test where all faces are given as tuples.
         """
@@ -65,7 +65,7 @@ class PolyhedronTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testDebug(self):
+    def test_debug(self):
         """
         Test where one face is being highlighted.
         """
@@ -94,7 +94,7 @@ class PolyhedronTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricCube(self):
+    def test_imperial_metric_cube(self):
         """
         Test for an imperial unit cube in metric units.
         """
@@ -110,7 +110,7 @@ class PolyhedronTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialCube(self):
+    def test_imperial_imperial_cube(self):
         """
         Test for an imperial unit cube in imperial units.
         """

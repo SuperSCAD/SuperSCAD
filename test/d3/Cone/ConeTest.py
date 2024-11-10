@@ -10,7 +10,7 @@ class ConeTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testConeRadius(self):
+    def test_cone_radius(self):
         """
         Test for a cone defined by radii.
         """
@@ -36,7 +36,7 @@ class ConeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testConeDiameter(self):
+    def test_cone_diameter(self):
         """
         Test for a cone defined by a diameter.
         """
@@ -62,7 +62,7 @@ class ConeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCone4n(self):
+    def test_cone4n(self):
         """
         Test for a cone with a multiple of 4 vertices.
         """
@@ -86,7 +86,7 @@ class ConeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testConeAuxiliaryParameter(self):
+    def test_cone_auxiliary_parameter(self):
         """
         Test auxiliary parameters.
         """
@@ -113,7 +113,7 @@ class ConeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricCone(self):
+    def test_imperial_metric_cone(self):
         """
         Test for an imperial cone in metric units.
         """
@@ -138,7 +138,7 @@ class ConeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialCone(self):
+    def test_imperial_imperial_cone(self):
         """
         Test for an imperial cone in imperial units.
         """

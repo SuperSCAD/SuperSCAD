@@ -10,7 +10,7 @@ class EchoTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testEcho(self):
+    def test_echo(self):
         """
         The test case for Echo.
         """

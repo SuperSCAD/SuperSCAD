@@ -9,7 +9,7 @@ class Vector3Test(unittest.TestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testAddition(self):
+    def test_addition(self):
         """
         Test adding two vectors.
         """
@@ -27,7 +27,7 @@ class Vector3Test(unittest.TestCase):
         self.assertAlmostEqual(9.0, vector3.z)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSubtraction(self):
+    def test_subtraction(self):
         """
         Test subtraction two vectors.
         """
@@ -57,7 +57,7 @@ class Vector3Test(unittest.TestCase):
         self.assertAlmostEqual(5.0, vector3.z)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testDivision(self):
+    def test_division(self):
         """
         Test division of a vector.
         """
@@ -71,7 +71,7 @@ class Vector3Test(unittest.TestCase):
         self.assertAlmostEqual(1.5, vector2.z)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMultiplication(self):
+    def test_multiplication(self):
         """
         Test multiplication of a vector.
         """
@@ -85,7 +85,7 @@ class Vector3Test(unittest.TestCase):
         self.assertAlmostEqual(12.0, vector2.z)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testLength(self):
+    def test_length(self):
         """
         Test length of a vector.
         """
@@ -96,7 +96,7 @@ class Vector3Test(unittest.TestCase):
         self.assertAlmostEqual(5.385164807134504, vector.length)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNormal(self):
+    def test_normal(self):
         """
         Test normalized vector of a vector.
         """
@@ -113,7 +113,7 @@ class Vector3Test(unittest.TestCase):
         self.assertAlmostEqual(1.0, vector.length)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testOrigin(self):
+    def test_origin(self):
         """
         Test the origin is at the origin.
         """
@@ -122,7 +122,7 @@ class Vector3Test(unittest.TestCase):
         self.assertEqual(Vector3.origin.z, 0.0)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testIsOrigin(self):
+    def test_is_origin(self):
         """
         Test is_origin.
         """
@@ -144,6 +144,5 @@ class Vector3Test(unittest.TestCase):
         vector = Vector3(0.0, 0.0, 1.0)
         self.assertFalse(vector.is_origin)
         self.assertTrue(vector.is_not_origin)
-
 
 # ----------------------------------------------------------------------------------------------------------------------

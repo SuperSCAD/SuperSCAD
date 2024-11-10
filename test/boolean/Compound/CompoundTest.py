@@ -11,7 +11,7 @@ class CompoundTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCompound(self):
+    def test_compound(self):
         """
         The test case for Compound.
         """

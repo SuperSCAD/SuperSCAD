@@ -10,7 +10,7 @@ class HullTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testHull(self):
+    def test_hull(self):
         """
         The test case for hull.
         """

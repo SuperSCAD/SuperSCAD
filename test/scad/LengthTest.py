@@ -11,7 +11,7 @@ class LengthTest(unittest.TestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMetric(self):
+    def test_metric(self):
         """
         Test conversion between metric lengths.
         """
@@ -22,7 +22,7 @@ class LengthTest(unittest.TestCase):
         self.assertEqual(1000.0, Length.convert(1.0, Unit.KM, Unit.M))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperial(self):
+    def test_imperial(self):
         """
         Test conversion between imperial lengths.
         """
@@ -32,7 +32,7 @@ class LengthTest(unittest.TestCase):
         self.assertAlmostEqual(1.0, Length.convert(5280.0, Unit.FOOT, Unit.MILE))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPracticalConversions(self):
+    def test_practical_conversions(self):
         """
         Test some practical conversions.
         """
@@ -41,7 +41,7 @@ class LengthTest(unittest.TestCase):
         self.assertAlmostEqual(0.9144, Length.convert(1, Unit.YARD, Unit.M))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testFreeOfScale(self):
+    def test_free_of_scale(self):
         """
         Test a length free of any scale can be converted to a length free of any scale only.
         """

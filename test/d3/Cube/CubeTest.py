@@ -10,7 +10,7 @@ class CubeTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPlainCube(self):
+    def test_plain_cube(self):
         """
         Plain test for a cube.
         """
@@ -28,7 +28,7 @@ class CubeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCenteredCube(self):
+    def test_centered_cube(self):
         """
         Plain test for a centered cube.
         """
@@ -46,7 +46,7 @@ class CubeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricCube(self):
+    def test_imperial_metric_cube(self):
         """
         Test for an imperial unit cube in metric units.
         """
@@ -64,7 +64,7 @@ class CubeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialCube(self):
+    def test_imperial_imperial_cube(self):
         """
         Test for an imperial unit cube in imperial units.
         """

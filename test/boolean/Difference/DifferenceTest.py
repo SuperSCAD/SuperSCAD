@@ -10,7 +10,7 @@ class DifferenceTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testDifference(self):
+    def test_difference(self):
         """
         The test case for Difference.
         """

@@ -14,7 +14,7 @@ class ModifyTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testTransparentModifier(self):
+    def test_transparent_modifier(self):
         """
         Test the transparent modifier.
         """
@@ -43,7 +43,7 @@ class ModifyTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testHighlightModifier(self):
+    def test_highlight_modifier(self):
         """
         Test the highlight modifier.
         """
@@ -72,7 +72,7 @@ class ModifyTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testShowOnlyModifier(self):
+    def test_show_only_modifier(self):
         """
         Test the show only modifier.
         """
@@ -97,7 +97,7 @@ class ModifyTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testDisableModifier(self):
+    def test_disable_modifier(self):
         """
         Test the disable modifier.
         """
@@ -125,7 +125,7 @@ class ModifyTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNoModifying(self):
+    def test_no_modifying(self):
         """
         Test the modifier without modifications.
         """

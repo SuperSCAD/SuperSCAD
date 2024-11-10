@@ -10,7 +10,7 @@ class Flip2DTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testFlipX(self):
+    def test_flip_x(self):
         """
         Test flip around x-axis.
         """
@@ -32,7 +32,7 @@ class Flip2DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testFlipY(self):
+    def test_flip_y(self):
         """
         Test flip around y-axis.
         """
@@ -54,7 +54,7 @@ class Flip2DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testFlipZ(self):
+    def test_flip_z(self):
         """
         Test flip around x and y-axis.
         """

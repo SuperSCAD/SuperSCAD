@@ -12,7 +12,7 @@ class ScadTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNonDefaultFa(self):
+    def test_non_default_fa(self):
         """
         Test non default value for $fa.
         """
@@ -26,7 +26,7 @@ class ScadTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNonDefaultFs(self):
+    def test_non_default_fs(self):
         """
         Test non default value for $fs.
         """
@@ -40,7 +40,7 @@ class ScadTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNonDefaultFn(self):
+    def test_non_default_fn(self):
         """
         Test non default value for $fn.
         """
@@ -54,7 +54,7 @@ class ScadTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNonDefaultFaFsFn(self):
+    def test_non_default_fa_fs_fn(self):
         """
         Test non default value for $fa, $fs, and $fn.
         """

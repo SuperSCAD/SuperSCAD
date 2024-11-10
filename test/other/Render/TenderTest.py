@@ -13,7 +13,7 @@ class TenderTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRender(self):
+    def test_render(self):
         """
         The unit test for Render.
         """

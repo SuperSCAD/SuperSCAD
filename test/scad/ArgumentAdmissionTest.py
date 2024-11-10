@@ -9,7 +9,7 @@ class ArgumentAdmissionTest(unittest.TestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testExclusiveExclusive(self):
+    def test_exclusive_exclusive(self):
         """
         Test exclusive arguments that are exclusive.
         """
@@ -19,7 +19,7 @@ class ArgumentAdmissionTest(unittest.TestCase):
         self.assertTrue(True)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testExclusiveNotExclusive(self):
+    def test_exclusive_not_exclusive(self):
         """
         Test exclusive arguments that are not exclusive.
         """
@@ -28,7 +28,7 @@ class ArgumentAdmissionTest(unittest.TestCase):
         self.assertRaises(ValueError, lambda: admission.validate_exclusive({'radius'}, {'diameter'}))
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRequiredRequired(self):
+    def test_required_required(self):
         """
         Test required arguments that are given.
         """
@@ -38,7 +38,7 @@ class ArgumentAdmissionTest(unittest.TestCase):
         self.assertTrue(True)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRequiredNotGiven(self):
+    def test_required_not_given(self):
         """
         Test required arguments that are given.
         """

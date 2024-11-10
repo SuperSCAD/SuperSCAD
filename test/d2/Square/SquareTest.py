@@ -12,7 +12,7 @@ class SquareTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testPlainSquare(self):
+    def test_plain_square(self):
         """
         Plain test for a square.
         """
@@ -31,7 +31,7 @@ class SquareTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testCenteredSquare(self):
+    def test_centered_square(self):
         """
         Plain test for a centered square.
         """
@@ -50,7 +50,7 @@ class SquareTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricSquare(self):
+    def test_imperial_metric_square(self):
         """
         Test for an imperial unit square in metric units.
         """
@@ -68,7 +68,7 @@ class SquareTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialSquare(self):
+    def test_imperial_imperial_square(self):
         """
         Test for an imperial unit square in imperial units.
         """

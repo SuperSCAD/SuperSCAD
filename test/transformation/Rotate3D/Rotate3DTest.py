@@ -17,7 +17,7 @@ class Rotate3DTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRotatePoint3(self):
+    def test_rotate_point3(self):
         """
         Test case for rotate with Point3.
         """
@@ -49,7 +49,7 @@ class Rotate3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRotateAngles(self):
+    def test_rotate_angles(self):
         """
         Test case for rotate with angles.
         """
@@ -81,7 +81,7 @@ class Rotate3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRotateVector(self):
+    def test_rotate_vector(self):
         """
         Test case for rotate around a vector.
         """

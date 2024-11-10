@@ -9,7 +9,7 @@ class AngleTest(unittest.TestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNormalize(self):
+    def test_normalize(self):
         """
         Test cases for normalize.
         """

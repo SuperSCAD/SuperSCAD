@@ -9,7 +9,7 @@ class ColorTestCase(unittest.TestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testAllFormats(self):
+    def test_all_formats(self):
         """
         Test all format of lightslategray.
         """

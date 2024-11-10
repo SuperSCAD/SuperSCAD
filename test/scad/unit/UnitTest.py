@@ -26,7 +26,7 @@ class UnitTest(unittest.TestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testMetricUnits(self):
+    def test_metric_units(self):
         """
         The metric system is brilliant in its simplicity.
         """
@@ -47,7 +47,7 @@ class UnitTest(unittest.TestCase):
         self.assertEqual(1.0, meter.meters())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testScienceUnits(self):
+    def test_science_units(self):
         """
         The unit of length used in science.
         """
@@ -68,7 +68,7 @@ class UnitTest(unittest.TestCase):
         self.assertAlmostEqual(3.086, 100 * attoparsec.meters(), 3)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testInsanity(self):
+    def test_insanity(self):
         """
         The imperial system makes satellites crash on Mars.
         """
@@ -88,7 +88,7 @@ class UnitTest(unittest.TestCase):
         self.assertAlmostEqual(inch.meters(), 25.4 * millimeter.meters())
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testChineseLengthUnits(self):
+    def test_chinese_length_units(self):
         """
         The imperial system lets you crash satellites on Mars.
         """

@@ -2,7 +2,6 @@ from d2.Semicircle.ImperialSemicircle import ImperialSemicircle
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Semicircle import Semicircle
 from super_scad.scad.Unit import Unit
-from super_scad.type.Vector2 import Vector2
 
 
 class SemicircleTestCase(ScadTestCase):
@@ -11,7 +10,7 @@ class SemicircleTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSemicircleRadius(self):
+    def test_semicircle_radius(self):
         """
         Test for a semi_circle defined by a radius.
         """
@@ -30,7 +29,7 @@ class SemicircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSemicircleDiameter(self):
+    def test_semicircle_diameter(self):
         """
         Test for a semi_circle defined by a diameter.
         """
@@ -52,7 +51,7 @@ class SemicircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSemicircle4n(self):
+    def test_semicircle4n(self):
         """
         Test for a semi_circle based on circle with a multiple of four vertices.
         """
@@ -73,7 +72,7 @@ class SemicircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSemicircleAuxiliaryParameter(self):
+    def test_semicircle_auxiliary_parameter(self):
         """
         Test auxiliary parameters.
         """
@@ -97,7 +96,7 @@ class SemicircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricSemicircle(self):
+    def test_imperial_metric_semicircle(self):
         """
         Test for an imperial 2D semi_circle in metric units.
         """
@@ -119,7 +118,7 @@ class SemicircleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialSemicircle(self):
+    def test_imperial_imperial_semicircle(self):
         """
         Test for an imperial 2D semi_circle in imperial units.
         """

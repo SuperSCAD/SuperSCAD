@@ -9,7 +9,7 @@ class Rotate2DTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testRotate(self):
+    def test_rotate(self):
         """
         Test case for Rotate2D.
         """
@@ -27,7 +27,7 @@ class Rotate2DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testNoRotate(self):
+    def test_no_rotate(self):
         """
         Test case for Rotate2D with angle.
         """

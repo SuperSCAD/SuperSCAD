@@ -10,7 +10,7 @@ class Import3DTest(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImport2D(self):
+    def test_import2_d(self):
         """
         The test case for Import2D.
         """
@@ -29,7 +29,7 @@ class Import3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImport3D(self):
+    def test_import3_d(self):
         """
         The test case for Import3D.
         """
@@ -47,7 +47,7 @@ class Import3DTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testFileNotExists(self):
+    def test_file_not_exists(self):
         """
         Test for non-existent file.
         """

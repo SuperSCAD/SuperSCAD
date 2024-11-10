@@ -10,7 +10,7 @@ class SphereTestCase(ScadTestCase):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSphereRadius(self):
+    def test_sphere_radius(self):
         """
         Test for a sphere defined by a radius.
         """
@@ -29,7 +29,7 @@ class SphereTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSphereDiameter(self):
+    def test_sphere_diameter(self):
         """
         Test for a sphere defined by a diameter.
         """
@@ -51,7 +51,7 @@ class SphereTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSphere4n(self):
+    def test_sphere4n(self):
         """
         Test for a sphere with a multiple of 4 vertices.
         """
@@ -72,7 +72,7 @@ class SphereTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testSphereAuxiliaryParameter(self):
+    def test_sphere_auxiliary_parameter(self):
         """
         Test auxiliary parameters.
         """
@@ -95,7 +95,7 @@ class SphereTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialMetricSphere(self):
+    def test_imperial_metric_sphere(self):
         """
         Test for an imperial sphere in metric units.
         """
@@ -116,7 +116,7 @@ class SphereTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testImperialImperialSphere(self):
+    def test_imperial_imperial_sphere(self):
         """
         Test for an imperial sphere in imperial units.
         """
