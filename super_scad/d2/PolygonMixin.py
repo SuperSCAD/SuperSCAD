@@ -9,13 +9,15 @@ from super_scad.type import Vector2
 from super_scad.type.Angle import Angle
 
 
-class PolygonMixin(ABC):
+class   PolygonMixin(ABC):
     """
     A mixin for all polygonal and polygonal like widgets in SuperSCAD.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, delta: float | None):
+    def __init__(self,
+                 *,
+                 delta: float | None):
         """
         Object constructor.
 
@@ -265,5 +267,14 @@ class PolygonMixin(ABC):
         :param context: The build context.
         """
         raise NotImplementedError()
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def build(self, context: Context) -> ScadWidget:
+        """
+        Builds a SuperSCAD widget.
+
+        :param context: The build context.
+        """
+        return self.build_polygon(context)
 
 # ----------------------------------------------------------------------------------------------------------------------

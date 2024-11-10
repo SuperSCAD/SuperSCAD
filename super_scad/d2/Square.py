@@ -8,7 +8,7 @@ from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type import Vector2
 
 
-class Square(ScadWidget, PolygonMixin):
+class Square(PolygonMixin, ScadWidget):
     """
     Widget for creating squares.
     """
@@ -24,8 +24,8 @@ class Square(ScadWidget, PolygonMixin):
         :param size: The size of the square.
         :param center: Whether the square is centered at the origin.
         """
-        ScadWidget.__init__(self, args=locals())
         PolygonMixin.__init__(self, delta=None)
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
@@ -84,14 +84,5 @@ class Square(ScadWidget, PolygonMixin):
         :param context: The build context.
         """
         return PrivateSquare(size=self.size, center=self.center)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadWidget:
-        """
-        Builds a SuperSCAD widget.
-
-        :param context: The build context.
-        """
-        return self.build_polygon(context)
 
 # ----------------------------------------------------------------------------------------------------------------------

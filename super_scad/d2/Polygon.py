@@ -110,13 +110,4 @@ class Polygon(PolygonMixin, ScadWidget):
 
         return PrivatePolygon(points=points, paths=paths, convexity=self.convexity)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadWidget:
-        """
-        Builds a SuperSCAD widget.
-
-        :param context: The build context.
-        """
-        return self.build_polygon(context)
-
 # ----------------------------------------------------------------------------------------------------------------------

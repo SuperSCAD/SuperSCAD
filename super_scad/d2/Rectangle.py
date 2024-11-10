@@ -8,7 +8,7 @@ from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Vector2 import Vector2
 
 
-class Rectangle(ScadWidget, PolygonMixin):
+class Rectangle(PolygonMixin, ScadWidget):
     """
     Widget for creating rectangles.
     """
@@ -28,8 +28,8 @@ class Rectangle(ScadWidget, PolygonMixin):
         :param depth: The depth (the size along the y-axis) of the rectangle.
         :param center: Whether the rectangle is centered at its position.
         """
-        ScadWidget.__init__(self, args=locals())
         PolygonMixin.__init__(self, delta=None)
+        ScadWidget.__init__(self, args=locals())
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
@@ -113,14 +113,5 @@ class Rectangle(ScadWidget, PolygonMixin):
         :param context: The build context.
         """
         return PrivateSquare(size=self.size, center=self.center)
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def build(self, context: Context) -> ScadWidget:
-        """
-        Builds a SuperSCAD widget.
-
-        :param context: The build context.
-        """
-        return self.build_polygon(context)
 
 # ----------------------------------------------------------------------------------------------------------------------
