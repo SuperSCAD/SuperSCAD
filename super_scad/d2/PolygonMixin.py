@@ -18,7 +18,7 @@ class PolygonMixin(ABC):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 extend_sides_by_eps: bool | Set[int] | None,
+                 extend_sides_by_eps: bool | List[bool] | Set[int] | None,
                  delta: float | None):
         """
         Object constructor.
@@ -42,7 +42,7 @@ class PolygonMixin(ABC):
         Whether the nodes of the polygon are in a clockwise order.
         """
 
-        self._extend_sides_by_eps: bool | Set[int] | None = extend_sides_by_eps
+        self._extend_sides_by_eps: bool | List[bool] | Set[int] | None = extend_sides_by_eps
         """
         Whether to extend sides by eps for a clear overlap.
         """
@@ -269,8 +269,11 @@ class PolygonMixin(ABC):
         if isinstance(self._extend_sides_by_eps, set):
             return self._extend_sides_by_eps
 
+        if isinstance(self._extend_sides_by_eps, list):
+            return set(index for index in range(len(self._extend_sides_by_eps)) if self._extend_sides_by_eps[index])
+
         raise ValueError(f'Parameter extend_sides_by_eps must be a boolean, '
-                         f'set of integers or None, got {type(self._extend_sides_by_eps)}')
+                         f'set of integers, a list of booleans or None, got {type(self._extend_sides_by_eps)}')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

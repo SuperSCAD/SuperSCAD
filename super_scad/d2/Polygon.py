@@ -21,7 +21,7 @@ class Polygon(PolygonMixin, ScadWidget):
                  secondary: List[Vector2] | None = None,
                  secondaries: List[List[Vector2]] | None = None,
                  convexity: int | None = None,
-                 extend_sides_by_eps: bool | Set[int] | None = None,
+                 extend_sides_by_eps: bool | List[bool] | Set[int] | None = None,
                  delta: float | None = None):
         """
         Object constructor.

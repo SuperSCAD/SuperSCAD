@@ -564,7 +564,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={2}))
+                         child=Polygon(points=points, extend_sides_by_eps=[False, False, True, False]))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 

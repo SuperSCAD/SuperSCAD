@@ -20,7 +20,7 @@ class Rectangle(PolygonMixin, ScadWidget):
                  width: float | None = None,
                  depth: float | None = None,
                  center: bool = False,
-                 extend_sides_by_eps: bool | Set[int] | None = None):
+                 extend_sides_by_eps: bool | List[bool] | Set[int] | None = None):
         """
         Object constructor.
 

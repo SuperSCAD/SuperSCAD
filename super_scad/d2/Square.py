@@ -18,7 +18,7 @@ class Square(PolygonMixin, ScadWidget):
                  *,
                  size: float,
                  center: bool = False,
-                 extend_sides_by_eps: bool | Set[int] | None = None):
+                 extend_sides_by_eps: bool | List[bool] | Set[int] | None = None):
         """
         Object constructor.
 
