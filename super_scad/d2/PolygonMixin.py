@@ -332,66 +332,84 @@ class PolygonMixin(ABC):
             inner_angle = inner_angles[index]
             normal_angle = normal_angles[index]
 
+            extend_side_by_eps1 = (index - 1) % n in extend_sides_by_eps
+            extend_side_by_eps2 = index in extend_sides_by_eps
+
             if inner_angle <= 180.0:
                 # Outer corner.
-                if index in extend_sides_by_eps:
-                    # This side is extended by eps.
-                    if (index - 1) % n in extend_sides_by_eps:
-                        # The previous side is extended by eps, also.
-                        if clockwise:
-                            angle = normal_angle - 0.5 * inner_angle - 90.0
-                        else:
-                            angle = normal_angle + 0.5 * inner_angle + 90.0
-                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
-                        new_nodes.append(
-                                node + Vector2.from_polar_coordinates(context.eps, normal_angle + 180.0))
-                    else:
-                        # The previous side is not extended by eps.
-                        new_nodes.append(node)
+                if not extend_side_by_eps1 and not extend_side_by_eps2:
+                    # Neither sides are extended.
+                    new_nodes.append(node)
+
+                elif not extend_side_by_eps1 and extend_side_by_eps2:
+                    # Only the second side is extended.
+                    new_nodes.append(node)
                     if clockwise:
                         angle = normal_angle + 0.5 * inner_angle + 90.0
                     else:
                         angle = normal_angle - 0.5 * inner_angle - 90.0
                     new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
-                else:
-                    # This side is not extended by eps.
-                    if (index - 1) % n in extend_sides_by_eps:
-                        # The previous side is extended by eps.
-                        if clockwise:
-                            angle = normal_angle - 0.5 * inner_angle - 90.0
-                        else:
-                            angle = normal_angle + 0.5 * inner_angle + 90.0
-                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
+
+                elif extend_side_by_eps1 and not extend_side_by_eps2:
+                    # Only the first side is extended.
+                    if clockwise:
+                        angle = normal_angle - 0.5 * inner_angle - 90.0
+                    else:
+                        angle = normal_angle + 0.5 * inner_angle + 90.0
+                    new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
                     new_nodes.append(node)
+
+                elif extend_side_by_eps1 and extend_side_by_eps2:
+                    # Both sides are extended.
+                    if inner_angle >= 90.0:
+                        # Oblique angle.
+                        length = context.eps / math.cos(math.radians(0.5 * (180.0 - inner_angle)))
+                        new_nodes.append(node + Vector2.from_polar_coordinates(length, normal_angle + 180.0))
+                    else:
+                        # Sharp angle.
+                        if clockwise:
+                            angle1 = normal_angle - 0.5 * inner_angle - 90.0
+                            angle2 = normal_angle + 0.5 * inner_angle + 90.0
+                        else:
+                            angle1 = normal_angle + 0.5 * inner_angle + 90.0
+                            angle2 = normal_angle - 0.5 * inner_angle - 90.0
+                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle1))
+                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, normal_angle + 180.0))
+                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle2))
+
+                else:
+                    raise ValueError('Math is broken.')
             else:
                 # Inner corner.
-                if index in extend_sides_by_eps:
-                    # This side is extended by eps.
-                    if (index - 1) % n in extend_sides_by_eps:
-                        # The previous side is extended by eps, also.
-                        alpha = 0.5 * (360.0 - inner_angle)
-                        eps0 = Vector2.from_polar_coordinates(context.eps / math.sin(math.radians(alpha)),
-                                                              normal_angle + 180.0)
-                        new_nodes.append(node + eps0)
+                if not extend_side_by_eps1 and not extend_side_by_eps2:
+                    # Neither sides are extended.
+                    new_nodes.append(node)
+
+                elif not extend_side_by_eps1 and extend_side_by_eps2:
+                    # Only the second side is extended.
+                    if clockwise:
+                        angle = normal_angle - 0.5 * inner_angle
                     else:
-                        # The next side is not extended by eps.
-                        if clockwise:
-                            angle = normal_angle - 0.5 * inner_angle
-                        else:
-                            angle = normal_angle + 0.5 * inner_angle
-                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
+                        angle = normal_angle + 0.5 * inner_angle
+                    new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
+
+                elif extend_side_by_eps1 and not extend_side_by_eps2:
+                    # Only the first side is extended.
+                    if clockwise:
+                        angle = normal_angle + 0.5 * inner_angle
+                    else:
+                        angle = normal_angle - 0.5 * inner_angle
+                    new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
+
+                elif extend_side_by_eps1 and extend_side_by_eps2:
+                    # Both sides are extended.
+                    alpha = 0.5 * (360.0 - inner_angle)
+                    eps0 = Vector2.from_polar_coordinates(context.eps / math.sin(math.radians(alpha)),
+                                                          normal_angle + 180.0)
+                    new_nodes.append(node + eps0)
+
                 else:
-                    # This side is not extended by eps.
-                    if (index - 1) % n in extend_sides_by_eps:
-                        # The previous side is extended by eps.
-                        if clockwise:
-                            angle = normal_angle + 0.5 * inner_angle
-                        else:
-                            angle = normal_angle - 0.5 * inner_angle
-                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
-                    else:
-                        # The next side is not extended by eps, also.
-                        new_nodes.append(node)
+                    raise ValueError('Math is broken.')
 
         return PrivatePolygon(points=new_nodes, convexity=self.convexity)
 
