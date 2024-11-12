@@ -26,8 +26,8 @@ class Square(PolygonMixin, ScadWidget):
         :param center: Whether the square is centered at the origin.
         :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
         """
-        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps, delta=None)
         ScadWidget.__init__(self, args=locals())
+        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps, delta=None)
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:

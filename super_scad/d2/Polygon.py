@@ -36,8 +36,8 @@ class Polygon(PolygonMixin, ScadWidget):
         :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
                       separation between line segments and nodes.
         """
-        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps, delta=delta)
         ScadWidget.__init__(self, args=locals())
+        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps, delta=delta)
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
@@ -78,14 +78,6 @@ class Polygon(PolygonMixin, ScadWidget):
         Returns the nodes of the polygon.
         """
         return self.primary
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
-    def convexity(self) -> int | None:
-        """
-        Returns the convexity of the polygon.
-        """
-        return self._args.get('convexity')
 
     # ------------------------------------------------------------------------------------------------------------------
     def _build_polygon(self, context: Context) -> ScadWidget:

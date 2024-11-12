@@ -3,6 +3,7 @@ import random
 from abc import ABC, abstractmethod
 from typing import List, Set
 
+from super_scad.d2.helper.PolygonSideExtender import PolygonSideExtender
 from super_scad.d2.private.PrivatePolygon import PrivatePolygon
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
@@ -10,6 +11,7 @@ from super_scad.type import Vector2
 from super_scad.type.Angle import Angle
 
 
+# class PolygonMixin(ScadWidget, ABC):
 class PolygonMixin(ABC):
     """
     A mixin for all polygonal and polygonal like widgets in SuperSCAD.
@@ -19,14 +21,18 @@ class PolygonMixin(ABC):
     def __init__(self,
                  *,
                  extend_sides_by_eps: bool | List[bool] | Set[int] | None,
+                 polygon_side_extender: PolygonSideExtender | None = None,
                  delta: float | None):
         """
         Object constructor.
 
         :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
+        :param polygon_side_extender: The object for extending the side of the polygon by eps for clear overlap.
         :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
                       separation between line segments and nodes.
         """
+        # ScadWidget.__init__(self)
+
         self._inner_angles: List[float] | None = None
         """
         The inner angles of the polygon (in the same order as the primary points).
@@ -42,16 +48,14 @@ class PolygonMixin(ABC):
         Whether the nodes of the polygon are in a clockwise order.
         """
 
-        self._extend_sides_by_eps: bool | List[bool] | Set[int] | None = extend_sides_by_eps
-        """
-        Whether to extend sides by eps for a clear overlap.
-        """
-
         self._delta: float | None = delta
         """
         The minimum distance between nodes, vertices and line segments for reliable computation of the separation
         between line segments and nodes.
         """
+
+        self._args['extend_sides_by_eps'] = extend_sides_by_eps
+        self._args['polygon_side_extender'] = polygon_side_extender
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -123,7 +127,6 @@ class PolygonMixin(ABC):
         @param vertex_start: The start point of the vertex.
         @param vertex_end:  The end point of the vertex.
         """
-
         o1 = Vector2.orientation(segment_start, segment_end, vertex_start)
         o2 = Vector2.orientation(segment_start, segment_end, vertex_end)
         o3 = Vector2.orientation(vertex_start, vertex_end, segment_start)
@@ -260,20 +263,26 @@ class PolygonMixin(ABC):
         """
         Returns the set of sides that must be extended by eps for clear overlap.
         """
-        if not self._extend_sides_by_eps:
-            return set()
+        extend_sides_by_eps = self._args.get('extend_sides_by_eps')
+        if isinstance(extend_sides_by_eps, set):
+            return extend_sides_by_eps
 
-        if self._extend_sides_by_eps is True:
-            return {index for index in range(self.sides)}
+        if extend_sides_by_eps is None:
+            extend_sides_by_eps = set()
 
-        if isinstance(self._extend_sides_by_eps, set):
-            return self._extend_sides_by_eps
+        elif extend_sides_by_eps is True:
+            extend_sides_by_eps = {index for index in range(self.sides)}
 
-        if isinstance(self._extend_sides_by_eps, list):
-            return set(index for index in range(len(self._extend_sides_by_eps)) if self._extend_sides_by_eps[index])
+        elif isinstance(extend_sides_by_eps, list):
+            extend_sides_by_eps = set(index for index in range(len(extend_sides_by_eps)) if extend_sides_by_eps[index])
 
-        raise ValueError(f'Parameter extend_sides_by_eps must be a boolean, '
-                         f'set of integers, a list of booleans or None, got {type(self._extend_sides_by_eps)}')
+        else:
+            raise ValueError(f'Parameter extend_sides_by_eps must be a boolean, '
+                             f'set of integers, a list of booleans or None, got {type(extend_sides_by_eps)}')
+
+        self._args['extend_sides_by_eps'] = extend_sides_by_eps
+
+        return extend_sides_by_eps
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -287,9 +296,9 @@ class PolygonMixin(ABC):
     @property
     def convexity(self) -> int | None:
         """
-        Returns the convexity of this polygon.
+        Returns the convexity of the polygon.
         """
-        return None
+        return self._args.get('convexity')
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -315,104 +324,19 @@ class PolygonMixin(ABC):
         raise NotImplementedError()
 
     # ------------------------------------------------------------------------------------------------------------------
-    def _build_polygon_extended(self, context: Context):
+    def _build_polygon_extended(self, context: Context) -> ScadWidget:
         """
         Builds a polygon with extended sides.
 
         @param context: The build context.
         """
-        extend_sides_by_eps = self.extend_sides_by_eps()
-
-        nodes = self.nodes
-        inner_angles = self.inner_angles(context)
-        normal_angles = self.normal_angles(context)
-        clockwise = self.is_clockwise(context)
-
-        new_nodes = []
-        n = len(nodes)
-        for index in range(n):
-            node = nodes[index]
-            inner_angle = inner_angles[index]
-            normal_angle = normal_angles[index]
-
-            extend_side_by_eps1 = (index - 1) % n in extend_sides_by_eps
-            extend_side_by_eps2 = index in extend_sides_by_eps
-
-            if inner_angle <= 180.0:
-                # Outer corner.
-                if not extend_side_by_eps1 and not extend_side_by_eps2:
-                    # Neither sides are extended.
-                    new_nodes.append(node)
-
-                elif not extend_side_by_eps1 and extend_side_by_eps2:
-                    # Only the second side is extended.
-                    new_nodes.append(node)
-                    if clockwise:
-                        angle = normal_angle + 0.5 * inner_angle + 90.0
-                    else:
-                        angle = normal_angle - 0.5 * inner_angle - 90.0
-                    new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
-
-                elif extend_side_by_eps1 and not extend_side_by_eps2:
-                    # Only the first side is extended.
-                    if clockwise:
-                        angle = normal_angle - 0.5 * inner_angle - 90.0
-                    else:
-                        angle = normal_angle + 0.5 * inner_angle + 90.0
-                    new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
-                    new_nodes.append(node)
-
-                elif extend_side_by_eps1 and extend_side_by_eps2:
-                    # Both sides are extended.
-                    if inner_angle >= 90.0:
-                        # Oblique angle.
-                        length = context.eps / math.cos(math.radians(0.5 * (180.0 - inner_angle)))
-                        new_nodes.append(node + Vector2.from_polar_coordinates(length, normal_angle + 180.0))
-                    else:
-                        # Sharp angle.
-                        if clockwise:
-                            angle1 = normal_angle - 0.5 * inner_angle - 90.0
-                            angle2 = normal_angle + 0.5 * inner_angle + 90.0
-                        else:
-                            angle1 = normal_angle + 0.5 * inner_angle + 90.0
-                            angle2 = normal_angle - 0.5 * inner_angle - 90.0
-                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle1))
-                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, normal_angle + 180.0))
-                        new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle2))
-
-                else:
-                    raise ValueError('Math is broken.')
-            else:
-                # Inner corner.
-                if not extend_side_by_eps1 and not extend_side_by_eps2:
-                    # Neither sides are extended.
-                    new_nodes.append(node)
-
-                elif not extend_side_by_eps1 and extend_side_by_eps2:
-                    # Only the second side is extended.
-                    if clockwise:
-                        angle = normal_angle - 0.5 * inner_angle
-                    else:
-                        angle = normal_angle + 0.5 * inner_angle
-                    new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
-
-                elif extend_side_by_eps1 and not extend_side_by_eps2:
-                    # Only the first side is extended.
-                    if clockwise:
-                        angle = normal_angle + 0.5 * inner_angle
-                    else:
-                        angle = normal_angle - 0.5 * inner_angle
-                    new_nodes.append(node + Vector2.from_polar_coordinates(context.eps, angle))
-
-                elif extend_side_by_eps1 and extend_side_by_eps2:
-                    # Both sides are extended.
-                    alpha = 0.5 * (360.0 - inner_angle)
-                    eps0 = Vector2.from_polar_coordinates(context.eps / math.sin(math.radians(alpha)),
-                                                          normal_angle + 180.0)
-                    new_nodes.append(node + eps0)
-
-                else:
-                    raise ValueError('Math is broken.')
+        polygon_side_extender = self._args.get('polygon_side_extender') or PolygonSideExtender()
+        new_nodes = polygon_side_extender.extend_sides(context=context,
+                                                       nodes=self.nodes,
+                                                       inner_angles=self.inner_angles(context),
+                                                       normal_angles=self.normal_angles(context),
+                                                       is_clockwise=self.is_clockwise(context),
+                                                       extend_sides_by_eps=self.extend_sides_by_eps())
 
         return PrivatePolygon(points=new_nodes, convexity=self.convexity)
 
