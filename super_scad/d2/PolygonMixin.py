@@ -20,14 +20,11 @@ class PolygonMixin(ABC):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 extend_sides_by_eps: bool | List[bool] | Set[int] | None,
-                 delta: float | None):
+                 extend_sides_by_eps: bool | List[bool] | Set[int] | None):
         """
         Object constructor.
 
         :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
-        :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
-                      separation between line segments and nodes.
         """
         self._inner_angles: List[float] | None = None
         """
@@ -42,12 +39,6 @@ class PolygonMixin(ABC):
         self._is_clockwise: bool | None = None
         """
         Whether the nodes of the polygon are in a clockwise order.
-        """
-
-        self._delta: float | None = delta
-        """
-        The minimum distance between nodes, vertices and line segments for reliable computation of the separation
-        between line segments and nodes.
         """
 
         self._args['extend_sides_by_eps'] = extend_sides_by_eps
@@ -179,7 +170,7 @@ class PolygonMixin(ABC):
         self._normal_angles = []
 
         nodes = self.nodes
-        self._is_clockwise = self.is_clockwise_order(nodes, self.delta(context))
+        self._is_clockwise = self.is_clockwise_order(nodes, context.delta)
 
         n = len(nodes)
         for i in range(n):
@@ -242,19 +233,6 @@ class PolygonMixin(ABC):
         Returns the nodes of this polygon.
         """
         raise NotImplementedError()
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def delta(self, context: Context) -> float:
-        """
-        The minimum distance between nodes, vertices and line segments for reliable computation of the separation
-        between line segments, vertices and nodes.
-
-        :param context: The build context.
-        """
-        if self._delta is None:
-            self._delta = 0.5 * context.resolution
-
-        return self._delta
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

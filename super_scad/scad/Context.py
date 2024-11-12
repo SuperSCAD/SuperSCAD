@@ -45,6 +45,7 @@ class Context:
                  fs: float = DEFAULT_FS,
                  fn: int = DEFAULT_FN,
                  eps: float = 1E-2,
+                 delta: float = 1e-5,
                  angle_digits: int = 4,
                  length_digits: int = 4,
                  scale_digits: int = 4):
@@ -59,6 +60,8 @@ class Context:
         :param fn: The number of fragments in 360 degrees. Values of 3 or more override $fa and $fs. Known in OpenSCAD
                    as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.
         :param eps: Epsilon value for clear overlap.
+        :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
+                      separation between line segments and nodes.
         :param angle_digits: The number of decimal places of an angle in the generated OpenSCAD code.
         :param length_digits: The number of decimal places of a length in the generated OpenSCAD code.
         :param scale_digits:  The number of decimal places of a scale or factor in the generated OpenSCAD code.
@@ -99,6 +102,12 @@ class Context:
         self.__eps: float = eps
         """
         Epsilon value for clear overlap.
+        """
+
+        self.__delta: float = delta
+        """
+        The minimum distance between nodes, vertices and line segments for reliable computation of the separation 
+        between line segments and nodes.
         """
 
         self.__unit_length_final: Unit = unit_length_final
@@ -195,6 +204,15 @@ class Context:
         Returns the epsilon value for clear overlap.
         """
         return self.__eps
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def delta(self) -> float:
+        """
+        Returns the minimum distance between nodes, vertices and line segments for reliable computation of the
+        separation between line segments and nodes.
+        """
+        return self.__delta
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

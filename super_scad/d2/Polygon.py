@@ -21,8 +21,7 @@ class Polygon(PolygonMixin, ScadWidget):
                  secondary: List[Vector2] | None = None,
                  secondaries: List[List[Vector2]] | None = None,
                  convexity: int | None = None,
-                 extend_sides_by_eps: bool | List[bool] | Set[int] | None = None,
-                 delta: float | None = None):
+                 extend_sides_by_eps: bool | List[bool] | Set[int] | None = None):
         """
         Object constructor.
 
@@ -33,11 +32,9 @@ class Polygon(PolygonMixin, ScadWidget):
         :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line
                           through the child widget.
         :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
-        :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
-                      separation between line segments and nodes.
         """
         ScadWidget.__init__(self, args=locals())
-        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps, delta=delta)
+        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps)
 
     # ------------------------------------------------------------------------------------------------------------------
     def _validate_arguments(self) -> None:
