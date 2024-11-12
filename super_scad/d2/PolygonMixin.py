@@ -21,18 +21,14 @@ class PolygonMixin(ABC):
     def __init__(self,
                  *,
                  extend_sides_by_eps: bool | List[bool] | Set[int] | None,
-                 polygon_side_extender: PolygonSideExtender | None = None,
                  delta: float | None):
         """
         Object constructor.
 
         :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
-        :param polygon_side_extender: The object for extending the side of the polygon by eps for clear overlap.
         :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
                       separation between line segments and nodes.
         """
-        # ScadWidget.__init__(self)
-
         self._inner_angles: List[float] | None = None
         """
         The inner angles of the polygon (in the same order as the primary points).
@@ -55,7 +51,6 @@ class PolygonMixin(ABC):
         """
 
         self._args['extend_sides_by_eps'] = extend_sides_by_eps
-        self._args['polygon_side_extender'] = polygon_side_extender
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -259,11 +254,13 @@ class PolygonMixin(ABC):
         return self._delta
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
     def extend_sides_by_eps(self) -> Set[int]:
         """
         Returns the set of sides that must be extended by eps for clear overlap.
         """
         extend_sides_by_eps = self._args.get('extend_sides_by_eps')
+
         if isinstance(extend_sides_by_eps, set):
             return extend_sides_by_eps
 
@@ -307,11 +304,10 @@ class PolygonMixin(ABC):
 
         :param context: The build context.
         """
-        extend_sides_by_eps = self.extend_sides_by_eps()
-        if not extend_sides_by_eps:
-            return self._build_polygon(context)
+        if self.extend_sides_by_eps:
+            return self._build_polygon_extended(context)
 
-        return self._build_polygon_extended(context)
+        return self._build_polygon(context)
 
     # ------------------------------------------------------------------------------------------------------------------
     @abstractmethod
@@ -330,14 +326,21 @@ class PolygonMixin(ABC):
 
         @param context: The build context.
         """
-        polygon_side_extender = self._args.get('polygon_side_extender') or PolygonSideExtender()
+        polygon_side_extender = self._create_polygon_side_extender()
         new_nodes = polygon_side_extender.extend_sides(context=context,
                                                        nodes=self.nodes,
                                                        inner_angles=self.inner_angles(context),
                                                        normal_angles=self.normal_angles(context),
                                                        is_clockwise=self.is_clockwise(context),
-                                                       extend_sides_by_eps=self.extend_sides_by_eps())
+                                                       extend_sides_by_eps=self.extend_sides_by_eps)
 
         return PrivatePolygon(points=new_nodes, convexity=self.convexity)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def _create_polygon_side_extender(self) -> PolygonSideExtender:
+        """
+        Returns a polygon side extender that extends this polygon.
+        """
+        return PolygonSideExtender()
 
 # ----------------------------------------------------------------------------------------------------------------------
