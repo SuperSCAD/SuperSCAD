@@ -65,7 +65,7 @@ class Square(PolygonMixin, ScadWidget):
     @property
     def nodes(self) -> List[Vector2]:
         """
-        Returns the nodes of this rectangle.
+        Returns the nodes of this square.
         """
         if self.center:
             return [Vector2(-0.5 * self.size, -0.5 * self.size),
