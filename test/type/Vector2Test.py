@@ -163,4 +163,27 @@ class Vector2Test(unittest.TestCase):
         q = Vector2.from_polar_coordinates(p.length, p.angle + 45.0)
         self.assertAlmostEqual(Vector2.dot_product(p, q), 1.0 / math.sqrt(2.0) * p.length ** 2)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_intermediate(self):
+        """
+        Test the intermediate of two vectors.
+        """
+        p = Vector2.origin
+        q = Vector2(10.0, 5.0)
+        r = Vector2.intermediate(p, q)
+        self.assertAlmostEqual(r.x, 5.0)
+        self.assertAlmostEqual(r.y, 2.5)
+
+        p = Vector2.origin
+        q = Vector2(10.0, 5.0)
+        r = Vector2.intermediate(p, q, 0)
+        self.assertAlmostEqual(r.x, 0.0)
+        self.assertAlmostEqual(r.y, 0.0)
+
+        p = Vector2.origin
+        q = Vector2(10.0, 5.0)
+        r = Vector2.intermediate(p, q, 1.0)
+        self.assertAlmostEqual(r.x, 10.0)
+        self.assertAlmostEqual(r.y, 5.0)
+
 # ----------------------------------------------------------------------------------------------------------------------

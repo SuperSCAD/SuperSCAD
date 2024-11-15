@@ -108,6 +108,20 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
+    def intermediate(p: Vector2, q: Vector2, ratio: float = 0.5) -> Vector2:
+        """
+        Returns the intermediate point between two vectors p and q.
+
+        @param p: Vector p.
+        @param q: Vector q.
+        @param ratio: The ratio between the two vectors.
+        """
+        diff = q - p
+
+        return p + Vector2.from_polar_coordinates(ratio * diff.length, diff.angle)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
     def cross_product(p: Vector2, q: Vector2) -> float:
         """
         Returns cross product of two vectors.
