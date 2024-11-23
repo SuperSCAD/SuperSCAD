@@ -219,43 +219,43 @@ class LinearExtrude(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        height = self._height
-        if self._extend_top_by_eps:
+        height = self.height
+        if self.extend_top_by_eps:
             height += context.eps
-        if self._extend_bottom_by_eps:
+        if self.extend_bottom_by_eps:
             height += context.eps
 
-        if (not self._extend_bottom_by_eps and not self._extend_top_by_eps) or \
-                (self._extend_bottom_by_eps and self._extend_top_by_eps and self._center):
+        if (not self.extend_bottom_by_eps and not self.extend_top_by_eps) or \
+                (self.extend_bottom_by_eps and self.extend_top_by_eps and self.center):
             return PrivateLinearExtrude(height=height,
-                                        center=self._center,
-                                        convexity=self._convexity,
-                                        twist=self._twist,
-                                        scale=self._scale,
-                                        slices=self._slices,
-                                        segments=self._segments,
-                                        fa=self._fa,
-                                        fs=self._fs,
-                                        fn=self._fn,
+                                        center=self.center,
+                                        convexity=self.convexity,
+                                        twist=self.twist,
+                                        scale=self.scale,
+                                        slices=self.slices,
+                                        segments=self.segments,
+                                        fa=self.fa,
+                                        fs=self.fs,
+                                        fn=self.fn,
                                         child=self.child)
 
         offset = 0.0
-        if self._center:
-            offset -= 0.5 * self._height
-        if self._extend_bottom_by_eps:
+        if self.center:
+            offset -= 0.5 * self.height
+        if self.extend_bottom_by_eps:
             offset -= context.eps
 
         return Translate3D(z=offset,
                            child=PrivateLinearExtrude(height=height,
                                                       center=False,
-                                                      convexity=self._convexity,
-                                                      twist=self._twist,
-                                                      scale=self._scale,
-                                                      slices=self._slices,
-                                                      segments=self._segments,
-                                                      fa=self._fa,
-                                                      fs=self._fs,
-                                                      fn=self._fn,
+                                                      convexity=self.convexity,
+                                                      twist=self.twist,
+                                                      scale=self.scale,
+                                                      slices=self.slices,
+                                                      segments=self.segments,
+                                                      fa=self.fa,
+                                                      fs=self.fs,
+                                                      fn=self.fn,
                                                       child=self.child))
 
 # ----------------------------------------------------------------------------------------------------------------------
