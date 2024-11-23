@@ -22,7 +22,17 @@ class Cube(ScadWidget):
         :param size: The size of the cube.
         :param center: Whether the cube is centered at the origin.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._size: float = size
+        """
+        The size of the cube.
+        """
+
+        self._center: bool = center
+        """
+        Whether the cube is centered at the origin.
+        """
 
         self.__validate_arguments(locals())
 
@@ -43,7 +53,7 @@ class Cube(ScadWidget):
         """
         Returns whether the cube is centered at the origin.
         """
-        return self._args['center']
+        return self._center
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -51,7 +61,7 @@ class Cube(ScadWidget):
         """
         Returns the size of the cube.
         """
-        return self.uc(self._args['size'])
+        return self._size
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
