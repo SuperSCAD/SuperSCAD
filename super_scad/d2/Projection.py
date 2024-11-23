@@ -15,7 +15,7 @@ class Projection(ScadSingleChildParent):
     def __init__(self,
                  *,
                  cut: bool = False,
-                 z: float | None = None,
+                 z: float = 0.0,
                  child: ScadWidget):
         """
         Object constructor.
@@ -24,7 +24,17 @@ class Projection(ScadSingleChildParent):
         :param z: The height where the 3D model will be cut. Defaults to 0.0.
         :param child: The widget with the 3D model.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._cut: bool = cut
+        """
+        Whether to cut the 3D model.
+        """
+
+        self._z: float | None = z
+        """
+        The height where the 3D model will be cut. Defaults to 0.0.
+        """
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -32,7 +42,7 @@ class Projection(ScadSingleChildParent):
         """
         Returns whether to cut the 3D model.
         """
-        return self._args['cut']
+        return self._cut
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -43,7 +53,7 @@ class Projection(ScadSingleChildParent):
         if not self.cut:
             return None
 
-        return self._args.get('z', 0.0)
+        return self._z
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
