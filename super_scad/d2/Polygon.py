@@ -33,8 +33,28 @@ class Polygon(PolygonMixin, ScadWidget):
                           through the child widget.
         :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
         PolygonMixin.__init__(self, convexity=convexity, extend_sides_by_eps=extend_sides_by_eps)
+
+        self._primary: List[Vector2] | None = primary
+        """
+        The list of 2D points of the polygon.
+        """
+
+        self._points: List[Vector2] | None = points
+        """
+        Alias for primary.
+        """
+
+        self._secondary: List[Vector2] | None = secondary
+        """
+        The secondary path that will be subtracted from the polygon.
+        """
+
+        self._secondaries: List[List[Vector2]] | None = secondaries
+        """
+        The secondary paths that will be subtracted form the polygon.
+        """
 
         self.__validate_arguments(locals())
 
@@ -42,7 +62,8 @@ class Polygon(PolygonMixin, ScadWidget):
     @staticmethod
     def __validate_arguments(args: Dict[str, Any]) -> None:
         """
-        Validates the arguments supplied to the constructor of this SuperSCAD widget.
+        Validates the arguments supplied to the
+         constructor of this SuperSCAD widget.
 
         :param args: The arguments supplied to the constructor.
         """
@@ -57,7 +78,10 @@ class Polygon(PolygonMixin, ScadWidget):
         """
         Returns the points of the polygon.
         """
-        return self.uc(self._args.get('primary', self._args.get('points')))
+        if self._primary is None:
+            self._primary = self._points
+
+        return self._primary
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -65,13 +89,13 @@ class Polygon(PolygonMixin, ScadWidget):
         """
         Returns the points of the polygon.
         """
-        if 'secondaries' in self._args:
-            return [self.uc(point) for point in self._args.get('secondaries')]
+        if self._secondaries is not None:
+            return self._secondaries
 
-        if 'secondary' in self._args:
-            return [self.uc(self._args['secondary'])]
+        if self._secondary is not None:
+            self._secondaries = [self._secondary]
 
-        return None
+        return self._secondaries
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
