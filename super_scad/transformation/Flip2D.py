@@ -30,7 +30,27 @@ class Flip2D(ScadSingleChildParent):
         :param flip_y: Whether to flip the child widget around the y-asis (i.e., horizontal flip).
         :param child: The child widget to be flipped.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._horizontal: bool | None = horizontal
+        """
+        Whether to flip the child widget horizontally (i.e., flip around the y-axis).
+        """
+
+        self._vertical: bool | None = vertical
+        """
+        Whether to flip the child widget vertically (i.e., flip around the x-axis).
+        """
+
+        self._flip_x: bool | None = flip_x
+        """
+        Whether to flip the child widget around the x-asis (i.e., vertical flip).
+        """
+
+        self._flip_y: bool | None = flip_y
+        """
+        Whether to flip the child widget around the y-asis (i.e., horizontal flip).
+        """
 
         self.__validate_arguments(locals())
 
@@ -51,7 +71,12 @@ class Flip2D(ScadSingleChildParent):
         """
         Returns whether to flip the child widget horizontally (i.e., flip around the y-axis).
         """
-        return self._args.get('horizontal', False) or self._args.get('flip_y', False)
+        if self._horizontal is None:
+            horizontal = self._horizontal or False
+            flip_y = self._flip_y or False
+            self._horizontal = horizontal or flip_y
+
+        return self._horizontal
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -59,7 +84,12 @@ class Flip2D(ScadSingleChildParent):
         """
         Returns whether to flip the child widget vertically (i.e., flip around the x-axis).
         """
-        return self._args.get('vertical', False) or self._args.get('flip_x', False)
+        if self._vertical is None:
+            vertical = self._vertical or False
+            flip_x = self._flip_x or False
+            self._vertical = vertical or flip_x
+
+        return self._vertical
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -67,7 +97,10 @@ class Flip2D(ScadSingleChildParent):
         """
         Returns whether to flip the child widget around the x-asis (i.e., vertical flip).
         """
-        return self.vertical
+        if self._flip_x is None:
+            self._flip_x = self.vertical or False
+
+        return self._flip_x
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -75,7 +108,10 @@ class Flip2D(ScadSingleChildParent):
         """
         Returns whether to flip the child widget around the y-asis (i.e., horizontal flip).
         """
-        return self.horizontal
+        if self._flip_y is None:
+            self._flip_y = self.horizontal or False
+
+        return self._flip_y
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
