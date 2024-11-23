@@ -32,6 +32,26 @@ class Scale3D(ScadSingleChildParent):
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
+        self._factor: Vector3 | float | None = factor
+        """
+        The scaling factor along all the two axes.
+        """
+
+        self._factor_x: float | None = factor_x
+        """
+        The scaling factor along the x-axis.
+        """
+
+        self._factor_y: float | None = factor_y
+        """
+        The scaling factor along the y-axis.
+        """
+
+        self._factor_z: float | None = factor_z
+        """
+        The scaling factor along the z-axis.
+        """
+
         self.__validate_arguments(locals())
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -49,9 +69,14 @@ class Scale3D(ScadSingleChildParent):
     @property
     def factor(self) -> Vector3:
         """
-        Returns the scaling factor along all three the axes.
+        Returns the scaling factor along all two axes.
         """
-        return Vector3(self.factor_x, self.factor_y, self.factor_z)
+        if self._factor is None:
+            self._factor = Vector3(self.factor_x, self.factor_y, self.factor_z)
+        elif isinstance(self._factor, float):
+            self._factor = Vector3(self._factor, self._factor, self._factor)
+
+        return self._factor
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -59,13 +84,15 @@ class Scale3D(ScadSingleChildParent):
         """
         Returns the scaling factor along the x-axis.
         """
-        if 'factor' in self._args:
-            if isinstance(self._args['factor'], float):
-                return self._args['factor']
+        if self._factor_x is None:
+            if isinstance(self._factor, Vector3):
+                self._factor_x = self._factor.x
+            elif isinstance(self._factor, float):
+                self._factor_x = self._factor
+            else:
+                self._factor_x = 1.0
 
-            return self._args['factor'].x
-
-        return self._args.get('factor_x', 1.0)
+        return self._factor_x
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -73,13 +100,15 @@ class Scale3D(ScadSingleChildParent):
         """
         Returns the scaling factor along the y-axis.
         """
-        if 'factor' in self._args:
-            if isinstance(self._args['factor'], float):
-                return self._args['factor']
+        if self._factor_y is None:
+            if isinstance(self._factor, Vector3):
+                self._factor_y = self._factor.y
+            elif isinstance(self._factor, float):
+                self._factor_y = self._factor
+            else:
+                self._factor_y = 1.0
 
-            return self._args['factor'].y
-
-        return self._args.get('factor_y', 1.0)
+        return self._factor_y
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -87,13 +116,15 @@ class Scale3D(ScadSingleChildParent):
         """
         Returns the scaling factor along the z-axis.
         """
-        if 'factor' in self._args:
-            if isinstance(self._args['factor'], float):
-                return self._args['factor']
+        if self._factor_z is None:
+            if isinstance(self._factor, Vector3):
+                self._factor_z = self._factor.z
+            elif isinstance(self._factor, float):
+                self._factor_z = self._factor
+            else:
+                self._factor_z = 1.0
 
-            return self._args['factor'].z
-
-        return self._args.get('factor_z', 1.0)
+        return self._factor_z
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
