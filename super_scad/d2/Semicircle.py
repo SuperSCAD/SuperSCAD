@@ -33,7 +33,37 @@ class Semicircle(ScadWidget):
         :param fn: The fixed number of fragments in 360 degrees. Values of three or more override fa and fs.
         :param fn4n: Whether to create a semicircle based on circle with a multiple of four vertices.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._radius: float | None = radius
+        """
+        The radius of the semicircle.
+        """
+
+        self._diameter: float | None = diameter
+        """
+        The diameter of the semicircle.
+        """
+
+        self._fa: float | None = fa
+        """
+        The minimum angle (in degrees) of each fragment.
+        """
+
+        self._fs: float | None = fs
+        """
+        The fixed number of fragments in 360 degrees.
+        """
+
+        self._fn: int | None = fn
+        """
+        The fixed number of fragments in 360 degrees.
+        """
+
+        self._fn4n: bool | None = fn4n
+        """
+        Whether to create a semicircle based on circle with a multiple of four vertices.
+        """
 
         self.__validate_arguments(locals())
 
@@ -52,19 +82,14 @@ class Semicircle(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def height(self) -> float | None:
-        """
-        Returns the height of the pie slice. If height is None, a 2D widget will be created.
-        """
-        return self.uc(self._args.get('height'))
-
-    # ------------------------------------------------------------------------------------------------------------------
-    @property
     def radius(self) -> float:
         """
         Returns the radius of this semicircle.
         """
-        return self.uc(self._args.get('radius', 0.5 * self._args.get('diameter', 0.0)))
+        if self._radius is None:
+            self._radius = 0.5 * self._diameter
+
+        return self._radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -72,7 +97,10 @@ class Semicircle(ScadWidget):
         """
         Returns the diameter of this semicircle.
         """
-        return self.uc(self._args.get('diameter', 2.0 * self._args.get('radius', 0.0)))
+        if self._diameter is None:
+            self._diameter = 2.0 * self._radius
+
+        return self._diameter
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -80,7 +108,7 @@ class Semicircle(ScadWidget):
         """
         Returns the minimum angle (in degrees) of each fragment.
         """
-        return self._args.get('fa')
+        return self._fa
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -88,7 +116,7 @@ class Semicircle(ScadWidget):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self._fs
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -96,7 +124,7 @@ class Semicircle(ScadWidget):
         """
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
-        return self._args.get('fn')
+        return self._fn
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -104,7 +132,7 @@ class Semicircle(ScadWidget):
         """
         Returns whether to create a semicircle with multiple of four vertices.
         """
-        return self._args.get('fn4n')
+        return self._fn4n
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
