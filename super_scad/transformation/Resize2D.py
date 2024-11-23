@@ -28,7 +28,7 @@ class Resize2D(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param new_size: The new_size along all two axes.
+        :param new_size: The new size along all two axes.
         :param new_width: The new width (the new size along the x-axis).
         :param new_depth: The new depth (the new size along the y-axis).
         :param auto: Whether to auto-scale any 0-dimensions to match.
@@ -36,7 +36,42 @@ class Resize2D(ScadSingleChildParent):
                           through the child widget.
         :param child: The child widget to be resized.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._new_size: Vector2 | None = new_size
+        """
+        The new size along all two axes.
+        """
+
+        self._new_width: float | None = new_width
+        """
+        The new width (the new size along the x-axis).
+        """
+
+        self._new_depth: float | None = new_depth
+        """
+        The new depth (the new size along the y-axis).
+        """
+
+        self._auto: bool | Tuple[bool, bool] | None = auto
+        """
+        Whether to auto-scale any 0-dimensions to match.
+        """
+
+        self._auto_width: bool | None = auto_width
+        """
+        Whether to auto-scale any 0-dimensions to match.
+        """
+
+        self._auto_depth: bool | None = auto_depth
+        """
+        Whether to auto-scale any 0-dimensions to match.
+        """
+
+        self._convexity: int | None = convexity
+        """
+        The convexity of the child widget.
+        """
 
         self.__validate_arguments(locals())
 
@@ -60,7 +95,10 @@ class Resize2D(ScadSingleChildParent):
         """
         Returns the new_size along all three axes.
         """
-        return Vector2(self.new_width, self.new_depth)
+        if self._new_size is None:
+            self._new_size = Vector2(self._new_width, self._new_depth)
+
+        return self._new_size
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -68,10 +106,13 @@ class Resize2D(ScadSingleChildParent):
         """
         Returns new width (the new size along the x-axis).
         """
-        if 'new_size' in self._args:
-            return self.uc(self._args['new_size'].x)
+        if self._new_width is None:
+            if self._new_size is not None:
+                self._new_width = self._new_size.x
+            else:
+                self._new_width = 0.0
 
-        return self.uc(self._args.get('new_width', 0.0))
+        return self._new_width
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -79,10 +120,13 @@ class Resize2D(ScadSingleChildParent):
         """
         Returns the new depth (the new size along the y-axis).
         """
-        if 'new_size' in self._args:
-            return self.uc(self._args['new_size'].y)
+        if self._new_depth is None:
+            if self._new_size is not None:
+                self._new_depth = self._new_size.y
+            else:
+                self._new_depth = 0.0
 
-        return self.uc(self._args.get('new_depth', 0.0))
+        return self._new_depth
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -99,14 +143,14 @@ class Resize2D(ScadSingleChildParent):
         Returns whether to auto-scale the width (the size along the x-axis).
         """
         if round(self.new_width, 4) == 0.0:  # xxx Use rounding in target units.
-            if 'auto' in self._args:
-                if isinstance(self._args['auto'], tuple):
-                    return self._args['auto'][0]
-                else:
-                    return self._args['auto']
+            if self._auto is not None:
+                if isinstance(self._auto, tuple):
+                    return self._auto[0]
 
-            if 'auto_width' in self._args:
-                return self._args['auto_width']
+                return self._auto
+
+            if self._auto_width is not None:
+                return self._auto_width
 
         return False
 
@@ -117,14 +161,14 @@ class Resize2D(ScadSingleChildParent):
         Returns whether to auto-scale the depth (the size along the y-axis).
         """
         if round(self.new_depth, 4) == 0.0:  # xxx Use rounding in target units.
-            if 'auto' in self._args:
-                if isinstance(self._args['auto'], tuple):
-                    return self._args['auto'][1]
-                else:
-                    return self._args['auto']
+            if self._auto is not None:
+                if isinstance(self._auto, tuple):
+                    return self._auto[1]
 
-            if 'auto_depth' in self._args:
-                return self._args['auto_depth']
+                return self._auto
+
+            if self._auto_depth is not None:
+                return self._auto_depth
 
         return False
 
@@ -134,7 +178,7 @@ class Resize2D(ScadSingleChildParent):
         """
         Returns the convexity.
         """
-        return self._args.get('convexity')
+        return self._convexity
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
