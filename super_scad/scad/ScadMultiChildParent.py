@@ -1,5 +1,5 @@
 from abc import ABC
-from typing import Any, Dict, List
+from typing import List
 
 from super_scad.scad.ScadWidget import ScadWidget
 
@@ -10,13 +10,13 @@ class ScadMultiChildParent(ScadWidget, ABC):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, args: Dict[str, Any] | None = None, children: List[ScadWidget]):
+    def __init__(self, *, children: List[ScadWidget]):
         """
         Object constructor.
 
         :param children: The child SuperSCAD widgets of this multi-child parent.
         """
-        ScadWidget.__init__(self, args=args)
+        ScadWidget.__init__(self)
 
         self.__children: List[ScadWidget] = children
         """

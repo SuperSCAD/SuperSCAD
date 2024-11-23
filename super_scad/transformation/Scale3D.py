@@ -30,7 +30,7 @@ class Scale3D(ScadSingleChildParent):
         :param factor_z: The scaling factor along the z-axis.
         :param child: The child widget to be scaled.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
 
         self._factor: Vector3 | float | None = factor
         """

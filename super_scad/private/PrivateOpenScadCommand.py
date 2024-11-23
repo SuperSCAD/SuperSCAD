@@ -21,12 +21,22 @@ class PrivateOpenScadCommand(ScadWidget):
         :param command: The name of the OpenSCAD command.
         :param args: The arguments of the OpenSCAD command.
         """
-        ScadWidget.__init__(self, args=args)
+        ScadWidget.__init__(self)
 
         self._command: str = command
         """
         The name of the OpenSCAD command.
         """
+
+        self._args: Dict[str, Any] = {}
+        """
+        The arguments of this OpenSCAD widget.
+        """
+
+        if args is not None:
+            for key, value in args.items():
+                if value is not None and value != self and key not in ('child', 'children'):
+                    self._args[key] = value
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:

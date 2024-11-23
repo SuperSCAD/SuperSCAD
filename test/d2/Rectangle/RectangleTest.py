@@ -183,5 +183,4 @@ class RectangleTestCase(ScadTestCase):
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
-
 # ----------------------------------------------------------------------------------------------------------------------

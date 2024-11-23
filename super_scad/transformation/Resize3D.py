@@ -39,7 +39,7 @@ class Resize3D(ScadSingleChildParent):
                           through the child widget.
         :param child: The child widget to be resized.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
 
         self._new_size: Vector3 | None = new_size
         """
@@ -128,7 +128,7 @@ class Resize3D(ScadSingleChildParent):
                 self._new_width = self._new_size.x
             else:
                 self._new_width = 0.0
-                
+
         return self._new_width
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ class Resize3D(ScadSingleChildParent):
                 self._new_depth = self._new_size.y
             else:
                 self._new_depth = 0.0
-                
+
         return self._new_depth
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -156,7 +156,7 @@ class Resize3D(ScadSingleChildParent):
                 self._new_height = self._new_size.z
             else:
                 self._new_height = 0.0
-                
+
         return self._new_height
 
     # ------------------------------------------------------------------------------------------------------------------

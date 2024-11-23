@@ -20,6 +20,6 @@ class PrivateSingleChildOpenScadCommand(PrivateOpenScadCommand, ScadSingleChildP
         :param child: The child SuperSCAD widget of this single-child parent.
         """
         PrivateOpenScadCommand.__init__(self, command=command, args=args)
-        ScadSingleChildParent.__init__(self, args=args, child=child)
+        ScadSingleChildParent.__init__(self, child=child)
 
 # ----------------------------------------------------------------------------------------------------------------------

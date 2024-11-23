@@ -16,7 +16,7 @@ class ImperialUnitDonut(ScadWidget):
         """
         Object constructor.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
 
         self.imperial_unit_donut: RotateExtrude | None = None
         """

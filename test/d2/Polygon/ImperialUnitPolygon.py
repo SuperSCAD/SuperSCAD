@@ -15,7 +15,7 @@ class ImperialUnitPolygon(ScadWidget):
         """
         Object constructor.
         """
-        ScadWidget.__init__(self, args={})
+        ScadWidget.__init__(self)
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:

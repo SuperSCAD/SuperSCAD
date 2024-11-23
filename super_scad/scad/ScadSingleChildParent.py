@@ -1,5 +1,4 @@
 from abc import ABC
-from typing import Any, Dict
 
 from super_scad.scad.ScadWidget import ScadWidget
 
@@ -10,13 +9,13 @@ class ScadSingleChildParent(ScadWidget, ABC):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, args: Dict[str, Any] | None = None, child: ScadWidget):
+    def __init__(self, *, child: ScadWidget):
         """
         Object constructor.
 
         :param child: The child SuperSCAD widget of this single-child parent.
         """
-        ScadWidget.__init__(self, args=args)
+        ScadWidget.__init__(self)
 
         self.__child = child
         """

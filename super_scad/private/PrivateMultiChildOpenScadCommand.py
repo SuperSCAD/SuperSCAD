@@ -20,6 +20,6 @@ class PrivateMultiChildOpenScadCommand(PrivateOpenScadCommand, ScadMultiChildPar
         :param children: The child SuperSCAD widgets of this multi-child parent.
         """
         PrivateOpenScadCommand.__init__(self, command=command, args=args)
-        ScadMultiChildParent.__init__(self, args=args, children=children)
+        ScadMultiChildParent.__init__(self, children=children)
 
 # ----------------------------------------------------------------------------------------------------------------------

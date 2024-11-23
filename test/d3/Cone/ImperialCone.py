@@ -22,7 +22,16 @@ class ImperialCone(ScadWidget):
         """
         Object constructor.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._height = height
+        self._top_radius = top_radius
+        self._top_diameter = top_diameter
+        self._bottom_radius = bottom_radius
+        self._bottom_diameter = bottom_diameter
+        self._fa = fa
+        self._fs = fs
+        self._fn = fn
 
         self.imperial_cone: Cone | None = None
         """
@@ -38,14 +47,14 @@ class ImperialCone(ScadWidget):
         """
         Context.set_unit_length_current(Unit.INCH)
 
-        self.imperial_cone = Cone(height=self._args.get('height'),
-                                  top_radius=self._args.get('top_radius'),
-                                  top_diameter=self._args.get('top_diameter'),
-                                  bottom_radius=self._args.get('bottom_radius'),
-                                  bottom_diameter=self._args.get('bottom_diameter'),
-                                  fa=self._args.get('fa'),
-                                  fs=self._args.get('fs'),
-                                  fn=self._args.get('fn'))
+        self.imperial_cone = Cone(height=self._height,
+                                  top_radius=self._top_radius,
+                                  top_diameter=self._top_diameter,
+                                  bottom_radius=self._bottom_radius,
+                                  bottom_diameter=self._bottom_diameter,
+                                  fa=self._fa,
+                                  fs=self._fs,
+                                  fn=self._fn)
 
         return self.imperial_cone
 

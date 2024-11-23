@@ -1,6 +1,6 @@
 import typing
 from abc import ABC, abstractmethod
-from typing import Any, Dict, List
+from typing import Any, List
 
 from super_scad.scad import Length
 from super_scad.scad.Context import Context
@@ -17,24 +17,15 @@ class ScadWidget(ABC):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, args: Dict[str, Any] | None = None):
+    def __init__(self, ):
         """
         Object constructor.
-        """
-        self._args: Dict[str, Any] = {}
-        """
-        The arguments of this OpenSCAD widget.
         """
 
         self.__unit: Unit = Context.get_unit_length_current()
         """
         The unit of length of the Context of this OpenSCAD widget.
         """
-
-        if args is not None:
-            for key, value in args.items():
-                if value is not None and value != self and key not in ('child', 'children'):
-                    self._args[key] = value
 
     # ------------------------------------------------------------------------------------------------------------------
     @abstractmethod

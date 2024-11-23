@@ -16,7 +16,9 @@ class Indicator(ScadWidget):
         """
         Object constructor.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._unit = unit
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -25,7 +27,7 @@ class Indicator(ScadWidget):
 
         :param context: The build context.
         """
-        Context.set_unit_length_current(self._args['unit'])
+        Context.set_unit_length_current(self._unit)
 
         return Translate2D(x=5.0, y=5.0, child=Polygon(points=[Vector2(0.0, 0.0),
                                                                Vector2(10.0, 0.0),

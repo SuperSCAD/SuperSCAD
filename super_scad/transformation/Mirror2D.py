@@ -31,7 +31,7 @@ class Mirror2D(ScadSingleChildParent):
         :param y:  The y-coordinate of the origin-intersecting mirror plane.
         :param child: The widget to be mirrored.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
 
         self._vector: Vector2 | None = vector
         """

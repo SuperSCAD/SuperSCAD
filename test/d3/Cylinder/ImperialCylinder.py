@@ -20,7 +20,14 @@ class ImperialCylinder(ScadWidget):
         """
         Object constructor.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._height = height
+        self._radius = radius
+        self._diameter = diameter
+        self._fa = fa
+        self._fs = fs
+        self._fn = fn
 
         self.imperial_cylinder: Cylinder | None = None
         """
@@ -36,12 +43,12 @@ class ImperialCylinder(ScadWidget):
         """
         Context.set_unit_length_current(Unit.INCH)
 
-        self.imperial_cylinder = Cylinder(height=self._args.get('height'),
-                                          radius=self._args.get('radius'),
-                                          diameter=self._args.get('diameter'),
-                                          fa=self._args.get('fa'),
-                                          fs=self._args.get('fs'),
-                                          fn=self._args.get('fn'))
+        self.imperial_cylinder = Cylinder(height=self._height,
+                                          radius=self._radius,
+                                          diameter=self._diameter,
+                                          fa=self._fa,
+                                          fs=self._fs,
+                                          fn=self._fn)
 
         return self.imperial_cylinder
 

@@ -33,7 +33,7 @@ class Mirror3D(ScadSingleChildParent):
         :param z: The z-coordinate of the origin-intersecting mirror plane.
         :param child: The widget to be mirrored.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
 
         self._vector: Vector3 | None = vector
         """
