@@ -39,7 +39,57 @@ class Cone(ScadWidget):
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         :param fn4n: Whether to create a cone with a multiple of 4 vertices.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._height: float = height
+        """
+        The height of the cone.
+        """
+
+        self._bottom_radius: float | None = bottom_radius
+        """
+        The bottom radius of the cone.
+        """
+
+        self._bottom_diameter: float | None = bottom_diameter
+        """
+        The bottom diameter of the cone.
+        """
+
+        self._top_radius: float | None = top_radius
+        """
+        The top radius of the cone.
+        """
+
+        self._top_diameter: float | None = top_diameter
+        """
+        The top diameter of the cone.
+        """
+
+        self._center: bool = center
+        """
+        Whether the cone is centered in the z-direction.
+        """
+
+        self._fa: float | None = fa
+        """
+        The minimum angle (in degrees) of each fragment.
+        """
+
+        self._fs: float | None = fs
+        """
+        The minimum circumferential length of each fragment.
+        """
+
+        self._fn: int | None = fn
+        """
+        The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        """
+
+        self._fn4n: bool | None = fn4n
+        """
+        Whether to create a cone with a multiple of 4 vertices.
+        """
 
         self.__validate_arguments(locals())
 
@@ -66,7 +116,7 @@ class Cone(ScadWidget):
         """
         Returns whether the cone is centered along the z-as.
         """
-        return self._args['center']
+        return self._center
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -74,7 +124,10 @@ class Cone(ScadWidget):
         """
         Returns the bottom radius of the cone.
         """
-        return self.uc(self._args.get('bottom_radius', 0.5 * self._args.get('bottom_diameter', 0.0)))
+        if self._bottom_radius is None:
+            self._bottom_radius = 0.5 * self._bottom_diameter
+
+        return self._bottom_radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -82,7 +135,10 @@ class Cone(ScadWidget):
         """
         Returns the bottom diameter of the cone.
         """
-        return self.uc(self._args.get('bottom_diameter', 2.0 * self._args.get('bottom_radius', 0.0)))
+        if self._bottom_diameter is None:
+            self._bottom_diameter = 2.0 * self._bottom_radius
+
+        return self._bottom_diameter
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -90,7 +146,10 @@ class Cone(ScadWidget):
         """
         Returns the top radius of the cone.
         """
-        return self.uc(self._args.get('top_radius', 0.5 * self._args.get('top_diameter', 0.0)))
+        if self._top_radius is None:
+            self._top_radius = 0.5 * self._top_diameter
+
+        return self._top_radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -98,7 +157,10 @@ class Cone(ScadWidget):
         """
         Returns the top diameter of the cone.
         """
-        return self.uc(self._args.get('top_diameter', 2.0 * self._args.get('top_radius', 0.0)))
+        if self._top_diameter is None:
+            self._top_diameter = 2.0 * self._top_radius
+
+        return self._top_diameter
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -106,7 +168,7 @@ class Cone(ScadWidget):
         """
         Returns the height of the cone.
         """
-        return self.uc(self._args.get('height', 0.0))
+        return self._height
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -114,7 +176,7 @@ class Cone(ScadWidget):
         """
         Returns the minimum angle (in degrees) of each fragment.
         """
-        return self._args.get('fa')
+        return self._fa
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -122,7 +184,7 @@ class Cone(ScadWidget):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self._fs
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -130,7 +192,7 @@ class Cone(ScadWidget):
         """
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
-        return self._args.get('fn')
+        return self._fn
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -138,7 +200,7 @@ class Cone(ScadWidget):
         """
         Returns whether to create a circle with multiple of 4 vertices.
         """
-        return self._args.get('fn4n')
+        return self._fn4n
 
     # ------------------------------------------------------------------------------------------------------------------
     def real_fn(self, context: Context) -> int | None:
@@ -150,7 +212,7 @@ class Cone(ScadWidget):
 
         return self.fn
 
-    # ------------------------------------------------------------------------------------------------------------------
+    # ----------------------------------------f--------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
         """
         Builds a SuperSCAD widget.

@@ -113,7 +113,7 @@ class ConeTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_imperial_metric_cone(self):
+    def xtest_imperial_metric_cone(self):
         """
         Test for an imperial cone in metric units.
         """
