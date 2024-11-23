@@ -30,8 +30,28 @@ class Rectangle(PolygonMixin, ScadWidget):
         :param center: Whether the rectangle is centered at its position.
         :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
         PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps)
+
+        self._size: Vector2 | None = size
+        """
+        The size of the rectangle.
+        """
+
+        self._width: float | None = width
+        """
+        The width of the rectangle.
+        """
+
+        self._depth: float | None = depth
+        """
+        The depth of the rectangle.
+        """
+
+        self._center: bool = center
+        """
+        Whether the rectangle center is at the center of the rectangle.
+        """
 
         self.__validate_arguments(locals())
 
@@ -55,7 +75,10 @@ class Rectangle(PolygonMixin, ScadWidget):
         """
         Returns the size of this rectangle.
         """
-        return Vector2(x=self.width, y=self.depth)
+        if self._size is None:
+            self._size = Vector2(self._width, self._depth)
+
+        return self._size
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -63,10 +86,10 @@ class Rectangle(PolygonMixin, ScadWidget):
         """
         Returns the width (the size along the x-axis) of this rectangle.
         """
-        if 'size' in self._args:
-            return self.uc(self._args['size'].x)
+        if self._width is None:
+            self._width = self._size.x
 
-        return self.uc(self._args['width'])
+        return self._width
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -74,10 +97,10 @@ class Rectangle(PolygonMixin, ScadWidget):
         """
         Returns the depth (the size along the y-axis) of this rectangle.
         """
-        if 'size' in self._args:
-            return self.uc(self._args['size'].y)
+        if self._depth is None:
+            self._depth = self._size.y
 
-        return self.uc(self._args['depth'])
+        return self._depth
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -85,7 +108,7 @@ class Rectangle(PolygonMixin, ScadWidget):
         """
         Returns whether the rectangle is centered at this origin.
         """
-        return self._args['center']
+        return self._center
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

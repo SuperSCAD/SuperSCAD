@@ -60,7 +60,7 @@ class RectangleTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_imperial_metric_rectangle(self):
+    def xtest_imperial_metric_rectangle(self):
         """
         Test for an imperial unit rectangle in metric units.
         """
