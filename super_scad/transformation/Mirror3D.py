@@ -25,16 +25,38 @@ class Mirror3D(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param vector:  The normal vector of the origin-intersecting mirror plane used, meaning the vector coming
-                        perpendicularly out of the plane. Each coordinate of the original widget is altered such that
-                        it becomes equidistant on the other side of this plane from the closest point on the plane.
-        :param x:  The x-coordinate of the origin-intersecting mirror plane.
-        :param y:  The y-coordinate of the origin-intersecting mirror plane.
+        :param vector: The normal vector of the origin-intersecting mirror plane used, meaning the vector coming
+                       perpendicularly out of the plane. Each coordinate of the original widget is altered such that
+                       it becomes equidistant on the other side of this plane from the closest point on the plane.
+        :param x: The x-coordinate of the origin-intersecting mirror plane.
+        :param y: The y-coordinate of the origin-intersecting mirror plane.
+        :param z: The z-coordinate of the origin-intersecting mirror plane.
         :param child: The widget to be mirrored.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
-        self.__vector: Vector3 | None = None
+        self._vector: Vector3 | None = vector
+        """
+        The normal vector of the origin-intersecting mirror plane used, meaning the vector coming perpendicularly out of 
+        the plane
+        """
+
+        self._x: float | None = x
+        """
+        The x-coordinate of the origin-intersecting mirror plane.
+        """
+
+        self._y: float | None = y
+        """
+        The y-coordinate of the origin-intersecting mirror plane.
+        """
+
+        self._z: float | None = z
+        """
+        The z-coordinate of the origin-intersecting mirror plane.
+        """
+
+        self._normal: Vector3 | None = None
         """
         The normalized normal vector of the origin-intersecting mirror plane used.
         """
@@ -55,22 +77,21 @@ class Mirror3D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def vector(self) -> Vector3:
+    def normal(self) -> Vector3:
         """
         The normal vector of the origin-intersecting mirror plane.
         """
-        if self.__vector is None:
-            if 'vector' in self._args:
-                self.__vector = self.uc(self._args['vector']).normal
+        if self._normal is None:
+            if self._vector is not None:
+                self._normal = self._vector.normal
+            else:
+                self._normal = Vector3(self._x or 0.0,
+                                       self._y or 0.0,
+                                       self._z or 0.0).normal
 
-            if 'x' in self._args or 'y' in self._args or 'z' in self._args:
-                self.__vector = self.uc(Vector3(self._args.get('x', 0.0),
-                                                self._args.get('y', 0.0),
-                                                self._args.get('z', 0.0))).normal
+                self._normal = self._normal * (-1.0 if self._normal.x < 0.0 else 1.0)
 
-            self.__vector = self.__vector * (-1.0 if self.__vector.x < 0.0 else 1.0)
-
-        return self.__vector
+        return self._normal
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -79,6 +100,6 @@ class Mirror3D(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        return PrivateMirror(vector=self.vector, child=self.child)
+        return PrivateMirror(vector=self.normal, child=self.child)
 
 # ----------------------------------------------------------------------------------------------------------------------

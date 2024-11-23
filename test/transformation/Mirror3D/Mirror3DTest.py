@@ -23,9 +23,9 @@ class Mirror3DTest(ScadTestCase):
         original = Indicator()
         mirrored = Mirror3D(x=1.0, child=original)
 
-        self.assertAlmostEqual(1.0, mirrored.vector.x)
-        self.assertAlmostEqual(0.0, mirrored.vector.y)
-        self.assertAlmostEqual(1.0, mirrored.vector.length)
+        self.assertAlmostEqual(1.0, mirrored.normal.x)
+        self.assertAlmostEqual(0.0, mirrored.normal.y)
+        self.assertAlmostEqual(1.0, mirrored.normal.length)
 
         union = Union(children=[original, mirrored])
         scad.run_super_scad(union, path_actual)
@@ -44,9 +44,9 @@ class Mirror3DTest(ScadTestCase):
         original = Indicator()
         mirrored = Mirror3D(y=1.0, child=original)
 
-        self.assertAlmostEqual(0.0, mirrored.vector.x)
-        self.assertAlmostEqual(1.0, mirrored.vector.y)
-        self.assertAlmostEqual(1.0, mirrored.vector.length)
+        self.assertAlmostEqual(0.0, mirrored.normal.x)
+        self.assertAlmostEqual(1.0, mirrored.normal.y)
+        self.assertAlmostEqual(1.0, mirrored.normal.length)
 
         union = Union(children=[original, mirrored])
         scad.run_super_scad(union, path_actual)
@@ -65,10 +65,10 @@ class Mirror3DTest(ScadTestCase):
         original = Indicator()
         mirrored = Mirror3D(z=1.0, child=original)
 
-        self.assertAlmostEqual(0.0, mirrored.vector.x)
-        self.assertAlmostEqual(0.0, mirrored.vector.y)
-        self.assertAlmostEqual(1.0, mirrored.vector.z)
-        self.assertAlmostEqual(1.0, mirrored.vector.length)
+        self.assertAlmostEqual(0.0, mirrored.normal.x)
+        self.assertAlmostEqual(0.0, mirrored.normal.y)
+        self.assertAlmostEqual(1.0, mirrored.normal.z)
+        self.assertAlmostEqual(1.0, mirrored.normal.length)
 
         union = Union(children=[original, mirrored])
         scad.run_super_scad(union, path_actual)
@@ -87,10 +87,10 @@ class Mirror3DTest(ScadTestCase):
         original = Indicator()
         mirrored = Mirror3D(vector=Vector3(1.0, 1.0, 1.0), child=original)
 
-        self.assertAlmostEqual(math.sqrt(3.0) / 3.0, mirrored.vector.x)
-        self.assertAlmostEqual(math.sqrt(3.0) / 3.0, mirrored.vector.y)
-        self.assertAlmostEqual(math.sqrt(3.0) / 3.0, mirrored.vector.z)
-        self.assertAlmostEqual(1.0, mirrored.vector.length)
+        self.assertAlmostEqual(math.sqrt(3.0) / 3.0, mirrored.normal.x)
+        self.assertAlmostEqual(math.sqrt(3.0) / 3.0, mirrored.normal.y)
+        self.assertAlmostEqual(math.sqrt(3.0) / 3.0, mirrored.normal.z)
+        self.assertAlmostEqual(1.0, mirrored.normal.length)
 
         union = Union(children=[original, mirrored])
         scad.run_super_scad(union, path_actual)
