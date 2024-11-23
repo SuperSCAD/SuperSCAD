@@ -1,11 +1,12 @@
-from typing import Dict, Set
-
-from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
+from super_scad.d3.private.PrivateLinearExtrude import PrivateLinearExtrude
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.transformation.Translate3D import Translate3D
 from super_scad.type.Vector2 import Vector2
 
 
-class LinearExtrude(PrivateSingleChildOpenScadCommand):
+class LinearExtrude(ScadSingleChildParent):
     """
     Linear Extrusion is an operation that takes a 2D object as input and generates a 3D object as a result. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Using_the_2D_Subsystem#linear_extrude.
@@ -24,6 +25,8 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
+                 extend_top_by_eps: bool = False,
+                 extend_bottom_by_eps: bool = False,
                  child: ScadWidget):
         """
         Object constructor.
@@ -43,36 +46,20 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        :param extend_top_by_eps: Whether to extend the top by eps for a clear overlap.
+        :param extend_bottom_by_eps: Whether to extend the bottom by eps for a clear overlap.
         """
-        PrivateSingleChildOpenScadCommand.__init__(self, command='linear_extrude', args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
-    # ------------------------------------------------------------------------------------------------------------------
-    def _argument_map(self) -> Dict[str, str]:
+        self._extend_top_by_eps: bool = extend_top_by_eps
         """
-        Returns the map from SuperSCAD arguments to OpenSCAD arguments.
+        Whether to extend the top by eps for a clear overlap.  
         """
-        return {'fa': '$fa', 'fs': '$fs', 'fn': '$fn'}
 
-    # ------------------------------------------------------------------------------------------------------------------
-    def _argument_angles(self) -> Set[str]:
+        self._extend_bottom_by_eps: bool = extend_bottom_by_eps
         """
-        Returns the set with arguments that are angles.
+        Whether to extend the bottom by eps for a clear overlap.  
         """
-        return {'$fa', 'twist'}
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def _argument_lengths(self) -> Set[str]:
-        """
-        Returns the set with arguments that are lengths.
-        """
-        return {'height', '$fs'}
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def _argument_scales(self) -> Set[str]:
-        """
-        Returns the set with arguments that are scales and factors.
-        """
-        return {'scale'}
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -157,5 +144,67 @@ class LinearExtrude(PrivateSingleChildOpenScadCommand):
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
         return self._args.get('fn')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def extend_top_by_eps(self) -> bool:
+        """
+        Returns whether to extend the top by eps for a clear overlap.
+        """
+        return self._extend_top_by_eps
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def extend_bottom_by_eps(self) -> bool:
+        """
+        Returns whether to extend the bottom by eps for a clear overlap.
+        """
+        return self._extend_bottom_by_eps
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def build(self, context: Context) -> ScadWidget:
+        """
+        Builds a SuperSCAD widget.
+
+        :param context: The build context.
+        """
+        height=self.height
+        if self._extend_top_by_eps:
+            height+=context.eps
+        if self._extend_bottom_by_eps:
+            height+=context.eps
+
+        if (not self._extend_bottom_by_eps and not self._extend_top_by_eps) or \
+                (self._extend_bottom_by_eps and self._extend_top_by_eps and self.center):
+            return PrivateLinearExtrude(height=height,
+                                        center=self.center,
+                                        convexity=self.convexity,
+                                        twist=self.twist,
+                                        scale=self.scale,
+                                        slices=self.slices,
+                                        segments=self.segments,
+                                        fa=self.fa,
+                                        fs=self.fs,
+                                        fn=self.fn,
+                                        child=self.child)
+
+        offset = 0.0
+        if self.center:
+            offset -= 0.5 * self.height
+        if self._extend_bottom_by_eps:
+            offset -= context.eps
+
+        return Translate3D(z=offset,
+                           child=PrivateLinearExtrude(height=height,
+                                                      center=False,
+                                                      convexity=self.convexity,
+                                                      twist=self.twist,
+                                                      scale=self.scale,
+                                                      slices=self.slices,
+                                                      segments=self.segments,
+                                                      fa=self.fa,
+                                                      fs=self.fs,
+                                                      fn=self.fn,
+                                                      child=self.child))
 
 # ----------------------------------------------------------------------------------------------------------------------

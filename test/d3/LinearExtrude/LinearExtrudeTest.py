@@ -2,6 +2,8 @@ from d3.LinearExtrude.ImperialUnitCube import ImperialUnitCube
 from ScadTestCase import ScadTestCase
 from super_scad.d2.Circle import Circle
 from super_scad.d3.LinearExtrude import LinearExtrude
+from super_scad.scad.Context import Context
+from super_scad.scad.Scad import Scad
 from super_scad.scad.Unit import Unit
 from super_scad.transformation.Translate2D import Translate2D
 from super_scad.type.Vector2 import Vector2
@@ -342,6 +344,139 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertAlmostEqual(0.01, extrude.imperial_unit_cube.fs)
         self.assertIsNone(extrude.imperial_unit_cube.fn)
 
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_top_by_eps_no_center(self):
+        """
+        Test extend top by eps only.
+        """
+        context = Context(eps=1.0)
+        scad = Scad(context=context)
+
+        extrude = LinearExtrude(height=20.0, extend_top_by_eps=True, child=Circle(radius=1.0))
+
+        self.assertAlmostEqual(20.0, extrude.height)
+        self.assertFalse(extrude.center)
+        self.assertTrue(extrude.extend_top_by_eps)
+        self.assertFalse(extrude.extend_bottom_by_eps)
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(extrude, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_top_by_eps_center(self):
+        """
+        Test extend top by eps only and center.
+        """
+        context = Context(eps=1.0)
+        scad = Scad(context=context)
+
+        extrude = LinearExtrude(height=20.0, center=True, extend_top_by_eps=True, child=Circle(radius=1.0))
+
+        self.assertAlmostEqual(20.0, extrude.height)
+        self.assertTrue(extrude.center)
+        self.assertTrue(extrude.extend_top_by_eps)
+        self.assertFalse(extrude.extend_bottom_by_eps)
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(extrude, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_bottom_by_eps_no_center(self):
+        """
+        Test extend bottom by eps only.
+        """
+        context = Context(eps=1.0)
+        scad = Scad(context=context)
+
+        extrude = LinearExtrude(height=20.0, extend_bottom_by_eps=True, child=Circle(radius=1.0))
+
+        self.assertAlmostEqual(20.0, extrude.height)
+        self.assertFalse(extrude.center)
+        self.assertFalse(extrude.extend_top_by_eps)
+        self.assertTrue(extrude.extend_bottom_by_eps)
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(extrude, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_bottom_by_eps_center(self):
+        """
+        Test extend bottom by eps only and center.
+        """
+        context = Context(eps=1.0)
+        scad = Scad(context=context)
+
+        extrude = LinearExtrude(height=20.0, center=True, extend_bottom_by_eps=True, child=Circle(radius=1.0))
+
+        self.assertAlmostEqual(20.0, extrude.height)
+        self.assertTrue(extrude.center)
+        self.assertFalse(extrude.extend_top_by_eps)
+        self.assertTrue(extrude.extend_bottom_by_eps)
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(extrude, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_top_bottom_by_eps_no_center(self):
+        """
+        Test extend top and bottom by eps.
+        """
+        context = Context(eps=1.0)
+        scad = Scad(context=context)
+
+        extrude = LinearExtrude(height=20.0,
+                                extend_top_by_eps=True,
+                                extend_bottom_by_eps=True,
+                                child=Circle(radius=1.0))
+
+        self.assertAlmostEqual(20.0, extrude.height)
+        self.assertFalse(extrude.center)
+        self.assertTrue(extrude.extend_top_by_eps)
+        self.assertTrue(extrude.extend_bottom_by_eps)
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(extrude, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_top_bottom_by_eps_center(self):
+        """
+        Test extend top and bottom by eps and center.
+        """
+        context = Context(eps=1.0)
+        scad = Scad(context=context)
+
+        extrude = LinearExtrude(height=20.0,
+                                center=True,
+                                extend_top_by_eps=True,
+                                extend_bottom_by_eps=True,
+                                child=Circle(radius=1.0))
+
+        self.assertAlmostEqual(20.0, extrude.height)
+        self.assertTrue(extrude.center)
+        self.assertTrue(extrude.extend_top_by_eps)
+        self.assertTrue(extrude.extend_bottom_by_eps)
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(extrude, path_actual)
         actual = path_actual.read_text()
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
