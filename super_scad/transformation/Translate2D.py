@@ -29,7 +29,22 @@ class Translate2D(ScadSingleChildParent):
         :param y: The distance the child widget is translated to along the y-axis.
         :param child: The child widget to be translated.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._vector: Vector2 | None = vector
+        """
+        The vector over which the child widget is translated.
+        """
+
+        self._x: float | None = x
+        """
+        The distance the child widget is translated to along the x-axis.
+        """
+
+        self._y: float | None = y
+        """
+        The distance the child widget is translated to along the y-axis.
+        """
 
         self.__validate_arguments(locals())
 
@@ -50,7 +65,10 @@ class Translate2D(ScadSingleChildParent):
         """
         Returns the vector over which the child widget is translated.
         """
-        return Vector2(self.x, self.y)
+        if self._vector is None:
+            self._vector = Vector2(self.x, self.y)
+
+        return self._vector
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -58,10 +76,13 @@ class Translate2D(ScadSingleChildParent):
         """
         Returns distance the child widget is translated to along the x-axis.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'].x)
+        if self._x is None:
+            if not self._vector is None:
+                self._x = self.vector.x
+            else:
+                self._x = 0.0
 
-        return self.uc(self._args.get('x', 0.0))
+        return self._x
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -69,10 +90,13 @@ class Translate2D(ScadSingleChildParent):
         """
         Returns distance the child widget is translated to along the y-axis.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'].y)
+        if self._y is None:
+            if not self._vector is None:
+                self._y = self.vector.y
+            else:
+                self._y = 0.0
 
-        return self.uc(self._args.get('y', 0.0))
+        return self._y
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -81,6 +105,6 @@ class Translate2D(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        return PrivateTranslate(vector=Vector2(x=self.x, y=self.y), child=self.child)
+        return PrivateTranslate(vector=self.vector, child=self.child)
 
 # ----------------------------------------------------------------------------------------------------------------------
