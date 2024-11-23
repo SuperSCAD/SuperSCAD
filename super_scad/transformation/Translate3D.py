@@ -31,7 +31,27 @@ class Translate3D(ScadSingleChildParent):
         :param z: The distance over which the child widget is translated along the z-axis.
         :param child: The child widget to be translated.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._vector: Vector3 | None = vector
+        """
+        The vector over which the child widget is translated.
+        """
+
+        self._x: float | None = x
+        """
+        The distance over which the child widget is translated along the x-axis.
+        """
+
+        self._y: float | None = y
+        """
+        The distance over which the child widget is translated along the y-axis.
+        """
+
+        self._z: float | None = z
+        """
+        The distance over which the child widget is translated along the z-axis.
+        """
 
         self.__validate_arguments(locals())
 
@@ -52,7 +72,10 @@ class Translate3D(ScadSingleChildParent):
         """
         Returns the vector over which the child widget is translated.
         """
-        return Vector3(self.x, self.y, self.z)
+        if self._vector is None:
+            self._vector = Vector3(self.x, self.y, self.z)
+
+        return self._vector
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -60,10 +83,13 @@ class Translate3D(ScadSingleChildParent):
         """
         Returns distance over which the child widget is translated to along the x-axis.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'].x)
+        if self._x is None:
+            if self._vector is not None:
+                self._x = self._vector.x
+            else:
+                self._x = 0.0
 
-        return self.uc(self._args.get('x', 0.0))
+        return self._x
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -71,10 +97,13 @@ class Translate3D(ScadSingleChildParent):
         """
         Returns distance over which the child widget is translated to along the y-axis.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'].y)
+        if self._y is None:
+            if self._vector is not None:
+                self._y = self._vector.y
+            else:
+                self._y = 0.0
 
-        return self.uc(self._args.get('y', 0.0))
+        return self._y
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -82,10 +111,13 @@ class Translate3D(ScadSingleChildParent):
         """
         Returns distance over which the child widget is translated to along the z-axis.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'].z)
+        if self._z is None:
+            if self._vector is not None:
+                self._z = self._vector.z
+            else:
+                self._z = 0.0
 
-        return self.uc(self._args.get('z', 0.0))
+        return self._z
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -94,6 +126,6 @@ class Translate3D(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        return PrivateTranslate(vector=Vector3(x=self.x, y=self.y, z=self.z), child=self.child)
+        return PrivateTranslate(vector=self.vector, child=self.child)
 
 # ----------------------------------------------------------------------------------------------------------------------
