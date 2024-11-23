@@ -21,7 +21,12 @@ class Rotate2D(ScadSingleChildParent):
         :param angle: The angle of rotation (around the z-axis).
         :param child: The widget to be rotated.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._angle: float | None = angle
+        """
+        The angle of rotation (around the z-axis).
+        """
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -29,7 +34,10 @@ class Rotate2D(ScadSingleChildParent):
         """
         Returns the angle of rotation (around the z-axis).
         """
-        return Angle.normalize(self._args.get('angle', 0.0))
+        if self._angle is None:
+            self._angle = 0.0
+
+        return Angle.normalize(self._angle)
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
