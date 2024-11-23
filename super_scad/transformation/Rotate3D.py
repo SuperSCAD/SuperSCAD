@@ -33,7 +33,32 @@ class Rotate3D(ScadSingleChildParent):
         :param vector: The vector of rotation.
         :param child: The widget to be rotated.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._angle: float | Vector3 | None = angle
+        """
+        The angle of rotation around all axis or a vector.
+        """
+
+        self._angle_x: float | None = angle_x
+        """
+        The angle of rotation around the x-axis.
+        """
+
+        self._angle_y: float | None = angle_y
+        """
+        The angle of rotation around the y-axis.
+        """
+
+        self._angle_z: float | None = angle_z
+        """
+        The angle of rotation around the z-axis.
+        """
+
+        self._vector: Vector3 | None = vector
+        """ 
+        The vector of rotation.
+        """
 
         self.__validate_arguments(locals())
 
@@ -55,10 +80,13 @@ class Rotate3D(ScadSingleChildParent):
         """
         Returns angle of rotation around all axis or a vector.
         """
-        if 'vector' in self._args:
-            return self._args.get('angle')
+        if self._vector is not None:
+            return self._angle
 
-        return Vector3(self.angle_x, self.angle_y, self.angle_z)
+        if self._angle is None:
+            self._angle = Vector3(self.angle_x, self.angle_y, self.angle_z)
+
+        return self._angle
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -66,13 +94,16 @@ class Rotate3D(ScadSingleChildParent):
         """
         Returns the angle of rotation around the x-axis.
         """
-        if 'vector' in self._args:
+        if self._vector is not None:
             return None
 
-        if 'angle' in self._args:
-            return self._args['angle'].x
+        if self._angle_x is None:
+            if self._angle is not None:
+                self._angle_x = self._angle.x
+            else:
+                self._angle_x = 0.0
 
-        return self._args.get('angle_x', 0.0)
+        return self._angle_x
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -80,13 +111,16 @@ class Rotate3D(ScadSingleChildParent):
         """
         Returns the angle of rotation around the y-axis.
         """
-        if 'vector' in self._args:
+        if self._vector is not None:
             return None
 
-        if 'angle' in self._args:
-            return self._args['angle'].y
+        if self._angle_y is None:
+            if self._angle is not None:
+                self._angle_y = self._angle.y
+            else:
+                self._angle_y = 0.0
 
-        return self._args.get('angle_y', 0.0)
+        return self._angle_y
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -94,13 +128,16 @@ class Rotate3D(ScadSingleChildParent):
         """
         Returns the angle of rotation around the z-axis.
         """
-        if 'vector' in self._args:
+        if self._vector is not None:
             return None
 
-        if 'angle' in self._args:
-            return self._args['angle'].z
+        if self._angle_z is None:
+            if self._angle is not None:
+                self._angle_z = self._angle.z
+            else:
+                self._angle_z = 0.0
 
-        return self._args.get('angle_z', 0.0)
+        return self._angle_z
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -108,10 +145,7 @@ class Rotate3D(ScadSingleChildParent):
         """
         Returns the vector of rotation.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'])
-
-        return None
+        return self._vector
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
