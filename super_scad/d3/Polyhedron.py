@@ -64,7 +64,7 @@ class Polyhedron(ScadWidget):
         """
         Object constructor.
 
-        :param faces:  The faces that collectively enclose the solid.
+        :param faces: The faces that collectively enclose the solid.
         :param highlight_faces: The ID of the faces to highlight. Each node of the face is marked, the first point
                                 is colored red, the second orange, the third green, and all other points are color
                                 black.
@@ -81,7 +81,39 @@ class Polyhedron(ScadWidget):
         Define enough faces to fully enclose the solid, with no overlap. If nodes that describe a single face are not
         on the same plane, the face is by OpenSCAD automatically split into triangles as needed.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._faces: List[List[Vector3] | Tuple[Vector3, ...]] = faces
+        """
+        The faces that collectively enclose the solid.
+        """
+
+        self._highlight_faces: int | List[int] | None = highlight_faces
+        """
+        The ID of the faces to highlight. Each node of the face is marked, the first point
+        """
+
+        self._highlight_nodes: int | List[int] = highlight_nodes
+        """
+        The IDs of the nodes to highlight.
+        """
+
+        self._highlight_diameter: float | None = highlight_diameter
+        """
+        The diameter of the spheres that highlight the nodes of the faces.
+        """
+
+        self._convexity: int | None = convexity
+        """
+        Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line the polyhedron.
+        """
+
+        self._validate: bool = validate
+        """
+        Whether to validate the polyhedron.
+        """
+
+        self._highlight_issues: bool = highlight_issues
 
         self.__nodes: Dict[int, Node] = {}
         """
@@ -104,14 +136,14 @@ class Polyhedron(ScadWidget):
         """
         Returns the IDs of the faces to highlight
         """
-        tmp = self._args.get('highlight_faces')
-        if tmp is None:
-            return []
+        if not isinstance(self._highlight_faces, list):
+            if self._highlight_faces is None:
+                self._highlight_faces = []
 
-        if isinstance(tmp, int):
-            return [tmp]
+            elif isinstance(self._highlight_faces, int):
+                self._highlight_faces = [self._highlight_faces]
 
-        return tmp
+        return self._highlight_faces
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -119,14 +151,13 @@ class Polyhedron(ScadWidget):
         """
         Returns the IDs of the nodes to highlight
         """
-        tmp = self._args.get('highlight_nodes')
-        if tmp is None:
-            return []
+        if not isinstance(self._highlight_nodes, list):
+            if self._highlight_nodes is None:
+                self._highlight_nodes = []
+            elif isinstance(self._highlight_nodes, int):
+                self._highlight_nodes = [self._highlight_nodes]
 
-        if isinstance(tmp, int):
-            return [tmp]
-
-        return tmp
+        return self._highlight_nodes
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -134,10 +165,10 @@ class Polyhedron(ScadWidget):
         """
         Returns the diameter of the spheres that highlight the nodes.
         """
-        return self._args.get('highlight_diameter')
+        return self._highlight_diameter
 
     # ------------------------------------------------------------------------------------------------------------------
-    def real_highlight_diameter(self, context: Context) -> float:
+    def __real_highlight_diameter(self, context: Context) -> float:
         """
         Returns the real diameter of the spheres that highlight the nodes.
         """
@@ -145,7 +176,7 @@ class Polyhedron(ScadWidget):
         if diameter is not None:
             return max(diameter, 5.0 * context.resolution)
 
-        face = self._args['faces'][self.highlight_faces[0]]
+        face = self._faces[self.highlight_faces[0]]
 
         total_distance = 0.0
         prev_point = None
@@ -187,7 +218,7 @@ class Polyhedron(ScadWidget):
         Returns the number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through the
         child widget.
         """
-        return self._args.get('convexity')
+        return self._convexity
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -195,7 +226,7 @@ class Polyhedron(ScadWidget):
         """
         Returns whether to validate polyhedron.
         """
-        return self._args.get('validate')
+        return self._validate
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -203,7 +234,7 @@ class Polyhedron(ScadWidget):
         """
         Returns whether to highlight all issues found by the validation.
         """
-        return self._args.get('highlight_issues')
+        return self._highlight_issues
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
@@ -301,7 +332,7 @@ class Polyhedron(ScadWidget):
 
         :param context: The build context.
         """
-        diameter_node = self.real_highlight_diameter(context)
+        diameter_node = self.__real_highlight_diameter(context)
         diameter_edge = 0.2 * diameter_node
         markers = []
 
@@ -329,7 +360,7 @@ class Polyhedron(ScadWidget):
 
         :param context: The build context.
         """
-        diameter_node = self.real_highlight_diameter(context)
+        diameter_node = self.__real_highlight_diameter(context)
         markers = []
 
         map_node_id_to_node = {}
@@ -360,7 +391,7 @@ class Polyhedron(ScadWidget):
             Node.next_node_id = 0
             digits = context.length_digits
 
-            for points in self._args['faces']:
+            for points in self._faces:
                 face = []
                 for point in points:
                     node = self.__nodes.get(id(point))
@@ -408,8 +439,8 @@ class Polyhedron(ScadWidget):
                     print(f'         Add highlight_faces=[{face_ids}] to locate the faces.')
 
                 if self.highlight_issues:
-                    self._args['highlight_nodes'].append(line_segment[0])
-                    self._args['highlight_nodes'].append(line_segment[1])
+                    self._highlight_nodes.append(line_segment[0])
+                    self._highlight_nodes.append(line_segment[1])
 
     # ------------------------------------------------------------------------------------------------------------------
     def __validate_faces1(self) -> None:
@@ -423,7 +454,7 @@ class Polyhedron(ScadWidget):
                 print(f'         Add highlight_faces=[{face_id}] to locate the face.')
 
                 if self.highlight_issues:
-                    self._args['highlight_face'].append(face_id)
+                    self._highlight_faces.append(face_id)
 
     # ------------------------------------------------------------------------------------------------------------------
     def __validate_faces2(self) -> None:
@@ -439,8 +470,8 @@ class Polyhedron(ScadWidget):
         Validates the polyhedron.
         """
         if self.highlight_issues:
-            self._args['highlight_faces'] = []
-            self._args['highlight_nodes'] = []
+            self._highlight_faces = []
+            self._highlight_nodes = []
 
         self.__validate_line_segments()
         self.__validate_faces1()
