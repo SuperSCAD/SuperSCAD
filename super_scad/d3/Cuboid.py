@@ -29,7 +29,32 @@ class Cuboid(ScadWidget):
         :param height: The height (the size along the y-axis) of the cuboid.
         :param center: Whether the cuboid is centered at the origin.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._size: Vector3 | None = size
+        """
+        The size of the cuboid.
+        """
+
+        self._width: float | None = width
+        """
+        The width (the size along the x-axis) of the cuboid.
+        """
+
+        self._depth: float | None = depth
+        """
+        The depth (the size along the y-axis) of the cuboid.
+        """
+
+        self._height: float | None = height
+        """
+        The height (the size along the y-axis) of the cuboid.
+        """
+
+        self._center: bool = center
+        """
+        Whether the cuboid is centered at the origin.
+        """
 
         self.__validate_arguments(locals())
 
@@ -54,7 +79,7 @@ class Cuboid(ScadWidget):
         """
         Returns whether the cuboid is centered at the origin.
         """
-        return self._args['center']
+        return self._center
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -62,7 +87,10 @@ class Cuboid(ScadWidget):
         """
         Returns the size of the cuboid.
         """
-        return Vector3(x=self.width, y=self.depth, z=self.height)
+        if self._size is None:
+            self._size = Vector3(x=self.width, y=self.depth, z=self.height)
+
+        return self._size
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -70,10 +98,10 @@ class Cuboid(ScadWidget):
         """
         Returns the width of the cuboid.
         """
-        if 'size' in self._args:
-            return self.uc(self._args['size'].x)
+        if self._width is None:
+            self._width = self._size.x
 
-        return self.uc(self._args['width'])
+        return self._width
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -81,10 +109,10 @@ class Cuboid(ScadWidget):
         """
         Returns the depth of the cuboid.
         """
-        if 'size' in self._args:
-            return self.uc(self._args['size'].y)
+        if self._depth is None:
+            self._depth = self._size.y
 
-        return self.uc(self._args['depth'])
+        return self._depth
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -92,10 +120,10 @@ class Cuboid(ScadWidget):
         """
         Returns the height of the cuboid.
         """
-        if 'size' in self._args:
-            return self.uc(self._args['size'].z)
+        if self._height is None:
+            self._height = self._size.z
 
-        return self.uc(self._args['height'])
+        return self._height
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:

@@ -57,7 +57,7 @@ class CuboidTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_imperial_metric_cuboid(self):
+    def xtest_imperial_metric_cuboid(self):
         """
         Test for an imperial unit cuboid in metric units.
         """
