@@ -33,7 +33,23 @@ class Mirror2D(ScadSingleChildParent):
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
-        self.__vector: Vector2 | None = None
+        self._vector: Vector2 | None = vector
+        """
+        The normal vector of the origin-intersecting mirror plane used, meaning the vector coming perpendicularly out of 
+        the plane
+        """
+
+        self._x: float | None = x
+        """
+        The x-coordinate of the origin-intersecting mirror plane.
+        """
+
+        self._y: float | None = y
+        """
+        The y-coordinate of the origin-intersecting mirror plane.
+        """
+
+        self._normal: Vector2 | None = None
         """
         The normalized normal vector of the origin-intersecting mirror plane used.
         """
@@ -54,21 +70,20 @@ class Mirror2D(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def vector(self) -> Vector2:
+    def normal(self) -> Vector2:
         """
         The normal vector of the origin-intersecting mirror plane.
         """
-        if self.__vector is None:
-            if 'vector' in self._args:
-                self.__vector = self.uc(self._args['vector']).unit
+        if self._normal is None:
+            if self._vector is not None:
+                self._normal = self._vector.unit
+            else:
+                self._normal = Vector2(self._x or 0.0,
+                                       self._y or 0.0).unit
 
-            if 'x' in self._args or 'y' in self._args or 'z' in self._args:
-                self.__vector = self.uc(Vector2(self._args.get('x', 0.0),
-                                                self._args.get('y', 0.0))).unit
+                self._normal = self._normal * (-1.0 if self._normal.x < 0.0 else 1.0)
 
-            self.__vector = self.__vector * (-1.0 if self.__vector.x < 0.0 else 1.0)
-
-        return self.__vector
+        return self._normal
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -77,6 +92,6 @@ class Mirror2D(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        return PrivateMirror(vector=self.vector, child=self.child)
+        return PrivateMirror(vector=self.normal, child=self.child)
 
 # ----------------------------------------------------------------------------------------------------------------------
