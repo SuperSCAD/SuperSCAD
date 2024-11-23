@@ -34,7 +34,7 @@ class Polygon(PolygonMixin, ScadWidget):
         :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
         """
         ScadWidget.__init__(self, args=locals())
-        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps)
+        PolygonMixin.__init__(self, convexity=convexity, extend_sides_by_eps=extend_sides_by_eps)
 
         self.__validate_arguments(locals())
 
