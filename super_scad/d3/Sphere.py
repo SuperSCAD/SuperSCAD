@@ -34,7 +34,37 @@ class Sphere(ScadWidget):
         :param fn: The fixed number of fragments in 360 degrees. Values of three or more override fa and fs.
         :param fn4n: Whether to create a sphere with a multiple of four vertices.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._radius: float | None = radius
+        """
+        The radius of the sphere.
+        """
+
+        self._diameter: float | None = diameter
+        """
+        The diameter of the sphere.
+        """
+
+        self._fa: float | None = fa
+        """
+        The minimum angle (in degrees) of each fragment.
+        """
+
+        self._fs: float | None = fs
+        """
+        The minimum circumferential length of each fragment.
+        """
+
+        self._fn: int | None = fn
+        """
+        The fixed number of fragments in 360 degrees.
+        """
+
+        self._fn4n: bool | None = fn4n
+        """
+        Whether to create a sphere with a multiple of four vertices.
+        """
 
         self.__validate_arguments(locals())
 
@@ -56,7 +86,10 @@ class Sphere(ScadWidget):
         """
         Returns the radius of the sphere.
         """
-        return self.uc(self._args.get('radius', 0.5 * self._args.get('diameter', 0.0)))
+        if self._radius is None:
+            self._radius = 0.5 * self._diameter
+
+        return self._radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -64,7 +97,10 @@ class Sphere(ScadWidget):
         """
         Returns the diameter of the sphere.
         """
-        return self.uc(self._args.get('diameter', 2.0 * self._args.get('radius', 0.0)))
+        if self._diameter is None:
+            self._diameter = 2.0 * self._radius
+
+        return self._diameter
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -72,7 +108,7 @@ class Sphere(ScadWidget):
         """
         Returns the minimum angle (in degrees) of each fragment.
         """
-        return self._args.get('fa')
+        return self._fa
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -80,7 +116,7 @@ class Sphere(ScadWidget):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self._fs
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -88,15 +124,18 @@ class Sphere(ScadWidget):
         """
         Returns the fixed number of fragments in 360 degrees. Values of three or more override fa and fs.
         """
-        return self._args.get('fn')
+        return self._fn
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def fn4n(self) -> bool | None:
+    def fn4n(self) -> bool:
         """
         Returns whether to create a circle with multiple of 4 vertices.
         """
-        return self._args.get('fn4n')
+        if self._fn4n is None:
+            self._fn4n = False
+
+        return self._fn4n
 
     # ------------------------------------------------------------------------------------------------------------------
     def real_fn(self, context: Context) -> int | None:

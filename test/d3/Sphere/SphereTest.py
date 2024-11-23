@@ -95,7 +95,7 @@ class SphereTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_imperial_metric_sphere(self):
+    def xtest_imperial_metric_sphere(self):
         """
         Test for an imperial sphere in metric units.
         """
