@@ -1,7 +1,7 @@
-from typing import Dict, Set
+from typing import Any, Dict, Set
 
 from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 
 
 class PrivateCylinder(PrivateOpenScadCommand):
@@ -40,16 +40,21 @@ class PrivateCylinder(PrivateOpenScadCommand):
         """
         PrivateOpenScadCommand.__init__(self, command='cylinder', args=locals())
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'radius'}, {'diameter'})
-        admission.validate_exclusive({'top_radius'}, {'top_diameter'}, {'radius'}, {'diameter'})
-        admission.validate_exclusive({'bottom_radius'}, {'bottom_diameter'}, {'radius'}, {'diameter'})
-        admission.validate_required({'height'},
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'radius'}, {'diameter'})
+        validator.validate_exclusive({'top_radius'}, {'top_diameter'}, {'radius'}, {'diameter'})
+        validator.validate_exclusive({'bottom_radius'}, {'bottom_diameter'}, {'radius'}, {'diameter'})
+        validator.validate_required({'height'},
                                     {'radius', 'diameter', 'bottom_radius', 'bottom_diameter'},
                                     {'radius', 'diameter', 'top_radius', 'top_diameter'},
                                     {'center'})

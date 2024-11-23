@@ -1,4 +1,6 @@
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from typing import Any, Dict
+
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
@@ -33,14 +35,19 @@ class Rotate3D(ScadSingleChildParent):
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'angle', 'vector'}, {'angle_x', 'angle_y', 'angle_z'})
-        admission.validate_required({'angle_x', 'angle_y', 'angle_z', 'angle'})
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'angle', 'vector'}, {'angle_x', 'angle_y', 'angle_z'})
+        validator.validate_required({'angle_x', 'angle_y', 'angle_z', 'angle'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

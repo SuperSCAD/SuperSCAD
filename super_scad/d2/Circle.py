@@ -1,4 +1,7 @@
+from typing import Any, Dict
+
 from super_scad.d2.private.PrivateCircle import PrivateCircle
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.util.Radius2Sides4n import Radius2Sides4n
@@ -67,15 +70,20 @@ class Circle(ScadWidget):
         Whether to extend the radius by eps (or the diameter by 2*eps).
         """
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        # admission = ArgumentAdmission(self._args)
-        # admission.validate_exclusive({'radius'}, {'diameter'})
-        # admission.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
-        # admission.validate_required({'radius', 'diameter'})
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'radius'}, {'diameter'})
+        validator.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
+        validator.validate_required({'radius', 'diameter'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

@@ -1,8 +1,8 @@
-from typing import List, Set
+from typing import Any, Dict, List, Set
 
 from super_scad.d2.PolygonMixin import PolygonMixin
 from super_scad.d2.private.PrivatePolygon import PrivatePolygon
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Vector2 import Vector2
@@ -36,15 +36,20 @@ class Polygon(PolygonMixin, ScadWidget):
         ScadWidget.__init__(self, args=locals())
         PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps)
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'primary'}, {'points'})
-        admission.validate_exclusive({'secondary'}, {'secondaries'})
-        admission.validate_required({'primary', 'points'})
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'primary'}, {'points'})
+        validator.validate_exclusive({'secondary'}, {'secondaries'})
+        validator.validate_required({'primary', 'points'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

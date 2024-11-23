@@ -1,4 +1,6 @@
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from typing import Any, Dict
+
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
@@ -22,27 +24,32 @@ class Flip2D(ScadSingleChildParent):
         """
         Object constructor.
 
-        :param horizontal: Whether to flip the child widget horizontally (i.e. flip around the y-axis).
-        :param vertical: Whether to flip the child widget vertically (i.e. flip around the x-axis).
-        :param flip_x: Whether to flip the child widget around the x-asis (i.e. vertical flip).
-        :param flip_y: Whether to flip the child widget around the y-asis (i.e. horizontal flip).
+        :param horizontal: Whether to flip the child widget horizontally (i.e., flip around the y-axis).
+        :param vertical: Whether to flip the child widget vertically (i.e., flip around the x-axis).
+        :param flip_x: Whether to flip the child widget around the x-asis (i.e., vertical flip).
+        :param flip_y: Whether to flip the child widget around the y-asis (i.e., horizontal flip).
         :param child: The child widget to be flipped.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'horizontal', 'vertical'}, {'flip_x', 'flip_y'})
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'horizontal', 'vertical'}, {'flip_x', 'flip_y'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
     def horizontal(self) -> bool:
         """
-        Returns whether to flip the child widget horizontally (i.e. flip around the y-axis).
+        Returns whether to flip the child widget horizontally (i.e., flip around the y-axis).
         """
         return self._args.get('horizontal', False) or self._args.get('flip_y', False)
 
@@ -50,7 +57,7 @@ class Flip2D(ScadSingleChildParent):
     @property
     def vertical(self) -> bool:
         """
-        Returns whether to flip the child widget vertically (i.e. flip around the x-axis).
+        Returns whether to flip the child widget vertically (i.e., flip around the x-axis).
         """
         return self._args.get('vertical', False) or self._args.get('flip_x', False)
 
@@ -58,7 +65,7 @@ class Flip2D(ScadSingleChildParent):
     @property
     def flip_x(self) -> bool:
         """
-        Returns whether to flip the child widget around the x-asis (i.e. vertical flip).
+        Returns whether to flip the child widget around the x-asis (i.e., vertical flip).
         """
         return self.vertical
 
@@ -66,7 +73,7 @@ class Flip2D(ScadSingleChildParent):
     @property
     def flip_y(self) -> bool:
         """
-        Returns whether to flip the child widget around the y-asis (i.e. horizontal flip).
+        Returns whether to flip the child widget around the y-asis (i.e., horizontal flip).
         """
         return self.horizontal
 

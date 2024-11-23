@@ -1,5 +1,7 @@
+from typing import Any, Dict
+
 from super_scad.d3.private.PrivateCube import PrivateCube
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 
@@ -22,13 +24,18 @@ class Cube(ScadWidget):
         """
         ScadWidget.__init__(self, args=locals())
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_required({'size'}, {'center'})
+        validator = ArgumentValidator(args)
+        validator.validate_required({'size'}, {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

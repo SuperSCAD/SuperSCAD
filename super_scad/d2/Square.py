@@ -1,8 +1,8 @@
-from typing import List, Set
+from typing import Any, Dict, List, Set
 
 from super_scad.d2.PolygonMixin import PolygonMixin
 from super_scad.d2.private.PrivateSquare import PrivateSquare
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type import Vector2
@@ -29,13 +29,18 @@ class Square(PolygonMixin, ScadWidget):
         ScadWidget.__init__(self, args=locals())
         PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps)
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_required({'size'}, {'center'})
+        validator = ArgumentValidator(args)
+        validator.validate_required({'size'}, {'center'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

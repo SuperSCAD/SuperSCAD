@@ -36,15 +36,6 @@ class ScadWidget(ABC):
                 if value is not None and value != self and key not in ('child', 'children'):
                     self._args[key] = value
 
-        self._validate_arguments()
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
-        """
-        Validates the arguments supplied to the constructor of this SuperSCAD widget.
-        """
-        pass
-
     # ------------------------------------------------------------------------------------------------------------------
     @abstractmethod
     def build(self, context: Context) -> ScadWidget:

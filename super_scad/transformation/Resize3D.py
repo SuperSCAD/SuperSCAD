@@ -1,6 +1,6 @@
-from typing import Tuple
+from typing import Any, Dict, Tuple
 
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
@@ -41,15 +41,20 @@ class Resize3D(ScadSingleChildParent):
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'new_size'}, {'new_width', 'new_depth', 'new_height'})
-        admission.validate_exclusive({'auto'}, {'auto_width', 'auto_depth', 'auto_height'})
-        admission.validate_required({'new_width', 'new_size', 'auto_width', 'auto'},
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'new_size'}, {'new_width', 'new_depth', 'new_height'})
+        validator.validate_exclusive({'auto'}, {'auto_width', 'auto_depth', 'auto_height'})
+        validator.validate_required({'new_width', 'new_size', 'auto_width', 'auto'},
                                     {'new_depth', 'new_size', 'auto_depth', 'auto'},
                                     {'new_height', 'new_size', 'auto_height', 'auto'})
 

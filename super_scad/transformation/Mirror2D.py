@@ -1,4 +1,6 @@
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from typing import Any, Dict
+
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
@@ -36,14 +38,19 @@ class Mirror2D(ScadSingleChildParent):
         The normalized normal vector of the origin-intersecting mirror plane used.
         """
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'vector'}, {'x', 'y'})
-        admission.validate_required({'x', 'y', 'vector'})
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'vector'}, {'x', 'y'})
+        validator.validate_required({'x', 'y', 'vector'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

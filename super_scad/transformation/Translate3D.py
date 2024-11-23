@@ -1,4 +1,6 @@
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from typing import Any, Dict
+
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
@@ -24,20 +26,25 @@ class Translate3D(ScadSingleChildParent):
         Object constructor.
 
         :param vector: The vector over which the child widget is translated.
-        :param x: The distance the child widget is translated along the x-axis.
-        :param y: The distance the child widget is translated along the y-axis.
-        :param z: The distance the child widget is translated along the z-axis.
+        :param x: The distance over which the child widget is translated along the x-axis.
+        :param y: The distance over which the child widget is translated along the y-axis.
+        :param z: The distance over which the child widget is translated along the z-axis.
         :param child: The child widget to be translated.
         """
         ScadSingleChildParent.__init__(self, args=locals(), child=child)
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'vector'}, {'x', 'y', 'z'})
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'vector'}, {'x', 'y', 'z'})
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -51,7 +58,7 @@ class Translate3D(ScadSingleChildParent):
     @property
     def x(self) -> float:
         """
-        Returns distance the child widget is translated to along the x-axis.
+        Returns distance over which the child widget is translated to along the x-axis.
         """
         if 'vector' in self._args:
             return self.uc(self._args['vector'].x)
@@ -62,7 +69,7 @@ class Translate3D(ScadSingleChildParent):
     @property
     def y(self) -> float:
         """
-        Returns distance the child widget is translated to along the y-axis.
+        Returns distance over which the child widget is translated to along the y-axis.
         """
         if 'vector' in self._args:
             return self.uc(self._args['vector'].y)
@@ -73,7 +80,7 @@ class Translate3D(ScadSingleChildParent):
     @property
     def z(self) -> float:
         """
-        Returns distance the child widget is translated to along the z-axis.
+        Returns distance over which the child widget is translated to along the z-axis.
         """
         if 'vector' in self._args:
             return self.uc(self._args['vector'].z)

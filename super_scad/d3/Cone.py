@@ -1,5 +1,7 @@
+from typing import Any, Dict
+
 from super_scad.d3.private.PrivateCylinder import PrivateCylinder
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.util.Radius2Sides4n import Radius2Sides4n
@@ -39,16 +41,21 @@ class Cone(ScadWidget):
         """
         ScadWidget.__init__(self, args=locals())
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'bottom_radius'}, {'bottom_diameter'})
-        admission.validate_exclusive({'top_radius'}, {'top_diameter'})
-        admission.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
-        admission.validate_required({'height'},
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'bottom_radius'}, {'bottom_diameter'})
+        validator.validate_exclusive({'top_radius'}, {'top_diameter'})
+        validator.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
+        validator.validate_required({'height'},
                                     {'bottom_radius', 'bottom_diameter'},
                                     {'top_radius', 'top_diameter'},
                                     {'center'})

@@ -1,7 +1,7 @@
-from typing import Dict
+from typing import Any, Dict
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Color import Color
 
@@ -25,13 +25,18 @@ class Paint(PrivateSingleChildOpenScadCommand):
         """
         PrivateSingleChildOpenScadCommand.__init__(self, command='color', args=locals(), child=child)
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'color'})
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'color'})
 
     # ------------------------------------------------------------------------------------------------------------------
     def _argument_map(self) -> Dict[str, str]:

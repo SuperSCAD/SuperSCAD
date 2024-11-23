@@ -1,7 +1,8 @@
 import math
+from typing import Any, Dict
 
 from super_scad.d3.private.PrivateCylinder import PrivateCylinder
-from super_scad.scad.ArgumentAdmission import ArgumentAdmission
+from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.transformation.Rotate3D import Rotate3D
@@ -44,16 +45,21 @@ class Cylinder(ScadWidget):
         """
         ScadWidget.__init__(self, args=locals())
 
+        self.__validate_arguments(locals())
+
     # ------------------------------------------------------------------------------------------------------------------
-    def _validate_arguments(self) -> None:
+    @staticmethod
+    def __validate_arguments(args: Dict[str, Any]) -> None:
         """
         Validates the arguments supplied to the constructor of this SuperSCAD widget.
+
+        :param args: The arguments supplied to the constructor.
         """
-        admission = ArgumentAdmission(self._args)
-        admission.validate_exclusive({'height'}, {'start_point', 'end_point'})
-        admission.validate_exclusive({'radius'}, {'diameter'})
-        admission.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
-        admission.validate_required({'height', 'start_point'},
+        validator = ArgumentValidator(args)
+        validator.validate_exclusive({'height'}, {'start_point', 'end_point'})
+        validator.validate_exclusive({'radius'}, {'diameter'})
+        validator.validate_exclusive({'fn4n'}, {'fa', 'fs', 'fn'})
+        validator.validate_required({'height', 'start_point'},
                                     {'height', 'end_point'},
                                     {'radius', 'diameter'})
 

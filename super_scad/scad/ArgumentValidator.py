@@ -1,19 +1,18 @@
-from typing import Any, List, Set
+from typing import Any, Dict, List, Set
 
 
-class ArgumentAdmission:
+class ArgumentValidator:
     """
-    Class for validation arguments of a SupeSCAD widget constructor.
+    Class for the validation of arguments of a SupeSCAD widget constructor.
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, arguments: dict[str, Any]):
+    def __init__(self, args):
         """
         Object constructor.
 
-        :param arguments: The arguments passed to the constructor of the SuperSCAD widget.
         """
-        self.__arguments_set: Set[str] = set(arguments.keys())
+        self.__arguments_set: Set[str] = set(name for name, value in args.items() if value is not None)
         """
         A set with all the none empty arguments passed to the constructor of a ScadWidget.
         """
