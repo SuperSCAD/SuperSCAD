@@ -13,12 +13,10 @@ class Modify(ScadSingleChildParent):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 disable: bool | None = None,
-                 show_only: bool | None = None,
-                 highlight: bool | None = None,
-                 debug: bool | None = None,
-                 transparent: bool | None = None,
-                 background: bool | None = None,
+                 disable: bool = False,
+                 show_only: bool = False,
+                 highlight: bool = False,
+                 transparent: bool = False,
                  child: ScadWidget):
         """
         Object constructor.
@@ -27,13 +25,33 @@ class Modify(ScadSingleChildParent):
         :param show_only: Whether to ignore the rest of the design and use this child widget as design root.
         :param highlight: Whether the child widget is used as usual in the rendering process but also draw it
                           unmodified in transparent pink.
-        :param debug: Alias for highlight.
         :param transparent: Whether this child widget is used as usual in the rendering process but draw it in
                             transparent gray (all transformations are still applied to the nodes in this tree).
-        :param background: Alias for transparent.
         :param child: The child widget.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._disable: bool = disable
+        """
+        Whether the child widget is ignored.
+        """
+
+        self._show_only: bool = show_only
+        """
+        Whether to ignore the rest of the design and use this child widget as design root.
+        """
+
+        self._highlight: bool = highlight
+        """
+        Whether the child widget is used as usual in the rendering process but also draw it unmodified in transparent
+        pink.
+        """
+
+        self._transparent: bool = transparent
+        """
+        Whether this child widget is used as usual in the rendering process but draw it in transparent gray (all 
+        transformations are still applied to the nodes in this tree).
+        """
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -41,7 +59,7 @@ class Modify(ScadSingleChildParent):
         """
         Returns whether this SuperSCAD widget is ignored.
         """
-        return self._args.get('disable', False)
+        return self._disable
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -49,7 +67,7 @@ class Modify(ScadSingleChildParent):
         """
         Returns whether to ignore the rest of the design and use this SuperSCAD widget as design root.
         """
-        return self._args.get('show_only', False)
+        return self._show_only
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -58,7 +76,7 @@ class Modify(ScadSingleChildParent):
         Returns whether this SuperSCAD widget is used as usual in the rendering process but also draw it unmodified in
         transparent pink.
         """
-        return self._args.get('highlight', False) or self._args.get('debug', False)
+        return self._highlight
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -67,7 +85,7 @@ class Modify(ScadSingleChildParent):
         Returns whether this SuperSCAD widget is used as usual in the rendering process but draw it in transparent gray
         (all transformations are still applied to the nodes in this tree).
         """
-        return self._args.get('transparent', False) or self._args.get('background', False)
+        return self._transparent
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:

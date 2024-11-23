@@ -85,7 +85,7 @@ class ModifyTest(ScadTestCase):
                                  Translate3D(z=5,
                                              child=Modify(show_only=True,
                                                           child=Rotate3D(angle_x=90,
-                                                                         child=Modify(debug=True,
+                                                                         child=Modify(highlight=True,
                                                                                       child=Cylinder(height=20,
                                                                                                      radius=2,
                                                                                                      center=True,
