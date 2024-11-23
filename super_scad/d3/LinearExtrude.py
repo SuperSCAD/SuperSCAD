@@ -32,7 +32,7 @@ class LinearExtrude(ScadSingleChildParent):
         Object constructor.
 
         :param height: The height of the extruded object.
-        :param center: Whether the cylinder is centered along the z-as.
+        :param center: Whether the extruded object is centered along the z-as.
         :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line 
                           through the child widget.
         :param twist: The number of degrees through which the shape is extruded. Setting the parameter twist = 360
@@ -49,7 +49,58 @@ class LinearExtrude(ScadSingleChildParent):
         :param extend_top_by_eps: Whether to extend the top by eps for a clear overlap.
         :param extend_bottom_by_eps: Whether to extend the bottom by eps for a clear overlap.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._height: float = height
+        """
+        The height of the extruded object.
+        """
+
+        self._center: bool = center
+        """
+        Whether the extruded object is centered along the z-as.
+        """
+
+        self._convexity: int | None = convexity
+        """
+        Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through the child
+        widget.
+        """
+
+        self._twist: float = twist
+        """
+        The number of degrees through which the shape is extruded. 
+        """
+
+        self._scale: float | Vector2 = scale
+        """
+        Scales the 2D shape by this value over the height of the extrusion.
+        """
+
+        self._slices: int | None = slices
+        """
+        DDefines the number of intermediate points along the Z axis of the extrusion. 
+        """
+
+        self._segments: int | None = segments
+        """
+        Adds vertices (points) to the extruded polygon resulting in smoother twisted geometries.
+        """
+
+        self._fa: float | None = fa
+        """
+        The minimum angle (in degrees) of each fragment.
+        """
+
+        self._fs: float | None = fs
+        """
+        The minimum circumferential length of each fragment.
+        """
+
+        self._fn: int | None = fn
+        """
+        The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        """
 
         self._extend_top_by_eps: bool = extend_top_by_eps
         """
@@ -67,7 +118,7 @@ class LinearExtrude(ScadSingleChildParent):
         """
         Returns the height of the extruded object.
         """
-        return self.uc(self._args.get('height', 0.0))
+        return self._height
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -75,7 +126,7 @@ class LinearExtrude(ScadSingleChildParent):
         """
         Returns whether the extruded object is centered along the z-as.
         """
-        return self._args['center']
+        return self._center
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -84,7 +135,7 @@ class LinearExtrude(ScadSingleChildParent):
         Returns the number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through the
         child widget.
         """
-        return self._args.get('convexity')
+        return self._convexity
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -93,7 +144,7 @@ class LinearExtrude(ScadSingleChildParent):
         Returns the number of degrees of through which the shape is extruded. Setting the parameter twist = 360
         extrudes through one revolution. The twist direction follows the left-hand rule.
         """
-        return self._args.get('twist')
+        return self._twist
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -102,7 +153,7 @@ class LinearExtrude(ScadSingleChildParent):
         Returns the number of degrees of through which the shape is extruded. Setting the parameter twist = 360
         extrudes through one revolution. The twist direction follows the left-hand rule.
         """
-        return self._args.get('scale')
+        return self._scale
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -111,7 +162,7 @@ class LinearExtrude(ScadSingleChildParent):
         Returns the number of intermediate points along the Z axis of the extrusion. Its default
         increases with the value of twist. Explicitly setting slices may improve the output refinement.
         """
-        return self._args.get('slices')
+        return self._slices
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -119,7 +170,7 @@ class LinearExtrude(ScadSingleChildParent):
         """
         Returns the Adds vertices (points) to the extruded polygon resulting in smoother twisted geometries.
         """
-        return self._args.get('segments')
+        return self._segments
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -127,7 +178,7 @@ class LinearExtrude(ScadSingleChildParent):
         """
         Returns the minimum angle (in degrees) of each fragment.
         """
-        return self._args.get('fa')
+        return self._fa
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -135,7 +186,7 @@ class LinearExtrude(ScadSingleChildParent):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self._fs
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -143,7 +194,7 @@ class LinearExtrude(ScadSingleChildParent):
         """
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
-        return self._args.get('fn')
+        return self._fn
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -168,43 +219,43 @@ class LinearExtrude(ScadSingleChildParent):
 
         :param context: The build context.
         """
-        height=self.height
+        height = self._height
         if self._extend_top_by_eps:
-            height+=context.eps
+            height += context.eps
         if self._extend_bottom_by_eps:
-            height+=context.eps
+            height += context.eps
 
         if (not self._extend_bottom_by_eps and not self._extend_top_by_eps) or \
-                (self._extend_bottom_by_eps and self._extend_top_by_eps and self.center):
+                (self._extend_bottom_by_eps and self._extend_top_by_eps and self._center):
             return PrivateLinearExtrude(height=height,
-                                        center=self.center,
-                                        convexity=self.convexity,
-                                        twist=self.twist,
-                                        scale=self.scale,
-                                        slices=self.slices,
-                                        segments=self.segments,
-                                        fa=self.fa,
-                                        fs=self.fs,
-                                        fn=self.fn,
+                                        center=self._center,
+                                        convexity=self._convexity,
+                                        twist=self._twist,
+                                        scale=self._scale,
+                                        slices=self._slices,
+                                        segments=self._segments,
+                                        fa=self._fa,
+                                        fs=self._fs,
+                                        fn=self._fn,
                                         child=self.child)
 
         offset = 0.0
-        if self.center:
-            offset -= 0.5 * self.height
+        if self._center:
+            offset -= 0.5 * self._height
         if self._extend_bottom_by_eps:
             offset -= context.eps
 
         return Translate3D(z=offset,
                            child=PrivateLinearExtrude(height=height,
                                                       center=False,
-                                                      convexity=self.convexity,
-                                                      twist=self.twist,
-                                                      scale=self.scale,
-                                                      slices=self.slices,
-                                                      segments=self.segments,
-                                                      fa=self.fa,
-                                                      fs=self.fs,
-                                                      fn=self.fn,
+                                                      convexity=self._convexity,
+                                                      twist=self._twist,
+                                                      scale=self._scale,
+                                                      slices=self._slices,
+                                                      segments=self._segments,
+                                                      fa=self._fa,
+                                                      fs=self._fs,
+                                                      fn=self._fn,
                                                       child=self.child))
 
 # ----------------------------------------------------------------------------------------------------------------------

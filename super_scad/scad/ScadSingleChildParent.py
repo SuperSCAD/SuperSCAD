@@ -10,7 +10,7 @@ class ScadSingleChildParent(ScadWidget, ABC):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, args: Dict[str, Any], child: ScadWidget):
+    def __init__(self, *, args: Dict[str, Any] | None = None, child: ScadWidget):
         """
         Object constructor.
 

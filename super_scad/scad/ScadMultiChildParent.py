@@ -10,7 +10,7 @@ class ScadMultiChildParent(ScadWidget, ABC):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, *, args: Dict[str, Any], children: List[ScadWidget]):
+    def __init__(self, *, args: Dict[str, Any] | None = None, children: List[ScadWidget]):
         """
         Object constructor.
 

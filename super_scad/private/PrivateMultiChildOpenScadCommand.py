@@ -11,7 +11,7 @@ class PrivateMultiChildOpenScadCommand(PrivateOpenScadCommand, ScadMultiChildPar
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, command: str, args: Dict[str, Any], children: List[ScadWidget]):
+    def __init__(self, *, command: str, args: Dict[str, Any], children: List[ScadWidget]):
         """
         Object constructor.
 

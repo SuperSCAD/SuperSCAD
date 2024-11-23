@@ -14,7 +14,7 @@ class PrivateOpenScadCommand(ScadWidget):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, command: str, args: Dict[str, Any]):
+    def __init__(self, *, command: str, args: Dict[str, Any]):
         """
         Object constructor.
 
