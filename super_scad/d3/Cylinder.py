@@ -43,7 +43,62 @@ class Cylinder(ScadWidget):
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         :param fn4n: Whether to create a cylinder with a multiple of 4 vertices.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self._height: float | None = height
+        """
+        The height of the cylinder.
+        """
+
+        self._start_point: Vector3 | None = start_point
+        """
+        The start point of the cylinder.
+        """
+
+        self._end_point: Vector3 | None = end_point
+        """
+        The end point of the cylinder.
+        """
+
+        self._radius: float | None = radius
+        """
+        The radius of the cylinder.
+        """
+
+        self._diameter: float | None = diameter
+        """
+        The diameter of the cylinder.
+        """
+
+        self._center: bool | None = center
+        """
+        Whether the cylinder is centered along the z-as. Defaults to false.
+        """
+
+        self._fa: float | None = fa
+        """
+        The minimum angle (in degrees) of each fragment.
+        """
+
+        self._fs: float | None = fs
+        """
+        The minimum circumferential length of each fragment.
+        """
+
+        self._fn: int | None = fn
+        """
+        The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
+        """
+
+        self._fn4n: bool | None = fn4n
+        """
+        Whether to create a cylinder with a multiple of 4 vertices.
+        """
+
+        self._explicit_height: bool = height is not None
+        """
+        Whether the height is explicit specified.
+        """
 
         self.__validate_arguments(locals())
 
@@ -69,7 +124,10 @@ class Cylinder(ScadWidget):
         """
         Returns whether the cylinder is centered along the z-as.
         """
-        return self._args.get('center', False)
+        if self._center is None:
+            self._center = False
+
+        return self._center
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -77,7 +135,10 @@ class Cylinder(ScadWidget):
         """
         Returns the radius of the cylinder.
         """
-        return self.uc(self._args.get('radius', 0.5 * self._args.get('diameter', 0.0)))
+        if self._radius is None:
+            self._radius = 0.5 * self._diameter
+
+        return self._radius
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -85,7 +146,10 @@ class Cylinder(ScadWidget):
         """
         Returns the diameter of the cylinder.
         """
-        return self.uc(self._args.get('diameter', 2.0 * self._args.get('radius', 0.0)))
+        if self._diameter is None:
+            self._diameter = 2.0 * self._radius
+
+        return self._diameter
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -93,10 +157,10 @@ class Cylinder(ScadWidget):
         """
         Returns the height/length of the cylinder.
         """
-        if 'height' in self._args:
-            return self.uc(self._args['height'])
+        if self._height is None:
+            self._height = Vector3.distance(self._start_point, self._end_point)
 
-        return self.uc((self._args['start_point'] - self._args['end_point']).length)
+        return self._height
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -104,10 +168,10 @@ class Cylinder(ScadWidget):
         """
         Returns the start point of the cylinder.
         """
-        if 'start_point' in self._args:
-            return self.uc(self._args['start_point'])
+        if self._start_point is None:
+            self._start_point = Vector3(0.0, 0.0, -self._height / 2.0 if self.center else 0.0)
 
-        return Vector3(0.0, 0.0, -self.height / 2.0 if self.center else 0.0)
+        return self._start_point
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -115,10 +179,10 @@ class Cylinder(ScadWidget):
         """
         Returns the end point of the cylinder.
         """
-        if 'end_point' in self._args:
-            return self.uc(self._args['end_point'])
+        if self._end_point is None:
+            self._end_point = Vector3(0.0, 0.0, self._height / 2.0 if self.center else self._height)
 
-        return Vector3(0.0, 0.0, self.height / 2.0 if self.center else self.height)
+        return self._end_point
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -126,7 +190,7 @@ class Cylinder(ScadWidget):
         """
         Returns the minimum angle (in degrees) of each fragment.
         """
-        return self._args.get('fa')
+        return self._fa
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -134,7 +198,7 @@ class Cylinder(ScadWidget):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self._fs
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -142,7 +206,7 @@ class Cylinder(ScadWidget):
         """
         Returns the fixed number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         """
-        return self._args.get('fn')
+        return self._fn
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -150,7 +214,7 @@ class Cylinder(ScadWidget):
         """
         Returns whether to create a circle with multiple of 4 vertices.
         """
-        return self._args.get('fn4n')
+        return self._fn4n
 
     # ------------------------------------------------------------------------------------------------------------------
     def real_fn(self, context: Context) -> int | None:
@@ -176,7 +240,7 @@ class Cylinder(ScadWidget):
                                    fs=self.fs,
                                    fn=self.real_fn(context))
 
-        if 'height' in self._args:
+        if self._explicit_height:
             return cylinder
 
         diff = self.end_point - self.start_point

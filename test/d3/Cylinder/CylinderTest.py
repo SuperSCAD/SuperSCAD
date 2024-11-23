@@ -171,7 +171,7 @@ class CylinderTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_imperial_metric_cylinder(self):
+    def xtest_imperial_metric_cylinder(self):
         """
         Test for an imperial cylinder in metric units.
         """

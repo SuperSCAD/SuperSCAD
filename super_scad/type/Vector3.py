@@ -65,6 +65,17 @@ class Vector3:
                        length * math.cos(theta_radians))
 
     # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def distance(p: Vector3, q: Vector3) -> float:
+        """
+        Returns the Euclidean distance between two vectors p and q.
+
+        @param p: Vector p.
+        @param q: Vector q.
+        """
+        return math.sqrt((p.x - q.x) ** 2 + (p.y - q.y) ** 2 + (p.z - q.z) ** 2)
+
+    # ------------------------------------------------------------------------------------------------------------------
     @property
     def length(self) -> float:
         """
