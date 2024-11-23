@@ -32,7 +32,27 @@ class Position2D(ScadSingleChildParent):
         :param x: The distance the child widget is translated to along the x-axis.
         :param y: The distance the child widget is translated to along the y-axis.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._angle: float | None = angle
+        """
+        The angle of rotation (around the z-axis).
+        """
+
+        self._vector: Vector2 | None = vector
+        """
+        The vector over which the child widget is translated.
+        """
+
+        self._x: float | None = x
+        """
+        The distance the child widget is translated to along the x-axis.
+        """
+
+        self._y: float | None = y
+        """
+        The distance the child widget is translated to along the y-axis.
+        """
 
         self.__validate_arguments(locals())
 
@@ -53,7 +73,10 @@ class Position2D(ScadSingleChildParent):
         """
         Returns the angle of rotation (around the z-axis).
         """
-        return Angle.normalize(self._args.get('angle', 0.0))
+        if self._angle is None:
+            self._angle = 0.0
+
+        return Angle.normalize(self._angle)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -61,10 +84,10 @@ class Position2D(ScadSingleChildParent):
         """
         Returns the vector over which the child widget is translated.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'])
+        if self._vector is None:
+            self._vector = Vector2(self.x, self.y)
 
-        return Vector2(self.x, self.y)
+        return self._vector
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -72,10 +95,13 @@ class Position2D(ScadSingleChildParent):
         """
         Returns distance the child widget is translated to along the x-axis.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'].x)
+        if self._x is None:
+            if self._vector is not None:
+                self._x = self.vector.x
+            else:
+                self._x = 0.0
 
-        return self.uc(self._args.get('x', 0.0))
+        return self._x
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -83,10 +109,13 @@ class Position2D(ScadSingleChildParent):
         """
         Returns distance the child widget is translated to along the y-axis.
         """
-        if 'vector' in self._args:
-            return self.uc(self._args['vector'].y)
+        if self._y is None:
+            if self._vector is not None:
+                self._y = self.vector.y
+            else:
+                self._y = 0.0
 
-        return self.uc(self._args.get('y', 0.0))
+        return self._y
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
