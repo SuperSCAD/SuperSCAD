@@ -28,7 +28,22 @@ class Scale2D(ScadSingleChildParent):
         :param factor_y: The scaling factor along the y-axis.
         :param child: The child to be scaled.
         """
-        ScadSingleChildParent.__init__(self, args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._factor: Vector2 | float | None = factor
+        """
+        The scaling factor along all the two axes.
+        """
+
+        self._factor_x: float | None = factor_x
+        """
+        The scaling factor along the x-axis.
+        """
+
+        self._factor_y: float | None = factor_y
+        """
+        The scaling factor along the y-axis.
+        """
 
         self.__validate_arguments(locals())
 
@@ -49,7 +64,12 @@ class Scale2D(ScadSingleChildParent):
         """
         Returns the scaling factor along all two axes.
         """
-        return Vector2(self.factor_x, self.factor_y)
+        if self._factor is None:
+            self._factor = Vector2(self.factor_x, self.factor_y)
+        elif isinstance(self._factor, float):
+            self._factor = Vector2(self._factor, self._factor)
+
+        return self._factor
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -57,13 +77,15 @@ class Scale2D(ScadSingleChildParent):
         """
         Returns the scaling factor along the x-axis.
         """
-        if 'factor' in self._args:
-            if isinstance(self._args['factor'], float):
-                return self._args['factor']
+        if self._factor_x is None:
+            if isinstance(self._factor, Vector2):
+                self._factor_x = self._factor.x
+            elif isinstance(self._factor, float):
+                self._factor_x = self._factor
+            else:
+                self._factor_x = 1.0
 
-            return self._args['factor'].x
-
-        return self._args.get('factor_x', 1.0)
+        return self._factor_x
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -71,13 +93,15 @@ class Scale2D(ScadSingleChildParent):
         """
         Returns the scaling factor along the y-axis.
         """
-        if 'factor' in self._args:
-            if isinstance(self._args['factor'], float):
-                return self._args['factor']
+        if self._factor_y is None:
+            if isinstance(self._factor, Vector2):
+                self._factor_y = self._factor.y
+            elif isinstance(self._factor, float):
+                self._factor_y = self._factor
+            else:
+                self._factor_y = 1.0
 
-            return self._args['factor'].y
-
-        return self._args.get('factor_y', 1.0)
+        return self._factor_y
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
