@@ -1,12 +1,14 @@
 from typing import Any, Dict
 
-from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.ArgumentValidator import ArgumentValidator
+from super_scad.scad.Context import Context
+from super_scad.scad.ScadSingleChildParent import ScadSingleChildParent
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.transformation.private.PrivatePaint import PrivatePaint
 from super_scad.type.Color import Color
 
 
-class Paint(PrivateSingleChildOpenScadCommand):
+class Paint(ScadSingleChildParent):
     """
     Paints a child widget using a specified color and opacity. See
     https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Transformations#color.
@@ -15,7 +17,7 @@ class Paint(PrivateSingleChildOpenScadCommand):
     # ------------------------------------------------------------------------------------------------------------------
     def __init__(self,
                  *,
-                 color: Color,
+                 color: Color | str | None = None,
                  child: ScadWidget) -> None:
         """
         Object constructor.
@@ -23,7 +25,12 @@ class Paint(PrivateSingleChildOpenScadCommand):
         :param color: The color and opacity of the child widget.
         :param child: The child widget to be painted.
         """
-        PrivateSingleChildOpenScadCommand.__init__(self, command='color', args=locals(), child=child)
+        ScadSingleChildParent.__init__(self, child=child)
+
+        self._color: Color | str | None = color
+        """
+        The color and opacity of the child widget.
+        """
 
         self.__validate_arguments(locals())
 
@@ -39,10 +46,23 @@ class Paint(PrivateSingleChildOpenScadCommand):
         validator.validate_exclusive({'color'})
 
     # ------------------------------------------------------------------------------------------------------------------
-    def _argument_map(self) -> Dict[str, str]:
+    @property
+    def color(self) -> Color:
         """
-        Returns the map from SuperSCAD arguments to OpenSCAD arguments.
+        Returns the color and opacity of the child widget.
         """
-        return {'color': 'c'}
+        if isinstance(self._color, str):
+            self._color = Color(self._color)
+
+        return self._color
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def build(self, context: Context) -> ScadWidget:
+        """
+        Builds a SuperSCAD widget.
+
+        :param context: The build context.
+        """
+        return PrivatePaint(color=self.color, child=self.child)
 
 # ----------------------------------------------------------------------------------------------------------------------
