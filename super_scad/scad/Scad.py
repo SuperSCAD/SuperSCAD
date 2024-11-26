@@ -56,6 +56,14 @@ class Scad:
             self.__context.code_store.add_line(f'$fs = {self.__context.round_length(self.__context.fs)};')
         if self.__context.fn != Context.DEFAULT_FN:
             self.__context.code_store.add_line(f'$fn = {self.__context.fn};')
+        if self.__context.vpt != Context.DEFAULT_VIEWPORT_TRANSLATION:
+            self.__context.code_store.add_line(f'$vpt = {self.__context.vpt};')
+        if self.__context.vpr != Context.DEFAULT_VIEWPORT_ROTATION:
+            self.__context.code_store.add_line(f'$vpr = {self.__context.vpr};')
+        if self.__context.vpd != Context.DEFAULT_VIEWPORT_DISTANCE:
+            self.__context.code_store.add_line(f'$vpd = {self.__context.round_length(self.__context.vpd)};')
+        if self.__context.vpf != Context.DEFAULT_VIEWPORT_FIELD_OF_VIEW:
+            self.__context.code_store.add_line(f'$vpf = {self.__context.round_length(self.__context.vpf)};')
 
         if self.__context.code_store.line_count() > 1:
             self.__context.code_store.add_line('')

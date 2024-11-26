@@ -4,6 +4,7 @@ from pathlib import Path
 
 from super_scad.scad.ScadCodeStore import ScadCodeStore
 from super_scad.scad.Unit import Unit
+from super_scad.type import Vector3
 
 
 class Context:
@@ -27,6 +28,26 @@ class Context:
     OpenSCAD default value for $fn.
     """
 
+    DEFAULT_VIEWPORT_ROTATION: Vector3 = Vector3(55.0, 0.0, 25)
+    """
+    The default viewport rotation.
+    """
+
+    DEFAULT_VIEWPORT_TRANSLATION: Vector3 = Vector3.origin
+    """
+    The default viewport translation.
+    """
+
+    DEFAULT_VIEWPORT_DISTANCE: float = 140.0
+    """
+    The default FOV (Field Of View).
+    """
+
+    DEFAULT_VIEWPORT_FIELD_OF_VIEW: float = 22.5
+    """
+    The default FOV (Field Of View).
+    """
+
     __unit_length_current: Unit = Unit.FREE
     """
     The current unit of length.
@@ -44,6 +65,10 @@ class Context:
                  fa: float = DEFAULT_FA,
                  fs: float = DEFAULT_FS,
                  fn: int = DEFAULT_FN,
+                 vpr: Vector3 = DEFAULT_VIEWPORT_ROTATION,
+                 vpt: Vector3 = DEFAULT_VIEWPORT_TRANSLATION,
+                 vpd: float = DEFAULT_VIEWPORT_DISTANCE,
+                 vpf: float = DEFAULT_VIEWPORT_FIELD_OF_VIEW,
                  eps: float = 1E-2,
                  delta: float = 1e-5,
                  angle_digits: int = 4,
@@ -59,6 +84,14 @@ class Context:
                    see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fs.
         :param fn: The number of fragments in 360 degrees. Values of 3 or more override $fa and $fs. Known in OpenSCAD
                    as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.
+        :param vpr: The viewport rotation,
+                    see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpr.
+        :param vpt: The viewport translation,
+                    see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpt.
+        :param vpf: The FOV (Field of View) of the view,
+                    see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpf.
+        :param vpd: The camera distance,
+                    see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpd.
         :param eps: Epsilon value for clear overlap.
         :param delta: The minimum distance between nodes, vertices and line segments for reliable computation of the
                       separation between line segments and nodes.
@@ -97,6 +130,26 @@ class Context:
         """
         The number of fragments in 360 degrees. Values of 3 or more override $fa and $fs.
         Known in OpenSCAD as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.
+        """
+
+        self.__vpt: Vector3 = vpt
+        """
+        The viewport rotation.
+        """
+
+        self.__vpr: Vector3 = vpr
+        """
+        The viewport translation.
+        """
+
+        self.__vpd: float = vpd
+        """
+        The camera distance.
+        """
+
+        self.__vpf: float = vpf
+        """
+        The FOV (Field of View) of the view.
         """
 
         self.__eps: float = eps
@@ -248,6 +301,42 @@ class Context:
         Known in OpenSCAD as $fn, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fn.
         """
         return self.__fn
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def vpr(self) -> Vector3:
+        """
+        Returns the viewport rotation,
+        see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpr.
+        """
+        return self.__vpr
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def vpt(self) -> Vector3:
+        """
+        Returns the viewport translation,
+        see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpt.
+        """
+        return self.__vpt
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def vpf(self) -> float:
+        """
+        Returns the FOV (Field of View) of the view,
+        see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpf.
+        """
+        return self.__vpf
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def vpd(self) -> float:
+        """
+        Returns the camera distance,
+        see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpd.
+        """
+        return self.__vpd
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
