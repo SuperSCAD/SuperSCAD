@@ -52,34 +52,34 @@ class Scad:
         self.__context.code_store.add_line('// Unit of length: {}'.format(Context.get_unit_length_final()))
 
         if self.__context.fa != Context.DEFAULT_FA:
-            self.__context.code_store.add_line(f'$fa = {Formatter.format(self.__context,
-                                                                         self.__context.fa,
-                                                                         is_angle=True)};')
+            fa = Formatter.format(self.__context, self.__context.fa, is_angle=True)
+            self.__context.code_store.add_line(f'$fa = {fa};')
         if self.__context.fs != Context.DEFAULT_FS:
-            self.__context.code_store.add_line(f'$fs = {Formatter.format(self.__context,
-                                                                         self.__context.fs,
-                                                                         is_length=True,
-                                                                         unit=self.__context.get_unit_length_final())};')
+            fs = Formatter.format(self.__context,
+                                  self.__context.fs,
+                                  is_length=True,
+                                  unit=self.__context.get_unit_length_final())
+            self.__context.code_store.add_line(f'$fs = {fs};')
         if self.__context.fn != Context.DEFAULT_FN:
             self.__context.code_store.add_line(f'$fn = {self.__context.fn};')
         if self.__context.vpt != Context.DEFAULT_VIEWPORT_TRANSLATION:
-            self.__context.code_store.add_line(f'$vpt = {Formatter.format(self.__context,
-                                                                          self.__context.vpt,
-                                                                          is_length=True,
-                                                                          unit=self.__context.get_unit_length_final())};')
+            vpt = Formatter.format(self.__context,
+                                   self.__context.vpt,
+                                   is_length=True,
+                                   unit=self.__context.get_unit_length_final())
+            self.__context.code_store.add_line(f'$vpt = {vpt};')
         if self.__context.vpr != Context.DEFAULT_VIEWPORT_ROTATION:
-            self.__context.code_store.add_line(f'$vpr = {Formatter.format(self.__context,
-                                                                          self.__context.vpr,
-                                                                          is_angle=True)};')
+            vpr = Formatter.format(self.__context, self.__context.vpr, is_angle=True)
+            self.__context.code_store.add_line(f'$vpr = {vpr};')
         if self.__context.vpd != Context.DEFAULT_VIEWPORT_DISTANCE:
-            self.__context.code_store.add_line(f'$vpd = {Formatter.format(self.__context,
-                                                                          self.__context.vpd,
-                                                                          is_length=True,
-                                                                          unit=self.__context.get_unit_length_final())};')
+            vpd = Formatter.format(self.__context,
+                                   self.__context.vpd,
+                                   is_length=True,
+                                   unit=self.__context.get_unit_length_final())
+            self.__context.code_store.add_line(f'$vpd = {vpd};')
         if self.__context.vpf != Context.DEFAULT_VIEWPORT_FIELD_OF_VIEW:
-            self.__context.code_store.add_line(f'$vpf = {Formatter.format(self.__context,
-                                                                          self.__context.vpf,
-                                                                          is_angle=True)};')
+            vpf = Formatter.format(self.__context, self.__context.vpf, is_angle=True)
+            self.__context.code_store.add_line(f'$vpf = {vpf};')
 
         if self.__context.code_store.line_count() > 1:
             self.__context.code_store.add_line('')
