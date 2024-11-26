@@ -17,10 +17,11 @@ class FormatterTest(unittest.TestCase):
         Lengths must be formatted as floats.
         """
         context = Context()
+        unit = context.get_unit_length_final()
 
-        self.assertEqual(Formatter.format(context, 10, is_length=True), '10.0')
-        self.assertEqual(Formatter.format(context, math.pi, is_length=True), '3.1416')
-        self.assertEqual(Formatter.format(context, Vector2(1, 2), is_length=True), '[1.0, 2.0]')
-        self.assertEqual(Formatter.format(context, Vector3(1, 2, 3), is_length=True), '[1.0, 2.0, 3.0]')
+        self.assertEqual(Formatter.format(context, 10, is_length=True, unit=unit), '10.0')
+        self.assertEqual(Formatter.format(context, math.pi, is_length=True, unit=unit), '3.1416')
+        self.assertEqual(Formatter.format(context, Vector2(1, 2), is_length=True, unit=unit), '[1.0, 2.0]')
+        self.assertEqual(Formatter.format(context, Vector3(1, 2, 3), is_length=True, unit=unit), '[1.0, 2.0, 3.0]')
 
 # ----------------------------------------------------------------------------------------------------------------------

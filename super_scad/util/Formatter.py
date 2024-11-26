@@ -1,7 +1,9 @@
 import re
 from typing import Any, List, Tuple
 
+from super_scad.scad import Length
 from super_scad.scad.Context import Context
+from super_scad.scad.Unit import Unit
 from super_scad.type import Vector2, Vector3
 from super_scad.type.Color import Color
 
@@ -17,7 +19,8 @@ class Formatter:
                argument: Any,
                is_angle: bool = False,
                is_length: bool = False,
-               is_scale: bool = False) -> str:
+               is_scale: bool = False,
+               unit: Unit | None = None) -> str:
         """
         Returns an argument of the OpenSCAD command.
 
@@ -26,9 +29,11 @@ class Formatter:
         :param is_scale: Whether the argument or variable is a scale.
         :param is_length: Whether the argument or variable is a length.
         :param is_angle: Whether the argument or variable is an angle.
+        :param unit: The unit of length. Mandatory when the argument or variable is a length.
         """
         if is_length and (isinstance(argument, float) or isinstance(argument, int)):
-            argument = str(round(float(argument), context.length_digits))
+            argument = Length.convert(float(argument), unit, context.get_unit_length_final())
+            argument = str(round(argument, context.length_digits))
             if argument == '-0.0':
                 argument = '0.0'
             return argument
@@ -46,14 +51,14 @@ class Formatter:
             return argument
 
         if isinstance(argument, Vector2):
-            return "[{}, {}]".format(Formatter.format(context, argument.x, is_angle, is_length, is_scale),
-                                     Formatter.format(context, argument.y, is_angle, is_length, is_scale))
+            return "[{}, {}]".format(Formatter.format(context, argument.x, is_angle, is_length, is_scale, unit),
+                                     Formatter.format(context, argument.y, is_angle, is_length, is_scale, unit))
 
         if isinstance(argument, Vector3):
             return "[{}, {}, {}]".format(
-                    Formatter.format(context, argument.x, is_angle, is_length, is_scale),
-                    Formatter.format(context, argument.y, is_angle, is_length, is_scale),
-                    Formatter.format(context, argument.z, is_angle, is_length, is_scale))
+                    Formatter.format(context, argument.x, is_angle, is_length, is_scale, unit),
+                    Formatter.format(context, argument.y, is_angle, is_length, is_scale, unit),
+                    Formatter.format(context, argument.z, is_angle, is_length, is_scale, unit))
 
         if isinstance(argument, bool):
             return str(argument).lower()
@@ -68,7 +73,7 @@ class Formatter:
             return str(argument)
 
         if isinstance(argument, List) or isinstance(argument, Tuple):
-            parts = [Formatter.format(context, element, is_angle, is_length, is_scale) for element in argument]
+            parts = [Formatter.format(context, element, is_angle, is_length, is_scale, unit) for element in argument]
 
             return '[{}]'.format(', '.join(parts))
 

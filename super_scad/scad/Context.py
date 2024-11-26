@@ -2,6 +2,7 @@ import inspect
 import os
 from pathlib import Path
 
+from super_scad.scad import Length
 from super_scad.scad.ScadCodeStore import ScadCodeStore
 from super_scad.scad.Unit import Unit
 from super_scad.type import Vector3
@@ -264,7 +265,7 @@ class Context:
         """
         Returns the epsilon value for clear overlap.
         """
-        return self.__eps
+        return Length.convert(self.__eps, self.__unit_length_final, self.__unit_length_current)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -273,7 +274,7 @@ class Context:
         Returns the minimum distance between nodes, vertices and line segments for reliable computation of the
         separation between line segments and nodes.
         """
-        return self.__delta
+        return Length.convert(self.__delta, self.__unit_length_final, self.__unit_length_current)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -299,7 +300,7 @@ class Context:
         Returns the minimum circumferential length of each fragment.
         Known in OpenSCAD as $fs, see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$fs.
         """
-        return self.__fs
+        return Length.convert(self.__fs, self.__unit_length_final, self.__unit_length_current)
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -317,7 +318,9 @@ class Context:
         Returns the viewport rotation,
         see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpr.
         """
-        return self.__vpr
+        return Vector3(Length.convert(self.__vpr.x, self.__unit_length_final, self.__unit_length_current),
+                       Length.convert(self.__vpr.y, self.__unit_length_final, self.__unit_length_current),
+                       Length.convert(self.__vpr.z, self.__unit_length_final, self.__unit_length_current))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -326,7 +329,9 @@ class Context:
         Returns the viewport translation,
         see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpt.
         """
-        return self.__vpt
+        return Vector3(Length.convert(self.__vpt.x, self.__unit_length_final, self.__unit_length_current),
+                       Length.convert(self.__vpt.y, self.__unit_length_final, self.__unit_length_current),
+                       Length.convert(self.__vpt.z, self.__unit_length_final, self.__unit_length_current))
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -344,7 +349,7 @@ class Context:
         Returns the camera distance,
         see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpd.
         """
-        return self.__vpd
+        return Length.convert(self.__vpd, self.__unit_length_final, self.__unit_length_current)
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod

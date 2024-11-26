@@ -58,13 +58,15 @@ class Scad:
         if self.__context.fs != Context.DEFAULT_FS:
             self.__context.code_store.add_line(f'$fs = {Formatter.format(self.__context,
                                                                          self.__context.fs,
-                                                                         is_length=True)};')
+                                                                         is_length=True,
+                                                                         unit=self.__context.get_unit_length_final())};')
         if self.__context.fn != Context.DEFAULT_FN:
             self.__context.code_store.add_line(f'$fn = {self.__context.fn};')
         if self.__context.vpt != Context.DEFAULT_VIEWPORT_TRANSLATION:
             self.__context.code_store.add_line(f'$vpt = {Formatter.format(self.__context,
                                                                           self.__context.vpt,
-                                                                          is_length=True)};')
+                                                                          is_length=True,
+                                                                          unit=self.__context.get_unit_length_final())};')
         if self.__context.vpr != Context.DEFAULT_VIEWPORT_ROTATION:
             self.__context.code_store.add_line(f'$vpr = {Formatter.format(self.__context,
                                                                           self.__context.vpr,
@@ -72,11 +74,12 @@ class Scad:
         if self.__context.vpd != Context.DEFAULT_VIEWPORT_DISTANCE:
             self.__context.code_store.add_line(f'$vpd = {Formatter.format(self.__context,
                                                                           self.__context.vpd,
-                                                                          is_length=True)};')
+                                                                          is_length=True,
+                                                                          unit=self.__context.get_unit_length_final())};')
         if self.__context.vpf != Context.DEFAULT_VIEWPORT_FIELD_OF_VIEW:
             self.__context.code_store.add_line(f'$vpf = {Formatter.format(self.__context,
                                                                           self.__context.vpf,
-                                                                          is_length=True)};')
+                                                                          is_angle=True)};')
 
         if self.__context.code_store.line_count() > 1:
             self.__context.code_store.add_line('')
@@ -100,6 +103,7 @@ class Scad:
         :param parent_widget: The parent widget to build.
         """
         old_unit = Context.get_unit_length_current()
+        self.__context.set_unit_length_current(parent_widget.unit)
         child_widget = parent_widget.build(self.__context)
         Context.set_unit_length_current(old_unit)
 

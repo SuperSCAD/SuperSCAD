@@ -74,7 +74,7 @@ class PrivateOpenScadCommand(ScadWidget):
             if real_name in argument_angles:
                 real_value = Formatter.format(context, value, is_angle=True)
             elif real_name in argument_lengths:
-                real_value = Formatter.format(context, value, is_length=True)
+                real_value = Formatter.format(context, value, is_length=True, unit=self.unit)
             elif real_name in argument_scales:
                 real_value = Formatter.format(context, value, is_scale=True)
             else:

@@ -102,7 +102,7 @@ class PolygonTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def xtest_imperial_metric_polygon(self):
+    def test_imperial_metric_polygon(self):
         """
         Test for an imperial unit polygon in metric units.
         """

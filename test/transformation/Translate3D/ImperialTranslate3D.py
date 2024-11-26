@@ -21,7 +21,12 @@ class ImperialTranslate3D(ScadWidget):
         """
         Object constructor.
         """
-        ScadWidget.__init__(self, args=locals())
+        ScadWidget.__init__(self)
+
+        self.vector = vector
+        self.x = x
+        self.y = y
+        self.z = z
 
         self.imperial_translate: Translate3D | None = None
         """
@@ -42,10 +47,10 @@ class ImperialTranslate3D(ScadWidget):
         """
         Context.set_unit_length_current(Unit.INCH)
 
-        self.imperial_translate = Translate3D(vector=self._args.get('vector'),
-                                              x=self._args.get('x'),
-                                              y=self._args.get('y'),
-                                              z=self._args.get('z'),
+        self.imperial_translate = Translate3D(vector=self.vector,
+                                              x=self.x,
+                                              y=self.y,
+                                              z=self.z,
                                               child=self.child)
 
         return self.imperial_translate

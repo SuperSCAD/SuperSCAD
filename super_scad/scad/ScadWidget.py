@@ -13,7 +13,7 @@ class ScadWidget(ABC):
     """
 
     # ------------------------------------------------------------------------------------------------------------------
-    def __init__(self, ):
+    def __init__(self):
         """
         Object constructor.
         """
@@ -22,6 +22,14 @@ class ScadWidget(ABC):
         """
         The unit of length of the Context of this OpenSCAD widget.
         """
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def unit(self) -> Unit:
+        """
+        Returns unit of length of the Context of this OpenSCAD widget.
+        """
+        return self.__unit
 
     # ------------------------------------------------------------------------------------------------------------------
     @abstractmethod
