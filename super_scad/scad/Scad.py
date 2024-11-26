@@ -5,6 +5,7 @@ from super_scad.private.PrivateOpenScadCommand import PrivateOpenScadCommand
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
 from super_scad.scad.Context import Context
 from super_scad.scad.ScadWidget import ScadWidget
+from super_scad.util.Formatter import Formatter
 
 
 class Scad:
@@ -51,19 +52,31 @@ class Scad:
         self.__context.code_store.add_line('// Unit of length: {}'.format(Context.get_unit_length_final()))
 
         if self.__context.fa != Context.DEFAULT_FA:
-            self.__context.code_store.add_line(f'$fa = {self.__context.round_angle(self.__context.fa)};')
+            self.__context.code_store.add_line(f'$fa = {Formatter.format(self.__context,
+                                                                         self.__context.fa,
+                                                                         is_angle=True)};')
         if self.__context.fs != Context.DEFAULT_FS:
-            self.__context.code_store.add_line(f'$fs = {self.__context.round_length(self.__context.fs)};')
+            self.__context.code_store.add_line(f'$fs = {Formatter.format(self.__context,
+                                                                         self.__context.fs,
+                                                                         is_length=True)};')
         if self.__context.fn != Context.DEFAULT_FN:
             self.__context.code_store.add_line(f'$fn = {self.__context.fn};')
         if self.__context.vpt != Context.DEFAULT_VIEWPORT_TRANSLATION:
-            self.__context.code_store.add_line(f'$vpt = {self.__context.vpt};')
+            self.__context.code_store.add_line(f'$vpt = {Formatter.format(self.__context,
+                                                                          self.__context.vpt,
+                                                                          is_length=True)};')
         if self.__context.vpr != Context.DEFAULT_VIEWPORT_ROTATION:
-            self.__context.code_store.add_line(f'$vpr = {self.__context.vpr};')
+            self.__context.code_store.add_line(f'$vpr = {Formatter.format(self.__context,
+                                                                          self.__context.vpr,
+                                                                          is_angle=True)};')
         if self.__context.vpd != Context.DEFAULT_VIEWPORT_DISTANCE:
-            self.__context.code_store.add_line(f'$vpd = {self.__context.round_length(self.__context.vpd)};')
+            self.__context.code_store.add_line(f'$vpd = {Formatter.format(self.__context,
+                                                                          self.__context.vpd,
+                                                                          is_length=True)};')
         if self.__context.vpf != Context.DEFAULT_VIEWPORT_FIELD_OF_VIEW:
-            self.__context.code_store.add_line(f'$vpf = {self.__context.round_length(self.__context.vpf)};')
+            self.__context.code_store.add_line(f'$vpf = {Formatter.format(self.__context,
+                                                                          self.__context.vpf,
+                                                                          is_length=True)};')
 
         if self.__context.code_store.line_count() > 1:
             self.__context.code_store.add_line('')

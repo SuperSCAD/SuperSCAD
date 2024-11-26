@@ -60,7 +60,7 @@ class Offset(PrivateSingleChildOpenScadCommand):
         """
         Returns the radius.
         """
-        return self.uc(self._args.get('radius'))
+        return self._args.get('radius')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -68,7 +68,7 @@ class Offset(PrivateSingleChildOpenScadCommand):
         """
         Returns the delta.
         """
-        return self.uc(self._args.get('delta'))
+        return self._args.get('delta')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -92,7 +92,7 @@ class Offset(PrivateSingleChildOpenScadCommand):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self._args.get('fs')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property

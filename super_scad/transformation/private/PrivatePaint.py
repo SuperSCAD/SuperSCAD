@@ -1,7 +1,6 @@
-from typing import Any, Dict
+from typing import Dict
 
 from super_scad.private.PrivateSingleChildOpenScadCommand import PrivateSingleChildOpenScadCommand
-from super_scad.scad.ArgumentValidator import ArgumentValidator
 from super_scad.scad.ScadWidget import ScadWidget
 from super_scad.type.Color import Color
 

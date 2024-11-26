@@ -227,6 +227,14 @@ class Context:
         return self.__length_digits
 
     # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def scale_digits(self) -> int:
+        """
+        Returns the number of decimal places of a scale or factor in the generated OpenSCAD code.
+        """
+        return self.__scale_digits
+
+    # ------------------------------------------------------------------------------------------------------------------
     def resolve_path(self, path: Path | str) -> Path:
         """
         Resolve a path relative from the caller script to a path relative to the project home.
@@ -371,32 +379,5 @@ class Context:
         Returns the current unit of length.
         """
         return Context.__unit_length_current
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def round_angle(self, angle: float) -> str:
-        """
-        Returns an angle rounded to the desired number of digits.
-
-        :param angle: The length.
-        """
-        return str(round(float(angle), self.__angle_digits))
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def round_length(self, length: float) -> str:
-        """
-        Returns a length rounded to the desired number of digits.
-
-        :param length: The length.
-        """
-        return str(round(float(length), self.__length_digits))
-
-    # ------------------------------------------------------------------------------------------------------------------
-    def round_scale(self, scale: float) -> str:
-        """
-        Returns a scale or factor rounded to the desired number of digits.
-
-        :param scale: The scale or factor.
-        """
-        return str(round(float(scale), self.__scale_digits))
 
 # ----------------------------------------------------------------------------------------------------------------------

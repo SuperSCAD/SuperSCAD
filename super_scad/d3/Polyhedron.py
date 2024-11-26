@@ -191,7 +191,7 @@ class Polyhedron(ScadWidget):
         average_distance = total_distance / (len(face) + 1)
         diameter = 0.1 * average_distance
 
-        return self.uc(max(diameter, 5.0 * context.resolution))
+        return round(max(diameter, 5.0 * context.resolution), context.length_digits)
 
     # ------------------------------------------------------------------------------------------------------------------
     def nodes(self, context: Context) -> List[Vector3]:
@@ -396,9 +396,9 @@ class Polyhedron(ScadWidget):
                 for point in points:
                     node = self.__nodes.get(id(point))
                     if node is None:
-                        point_rounded = Vector3(round(self.uc(point.x), digits),
-                                                round(self.uc(point.y), digits),
-                                                round(self.uc(point.z), digits))
+                        point_rounded = Vector3(round(point.x, digits),
+                                                round(point.y, digits),
+                                                round(point.z, digits))
                         node = Node(point_rounded)
                         self.__nodes[id(point)] = node
                     face.append(node)

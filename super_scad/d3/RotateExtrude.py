@@ -59,7 +59,7 @@ class RotateExtrude(PrivateSingleChildOpenScadCommand):
     def angle(self) -> float:
         """
         Returns the number of degrees to sweep, starting at the positive X axis. The direction of the sweep follows the
-        Right Hand Rule, hence a negative angle sweeps clockwise.
+        Right-Hand Rule, hence a negative angle sweeps clockwise.
         """
         return self._args['angle']
 
@@ -85,7 +85,7 @@ class RotateExtrude(PrivateSingleChildOpenScadCommand):
         """
         Returns the minimum circumferential length of each fragment.
         """
-        return self.uc(self._args.get('fs'))
+        return self._args.get('fs')
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
