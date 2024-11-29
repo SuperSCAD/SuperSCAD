@@ -37,7 +37,7 @@ class PolygonSideExtender:
         Whether the nodes are in a clockwise direction.
         """
 
-        self._extend_sides_by_eps: set[int] | None = None
+        self._extend_by_eps_sides: set[int] | None = None
         """
         The set of sides that must be extended by eps for a clear overlap.
         """
@@ -75,7 +75,7 @@ class PolygonSideExtender:
                      inner_angles: List[float],
                      normal_angles: List[float],
                      is_clockwise: bool,
-                     extend_sides_by_eps: set[int]) -> List[Vector2]:
+                     extend_by_eps_sides: set[int]) -> List[Vector2]:
         """
         Returns a modified list of nodes such that it appears that the sides are extended by eps for a clear overlap.
 
@@ -84,50 +84,50 @@ class PolygonSideExtender:
         @param inner_angles: The inner angles of the polygon.
         @param normal_angles: The absolute angles of the normal of each node.
         @param is_clockwise: Whether the nodes are in a clockwise direction.
-        @param extend_sides_by_eps: The set of sides that must be extended by eps for a clear overlap.
+        @param extend_by_eps_sides: The set of sides that must be extended by eps for a clear overlap.
         """
         self._nodes = nodes
         self._inner_angles = inner_angles
         self._normal_angles = normal_angles
         self._is_clockwise = is_clockwise
-        self._extend_sides_by_eps = extend_sides_by_eps
+        self._extend_by_eps_sides = extend_by_eps_sides
 
         self._new_nodes = []
         n = len(self._nodes)
         for self._index in range(n):
             self._set_currents()
 
-            extend_side_by_eps1 = (self._index - 1) % n in self._extend_sides_by_eps
-            extend_side_by_eps2 = self._index in self._extend_sides_by_eps
+            extend_by_eps_side1 = (self._index - 1) % n in self._extend_by_eps_sides
+            extend_by_eps_side2 = self._index in self._extend_by_eps_sides
 
             if self._current_inner_angle <= 180.0:
                 # Outer corner.
-                if not extend_side_by_eps1 and not extend_side_by_eps2:
+                if not extend_by_eps_side1 and not extend_by_eps_side2:
                     self._extend_outer_corner_no_sides(context)
 
-                elif not extend_side_by_eps1 and extend_side_by_eps2:
+                elif not extend_by_eps_side1 and extend_by_eps_side2:
                     self._extend_outer_corner_side2(context)
 
-                elif extend_side_by_eps1 and not extend_side_by_eps2:
+                elif extend_by_eps_side1 and not extend_by_eps_side2:
                     self._extend_outer_corner_side1(context)
 
-                elif extend_side_by_eps1 and extend_side_by_eps2:
+                elif extend_by_eps_side1 and extend_by_eps_side2:
                     self._extend_outer_corner_side1_and_side2(context)
 
                 else:
                     raise ValueError('Someone broke math.')
             else:
                 # Inner corner.
-                if not extend_side_by_eps1 and not extend_side_by_eps2:
+                if not extend_by_eps_side1 and not extend_by_eps_side2:
                     self._extend_inner_corner_no_sides(context)
 
-                elif not extend_side_by_eps1 and extend_side_by_eps2:
+                elif not extend_by_eps_side1 and extend_by_eps_side2:
                     self._extend_inner_corner_side2(context)
 
-                elif extend_side_by_eps1 and not extend_side_by_eps2:
+                elif extend_by_eps_side1 and not extend_by_eps_side2:
                     self._extend_inner_corner_side1(context)
 
-                elif extend_side_by_eps1 and extend_side_by_eps2:
+                elif extend_by_eps_side1 and extend_by_eps_side2:
                     self._extend_inner_corner_side1_and_side2(context)
 
                 else:

@@ -349,19 +349,19 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_extend_top_by_eps_no_center(self):
+    def test_extend_by_eps_top_no_center(self):
         """
         Test extend top by eps only.
         """
         context = Context(eps=1.0)
         scad = Scad(context=context)
 
-        extrude = LinearExtrude(height=20.0, extend_top_by_eps=True, child=Circle(radius=1.0))
+        extrude = LinearExtrude(height=20.0, extend_by_eps_top=True, child=Circle(radius=1.0))
 
         self.assertAlmostEqual(20.0, extrude.height)
         self.assertFalse(extrude.center)
-        self.assertTrue(extrude.extend_top_by_eps)
-        self.assertFalse(extrude.extend_bottom_by_eps)
+        self.assertTrue(extrude.extend_by_eps_top)
+        self.assertFalse(extrude.extend_by_eps_bottom)
 
         path_actual, path_expected = self.paths()
         scad.run_super_scad(extrude, path_actual)
@@ -370,19 +370,19 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_extend_top_by_eps_center(self):
+    def test_extend_by_eps_top_center(self):
         """
         Test extend top by eps only and center.
         """
         context = Context(eps=1.0)
         scad = Scad(context=context)
 
-        extrude = LinearExtrude(height=20.0, center=True, extend_top_by_eps=True, child=Circle(radius=1.0))
+        extrude = LinearExtrude(height=20.0, center=True, extend_by_eps_top=True, child=Circle(radius=1.0))
 
         self.assertAlmostEqual(20.0, extrude.height)
         self.assertTrue(extrude.center)
-        self.assertTrue(extrude.extend_top_by_eps)
-        self.assertFalse(extrude.extend_bottom_by_eps)
+        self.assertTrue(extrude.extend_by_eps_top)
+        self.assertFalse(extrude.extend_by_eps_bottom)
 
         path_actual, path_expected = self.paths()
         scad.run_super_scad(extrude, path_actual)
@@ -391,19 +391,19 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_extend_bottom_by_eps_no_center(self):
+    def test_extend_by_eps_bottom_no_center(self):
         """
         Test extend bottom by eps only.
         """
         context = Context(eps=1.0)
         scad = Scad(context=context)
 
-        extrude = LinearExtrude(height=20.0, extend_bottom_by_eps=True, child=Circle(radius=1.0))
+        extrude = LinearExtrude(height=20.0, extend_by_eps_bottom=True, child=Circle(radius=1.0))
 
         self.assertAlmostEqual(20.0, extrude.height)
         self.assertFalse(extrude.center)
-        self.assertFalse(extrude.extend_top_by_eps)
-        self.assertTrue(extrude.extend_bottom_by_eps)
+        self.assertFalse(extrude.extend_by_eps_top)
+        self.assertTrue(extrude.extend_by_eps_bottom)
 
         path_actual, path_expected = self.paths()
         scad.run_super_scad(extrude, path_actual)
@@ -412,19 +412,19 @@ class LinearExtrudeTest(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
-    def test_extend_bottom_by_eps_center(self):
+    def test_extend_by_eps_bottom_center(self):
         """
         Test extend bottom by eps only and center.
         """
         context = Context(eps=1.0)
         scad = Scad(context=context)
 
-        extrude = LinearExtrude(height=20.0, center=True, extend_bottom_by_eps=True, child=Circle(radius=1.0))
+        extrude = LinearExtrude(height=20.0, center=True, extend_by_eps_bottom=True, child=Circle(radius=1.0))
 
         self.assertAlmostEqual(20.0, extrude.height)
         self.assertTrue(extrude.center)
-        self.assertFalse(extrude.extend_top_by_eps)
-        self.assertTrue(extrude.extend_bottom_by_eps)
+        self.assertFalse(extrude.extend_by_eps_top)
+        self.assertTrue(extrude.extend_by_eps_bottom)
 
         path_actual, path_expected = self.paths()
         scad.run_super_scad(extrude, path_actual)
@@ -441,14 +441,14 @@ class LinearExtrudeTest(ScadTestCase):
         scad = Scad(context=context)
 
         extrude = LinearExtrude(height=20.0,
-                                extend_top_by_eps=True,
-                                extend_bottom_by_eps=True,
+                                extend_by_eps_top=True,
+                                extend_by_eps_bottom=True,
                                 child=Circle(radius=1.0))
 
         self.assertAlmostEqual(20.0, extrude.height)
         self.assertFalse(extrude.center)
-        self.assertTrue(extrude.extend_top_by_eps)
-        self.assertTrue(extrude.extend_bottom_by_eps)
+        self.assertTrue(extrude.extend_by_eps_top)
+        self.assertTrue(extrude.extend_by_eps_bottom)
 
         path_actual, path_expected = self.paths()
         scad.run_super_scad(extrude, path_actual)
@@ -466,14 +466,14 @@ class LinearExtrudeTest(ScadTestCase):
 
         extrude = LinearExtrude(height=20.0,
                                 center=True,
-                                extend_top_by_eps=True,
-                                extend_bottom_by_eps=True,
+                                extend_by_eps_top=True,
+                                extend_by_eps_bottom=True,
                                 child=Circle(radius=1.0))
 
         self.assertAlmostEqual(20.0, extrude.height)
         self.assertTrue(extrude.center)
-        self.assertTrue(extrude.extend_top_by_eps)
-        self.assertTrue(extrude.extend_bottom_by_eps)
+        self.assertTrue(extrude.extend_by_eps_top)
+        self.assertTrue(extrude.extend_by_eps_bottom)
 
         path_actual, path_expected = self.paths()
         scad.run_super_scad(extrude, path_actual)

@@ -21,13 +21,13 @@ class PolygonMixin(ABC):
     def __init__(self,
                  *,
                  convexity: int | None = None,
-                 extend_sides_by_eps: bool | List[bool] | Set[int] | None):
+                 extend_by_eps_sides: bool | List[bool] | Set[int] | None):
         """
         Object constructor.
 
         :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line
                           through the polygon.
-        :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
+        :param extend_by_eps_sides: Whether to extend sides by eps for a clear overlap.
         """
         self._inner_angles: List[float] | None = None
         """
@@ -49,7 +49,7 @@ class PolygonMixin(ABC):
         Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line through the polygon.
         """
 
-        self._extend_sides_by_eps = extend_sides_by_eps
+        self._extend_by_eps_sides = extend_by_eps_sides
         """
         Whether to extend sides by eps for a clear overlap.
         """
@@ -247,26 +247,26 @@ class PolygonMixin(ABC):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def extend_sides_by_eps(self) -> Set[int]:
+    def extend_by_eps_sides(self) -> Set[int]:
         """
         Returns the set of sides that must be extended by eps for clear overlap.
         """
-        if not isinstance(self._extend_sides_by_eps, set):
-            if self._extend_sides_by_eps is None:
-                self._extend_sides_by_eps = set()
+        if not isinstance(self._extend_by_eps_sides, set):
+            if self._extend_by_eps_sides is None:
+                self._extend_by_eps_sides = set()
 
-            elif self._extend_sides_by_eps is True:
-                self._extend_sides_by_eps = {index for index in range(self.sides)}
+            elif self._extend_by_eps_sides is True:
+                self._extend_by_eps_sides = {index for index in range(self.sides)}
 
-            elif isinstance(self._extend_sides_by_eps, list):
-                self._extend_sides_by_eps = set(index for index in range(len(self._extend_sides_by_eps)) \
-                                                if self._extend_sides_by_eps[index])
+            elif isinstance(self._extend_by_eps_sides, list):
+                self._extend_by_eps_sides = set(index for index in range(len(self._extend_by_eps_sides)) \
+                                                if self._extend_by_eps_sides[index])
 
             else:
-                raise ValueError(f'Parameter extend_sides_by_eps must be a boolean, '
-                                 f'set of integers, a list of booleans or None, got {type(self._extend_sides_by_eps)}')
+                raise ValueError(f'Parameter extend_by_eps_sides must be a boolean, '
+                                 f'set of integers, a list of booleans or None, got {type(self._extend_by_eps_sides)}')
 
-        return self._extend_sides_by_eps
+        return self._extend_by_eps_sides
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
@@ -291,7 +291,7 @@ class PolygonMixin(ABC):
 
         :param context: The build context.
         """
-        if self.extend_sides_by_eps:
+        if self.extend_by_eps_sides:
             return self._build_polygon_extended(context)
 
         return self._build_polygon(context)
@@ -319,7 +319,7 @@ class PolygonMixin(ABC):
                                                        inner_angles=self.inner_angles(context),
                                                        normal_angles=self.normal_angles(context),
                                                        is_clockwise=self.is_clockwise(context),
-                                                       extend_sides_by_eps=self.extend_sides_by_eps)
+                                                       extend_by_eps_sides=self.extend_by_eps_sides)
 
         return PrivatePolygon(points=new_nodes, convexity=self.convexity)
 

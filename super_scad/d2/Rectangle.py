@@ -20,7 +20,7 @@ class Rectangle(PolygonMixin, ScadWidget):
                  width: float | None = None,
                  depth: float | None = None,
                  center: bool = False,
-                 extend_sides_by_eps: bool | List[bool] | Set[int] | None = None):
+                 extend_by_eps_sides: bool | List[bool] | Set[int] | None = None):
         """
         Object constructor.
 
@@ -28,10 +28,10 @@ class Rectangle(PolygonMixin, ScadWidget):
         :param width: The width (the size along the x-axis) of the rectangle.
         :param depth: The depth (the size along the y-axis) of the rectangle.
         :param center: Whether the rectangle is centered at its position.
-        :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
+        :param extend_by_eps_sides: Whether to extend sides by eps for a clear overlap.
         """
         ScadWidget.__init__(self)
-        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps)
+        PolygonMixin.__init__(self, extend_by_eps_sides=extend_by_eps_sides)
 
         self._size: Vector2 | None = size
         """

@@ -25,8 +25,8 @@ class LinearExtrude(ScadSingleChildParent):
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
-                 extend_top_by_eps: bool = False,
-                 extend_bottom_by_eps: bool = False,
+                 extend_by_eps_top: bool = False,
+                 extend_by_eps_bottom: bool = False,
                  child: ScadWidget):
         """
         Object constructor.
@@ -46,8 +46,8 @@ class LinearExtrude(ScadSingleChildParent):
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
-        :param extend_top_by_eps: Whether to extend the top by eps for a clear overlap.
-        :param extend_bottom_by_eps: Whether to extend the bottom by eps for a clear overlap.
+        :param extend_by_eps_top: Whether to extend the top by eps for a clear overlap.
+        :param extend_by_eps_bottom: Whether to extend the bottom by eps for a clear overlap.
         """
         ScadSingleChildParent.__init__(self, child=child)
 
@@ -102,12 +102,12 @@ class LinearExtrude(ScadSingleChildParent):
         The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         """
 
-        self._extend_top_by_eps: bool = extend_top_by_eps
+        self._extend_by_eps_top: bool = extend_by_eps_top
         """
         Whether to extend the top by eps for a clear overlap.  
         """
 
-        self._extend_bottom_by_eps: bool = extend_bottom_by_eps
+        self._extend_by_eps_bottom: bool = extend_by_eps_bottom
         """
         Whether to extend the bottom by eps for a clear overlap.  
         """
@@ -198,19 +198,19 @@ class LinearExtrude(ScadSingleChildParent):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def extend_top_by_eps(self) -> bool:
+    def extend_by_eps_top(self) -> bool:
         """
         Returns whether to extend the top by eps for a clear overlap.
         """
-        return self._extend_top_by_eps
+        return self._extend_by_eps_top
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def extend_bottom_by_eps(self) -> bool:
+    def extend_by_eps_bottom(self) -> bool:
         """
         Returns whether to extend the bottom by eps for a clear overlap.
         """
-        return self._extend_bottom_by_eps
+        return self._extend_by_eps_bottom
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -220,13 +220,13 @@ class LinearExtrude(ScadSingleChildParent):
         :param context: The build context.
         """
         height = self.height
-        if self.extend_top_by_eps:
+        if self.extend_by_eps_top:
             height += context.eps
-        if self.extend_bottom_by_eps:
+        if self.extend_by_eps_bottom:
             height += context.eps
 
-        if (not self.extend_bottom_by_eps and not self.extend_top_by_eps) or \
-                (self.extend_bottom_by_eps and self.extend_top_by_eps and self.center):
+        if (not self.extend_by_eps_bottom and not self.extend_by_eps_top) or \
+                (self.extend_by_eps_bottom and self.extend_by_eps_top and self.center):
             return PrivateLinearExtrude(height=height,
                                         center=self.center,
                                         convexity=self.convexity,
@@ -242,7 +242,7 @@ class LinearExtrude(ScadSingleChildParent):
         offset = 0.0
         if self.center:
             offset -= 0.5 * self.height
-        if self.extend_bottom_by_eps:
+        if self.extend_by_eps_bottom:
             offset -= context.eps
 
         return Translate3D(z=offset,

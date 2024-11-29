@@ -131,7 +131,7 @@ class RectangleTestCase(ScadTestCase):
         context = Context(eps=0.5)
         scad = Scad(context=context)
 
-        square1 = Paint(color=Color('red'), child=Rectangle(width=20.0, depth=10.0, extend_sides_by_eps={1}))
+        square1 = Paint(color=Color('red'), child=Rectangle(width=20.0, depth=10.0, extend_by_eps_sides={1}))
         square2 = Rectangle(width=20.0, depth=10.0)
         union = Union(children=[square1, square2])
 
@@ -153,7 +153,7 @@ class RectangleTestCase(ScadTestCase):
                         child=Rectangle(width=20.0,
                                         depth=10.0,
                                         center=True,
-                                        extend_sides_by_eps={1, 2}))
+                                        extend_by_eps_sides={1, 2}))
         square2 = Rectangle(width=20.0,
                             depth=10.0,
                             center=True)
@@ -173,7 +173,7 @@ class RectangleTestCase(ScadTestCase):
         context = Context(eps=0.5)
         scad = Scad(context=context)
 
-        square1 = Paint(color=Color('red'), child=Rectangle(width=20.0, depth=10.0, extend_sides_by_eps=True))
+        square1 = Paint(color=Color('red'), child=Rectangle(width=20.0, depth=10.0, extend_by_eps_sides=True))
         square2 = Rectangle(width=20.0, depth=10.0)
         union = Union(children=[square1, square2])
 

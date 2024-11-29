@@ -21,7 +21,7 @@ class Polygon(PolygonMixin, ScadWidget):
                  secondary: List[Vector2] | None = None,
                  secondaries: List[List[Vector2]] | None = None,
                  convexity: int | None = None,
-                 extend_sides_by_eps: bool | List[bool] | Set[int] | None = None):
+                 extend_by_eps_sides: bool | List[bool] | Set[int] | None = None):
         """
         Object constructor.
 
@@ -31,10 +31,10 @@ class Polygon(PolygonMixin, ScadWidget):
         :param secondaries: The secondary paths that will be subtracted form the polygon.
         :param convexity: Number of "inward" curves, i.e., expected number of path crossings of an arbitrary line
                           through the child widget.
-        :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
+        :param extend_by_eps_sides: Whether to extend sides by eps for a clear overlap.
         """
         ScadWidget.__init__(self)
-        PolygonMixin.__init__(self, convexity=convexity, extend_sides_by_eps=extend_sides_by_eps)
+        PolygonMixin.__init__(self, convexity=convexity, extend_by_eps_sides=extend_by_eps_sides)
 
         self._primary: List[Vector2] | None = primary
         """

@@ -121,7 +121,7 @@ class SquareTestCase(ScadTestCase):
 
         square1 = Paint(color=Color('red'),
                         child=Square(size=10.0,
-                                     extend_sides_by_eps={1}))
+                                     extend_by_eps_sides={1}))
         square2 = Square(size=10.0)
         union = Union(children=[square1, square2])
 
@@ -142,7 +142,7 @@ class SquareTestCase(ScadTestCase):
         square1 = Paint(color=Color('red'),
                         child=Square(size=10.0,
                                      center=True,
-                                     extend_sides_by_eps={1, 2}))
+                                     extend_by_eps_sides={1, 2}))
         square2 = Square(size=10.0,
                          center=True)
         union = Union(children=[square1, square2])
@@ -163,7 +163,7 @@ class SquareTestCase(ScadTestCase):
 
         square1 = Paint(color=Color('red'),
                         child=Square(size=10.0,
-                                     extend_sides_by_eps=True))
+                                     extend_by_eps_sides=True))
         square2 = Square(size=10.0)
         union = Union(children=[square1, square2])
 

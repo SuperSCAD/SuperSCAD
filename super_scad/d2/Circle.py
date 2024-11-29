@@ -21,7 +21,7 @@ class Circle(ScadWidget):
                  fs: float | None = None,
                  fn: int | None = None,
                  fn4n: bool | None = None,
-                 extend_radius_by_eps: bool = False):
+                 extend_by_eps_radius: bool = False):
         """
         Object constructor.
 
@@ -31,7 +31,7 @@ class Circle(ScadWidget):
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
         :param fn4n: Whether to create a circle with a multiple of 4 vertices.
-        :param extend_radius_by_eps: Whether to extend the radius by eps (or the diameter by 2*eps) for a clear overlap.
+        :param extend_by_eps_radius: Whether to extend the radius by eps (or the diameter by 2*eps) for a clear overlap.
         """
         ScadWidget.__init__(self)
 
@@ -65,7 +65,7 @@ class Circle(ScadWidget):
         Whether to create a circle with a multiple of 4 vertices.
         """
 
-        self._extend_radius_by_eps: bool = extend_radius_by_eps
+        self._extend_by_eps_radius: bool = extend_by_eps_radius
         """
         Whether to extend the radius by eps (or the diameter by 2*eps).
         """
@@ -151,11 +151,11 @@ class Circle(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
-    def extend_radius_by_eps(self) -> bool:
+    def extend_by_eps_radius(self) -> bool:
         """
         Returns whether to extend the radius by eps (or the diameter by 2*eps) for a clear overlap.
         """
-        return self._extend_radius_by_eps
+        return self._extend_by_eps_radius
 
     # ------------------------------------------------------------------------------------------------------------------
     def build(self, context: Context) -> ScadWidget:
@@ -165,7 +165,7 @@ class Circle(ScadWidget):
         :param context: The build context.
         """
         diameter = self.diameter
-        if self.extend_radius_by_eps:
+        if self.extend_by_eps_radius:
             diameter += 2.0 * context.eps
 
         return PrivateCircle(diameter=diameter, fa=self.fa, fs=self.fs, fn=self.real_fn(context))

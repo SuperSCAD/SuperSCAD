@@ -18,16 +18,16 @@ class Square(PolygonMixin, ScadWidget):
                  *,
                  size: float,
                  center: bool = False,
-                 extend_sides_by_eps: bool | List[bool] | Set[int] | None = None):
+                 extend_by_eps_sides: bool | List[bool] | Set[int] | None = None):
         """
         Object constructor.
 
         :param size: The size of the square.
         :param center: Whether the square is centered at the origin.
-        :param extend_sides_by_eps: Whether to extend sides by eps for a clear overlap.
+        :param extend_by_eps_sides: Whether to extend sides by eps for a clear overlap.
         """
         ScadWidget.__init__(self)
-        PolygonMixin.__init__(self, extend_sides_by_eps=extend_sides_by_eps)
+        PolygonMixin.__init__(self, extend_by_eps_sides=extend_by_eps_sides)
 
         self._size: float = size
         """

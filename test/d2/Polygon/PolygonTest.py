@@ -520,7 +520,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={1}))
+                         child=Polygon(points=points, extend_by_eps_sides={1}))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -542,7 +542,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={1}))
+                         child=Polygon(points=points, extend_by_eps_sides={1}))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -563,7 +563,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps=[False, False, True, False]))
+                         child=Polygon(points=points, extend_by_eps_sides=[False, False, True, False]))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -585,7 +585,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={2}))
+                         child=Polygon(points=points, extend_by_eps_sides={2}))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -606,7 +606,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={1, 2}))
+                         child=Polygon(points=points, extend_by_eps_sides={1, 2}))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -628,7 +628,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={1, 2}))
+                         child=Polygon(points=points, extend_by_eps_sides={1, 2}))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -649,7 +649,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={0, 3}))
+                         child=Polygon(points=points, extend_by_eps_sides={0, 3}))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -671,7 +671,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={0, 3}))
+                         child=Polygon(points=points, extend_by_eps_sides={0, 3}))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -692,7 +692,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps={0, 2}))
+                         child=Polygon(points=points, extend_by_eps_sides={0, 2}))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -713,7 +713,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps=True))
+                         child=Polygon(points=points, extend_by_eps_sides=True))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 
@@ -735,7 +735,7 @@ class PolygonTestCase(ScadTestCase):
         scad = Scad(context=context)
 
         polygon1 = Paint(color=Color('red'),
-                         child=Polygon(points=points, extend_sides_by_eps=True))
+                         child=Polygon(points=points, extend_by_eps_sides=True))
         polygon2 = Polygon(points=points)
         union = Union(children=[polygon1, polygon2])
 

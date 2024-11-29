@@ -23,7 +23,7 @@ class CircleTestCase(ScadTestCase):
 
         self.assertAlmostEqual(2.0, circle.radius)
         self.assertAlmostEqual(4.0, circle.diameter)
-        self.assertFalse(circle.extend_radius_by_eps)
+        self.assertFalse(circle.extend_by_eps_radius)
 
         scad.run_super_scad(circle, path_actual)
 
@@ -46,7 +46,7 @@ class CircleTestCase(ScadTestCase):
         self.assertIsNone(circle.fa)
         self.assertIsNone(circle.fs)
         self.assertIsNone(circle.fn)
-        self.assertFalse(circle.extend_radius_by_eps)
+        self.assertFalse(circle.extend_by_eps_radius)
 
         scad.run_super_scad(circle, path_actual)
 
@@ -70,7 +70,7 @@ class CircleTestCase(ScadTestCase):
         self.assertAlmostEqual(2.0, circle.fs)
         self.assertEqual(0, circle.fn)
         self.assertFalse(circle.fn4n)
-        self.assertFalse(circle.extend_radius_by_eps)
+        self.assertFalse(circle.extend_by_eps_radius)
 
         scad.run_super_scad(circle, path_actual)
 
@@ -91,7 +91,7 @@ class CircleTestCase(ScadTestCase):
         self.assertAlmostEqual(5.0, circle.radius)
         self.assertAlmostEqual(10.0, circle.diameter)
         self.assertTrue(circle.fn4n)
-        self.assertFalse(circle.extend_radius_by_eps)
+        self.assertFalse(circle.extend_by_eps_radius)
 
         scad.run_super_scad(circle, path_actual)
 
@@ -115,7 +115,7 @@ class CircleTestCase(ScadTestCase):
         # self.assertAlmostEqual(12.0, circle.imperial_circle.fa)
         # self.assertAlmostEqual(2.0 * 25.4, circle.imperial_circle.fs)
         self.assertEqual(0, circle.imperial_circle.fn)
-        self.assertFalse(circle.imperial_circle.extend_radius_by_eps)
+        self.assertFalse(circle.imperial_circle.extend_by_eps_radius)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -137,7 +137,7 @@ class CircleTestCase(ScadTestCase):
         self.assertAlmostEqual(12.0, circle.imperial_circle.fa)
         self.assertAlmostEqual(2.0, circle.imperial_circle.fs)
         self.assertEqual(0, circle.imperial_circle.fn)
-        self.assertFalse(circle.imperial_circle.extend_radius_by_eps)
+        self.assertFalse(circle.imperial_circle.extend_by_eps_radius)
 
         actual = path_actual.read_text()
         expected = path_expected.read_text()
@@ -151,11 +151,11 @@ class CircleTestCase(ScadTestCase):
         context = Context(eps=1.0)
         scad = Scad(context=context)
 
-        circle = Circle(diameter=10.0, extend_radius_by_eps=True)
+        circle = Circle(diameter=10.0, extend_by_eps_radius=True)
 
         self.assertAlmostEqual(5.0, circle.radius)
         self.assertAlmostEqual(10.0, circle.diameter)
-        self.assertTrue(circle.extend_radius_by_eps)
+        self.assertTrue(circle.extend_by_eps_radius)
 
         path_actual, path_expected = self.paths()
         scad.run_super_scad(circle, path_actual)
