@@ -25,6 +25,9 @@ class Cylinder(ScadWidget):
                  radius: float | None = None,
                  diameter: float | None = None,
                  center: bool | None = None,
+                 extend_by_eps_top: bool = False,
+                 extend_by_eps_bottom: bool = False,
+                 extend_by_eps_radius: bool = False,
                  fa: float | None = None,
                  fs: float | None = None,
                  fn: int | None = None,
@@ -38,6 +41,9 @@ class Cylinder(ScadWidget):
         :param radius: The radius of the cylinder.
         :param diameter: The diameter of the cylinder.
         :param center: Whether the cylinder is centered along the z-as. Defaults to false.
+        :param extend_by_eps_top: Whether to extend the top of the cylinder by eps for a clear overlap.
+        :param extend_by_eps_bottom: Whether to extend the bottom of the cylinder by eps for a clear overlap.
+        :param extend_by_eps_radius: Whether to extend the radius of the cylinder by eps for a clear overlap.
         :param fa: The minimum angle (in degrees) of each fragment.
         :param fs: The minimum circumferential length of each fragment.
         :param fn: The fixed number of fragments in 360 degrees. Values of 3 or more override fa and fs.
@@ -73,6 +79,21 @@ class Cylinder(ScadWidget):
         self._center: bool | None = center
         """
         Whether the cylinder is centered along the z-as. Defaults to false.
+        """
+
+        self._extend_by_eps_top: bool = extend_by_eps_top
+        """
+        Whether to extend the top of the cylinder by eps for a clear overlap.
+        """
+
+        self._extend_by_eps_bottom: bool = extend_by_eps_bottom
+        """
+        Whether to extend the bottom of the cylinder by eps for a clear overlap.
+        """
+
+        self._extend_by_eps_radius: bool = extend_by_eps_radius
+        """
+        Whether to extend the radius of the cylinder by eps for a clear overlap.
         """
 
         self._fa: float | None = fa
@@ -186,6 +207,30 @@ class Cylinder(ScadWidget):
 
     # ------------------------------------------------------------------------------------------------------------------
     @property
+    def extend_by_eps_top(self) -> bool:
+        """
+        Returns whether the top of the cylinder is extended by eps.
+        """
+        return self._extend_by_eps_top
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def extend_by_eps_bottom(self) -> bool:
+        """
+        Returns whether the bottom of the cylinder is extended by eps.
+        """
+        return self._extend_by_eps_bottom
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def extend_by_eps_radius(self) -> bool:
+        """
+        Returns whether the radius of the cylinder is extended by eps.
+        """
+        return self._extend_by_eps_radius
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
     def fa(self) -> float | None:
         """
         Returns the minimum angle (in degrees) of each fragment.
@@ -233,21 +278,44 @@ class Cylinder(ScadWidget):
 
         :param context: The build context.
         """
-        cylinder = PrivateCylinder(height=self.height,
-                                   diameter=self.diameter,
-                                   center=self.center,
+        diameter = self.diameter
+        if self.extend_by_eps_radius:
+            diameter += 2.0 * context.eps
+
+        height = self.height
+        if self.extend_by_eps_top:
+            height += context.eps
+        if self.extend_by_eps_bottom:
+            height += context.eps
+
+        center = self.center and self.extend_by_eps_top == self.extend_by_eps_bottom
+
+        cylinder = PrivateCylinder(height=height,
+                                   diameter=diameter,
+                                   center=center,
                                    fa=self.fa,
                                    fs=self.fs,
                                    fn=self.real_fn(context))
 
         if self._explicit_height:
-            return cylinder
+            if not center:
+                z = 0.0
+                if self.extend_by_eps_bottom:
+                    z -= context.eps
+                if self.center:
+                    z -= 0.5 * self.height
+                if z != 0.0:
+                    cylinder = Translate3D(z=z, child=cylinder)
+        else:
+            if self.extend_by_eps_bottom:
+                cylinder = Translate3D(z=-context.eps, child=cylinder)
 
-        diff = self.end_point - self.start_point
+            diff = self.end_point - self.start_point
+            cylinder = Translate3D(vector=self.start_point,
+                                   child=Rotate3D(angle_y=math.degrees(math.acos(diff.z / diff.length)),
+                                                  angle_z=math.degrees(math.atan2(diff.y, diff.x)),
+                                                  child=cylinder))
 
-        return Translate3D(vector=self.start_point,
-                           child=Rotate3D(angle_y=math.degrees(math.acos(diff.z / diff.length)),
-                                          angle_z=math.degrees(math.atan2(diff.y, diff.x)),
-                                          child=cylinder))
+        return cylinder
 
 # ----------------------------------------------------------------------------------------------------------------------
