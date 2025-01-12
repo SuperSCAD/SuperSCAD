@@ -115,6 +115,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         center=True,
                         extend_by_eps_left=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -143,6 +149,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         center=True,
                         extend_by_eps_right=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -172,6 +184,12 @@ class CuboidTestCase(ScadTestCase):
                         center=True,
                         extend_by_eps_left=True,
                         extend_by_eps_right=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -200,6 +218,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         center=True,
                         extend_by_eps_top=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -228,6 +252,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         center=True,
                         extend_by_eps_bottom=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -257,6 +287,12 @@ class CuboidTestCase(ScadTestCase):
                         center=True,
                         extend_by_eps_top=True,
                         extend_by_eps_bottom=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -285,6 +321,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         center=True,
                         extend_by_eps_front=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -313,6 +355,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         center=True,
                         extend_by_eps_back=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -342,6 +390,12 @@ class CuboidTestCase(ScadTestCase):
                         center=True,
                         extend_by_eps_front=True,
                         extend_by_eps_back=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -372,6 +426,12 @@ class CuboidTestCase(ScadTestCase):
                         extend_by_eps_front=True,
                         extend_by_eps_bottom=True,
                         extend_by_eps_left=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -402,6 +462,12 @@ class CuboidTestCase(ScadTestCase):
                         extend_by_eps_back=True,
                         extend_by_eps_top=True,
                         extend_by_eps_right=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertTrue(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       center=True,
@@ -429,6 +495,12 @@ class CuboidTestCase(ScadTestCase):
 
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_left=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=True,
@@ -455,6 +527,12 @@ class CuboidTestCase(ScadTestCase):
 
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_right=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=True,
@@ -482,6 +560,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_left=True,
                         extend_by_eps_right=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=True,
@@ -508,6 +592,12 @@ class CuboidTestCase(ScadTestCase):
 
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_top=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=True,
@@ -534,6 +624,12 @@ class CuboidTestCase(ScadTestCase):
 
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_bottom=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=True,
@@ -561,6 +657,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_top=True,
                         extend_by_eps_bottom=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=True,
@@ -587,6 +689,12 @@ class CuboidTestCase(ScadTestCase):
 
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_front=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=False,
@@ -613,6 +721,12 @@ class CuboidTestCase(ScadTestCase):
 
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_back=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=True,
@@ -640,6 +754,12 @@ class CuboidTestCase(ScadTestCase):
         cuboid = Cuboid(size=Vector3(40, 20, 10),
                         extend_by_eps_front=True,
                         extend_by_eps_back=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=False,
@@ -668,6 +788,12 @@ class CuboidTestCase(ScadTestCase):
                         extend_by_eps_front=True,
                         extend_by_eps_bottom=True,
                         extend_by_eps_left=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=False,
@@ -696,6 +822,12 @@ class CuboidTestCase(ScadTestCase):
                         extend_by_eps_back=True,
                         extend_by_eps_top=True,
                         extend_by_eps_right=True)
+
+        self.assertAlmostEqual(40.0, cuboid.size.x)
+        self.assertAlmostEqual(20.0, cuboid.size.y)
+        self.assertAlmostEqual(10.0, cuboid.size.z)
+        self.assertFalse(cuboid.center)
+
         cuboid = Paint(color='red', child=cuboid)
         mask = Cuboid(size=Vector3(40, 20, 10),
                       extend_by_eps_front=True,

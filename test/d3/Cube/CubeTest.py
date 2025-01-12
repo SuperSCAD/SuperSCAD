@@ -95,6 +95,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     center=True,
                     extend_by_eps_left=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -123,6 +127,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     center=True,
                     extend_by_eps_right=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -152,6 +160,10 @@ class CubeTestCase(ScadTestCase):
                     center=True,
                     extend_by_eps_left=True,
                     extend_by_eps_right=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -180,6 +192,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     center=True,
                     extend_by_eps_top=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -208,6 +224,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     center=True,
                     extend_by_eps_bottom=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -237,6 +257,10 @@ class CubeTestCase(ScadTestCase):
                     center=True,
                     extend_by_eps_top=True,
                     extend_by_eps_bottom=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -265,6 +289,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     center=True,
                     extend_by_eps_front=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -293,6 +321,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     center=True,
                     extend_by_eps_back=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -322,6 +354,10 @@ class CubeTestCase(ScadTestCase):
                     center=True,
                     extend_by_eps_front=True,
                     extend_by_eps_back=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -352,6 +388,10 @@ class CubeTestCase(ScadTestCase):
                     extend_by_eps_front=True,
                     extend_by_eps_bottom=True,
                     extend_by_eps_left=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -382,6 +422,10 @@ class CubeTestCase(ScadTestCase):
                     extend_by_eps_back=True,
                     extend_by_eps_top=True,
                     extend_by_eps_right=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertTrue(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     center=True,
@@ -409,6 +453,10 @@ class CubeTestCase(ScadTestCase):
 
         cube = Cube(size=10,
                     extend_by_eps_left=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=True,
@@ -435,6 +483,10 @@ class CubeTestCase(ScadTestCase):
 
         cube = Cube(size=10,
                     extend_by_eps_right=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=True,
@@ -462,6 +514,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     extend_by_eps_left=True,
                     extend_by_eps_right=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=True,
@@ -488,6 +544,10 @@ class CubeTestCase(ScadTestCase):
 
         cube = Cube(size=10,
                     extend_by_eps_top=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=True,
@@ -514,6 +574,10 @@ class CubeTestCase(ScadTestCase):
 
         cube = Cube(size=10,
                     extend_by_eps_bottom=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=True,
@@ -541,6 +605,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     extend_by_eps_top=True,
                     extend_by_eps_bottom=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=True,
@@ -567,6 +635,10 @@ class CubeTestCase(ScadTestCase):
 
         cube = Cube(size=10,
                     extend_by_eps_front=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=False,
@@ -593,6 +665,10 @@ class CubeTestCase(ScadTestCase):
 
         cube = Cube(size=10,
                     extend_by_eps_back=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=True,
@@ -620,6 +696,10 @@ class CubeTestCase(ScadTestCase):
         cube = Cube(size=10,
                     extend_by_eps_front=True,
                     extend_by_eps_back=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=False,
@@ -648,6 +728,10 @@ class CubeTestCase(ScadTestCase):
                     extend_by_eps_front=True,
                     extend_by_eps_bottom=True,
                     extend_by_eps_left=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=False,
@@ -676,6 +760,10 @@ class CubeTestCase(ScadTestCase):
                     extend_by_eps_back=True,
                     extend_by_eps_top=True,
                     extend_by_eps_right=True)
+
+        self.assertAlmostEqual(10.0, cube.size)
+        self.assertFalse(cube.center)
+
         cube = Paint(color='red', child=cube)
         mask = Cube(size=10,
                     extend_by_eps_front=True,
