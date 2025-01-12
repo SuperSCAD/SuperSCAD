@@ -267,7 +267,7 @@ class Cuboid(ScadWidget):
         return translate
 
     # ------------------------------------------------------------------------------------------------------------------
-    def _real_size(self, context) -> Vector3:
+    def _real_size(self, context) -> Vector3 | float:
         """
         Returns the real size of the cuboid.
 
@@ -289,6 +289,9 @@ class Cuboid(ScadWidget):
         if self.extend_by_eps_bottom:
             z += context.eps
         size = self.size + Vector3(x=x, y=y, z=z)
+
+        if size.x == size.y and size.x == size.z:
+            size = size.x
 
         return size
 

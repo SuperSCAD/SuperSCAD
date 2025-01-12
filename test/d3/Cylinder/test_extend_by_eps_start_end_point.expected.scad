@@ -60,7 +60,7 @@ union()
    {
       translate(v = [0.0, 0.0, 0.0])
       {
-         cube(size = [10.0, 10.0, 10.0], center = false);
+         cube(size = 10.0, center = false);
       }
    }
    translate(v = [10.0, 0.0, 0.0])
@@ -69,7 +69,7 @@ union()
       {
          translate(v = [0.0, 0.0, 0.0])
          {
-            cube(size = [10.0, 10.0, 10.0], center = false);
+            cube(size = 10.0, center = false);
          }
       }
    }
@@ -79,7 +79,7 @@ union()
       {
          translate(v = [0.0, 0.0, 0.0])
          {
-            cube(size = [10.0, 10.0, 10.0], center = false);
+            cube(size = 10.0, center = false);
          }
       }
    }
@@ -89,7 +89,7 @@ union()
       {
          translate(v = [0.0, 0.0, 0.0])
          {
-            cube(size = [10.0, 10.0, 10.0], center = false);
+            cube(size = 10.0, center = false);
          }
       }
    }
@@ -99,7 +99,7 @@ union()
       {
          translate(v = [0.0, 0.0, 0.0])
          {
-            cube(size = [10.0, 10.0, 10.0], center = false);
+            cube(size = 10.0, center = false);
          }
       }
    }
