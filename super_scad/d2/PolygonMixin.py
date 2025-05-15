@@ -81,10 +81,10 @@ class PolygonMixin(ABC):
             leg1 = (p2 - p1)
             leg2 = (p2 - p3)
             height = abs(Vector2.cross_product(leg1, leg2)) / Vector2.distance(leg2, leg1)
-            q1 = p2 + Vector2.from_polar_coordinates(random.uniform(0.25, 0.75) * min(height, min_distance),
-                                                     0.5 * (leg1.angle + leg2.angle))
+            q1 = p2 + Vector2.from_polar(random.uniform(0.25, 0.75) * min(height, min_distance),
+                                         0.5 * (leg1.angle + leg2.angle))
             if not PolygonMixin._to_close(p1, p3, q1, delta):
-                q2 = Vector2.from_polar_coordinates(2.0 * radius, random.uniform(0.0, 360.0))
+                q2 = Vector2.from_polar(2.0 * radius, random.uniform(0.0, 360.0))
                 number_of_intersections = PolygonMixin._count_intersections(nodes, q1, q2, delta)
                 if number_of_intersections is not None:
                     orientation = Vector2.orientation(p1, p2, q1)

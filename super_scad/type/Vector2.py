@@ -44,7 +44,7 @@ class Vector2:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def from_polar_coordinates(length: float, angle: float) -> Vector2:
+    def from_polar(length: float, angle: float) -> Vector2:
         """
         Creates a 2-dimensional vector from polar coordinates.
 
@@ -118,7 +118,7 @@ class Vector2:
         """
         diff = q - p
 
-        return p + Vector2.from_polar_coordinates(ratio * diff.length, diff.angle)
+        return p + Vector2.from_polar(ratio * diff.length, diff.angle)
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod

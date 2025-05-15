@@ -156,11 +156,11 @@ class Vector2Test(unittest.TestCase):
         self.assertAlmostEqual(Vector2.dot_product(p, p), p.length ** 2)
 
         p = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
-        q = Vector2.from_polar_coordinates(p.length, p.angle + 90.0)
+        q = Vector2.from_polar(p.length, p.angle + 90.0)
         self.assertAlmostEqual(Vector2.dot_product(p, q), 0.0)
 
         p = Vector2(random.uniform(0.0, 100.0), random.uniform(0.0, 100.0))
-        q = Vector2.from_polar_coordinates(p.length, p.angle + 45.0)
+        q = Vector2.from_polar(p.length, p.angle + 45.0)
         self.assertAlmostEqual(Vector2.dot_product(p, q), 1.0 / math.sqrt(2.0) * p.length ** 2)
 
     # ------------------------------------------------------------------------------------------------------------------

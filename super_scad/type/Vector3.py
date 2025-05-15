@@ -49,7 +49,7 @@ class Vector3:
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod
-    def from_polar_coordinates(length: float, *, azimuth: float, inclination: float) -> Vector3:
+    def from_polar(length: float, *, azimuth: float, inclination: float) -> Vector3:
         """
         Creates a 3-dimensional vector from polar coordinates.
 

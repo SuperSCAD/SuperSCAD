@@ -164,7 +164,7 @@ class PolygonSideExtender:
             angle = self._current_normal_angle + 0.5 * self._current_inner_angle
         else:
             angle = self._current_normal_angle - 0.5 * self._current_inner_angle
-        self._new_nodes.append(self._current_node + Vector2.from_polar_coordinates(context.eps, angle))
+        self._new_nodes.append(self._current_node + Vector2.from_polar(context.eps, angle))
 
     # ------------------------------------------------------------------------------------------------------------------
     def _extend_inner_corner_side2(self, context: Context) -> None:
@@ -177,7 +177,7 @@ class PolygonSideExtender:
             angle = self._current_normal_angle - 0.5 * self._current_inner_angle
         else:
             angle = self._current_normal_angle + 0.5 * self._current_inner_angle
-        self._new_nodes.append(self._current_node + Vector2.from_polar_coordinates(context.eps, angle))
+        self._new_nodes.append(self._current_node + Vector2.from_polar(context.eps, angle))
 
     # ------------------------------------------------------------------------------------------------------------------
     def _extend_inner_corner_side1_and_side2(self, context: Context) -> None:
@@ -191,7 +191,7 @@ class PolygonSideExtender:
         length = min(length,
                      Vector2.distance(self._current_node, self._nodes[(self._index - 1) % len(self._nodes)]),
                      Vector2.distance(self._current_node, self._nodes[(self._index + 1) % len(self._nodes)]))
-        eps0 = Vector2.from_polar_coordinates(length, self._current_normal_angle + 180.0)
+        eps0 = Vector2.from_polar(length, self._current_normal_angle + 180.0)
         self._new_nodes.append(self._current_node + eps0)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -214,7 +214,7 @@ class PolygonSideExtender:
             angle = self._current_normal_angle - 0.5 * self._current_inner_angle - 90.0
         else:
             angle = self._current_normal_angle + 0.5 * self._current_inner_angle + 90.0
-        self._new_nodes.append(self._current_node + Vector2.from_polar_coordinates(context.eps, angle))
+        self._new_nodes.append(self._current_node + Vector2.from_polar(context.eps, angle))
         self._new_nodes.append(self._current_node)
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -229,7 +229,7 @@ class PolygonSideExtender:
             angle = self._current_normal_angle + 0.5 * self._current_inner_angle + 90.0
         else:
             angle = self._current_normal_angle - 0.5 * self._current_inner_angle - 90.0
-        self._new_nodes.append(self._current_node + Vector2.from_polar_coordinates(context.eps, angle))
+        self._new_nodes.append(self._current_node + Vector2.from_polar(context.eps, angle))
 
     # ------------------------------------------------------------------------------------------------------------------
     def _extend_outer_corner_side1_and_side2(self, context: Context) -> None:
@@ -240,7 +240,6 @@ class PolygonSideExtender:
         """
         if self._current_inner_angle >= 90.0:
             self._extend_outer_corner_side1_and_side2_oblique(context)
-
         else:
             self._extend_outer_corner_side1_and_side2_sharp(context)
 
@@ -257,10 +256,10 @@ class PolygonSideExtender:
         else:
             angle1 = self._current_normal_angle + 0.5 * self._current_inner_angle + 90.0
             angle2 = self._current_normal_angle - 0.5 * self._current_inner_angle - 90.0
-        self._new_nodes.append(self._current_node + Vector2.from_polar_coordinates(context.eps, angle1))
-        self._new_nodes.append(
-                self._current_node + Vector2.from_polar_coordinates(context.eps, self._current_normal_angle + 180.0))
-        self._new_nodes.append(self._current_node + Vector2.from_polar_coordinates(context.eps, angle2))
+        self._new_nodes.append(self._current_node + Vector2.from_polar(context.eps, angle1))
+        self._new_nodes.append(self._current_node + Vector2.from_polar(context.eps,
+                                                                       self._current_normal_angle + 180.0))
+        self._new_nodes.append(self._current_node + Vector2.from_polar(context.eps, angle2))
 
     # ------------------------------------------------------------------------------------------------------------------
     def _extend_outer_corner_side1_and_side2_oblique(self, context: Context) -> None:
@@ -270,7 +269,6 @@ class PolygonSideExtender:
         :param context: The build context.
         """
         length = context.eps / math.cos(math.radians(0.5 * (180.0 - self._current_inner_angle)))
-        self._new_nodes.append(
-                self._current_node + Vector2.from_polar_coordinates(length, self._current_normal_angle + 180.0))
+        self._new_nodes.append(self._current_node + Vector2.from_polar(length, self._current_normal_angle + 180.0))
 
 # ----------------------------------------------------------------------------------------------------------------------
