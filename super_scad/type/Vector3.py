@@ -105,7 +105,7 @@ class Vector3:
     @property
     def theta(self) -> float:
         """
-        Returns the inclination, i.e., the angle of this vector in the z-axis.
+        Returns the inclination, i.e., the angle between this vector and the z-axis.
         """
         return math.acos(self.z / self.length)
 
@@ -129,7 +129,7 @@ class Vector3:
     @staticmethod
     def cross_product(v1: Vector3, v2: Vector3) -> Vector3:
         """
-        Returns cross product of two vectors.
+        Returns the cross-product of two vectors.
         """
         return Vector3(v1.y * v2.z - v1.z * v2.y,
                        v1.z * v2.x - v1.x * v2.z,

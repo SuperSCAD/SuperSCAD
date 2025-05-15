@@ -124,7 +124,7 @@ class Vector2:
     @staticmethod
     def cross_product(p: Vector2, q: Vector2) -> float:
         """
-        Returns cross product of two vectors.
+        Returns the cross-product of two vectors.
         """
         return p.x * q.y - p.y * q.x
 
