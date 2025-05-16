@@ -154,6 +154,26 @@ class SquareTestCase(ScadTestCase):
         self.assertEqual(expected, actual)
 
     # ------------------------------------------------------------------------------------------------------------------
+    def test_extend_by_eps_is_false(self):
+        """
+        Don't extend all sides by extended by eps explicitly.
+        """
+        context = Context(eps=0.5)
+        scad = Scad(context=context)
+
+        square1 = Paint(color=Color('red'),
+                        child=Square(size=10.0,
+                                     extend_by_eps_sides=False))
+        square2 = Square(size=10.0)
+        union = Union(children=[square1, square2])
+
+        path_actual, path_expected = self.paths()
+        scad.run_super_scad(union, path_actual)
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
+    # ------------------------------------------------------------------------------------------------------------------
     def test_extend_by_eps_all_sides(self):
         """
         Extend all sides by extended by eps.

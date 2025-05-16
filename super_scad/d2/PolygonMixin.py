@@ -252,7 +252,7 @@ class PolygonMixin(ABC):
         Returns the set of sides that must be extended by eps for clear overlap.
         """
         if not isinstance(self._extend_by_eps_sides, set):
-            if self._extend_by_eps_sides is None:
+            if self._extend_by_eps_sides is None or self._extend_by_eps_sides is False:
                 self._extend_by_eps_sides = set()
 
             elif self._extend_by_eps_sides is True:
