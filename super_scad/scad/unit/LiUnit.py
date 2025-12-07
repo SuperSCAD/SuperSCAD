@@ -4,7 +4,7 @@ from super_scad.scad.unit.LengthUnit import LengthUnit
 
 class LiUnit(LengthUnit):
     """
-    The Chinese Li 市里. One li is 500 meters. See https://en.wikipedia.org/wiki/Li_(unit).
+    The Chinese li 市里. One li is 500 meters. See https://en.wikipedia.org/wiki/Li_(unit).
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -20,5 +20,12 @@ class LiUnit(LengthUnit):
         Returns one li expressed in meters.
         """
         return 5e2
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def symbol(self) -> str:
+        """
+        Returns the symbol for a li.
+        """
+        return '里'
 
 # ----------------------------------------------------------------------------------------------------------------------

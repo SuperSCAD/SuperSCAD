@@ -5,7 +5,6 @@ from super_scad.scad.unit.LengthUnit import LengthUnit
 class MicrometerUnit(LengthUnit):
     """
     The metric micrometer.
-
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -21,5 +20,13 @@ class MicrometerUnit(LengthUnit):
         Returns one micrometer expressed in meters.
         """
         return 1e-6
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def symbol(self) -> str:
+        """
+        Returns the symbol for a micrometer.
+        """
+        return 'µm'
+
 
 # ----------------------------------------------------------------------------------------------------------------------

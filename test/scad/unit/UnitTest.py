@@ -46,6 +46,13 @@ class UnitTest(unittest.TestCase):
         # The meter defines its self.
         self.assertEqual(1.0, meter.meters())
 
+        self.assertEqual(micrometer.symbol(), 'µm')
+        self.assertEqual(millimeter.symbol(), 'mm')
+        self.assertEqual(centimeter.symbol(), 'cm')
+        self.assertEqual(decimeter.symbol(), 'dm')
+        self.assertEqual(meter.symbol(), 'm')
+        self.assertEqual(kilometer.symbol(), 'km')
+
     # ------------------------------------------------------------------------------------------------------------------
     def test_science_units(self):
         """
@@ -67,6 +74,14 @@ class UnitTest(unittest.TestCase):
         self.assertAlmostEqual(1E-18, attoparsec.meters() / parsec.meters())
         self.assertAlmostEqual(3.086, 100 * attoparsec.meters(), 3)
 
+        self.assertEqual(angstrom.symbol(), 'Å')
+        self.assertEqual(light_year.symbol(), 'ly')
+        self.assertEqual(meter.symbol(), 'm')
+        self.assertEqual(astronomical_unit.symbol(), 'AU')
+        self.assertEqual(meter.symbol(), 'm')
+        self.assertEqual(parsec.symbol(), 'pc')
+        self.assertEqual(attoparsec.symbol(), 'apc')
+
     # ------------------------------------------------------------------------------------------------------------------
     def test_insanity(self):
         """
@@ -87,6 +102,12 @@ class UnitTest(unittest.TestCase):
         millimeter = MillimeterUnit()
         self.assertAlmostEqual(inch.meters(), 25.4 * millimeter.meters())
 
+        self.assertEqual(thou.symbol(), 'thou')
+        self.assertEqual(inch.symbol(), 'in')
+        self.assertEqual(foot.symbol(), 'ft')
+        self.assertEqual(yard.symbol(), 'yd')
+        self.assertEqual(mile.symbol(), 'mi')
+
     # ------------------------------------------------------------------------------------------------------------------
     def test_chinese_length_units(self):
         """
@@ -96,5 +117,7 @@ class UnitTest(unittest.TestCase):
         meter = MeterUnit()
 
         self.assertAlmostEqual(li.meters(), 500.0 * meter.meters())
+
+        self.assertEqual(li.symbol(), '里')
 
 # ----------------------------------------------------------------------------------------------------------------------

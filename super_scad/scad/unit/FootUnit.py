@@ -4,7 +4,7 @@ from super_scad.scad.unit.LengthUnit import LengthUnit
 
 class FootUnit(LengthUnit):
     """
-    The imperial foot. One foot is 12 inch. See https://en.wikipedia.org/wiki/Thousandth_of_an_inch.
+    The imperial foot. One foot is 12 inch. See https://en.wikipedia.org/wiki/Foot_(unit).
     """
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -20,5 +20,12 @@ class FootUnit(LengthUnit):
         Returns one foot expressed in meters.
         """
         return 3.048e-1
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def symbol(self) -> str:
+        """
+        Returns the symbol for an imperial foot.
+        """
+        return 'ft'
 
 # ----------------------------------------------------------------------------------------------------------------------
