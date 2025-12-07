@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 from super_scad.scad import Length
+from super_scad.scad.BOM import BOM
 from super_scad.scad.ScadCodeStore import ScadCodeStore
 from super_scad.scad.Unit import Unit
 from super_scad.type import Vector3
@@ -184,6 +185,11 @@ class Context:
         The number of decimal places of a scale or factor in the generated OpenSCAD code.
         """
 
+        self.__bom: BOM = BOM()
+        """
+        The Bill of materials.
+        """
+
         Context.set_unit_length_current(unit_length_final)
         Context.__set_unit_length_final(unit_length_final)
 
@@ -350,6 +356,14 @@ class Context:
         see https://en.wikibooks.org/wiki/OpenSCAD_User_Manual/Other_Language_Features#$vpd.
         """
         return Length.convert(self.__vpd, self.__unit_length_final, self.__unit_length_current)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @property
+    def bom(self) -> BOM:
+        """
+        Returns the BOM (Bill of Materials).
+        """
+        return self.__bom
 
     # ------------------------------------------------------------------------------------------------------------------
     @staticmethod

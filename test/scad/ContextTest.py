@@ -141,4 +141,31 @@ class ContextTest(ScadTestCase):
         expected = path_expected.read_text()
         self.assertEqual(expected, actual)
 
+    # ------------------------------------------------------------------------------------------------------------------
+    def test_bom(self):
+        """
+        Test the BOM.
+        """
+        my_dir = Path(__file__).parent
+        path_actual = my_dir.joinpath('bom.csv')
+        path_expected = my_dir.joinpath('bom.expected.csv')
+
+        context = Context()
+        context.bom \
+            .add(material_type='Heatfit Insert', description='M3 x 5.8mm') \
+            .add(material_type='Screw', description='M3 cap x 8mm') \
+            .add(material_type='Screw', description='M3 cap x 10mm') \
+            .add(material_type='Screw', description='M3 cap x 10mm') \
+            .add(material_type='Washer', description='M3 x 7mm x 0.5mm') \
+            .add(material_type='Star Washer', description='M3 x 0.5mm') \
+            .add(material_type='MDF Sheet 6mm', description='40mm x 40mm') \
+            .add(material_type='Acrylic Sheet 3mm', description='20mm x 20mm') \
+            .add(material_type='Screw', description='M3 cap x 10mm') \
+            .add(material_type='Screw', description='M3 cap x 10mm') \
+            .save(path_actual)
+
+        actual = path_actual.read_text()
+        expected = path_expected.read_text()
+        self.assertEqual(expected, actual)
+
 # ----------------------------------------------------------------------------------------------------------------------

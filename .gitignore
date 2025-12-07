@@ -12,4 +12,5 @@
 /test/**/*.actual.scad
 /test/coverage.xml
 /test/html/
+/test/scad/bom.csv
 /vendor/
