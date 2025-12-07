@@ -9,6 +9,7 @@ from super_scad.scad.unit.DecimeterUnit import DecimeterUnit
 from super_scad.scad.unit.FootUnit import FootUnit
 from super_scad.scad.unit.InchUnit import InchUnit
 from super_scad.scad.unit.KilometerUnit import KilometerUnit
+from super_scad.scad.unit.LengthUnit import LengthUnit
 from super_scad.scad.unit.LightYearUnit import LightYearUnit
 from super_scad.scad.unit.LiUnit import LiUnit
 from super_scad.scad.unit.MeterUnit import MeterUnit
@@ -26,7 +27,7 @@ class Length:
     Utility class for converting lengths between different units of length.
     """
     # ------------------------------------------------------------------------------------------------------------------
-    __ratio: List[List[float | None]] = []
+    __ratio: List[List[float] | None] = []
     """
     The ratios of all unit of lengths.
     """
@@ -92,5 +93,69 @@ class Length:
             return length * Length.__ratio[from_unit.value][to_unit.value]
         except Exception:
             raise ValueError(f'Cannot convert length {length} from {from_unit.name} to {to_unit.name}.')
+
+    # ------------------------------------------------------------------------------------------------------------------
+    @staticmethod
+    def length_unit(unit: Unit) -> LengthUnit:
+        """
+        Returns the length unit object of a unit of length.
+
+        :param unit: The unit of length.
+        """
+        if unit == Unit.UM:
+            return MicrometerUnit()
+
+        if unit == Unit.MM:
+            return MillimeterUnit()
+
+        if unit == Unit.CM:
+            return CentimeterUnit()
+
+        if unit == Unit.DM:
+            return DecimeterUnit()
+
+        if unit == Unit.M:
+            return MeterUnit()
+
+        if unit == Unit.KM:
+            return KilometerUnit()
+
+        if unit == Unit.THOU:
+            return ThouUnit()
+
+        if unit == Unit.INCH:
+            return InchUnit()
+
+        if unit == Unit.FOOT:
+            return FootUnit()
+
+        if unit == Unit.YARD:
+            return YardUnit()
+
+        if unit == Unit.MILE:
+            return MileUnit()
+
+        if unit == Unit.LI:
+            return LiUnit()
+
+        if unit == Unit.ROYAL_CUBIT:
+            return RoyalCubitUnit()
+
+        if unit == Unit.ANGSTROM:
+            return AngstromUnit()
+
+        if unit == Unit.ASTRONOMICAL_UNIT:
+            return AstronomicalUnit()
+
+        if unit == Unit.LIGHT_YEAR:
+            return LightYearUnit()
+
+        if unit == Unit.PARSEC:
+            return ParsecUnit()
+
+        if unit == Unit.ATTOPARSEC:
+            return AttoparsecUnit()
+
+        raise ValueError(f'Unsupported unit {unit}.')
 
 # ----------------------------------------------------------------------------------------------------------------------

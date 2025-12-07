@@ -1,6 +1,8 @@
 import math
 import unittest
 
+from super_scad.scad import Length
+from super_scad.scad.Unit import Unit
 from super_scad.scad.unit.AngstromUnit import AngstromUnit
 from super_scad.scad.unit.AstronomicalUnit import AstronomicalUnit
 from super_scad.scad.unit.AttoparsecUnit import AttoparsecUnit
@@ -30,12 +32,12 @@ class UnitTest(unittest.TestCase):
         """
         The metric system is brilliant in its simplicity.
         """
-        micrometer = MicrometerUnit()
-        millimeter = MillimeterUnit()
-        centimeter = CentimeterUnit()
-        decimeter = DecimeterUnit()
-        meter = MeterUnit()
-        kilometer = KilometerUnit()
+        micrometer = Length.length_unit(Unit.UM)
+        millimeter = Length.length_unit(Unit.MM)
+        centimeter = Length.length_unit(Unit.CM)
+        decimeter = Length.length_unit(Unit.DM)
+        meter = Length.length_unit(Unit.M)
+        kilometer = Length.length_unit(Unit.KM)
 
         self.assertAlmostEqual(millimeter.meters(), 1000.0 * micrometer.meters())
         self.assertAlmostEqual(centimeter.meters(), 10.0 * millimeter.meters())
@@ -58,12 +60,12 @@ class UnitTest(unittest.TestCase):
         """
         The unit of length used in science.
         """
-        angstrom = AngstromUnit()
-        light_year = LightYearUnit()
-        meter = MeterUnit()
-        astronomical_unit = AstronomicalUnit()
-        parsec = ParsecUnit()
-        attoparsec = AttoparsecUnit()
+        angstrom = Length.length_unit(Unit.ANGSTROM)
+        light_year = Length.length_unit(Unit.LIGHT_YEAR)
+        meter = Length.length_unit(Unit.M)
+        astronomical_unit = Length.length_unit(Unit.ASTRONOMICAL_UNIT)
+        parsec = Length.length_unit(Unit.PARSEC)
+        attoparsec = Length.length_unit(Unit.ATTOPARSEC)
 
         c = 299792458.0  # Speed of light in vacuum.
 
@@ -87,11 +89,11 @@ class UnitTest(unittest.TestCase):
         """
         The imperial system makes satellites crash on Mars.
         """
-        thou = ThouUnit()
-        inch = InchUnit()
-        foot = FootUnit()
-        yard = YardUnit()
-        mile = MileUnit()
+        thou = Length.length_unit(Unit.THOU)
+        inch = Length.length_unit(Unit.INCH)
+        foot = Length.length_unit(Unit.FOOT)
+        yard = Length.length_unit(Unit.YARD)
+        mile = Length.length_unit(Unit.MILE)
 
         self.assertAlmostEqual(inch.meters(), 1000.0 * thou.meters())
         self.assertAlmostEqual(foot.meters(), 12.0 * inch.meters())
@@ -113,8 +115,8 @@ class UnitTest(unittest.TestCase):
         """
         The imperial system lets you crash satellites on Mars.
         """
-        li = LiUnit()
-        meter = MeterUnit()
+        li = Length.length_unit(Unit.LI)
+        meter = Length.length_unit(Unit.M)
 
         self.assertAlmostEqual(li.meters(), 500.0 * meter.meters())
 
