@@ -17,7 +17,7 @@ class ThouUnit(LengthUnit):
     # ------------------------------------------------------------------------------------------------------------------
     def meters(self) -> float:
         """
-        Returns one inch expressed in meters.
+        Returns one thou expressed in meters.
         """
         return 2.54e-5
 

@@ -17,7 +17,7 @@ class LiUnit(LengthUnit):
     # ------------------------------------------------------------------------------------------------------------------
     def meters(self) -> float:
         """
-        Returns one foot expressed in meters.
+        Returns one li expressed in meters.
         """
         return 5e2
 

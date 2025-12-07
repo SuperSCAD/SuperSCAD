@@ -17,7 +17,7 @@ class MileUnit(LengthUnit):
     # ------------------------------------------------------------------------------------------------------------------
     def meters(self) -> float:
         """
-        Returns one foot expressed in meters.
+        Returns one mile expressed in meters.
         """
         return 1.609344e3
 

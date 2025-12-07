@@ -17,7 +17,7 @@ class YardUnit(LengthUnit):
     # ------------------------------------------------------------------------------------------------------------------
     def meters(self) -> float:
         """
-        Returns one foot expressed in meters.
+        Returns one imperial yard expressed in meters.
         """
         return 9.144e-1
 

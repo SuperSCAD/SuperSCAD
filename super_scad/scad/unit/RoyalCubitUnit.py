@@ -18,7 +18,7 @@ class RoyalCubitUnit(LengthUnit):
     # ------------------------------------------------------------------------------------------------------------------
     def meters(self) -> float:
         """
-        Returns one foot expressed in meters.
+        Returns one royal cubit expressed in meters.
         """
         return 5.236e-1
 
