@@ -507,7 +507,7 @@ class Color:
             self.__alpha = None
 
         if self.__alpha is None:
-            raise ValueError('Not a valid color: {}'.format(str(color)))
+            raise ValueError(f'Not a valid color: {str(color)}.')
 
         if isinstance(alpha, float) or isinstance(alpha, int):
             self.__alpha = Color.__normalize(alpha)
@@ -550,10 +550,7 @@ class Color:
 
     # ------------------------------------------------------------------------------------------------------------------
     def __repr__(self):
-        return "[{}, {}, {}, {}]".format(round(self.__red, 3),
-                                         round(self.__green, 3),
-                                         round(self.__blue, 3),
-                                         round(self.__alpha, 3))
+        return f"[{round(self.__red, 3)}, {round(self.__green, 3)}, {round(self.__blue, 3)}, {round(self.__alpha, 3)}]"
 
     # ------------------------------------------------------------------------------------------------------------------
     def __truediv__(self, fraction: float):
